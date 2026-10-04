@@ -1,0 +1,6 @@
+declare module '*.mdx' {
+  import type { Component } from 'solid-js';
+
+  const Content: Component<{ theme?: 'light' | 'dark' }>;
+  export default Content;
+}

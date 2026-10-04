@@ -1,0 +1,25 @@
+import { PageIntro, Section } from '../../docs';
+import { ColorsRoles, ColorsInteractionStates, ColorsAllTokens } from './colors-examples';
+
+<PageIntro
+  title="Colors"
+  description="Codex colors, preserved in both themes. Use roles rather than raw values."
+/>
+
+<Section title="Roles" description="The same role changes value when the theme changes.">
+  <ColorsRoles theme={props.theme} />
+</Section>
+
+<Section
+  title="Interaction states"
+  description="Hover, active, disabled, and focus values also come from Codex."
+>
+  <ColorsInteractionStates theme={props.theme} />
+</Section>
+
+<Section
+  title="All tokens"
+  description="The complete color contract from Codex 2.7.0. Values are generated from the official package."
+>
+  <ColorsAllTokens theme={props.theme} />
+</Section>

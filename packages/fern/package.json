@@ -1,0 +1,59 @@
+{
+  "name": "@taxon-labs/fern",
+  "version": "0.1.0-alpha.0",
+  "description": "A Wikimedia-first design system for Solid applications.",
+  "type": "module",
+  "license": "GPL-2.0-or-later",
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/source/index.d.ts",
+      "solid": "./dist/source/index.js",
+      "default": "./dist/index.js"
+    },
+    "./button": {
+      "types": "./dist/source/components/button/button.d.ts",
+      "solid": "./dist/source/components/button/button.jsx",
+      "default": "./dist/button.js"
+    },
+    "./icon": {
+      "types": "./dist/source/components/icon.d.ts",
+      "solid": "./dist/source/components/icon.jsx",
+      "default": "./dist/icon.js"
+    },
+    "./styles.css": "./dist/styles.css",
+    "./tokens.css": "./dist/tokens.css",
+    "./colors.json": "./dist/colors.json",
+    "./tailwind.css": "./dist/tailwind.css"
+  },
+  "scripts": {
+    "tokens": "node scripts/build-tokens.mjs",
+    "build": "node scripts/clean.mjs && pnpm tokens && tsc -p tsconfig.build.json && vite build && node scripts/finish-build.mjs",
+    "typecheck": "tsc --noEmit",
+    "test": "pnpm tokens && node --test tests/tokens.test.mjs && vitest run"
+  },
+  "peerDependencies": {
+    "@solidjs/web": "2.0.0-rc.13",
+    "solid-js": "2.0.0-rc.13"
+  },
+  "dependencies": {
+    "@kobalte/core": "2.0.0-alpha.2",
+    "@wikimedia/codex-icons": "2.7.0",
+    "class-variance-authority": "0.7.1"
+  },
+  "devDependencies": {
+    "@solidjs/web": "2.0.0-rc.13",
+    "@tailwindcss/vite": "4.3.3",
+    "@wikimedia/codex-design-tokens": "2.7.0",
+    "jsdom": "^26.1.0",
+    "solid-js": "2.0.0-rc.13",
+    "tailwindcss": "4.3.3",
+    "vitest": "^4.1.0"
+  }
+}

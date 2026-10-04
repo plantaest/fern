@@ -1,0 +1,37 @@
+{
+  "name": "fern",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@8.15.5",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "pnpm --filter @taxon-labs/fern build && pnpm --filter fern-docs dev",
+    "build": "pnpm --filter @taxon-labs/fern build && pnpm --filter fern-docs build",
+    "typecheck": "pnpm --filter @taxon-labs/fern build && pnpm -r typecheck",
+    "test": "pnpm --filter @taxon-labs/fern build && pnpm --filter @taxon-labs/fern test && pnpm --filter fern-docs test",
+    "check": "biome check --error-on-warnings . && prettier --check \"**/*.{md,mdx}\"",
+    "format": "biome check --write . && prettier --write \"**/*.{md,mdx}\"",
+    "pack:check": "pnpm --filter @taxon-labs/fern build && node scripts/check-package.mjs",
+    "release:check": "pnpm --filter @taxon-labs/fern build && node scripts/check-package.mjs --strict-peers"
+  },
+  "devDependencies": {
+    "@solidjs/vite-plugin": "3.0.0-next.46",
+    "@solidjs/compiler": "2.0.0-rc.13",
+    "@solidjs/babel-plugin": "2.0.0-rc.13",
+    "typescript": "^5.9.3",
+    "vite": "^8.2.0",
+    "@biomejs/biome": "2.5.0",
+    "prettier": "3.8.1"
+  },
+  "pnpm": {
+    "overrides": {
+      "solid-js": "2.0.0-rc.13",
+      "@solidjs/web": "2.0.0-rc.13",
+      "@solidjs/signals": "2.0.0-rc.13",
+      "@solidjs/compiler": "2.0.0-rc.13",
+      "@solidjs/babel-plugin": "2.0.0-rc.13"
+    }
+  }
+}

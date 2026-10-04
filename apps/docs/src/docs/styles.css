@@ -1,0 +1,148 @@
+@import "@taxon-labs/fern/tailwind.css";
+@import "tailwindcss/utilities.css" layer(utilities) source(none);
+@source "../";
+
+/* Keep the existing Docs breakpoints, including their boundary widths. */
+@custom-variant docs-narrow (@media (max-width: 1150px));
+@custom-variant docs-mobile (@media (max-width: 760px));
+@custom-variant docs-tiny (@media (max-width: 360px));
+
+/* Docs-only roles reference Codex tokens from the current Fern theme. */
+@theme inline {
+  --color-docs-hover: var(--fern-background-color-interactive-subtle--hover);
+  --color-docs-selected: var(--fern-background-color-progressive-subtle);
+  --color-docs-neutral: var(--fern-background-color-neutral);
+  --color-docs-control: var(--fern-border-color-base);
+  --color-docs-placeholder: var(--fern-color-placeholder);
+  --color-docs-progressive: var(--fern-background-color-progressive);
+  --color-docs-action-line: var(--fern-border-color-progressive);
+}
+
+/* Element defaults for MDX and native controls. Utilities can override them. */
+@layer base {
+  body:has(.fern-docs) {
+    margin: 0;
+  }
+
+  .fern-docs :where(h1, h2, h3, p) {
+    margin: 0;
+  }
+
+  .fern-docs :where(h1, h2, h3) {
+    font-family: var(--fern-font-heading);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+
+  .fern-docs h1 {
+    font-size: 36px;
+    line-height: 44px;
+  }
+
+  .fern-docs h2 {
+    font-size: 28px;
+    line-height: 36px;
+  }
+
+  .fern-docs h3 {
+    font-size: 22px;
+    line-height: 28px;
+  }
+
+  .fern-docs a {
+    color: var(--fern-color-progressive);
+    text-decoration: none;
+  }
+
+  .fern-docs a:hover {
+    text-decoration: underline;
+  }
+
+  .fern-docs :where(code, pre) {
+    font-family: var(--fern-font-code);
+  }
+
+  .fern-docs code {
+    font-size: 12px;
+  }
+
+  .fern-docs :where(button, input, select, summary) {
+    font-family: var(--fern-font-content);
+  }
+
+  .fern-docs :where(a, button, input, select, summary):focus-visible {
+    outline: 2px solid var(--fern-border-color-progressive--focus);
+    outline-offset: 3px;
+  }
+
+  .fern-docs pre {
+    margin: 0;
+    padding: 0 20px 20px;
+    overflow-x: auto;
+    max-width: 100%;
+
+    font-size: 12px;
+    line-height: 22px;
+    tab-size: 2;
+  }
+
+  .fern-docs summary {
+    cursor: pointer;
+    font-size: 13px;
+  }
+
+  .fern-docs table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    font-size: 13px;
+    line-height: 20px;
+  }
+
+  .fern-docs th {
+    font-weight: 500;
+    color: var(--fern-color-subtle);
+    font-size: 12px;
+    padding: 12px;
+    background: var(--fern-background-color-neutral-subtle);
+  }
+
+  .fern-docs td {
+    padding: 12px;
+    border-top: 1px solid var(--fern-border-color-subtle);
+    vertical-align: top;
+  }
+}
+
+/* Structure-dependent document rules, not layout for individual examples. */
+@layer components {
+  .fern-docs .api-table th:first-child,
+  .fern-docs .api-table th:last-child {
+    width: 18%;
+  }
+
+  .fern-docs .api-table code {
+    overflow-wrap: normal;
+  }
+
+  .fern-docs .api-table td:first-child code,
+  .fern-docs .api-table td:last-child code {
+    white-space: nowrap;
+  }
+
+  .fern-docs .doc-section > ul {
+    padding-left: 20px;
+    font-size: 14px;
+    line-height: 24px;
+  }
+
+  .fern-docs .doc-section > ul li + li {
+    margin-top: 8px;
+  }
+
+  @media (max-width: 760px) {
+    .fern-docs .api-table code {
+      font-size: 11px;
+    }
+  }
+}
