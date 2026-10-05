@@ -22,7 +22,6 @@ export function Icon(props: IconProps) {
       class={`fern-icon ${props.class ?? ''}`}
       viewBox="0 0 20 20"
       aria-hidden="true"
-      tabindex="-1"
       style={{
         transform:
           props.dir === 'rtl' && shouldIconFlip(props.icon, props.lang ?? 'en')

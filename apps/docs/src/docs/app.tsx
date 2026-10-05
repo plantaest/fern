@@ -116,13 +116,13 @@ function Layout(props: {
       <For each={pageGroups}>
         {(group) => (
           <div class="[&+&]:mt-8 docs-mobile:[&+&]:mt-5">
-            <p class="text-[12px] font-semibold text-muted mx-3 mb-3">{group}</p>
+            <p class="text-[0.75rem] font-semibold text-muted mx-3 mb-3">{group}</p>
             <For each={pages.filter((item) => item.group === group)}>
               {(item) => (
                 <a
                   class="
-                    block py-[7px] px-3 my-0.5 rounded-fern
-                    text-[14px] text-content hover:bg-docs-hover
+                    block py-[0.4375rem] px-3 my-0.5 rounded-base
+                    text-[0.875rem] text-content hover:bg-docs-hover
                     hover:no-underline aria-[current=page]:bg-docs-selected
                     aria-[current=page]:text-action aria-[current=page]:font-[550]
                   "
@@ -144,7 +144,7 @@ function Layout(props: {
     <div class="fern fern-docs min-h-screen" data-theme={props.theme}>
       <a
         class="
-          fixed top-[-100px] left-4 z-20 px-4 py-2 bg-canvas
+          fixed top-[-6.25rem] left-4 z-20 px-4 py-2 bg-canvas
           border border-docs-control focus:top-2
         "
         href={`${current.pathname}#main`}
@@ -153,22 +153,22 @@ function Layout(props: {
       </a>
       <header
         class="
-          sticky top-0 z-10 h-18 flex items-center
+          sticky top-0 z-10 h-18 flex items-center @container
           justify-between px-8 border-b border-line bg-canvas
           docs-mobile:h-16 docs-mobile:px-5
         "
       >
         <a
           class="
-            text-[18px] font-[650] tracking-[-0.03em] text-content
-            hover:no-underline docs-mobile:text-[17px]
+            text-[1.125rem] font-[650] tracking-[-0.03em] text-content
+            hover:no-underline docs-mobile:text-[1.0625rem]
           "
           href="/foundations/colors"
         >
           Fern{' '}
           <span
             class="
-              pl-3 ml-3 border-l border-line text-[13px] font-normal
+              pl-3 ml-3 border-l border-line text-[0.8125rem] font-normal
               tracking-normal text-muted docs-mobile:hidden
             "
           >
@@ -179,7 +179,7 @@ function Layout(props: {
           <fieldset
             class="
               theme-switch flex gap-0.5 m-0 p-0 border-0 min-w-0
-              rounded-fern
+              rounded-base
             "
             aria-label="Theme"
           >
@@ -188,20 +188,18 @@ function Layout(props: {
                 <button
                   class="
                     flex items-center justify-center gap-1.5 border-0
-                    rounded-[2px] py-1.5 px-2.5 text-muted bg-transparent
-                    text-[12px] font-medium cursor-pointer
+                    rounded-[0.125rem] py-1.5 px-2.5 text-muted bg-transparent
+                    text-[0.75rem] font-medium
                     aria-pressed:text-content aria-pressed:bg-docs-neutral
                     hover:text-content docs-mobile:px-2
                   "
                   type="button"
+                  aria-label={value === 'light' ? 'Light' : 'Dark'}
                   aria-pressed={props.theme === value ? 'true' : 'false'}
                   onClick={() => props.onThemeChange(value)}
                 >
-                  <Icon
-                    icon={value === 'light' ? cdxIconLightbulb : cdxIconMoon}
-                    class="size-4 docs-tiny:hidden"
-                  />
-                  <span>{value === 'light' ? 'Light' : 'Dark'}</span>
+                  <Icon icon={value === 'light' ? cdxIconLightbulb : cdxIconMoon} class="size-4" />
+                  <span class="@max-[20rem]:hidden">{value === 'light' ? 'Light' : 'Dark'}</span>
                 </button>
               )}
             </For>
@@ -209,8 +207,8 @@ function Layout(props: {
           <button
             class="
               menu-toggle hidden size-9 items-center justify-center
-              text-content border border-line rounded-fern bg-canvas
-              cursor-pointer docs-mobile:inline-flex
+              text-content border border-line rounded-base bg-canvas
+              docs-mobile:inline-flex
             "
             type="button"
             aria-label={menuOpen() ? 'Close navigation' : 'Open navigation'}
@@ -243,7 +241,7 @@ function Layout(props: {
       >
         <aside
           class="
-            sidebar sticky top-18 h-[calc(100vh-72px)] py-10 px-6
+            sidebar sticky top-18 h-[calc(100vh-4.5rem)] py-10 px-6
             border-r border-line flex flex-col docs-mobile:hidden
           "
         >
@@ -251,9 +249,9 @@ function Layout(props: {
         </aside>
         <main
           class="
-            flex flex-col min-w-0 min-h-[calc(100dvh-72px)]
+            flex flex-col min-w-0 min-h-[calc(100dvh-4.5rem)]
             px-12 pt-10 outline-none docs-narrow:px-9
-            docs-mobile:min-h-[calc(100dvh-64px)]
+            docs-mobile:min-h-[calc(100dvh-4rem)]
             docs-mobile:px-5 docs-mobile:pt-8
           "
           id="main"
@@ -265,7 +263,7 @@ function Layout(props: {
           <div class="flex-1">{props.children}</div>
           <footer
             class="
-              border-t border-line text-muted text-[12px] py-6 mt-16
+              border-t border-line text-muted text-[0.75rem] py-6 mt-16
             "
           >
             Fern · Taxon Labs
@@ -274,7 +272,7 @@ function Layout(props: {
         <Show when={page()?.sections.length}>
           <aside
             class="
-              toc sticky top-18 h-fit py-10 px-6 text-[12px]
+              toc sticky top-18 h-fit py-10 px-6 text-[0.75rem]
               docs-narrow:hidden
             "
           >

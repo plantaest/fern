@@ -42,7 +42,7 @@ export function ColorsRoles(props: { theme: Theme }) {
       <For each={roleGroups}>
         {(group) => (
           <div>
-            <h3 class="font-sans font-medium text-[14px] leading-5 mb-4">{group.title}</h3>
+            <h3 class="font-sans font-medium text-[0.875rem] leading-5 mb-4">{group.title}</h3>
             <For each={group.tokens}>
               {(token) => (
                 <div
@@ -53,7 +53,7 @@ export function ColorsRoles(props: { theme: Theme }) {
                 >
                   <span
                     class="
-                      inline-block size-9 border border-line rounded-fern
+                      inline-block size-9 border border-line rounded-base
                       shrink-0 docs-mobile:size-7
                     "
                     style={{ background: value(token) }}
@@ -61,16 +61,16 @@ export function ColorsRoles(props: { theme: Theme }) {
                   <div>
                     <code
                       class="
-                        block text-[11px] [overflow-wrap:anywhere]
-                        docs-mobile:text-[10px]
+                        block text-[0.6875rem] [overflow-wrap:anywhere]
+                        docs-mobile:text-[0.625rem]
                       "
                     >
                       {token}
                     </code>
                     <span
                       class="
-                        token-value block text-muted font-mono text-[11px]
-                        leading-[18px] mt-1
+                        token-value block text-muted font-mono text-[0.6875rem]
+                        leading-[1.125rem] mt-1
                       "
                     >
                       {value(token)}
@@ -98,7 +98,7 @@ export function ColorsInteractionStates(props: { theme: Theme }) {
       <For each={['progressive', 'destructive']}>
         {(name) => (
           <div>
-            <h3 class="font-sans font-medium text-[14px] leading-5 mb-4">
+            <h3 class="font-sans font-medium text-[0.875rem] leading-5 mb-4">
               {name === 'progressive' ? 'Progressive' : 'Destructive'}
             </h3>
             <div class="flex gap-3">
@@ -106,11 +106,13 @@ export function ColorsInteractionStates(props: { theme: Theme }) {
                 {(state) => (
                   <div class="flex-1">
                     <span
-                      class="block w-full h-11 rounded-fern mb-2"
+                      class="block w-full h-11 rounded-base mb-2"
                       style={{ background: value(`background-color-${name}${state}`) }}
                     />
-                    <span class="block text-[12px] capitalize">{state.slice(2) || 'Default'}</span>
-                    <code class="text-muted text-[10px]">
+                    <span class="block text-[0.75rem] capitalize">
+                      {state.slice(2) || 'Default'}
+                    </span>
+                    <code class="text-muted text-[0.625rem]">
                       {value(`background-color-${name}${state}`)}
                     </code>
                   </div>
@@ -134,7 +136,7 @@ export function ColorsAllTokens(props: { theme: Theme }) {
   );
 
   return (
-    <details class="token-disclosure border border-line rounded-fern p-4">
+    <details class="token-disclosure border border-line rounded-base p-4">
       <summary>Browse all {Object.keys(colors.light).length} color tokens</summary>
       <Field label="Filter tokens" for="token-filter" class="mt-5 mb-3">
         <input
@@ -146,7 +148,7 @@ export function ColorsAllTokens(props: { theme: Theme }) {
           placeholder="e.g. progressive"
         />
       </Field>
-      <p class="text-[13px] leading-5 text-muted" role="status">
+      <p class="text-[0.8125rem] leading-5 text-muted" role="status">
         {entries().length} tokens
       </p>
       <div class="max-w-full overflow-x-auto border-y border-line mt-3">
@@ -172,7 +174,7 @@ export function ColorsAllTokens(props: { theme: Theme }) {
                     <span
                       class="
                         inline-block size-5 border border-line
-                        rounded-fern shrink-0
+                        rounded-base shrink-0
                       "
                       style={{ background: value(name) }}
                     />

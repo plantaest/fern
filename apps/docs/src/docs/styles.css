@@ -35,18 +35,18 @@
   }
 
   .fern-docs h1 {
-    font-size: 36px;
-    line-height: 44px;
+    font-size: 2.25rem;
+    line-height: 2.75rem;
   }
 
   .fern-docs h2 {
-    font-size: 28px;
-    line-height: 36px;
+    font-size: 1.75rem;
+    line-height: 2.25rem;
   }
 
   .fern-docs h3 {
-    font-size: 22px;
-    line-height: 28px;
+    font-size: 1.375rem;
+    line-height: 1.75rem;
   }
 
   .fern-docs a {
@@ -63,7 +63,7 @@
   }
 
   .fern-docs code {
-    font-size: 12px;
+    font-size: 0.75rem;
   }
 
   .fern-docs :where(button, input, select, summary) {
@@ -77,38 +77,38 @@
 
   .fern-docs pre {
     margin: 0;
-    padding: 0 20px 20px;
+    padding: 0 --spacing(5) --spacing(5);
     overflow-x: auto;
     max-width: 100%;
 
-    font-size: 12px;
-    line-height: 22px;
+    font-size: 0.75rem;
+    line-height: 1.375rem;
     tab-size: 2;
   }
 
   .fern-docs summary {
     cursor: pointer;
-    font-size: 13px;
+    font-size: 0.8125rem;
   }
 
   .fern-docs table {
     width: 100%;
     border-collapse: collapse;
     text-align: left;
-    font-size: 13px;
-    line-height: 20px;
+    font-size: 0.8125rem;
+    line-height: 1.25rem;
   }
 
   .fern-docs th {
     font-weight: 500;
     color: var(--fern-color-subtle);
-    font-size: 12px;
-    padding: 12px;
+    font-size: 0.75rem;
+    padding: --spacing(3);
     background: var(--fern-background-color-neutral-subtle);
   }
 
   .fern-docs td {
-    padding: 12px;
+    padding: --spacing(3);
     border-top: 1px solid var(--fern-border-color-subtle);
     vertical-align: top;
   }
@@ -131,18 +131,18 @@
   }
 
   .fern-docs .doc-section > ul {
-    padding-left: 20px;
-    font-size: 14px;
-    line-height: 24px;
+    padding-left: --spacing(5);
+    font-size: 0.875rem;
+    line-height: 1.5rem;
   }
 
   .fern-docs .doc-section > ul li + li {
-    margin-top: 8px;
+    margin-top: --spacing(2);
   }
 
   @media (max-width: 760px) {
     .fern-docs .api-table code {
-      font-size: 11px;
+      font-size: 0.6875rem;
     }
   }
 }

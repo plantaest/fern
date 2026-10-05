@@ -99,7 +99,9 @@ import { cdxIconEdit } from '@wikimedia/codex-icons';
 import '@taxon-labs/fern/styles.css';
 
 const props: ButtonProps = {
-  variant: 'outline',
+  variant: 'surface',
+  action: 'destructive',
+  size: 'sm',
   type: 'button',
   'aria-label': 'Edit',
 };
@@ -111,7 +113,7 @@ render(
         <Icon icon={cdxIconEdit} />
         Edit
       </Button>
-      <a href="/article" class={buttonVariants({ variant: 'outline' })}>
+      <a href="/article" class={buttonVariants({ variant: 'outline', size: 'lg' })}>
         Read
       </a>
     </div>
@@ -221,7 +223,7 @@ assert.ok(cssFile, 'The consumer build must include Fern CSS');
 
 const css = await readFile(join(temp, 'dist/assets', cssFile), 'utf8');
 assert.ok(css.includes('.fern-button') && css.includes('[data-theme=dark]'));
-assert.ok(!css.includes('@apply') && !css.includes('@theme'), 'CSS must already be compiled');
+assert.ok(!/@(?:apply|theme|reference)\b|--spacing\(/.test(css), 'CSS must already be compiled');
 
 console.log(
   'Package check passed: types, exported imports, behavior, one Solid runtime, and standalone CSS.',

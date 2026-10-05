@@ -11,78 +11,78 @@ export function TypographyTypeScale() {
       <div>
         <span
           class="
-            block font-mono text-[11px] leading-5 text-muted mb-3
+            block font-mono text-[0.6875rem] leading-5 text-muted mb-3
           "
         >
           Heading 1 · 36 / 44
         </span>
         <p
           class="
-            font-serif font-semibold tracking-[-0.02em] text-[36px]
-            leading-[44px]
+            font-serif font-semibold tracking-[-0.02em] text-[2.25rem]
+            leading-[2.75rem]
           "
         >
           A place for knowledge
         </p>
-        <span class="text-[13px] leading-5 text-muted">Source Serif 4 · Semibold</span>
+        <span class="text-[0.8125rem] leading-5 text-muted">Source Serif 4 · Semibold</span>
       </div>
       <div>
         <span
           class="
-            block font-mono text-[11px] leading-5 text-muted mb-3
+            block font-mono text-[0.6875rem] leading-5 text-muted mb-3
           "
         >
           Heading 2 · 28 / 36
         </span>
         <p
           class="
-            font-serif font-semibold tracking-[-0.02em] text-[28px]
+            font-serif font-semibold tracking-[-0.02em] text-[1.75rem]
             leading-9
           "
         >
           Built for useful work
         </p>
-        <span class="text-[13px] leading-5 text-muted">Source Serif 4 · Semibold</span>
+        <span class="text-[0.8125rem] leading-5 text-muted">Source Serif 4 · Semibold</span>
       </div>
       <div>
         <span
           class="
-            block font-mono text-[11px] leading-5 text-muted mb-3
+            block font-mono text-[0.6875rem] leading-5 text-muted mb-3
           "
         >
           Heading 3 · 22 / 28
         </span>
         <p
           class="
-            font-serif font-semibold tracking-[-0.02em] text-[22px]
+            font-serif font-semibold tracking-[-0.02em] text-[1.375rem]
             leading-7
           "
         >
           Every detail has a purpose
         </p>
-        <span class="text-[13px] leading-5 text-muted">Source Serif 4 · Semibold</span>
+        <span class="text-[0.8125rem] leading-5 text-muted">Source Serif 4 · Semibold</span>
       </div>
       <div>
         <span
           class="
-            block font-mono text-[11px] leading-5 text-muted mb-3
+            block font-mono text-[0.6875rem] leading-5 text-muted mb-3
           "
         >
           Body · 16 / 26
         </span>
         <p>Find information, make an edit, and keep moving.</p>
-        <span class="text-[13px] leading-5 text-muted">Inter · Regular</span>
+        <span class="text-[0.8125rem] leading-5 text-muted">Inter · Regular</span>
       </div>
       <div>
         <span
           class="
-            block font-mono text-[11px] leading-5 text-muted mb-3
+            block font-mono text-[0.6875rem] leading-5 text-muted mb-3
           "
         >
           Control · 14 / 20
         </span>
-        <p class="text-[14px] font-medium">Save changes</p>
-        <span class="text-[13px] leading-5 text-muted">Inter · Medium</span>
+        <p class="text-[0.875rem] font-medium">Save changes</p>
+        <span class="text-[0.8125rem] leading-5 text-muted">Inter · Medium</span>
       </div>
     </div>
   );
@@ -108,7 +108,7 @@ export function TypographyCode() {
     <CodeBlock
       code={`import { Button } from '@taxon-labs/fern/button';
 
-<Button variant="outline">Save changes</Button>
+<Button variant="outline" action="progressive">Save changes</Button>
 
 // Vietnamese glyphs: Tri thức mở`}
     />

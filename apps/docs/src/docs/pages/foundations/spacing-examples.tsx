@@ -12,13 +12,13 @@ export function SpacingScale() {
           <div
             class="
               grid grid-cols-[40px_72px_56px_1fr] items-center gap-4 my-5
-              text-[13px] [&_code]:text-muted
+              text-[0.8125rem] [&_code]:text-muted
             "
           >
             <code>{size / 4}</code>
             <span
-              class="inline-block h-6 bg-docs-progressive rounded-[2px]"
-              style={{ width: `${size}px` }}
+              class="inline-block h-6 bg-docs-progressive rounded-[0.125rem]"
+              style={{ width: `calc(var(--fern-spacing) * ${size / 4})` }}
             />
             <span>{size}px</span>
             <code>{size / 16}rem</code>
@@ -34,11 +34,11 @@ export function SpacingInUse() {
     <Example
       title="Related actions"
       code={
-        '<div class="flex gap-2">\n  <Button>Save</Button>\n  <Button variant="outline">Cancel</Button>\n</div>'
+        '<div class="flex gap-2">\n  <Button action="progressive">Save</Button>\n  <Button variant="outline">Cancel</Button>\n</div>'
       }
     >
       <div class="flex gap-2">
-        <Button>Save</Button>
+        <Button action="progressive">Save</Button>
         <Button variant="outline">Cancel</Button>
       </div>
     </Example>

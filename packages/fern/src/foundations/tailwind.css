@@ -9,9 +9,11 @@
   --color-line: var(--fern-border-color-subtle);
   --color-action: var(--fern-color-progressive);
 
-  --font-sans: "Inter Variable", Inter, system-ui, sans-serif;
-  --font-serif: "Source Serif 4 Variable", Georgia, serif;
-  --font-mono: "JetBrains Mono Variable", ui-monospace, monospace;
+  --spacing: var(--fern-spacing);
 
-  --radius-fern: 4px;
+  --font-sans: var(--fern-font-content);
+  --font-serif: var(--fern-font-heading);
+  --font-mono: var(--fern-font-code);
+
+  --radius-base: var(--fern-radius-base);
 }

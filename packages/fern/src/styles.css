@@ -1,31 +1,31 @@
 @layer theme, base, components, utilities;
-@import "./foundations/tailwind.css";
-@import "tailwindcss/utilities.css" layer(utilities) source(none);
 @import "./foundations/tokens.css";
-@source "./components";
+@reference "./foundations/tailwind.css";
 
 .fern {
   --fern-font-content: "Inter Variable", Inter, system-ui, sans-serif;
   --fern-font-heading: "Source Serif 4 Variable", Georgia, serif;
   --fern-font-code: "JetBrains Mono Variable", ui-monospace, monospace;
-  --fern-radius: 4px;
 
-  font: 400 16px / 1.6 var(--fern-font-content);
+  --fern-spacing: 0.25rem;
+  --fern-radius-base: 0.25rem;
+
+  font: 400 1rem / 1.6 var(--fern-font-content);
   color: var(--fern-color-base);
   background: var(--fern-background-color-base);
-}
 
-.fern *,
-.fern *::before,
-.fern *::after {
-  box-sizing: border-box;
+  & *,
+  & *::before,
+  & *::after {
+    box-sizing: border-box;
+  }
 }
 
 @layer components {
   .fern-icon {
     display: inline-block;
-    width: 20px;
-    height: 20px;
+    width: 1rem;
+    height: 1rem;
     flex-shrink: 0;
 
     fill: currentColor;
@@ -33,106 +33,179 @@
   }
 
   .fern-button {
-    @apply inline-flex items-center justify-center gap-2 whitespace-nowrap;
+    --fern-button-size: 2rem;
+    --fern-button-icon-size: 1rem;
 
-    height: 36px;
-    padding: 0 12px;
+    --fern-button-color: var(--fern-color-neutral);
+    --fern-button-color-hover: var(--fern-color-neutral);
+    --fern-button-color-active: var(--fern-color-neutral);
+    --fern-button-solid-color: var(--fern-color-base);
+    --fern-button-solid-bg: var(--fern-background-color-neutral);
+    --fern-button-solid-hover: var(--fern-background-color-interactive--hover);
+    --fern-button-solid-active: var(--fern-background-color-interactive--active);
+    --fern-button-subtle-bg: var(--fern-background-color-interactive-subtle);
+    --fern-button-subtle-hover: var(--fern-background-color-interactive-subtle--hover);
+    --fern-button-subtle-active: var(--fern-background-color-interactive-subtle--active);
+    --fern-button-border: var(--fern-border-color-interactive);
+    --fern-button-border-hover: var(--fern-border-color-interactive--hover);
+    --fern-button-border-active: var(--fern-border-color-interactive--active);
+
+    --fern-button-fg: var(--fern-button-solid-color);
+    --fern-button-fg-hover: var(--fern-button-solid-color);
+    --fern-button-fg-active: var(--fern-button-solid-color);
+    --fern-button-bg: var(--fern-button-solid-bg);
+    --fern-button-hover: var(--fern-button-solid-hover);
+    --fern-button-active: var(--fern-button-solid-active);
+    --fern-button-line: transparent;
+    --fern-button-line-hover: transparent;
+    --fern-button-line-active: transparent;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: --spacing(2);
+    height: var(--fern-button-size);
+    padding: 0 --spacing(3);
 
     border: 1px solid transparent;
-    border-radius: var(--fern-radius);
-    font: 500 14px / 1 var(--fern-font-content);
+    border-radius: var(--fern-radius-base);
+    font: 500 0.875rem / 1 var(--fern-font-content);
+    white-space: nowrap;
     text-decoration: none;
-    cursor: pointer;
     box-shadow: none;
+    transition:
+      background-color 100ms ease,
+      color 100ms ease,
+      border-color 100ms ease;
 
-    --button-fg: var(--fern-color-inverted-fixed);
-    --button-bg: var(--fern-background-color-progressive);
-    --button-hover: var(--fern-background-color-progressive--hover);
-    --button-active: var(--fern-background-color-progressive--active);
-    --button-line: transparent;
+    color: var(--fern-button-fg);
+    background: var(--fern-button-bg);
+    border-color: var(--fern-button-line);
 
-    color: var(--button-fg);
-    background: var(--button-bg);
-    border-color: var(--button-line);
+    &:enabled:hover,
+    &:is(a):hover {
+      background: var(--fern-button-hover);
+      color: var(--fern-button-fg-hover);
+      border-color: var(--fern-button-line-hover);
+      text-decoration: none;
+    }
+
+    &:enabled:active,
+    &:is(a):active {
+      background: var(--fern-button-active);
+      color: var(--fern-button-fg-active);
+      border-color: var(--fern-button-line-active);
+      transition-duration: 0s;
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--fern-border-color-progressive--focus);
+      outline-offset: 2px;
+    }
+
+    &:disabled {
+      color: var(--fern-color-disabled-emphasized);
+      background: var(--fern-background-color-disabled);
+      border-color: transparent;
+      text-decoration: none;
+    }
+
+    & .fern-icon {
+      width: var(--fern-button-icon-size);
+      height: var(--fern-button-icon-size);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
   }
 
+  .fern-button-action--progressive {
+    --fern-button-color: var(--fern-color-progressive);
+    --fern-button-color-hover: var(--fern-color-progressive--hover);
+    --fern-button-color-active: var(--fern-color-progressive--active);
+    --fern-button-solid-color: var(--fern-color-inverted-fixed);
+    --fern-button-solid-bg: var(--fern-background-color-progressive);
+    --fern-button-solid-hover: var(--fern-background-color-progressive--hover);
+    --fern-button-solid-active: var(--fern-background-color-progressive--active);
+    --fern-button-subtle-bg: var(--fern-background-color-progressive-subtle);
+    --fern-button-subtle-hover: var(--fern-background-color-progressive-subtle--hover);
+    --fern-button-subtle-active: var(--fern-background-color-progressive-subtle--active);
+    --fern-button-border: var(--fern-border-color-progressive);
+    --fern-button-border-hover: var(--fern-border-color-progressive--hover);
+    --fern-button-border-active: var(--fern-border-color-progressive--active);
+  }
+
+  .fern-button-action--destructive {
+    --fern-button-color: var(--fern-color-destructive);
+    --fern-button-color-hover: var(--fern-color-destructive--hover);
+    --fern-button-color-active: var(--fern-color-destructive--active);
+    --fern-button-solid-color: var(--fern-color-inverted-fixed);
+    --fern-button-solid-bg: var(--fern-background-color-destructive);
+    --fern-button-solid-hover: var(--fern-background-color-destructive--hover);
+    --fern-button-solid-active: var(--fern-background-color-destructive--active);
+    --fern-button-subtle-bg: var(--fern-background-color-destructive-subtle);
+    --fern-button-subtle-hover: var(--fern-background-color-destructive-subtle--hover);
+    --fern-button-subtle-active: var(--fern-background-color-destructive-subtle--active);
+    --fern-button-border: var(--fern-border-color-destructive);
+    --fern-button-border-hover: var(--fern-border-color-destructive--hover);
+    --fern-button-border-active: var(--fern-border-color-destructive--active);
+  }
+
+  .fern-button-variant--soft,
+  .fern-button-variant--surface,
+  .fern-button-variant--outline,
+  .fern-button-variant--ghost {
+    --fern-button-fg: var(--fern-button-color);
+    --fern-button-fg-hover: var(--fern-button-color-hover);
+    --fern-button-fg-active: var(--fern-button-color-active);
+    --fern-button-bg: transparent;
+    --fern-button-hover: var(--fern-button-subtle-hover);
+    --fern-button-active: var(--fern-button-subtle-active);
+  }
+
+  .fern-button-variant--surface,
   .fern-button-variant--outline {
-    --button-fg: var(--fern-color-base);
-    --button-bg: var(--fern-background-color-base);
-    --button-hover: var(--fern-background-color-interactive-subtle--hover);
-    --button-active: var(--fern-background-color-interactive-subtle--active);
-    --button-line: var(--fern-border-color-base);
+    --fern-button-line: var(--fern-button-border);
+    --fern-button-line-hover: var(--fern-button-border-hover);
+    --fern-button-line-active: var(--fern-button-border-active);
   }
 
-  .fern-button-variant--secondary {
-    --button-fg: var(--fern-color-base);
-    --button-bg: var(--fern-background-color-neutral);
-    --button-hover: var(--fern-background-color-interactive--hover);
-    --button-active: var(--fern-background-color-interactive--active);
+  .fern-button-variant--soft,
+  .fern-button-variant--surface {
+    --fern-button-bg: var(--fern-button-subtle-bg);
   }
 
   .fern-button-variant--ghost {
-    --button-fg: var(--fern-color-base);
-    --button-bg: transparent;
-    --button-hover: var(--fern-background-color-interactive-subtle--hover);
-    --button-active: var(--fern-background-color-interactive-subtle--active);
+    &:disabled {
+      color: var(--fern-color-disabled);
+      background: transparent;
+    }
   }
 
-  .fern-button-variant--destructive {
-    --button-bg: var(--fern-background-color-destructive);
-    --button-hover: var(--fern-background-color-destructive--hover);
-    --button-active: var(--fern-background-color-destructive--active);
+  .fern-button-size--sm,
+  .fern-button-size--icon-sm {
+    --fern-button-size: 1.5rem;
+    --fern-button-icon-size: 0.875rem;
+
+    gap: --spacing(1);
+    padding: 0 --spacing(2);
+    font-size: 0.75rem;
   }
 
-  .fern-button-variant--link {
-    --button-fg: var(--fern-color-progressive);
-    --button-bg: transparent;
-    --button-hover: transparent;
-    --button-active: transparent;
+  .fern-button-size--lg,
+  .fern-button-size--icon-lg {
+    --fern-button-size: 2.75rem;
+    --fern-button-icon-size: 1.25rem;
 
-    text-underline-offset: 3px;
+    padding: 0 --spacing(4);
+    font-size: 1rem;
   }
 
-  .fern-button-size--icon {
-    width: 36px;
+  .fern-button-size--icon-sm,
+  .fern-button-size--icon,
+  .fern-button-size--icon-lg {
+    width: var(--fern-button-size);
     padding: 0;
-  }
-
-  .fern-button:hover {
-    background: var(--button-hover);
-    color: var(--button-fg);
-    text-decoration: none;
-  }
-
-  .fern-button:active {
-    background: var(--button-active);
-  }
-
-  .fern-button-variant--link:hover {
-    color: var(--fern-color-progressive--hover);
-    text-decoration: underline;
-  }
-
-  .fern-button-variant--link:active {
-    color: var(--fern-color-progressive--active);
-  }
-
-  .fern-button:focus-visible {
-    outline: 2px solid var(--fern-border-color-progressive--focus);
-    outline-offset: 2px;
-  }
-
-  .fern-button:disabled {
-    color: var(--fern-color-disabled);
-    background: var(--fern-background-color-disabled);
-    border-color: var(--fern-border-color-disabled);
-    cursor: default;
-    text-decoration: none;
-  }
-
-  .fern-button-variant--ghost:disabled,
-  .fern-button-variant--link:disabled {
-    background: transparent;
-    border-color: transparent;
   }
 }

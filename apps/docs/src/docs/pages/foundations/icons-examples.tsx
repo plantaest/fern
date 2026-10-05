@@ -37,7 +37,7 @@ export function IconsGallery() {
     <>
       <div
         class="
-          grid grid-cols-4 border-t border-l border-line rounded-fern
+          grid grid-cols-4 border-t border-l border-line rounded-base
           overflow-hidden mb-5 docs-mobile:grid-cols-3
         "
       >
@@ -46,7 +46,7 @@ export function IconsGallery() {
             <div
               class="
                 min-h-28 flex items-center justify-center flex-col
-                gap-4 border-r border-b border-line text-[12px]
+                gap-4 border-r border-b border-line text-[0.75rem]
                 text-muted
               "
             >
@@ -56,7 +56,7 @@ export function IconsGallery() {
           )}
         </For>
       </div>
-      <p class="text-[13px] leading-5 text-muted">
+      <p class="text-[0.8125rem] leading-5 text-muted">
         Explore the{' '}
         <a href="https://doc.wikimedia.org/codex/latest/icons/all-icons.html">
           full Codex icon collection

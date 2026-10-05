@@ -40,11 +40,13 @@ The Docs app bundles fonts locally with Vietnamese glyphs. Fern provides font st
 
 ## Conventions
 
+- Use rem for font sizes, spacing, control heights, icon sizes, and radii. Keep border and focus outline dimensions in px, and use unitless line-height where appropriate. Pixel values in the foundations and size descriptions assume a 16px root font size.
 - Use Kobalte behavior where appropriate; forward native props, events, refs, and ARIA attributes.
 - Button defaults to `type="button"`. Keep links as native anchors, using `buttonVariants()` when appropriate.
-- Keep the initial 36px Button size and its icon-only form. Use composition for icons and busy states.
+- Button sizes are `sm` (24px), `default` (32px), and `lg` (44px), with matching `icon-sm`, `icon`, and `icon-lg` forms. Use 12/14/16px text and 14/16/20px icons in both text and icon-only buttons. Standalone icons default to 16px. Use composition for icons and busy states.
+- Button separates visual `variant` (`solid`, `soft`, `surface`, `outline`, `ghost`) from semantic `action` (`neutral`, `progressive`, `destructive`). Defaults are `solid` and `neutral`.
 - Use direct namespaced component selectors (`.fern-button`, `.fern-icon`) in `@layer components`, so utilities can override them. Keep `.fern` for theme tokens, fonts, and scoped resets rather than repeating it in component selectors.
-- Include the variant group in modifier class names: `fern-button-variant--outline` and `fern-button-size--icon`. Keep the base class `fern-button`.
+- Include the styling group in modifier class names: `fern-button-variant--outline`, `fern-button-action--destructive`, and `fern-button-size--icon`. Keep the base class `fern-button`.
 - Docs navigation has Foundations and Components only. Use simple English, no logo or decorative animation.
 - Component pages present an introduction, basic example, API Reference, playground, examples, and accessibility notes, in that order.
 - In API tables, quote string literal types and defaults with straight double quotes, such as `"default" | "icon"`.
@@ -83,7 +85,7 @@ Keep prerelease compatibility explicit. A successful Docs build does not prove a
 
 ## Later
 
-Additional themes and sizes, ResourceLoader integration, automatic skin theme detection, and components beyond Kobalte remain future work. Add components after reviewing Button.
+Additional themes, ResourceLoader integration, automatic skin theme detection, and components beyond Kobalte remain future work. Add components after reviewing Button.
 
 ## References
 

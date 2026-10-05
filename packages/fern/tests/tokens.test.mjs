@@ -59,19 +59,23 @@ test('used text and focus pairs meet their contrast thresholds in both themes', 
       ['color-progressive', 'background-color-base', 4.5],
       ['border-color-progressive--focus', 'background-color-base', 3],
       ...['progressive', 'destructive'].flatMap((role) =>
-        ['', '--hover', '--active'].map((state) => [
-          'color-inverted-fixed',
-          `background-color-${role}${state}`,
-          4.5,
+        ['', '--hover', '--active'].flatMap((state) => [
+          ['color-inverted-fixed', `background-color-${role}${state}`, 4.5],
+          [`color-${role}${state}`, `background-color-${role}-subtle${state}`, 4.5],
+          [`color-${role}${state}`, 'background-color-base', 4.5],
         ]),
       ),
       ...[
-        'neutral',
-        'interactive--hover',
-        'interactive--active',
+        'base',
+        'interactive-subtle',
         'interactive-subtle--hover',
         'interactive-subtle--active',
-      ].map((role) => ['color-base', `background-color-${role}`, 4.5]),
+      ].map((role) => ['color-neutral', `background-color-${role}`, 4.5]),
+      ...['neutral', 'interactive--hover', 'interactive--active'].map((role) => [
+        'color-base',
+        `background-color-${role}`,
+        4.5,
+      ]),
     ];
 
     for (const [fg, bg, minimum] of pairs) {

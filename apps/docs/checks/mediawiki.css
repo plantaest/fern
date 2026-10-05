@@ -1,0 +1,26 @@
+body {
+  margin: 24px;
+  background: #f0e8d8;
+  font-size: 18px;
+  font-family: Georgia, serif;
+  color: #123456;
+}
+
+button,
+input {
+  font-size: 11px;
+  font-family: Georgia, serif;
+  color: #123456;
+  background: #f0e8d8;
+  border: 2px dashed #123456;
+  border-radius: 0;
+}
+
+a {
+  color: #123456;
+  text-decoration: underline;
+}
+
+#fixture {
+  margin-top: 24px;
+}

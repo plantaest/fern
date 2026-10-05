@@ -9,7 +9,9 @@ import { Button } from '@taxon-labs/fern/button';
 import '@taxon-labs/fern/styles.css';
 
 <div class="fern" data-theme="light">
-  <Button variant="outline">Save changes</Button>
+  <Button variant="outline" action="progressive">
+    Save changes
+  </Button>
 </div>;
 ```
 
@@ -23,8 +25,8 @@ CSS is already compiled: consumers do not need Tailwind to render components. Th
 
 | Entry           | Contents                                                                          |
 | --------------- | --------------------------------------------------------------------------------- |
-| Package root    | Button, Icon, their types, `buttonVariants`, `buttonVariantNames`                 |
-| `/button`       | Button, styling helper, variants, and types                                       |
+| Package root    | Button, Icon, their types, and `buttonVariants`                                   |
+| `/button`       | Button, `buttonVariants`, and Button types                                        |
 | `/icon`         | Decorative Codex icon helper and its props                                        |
 | `/styles.css`   | Compiled component CSS and both themes                                            |
 | `/tokens.css`   | Both themes without component styling                                             |
@@ -33,7 +35,11 @@ CSS is already compiled: consumers do not need Tailwind to render components. Th
 
 The Tailwind adapter uses standard utility names without a prefix, such as `flex`, `gap-2`, and `bg-canvas`. Fern component classes and theme tokens retain their `fern-` and `--fern-` names. For a MediaWiki gadget using Shadow DOM, load the compiled Fern CSS inside the shadow root and keep the `.fern` theme container around components and portal destinations.
 
+Within `.fern`, Button gaps and padding share `--fern-spacing` (0.25rem) with Tailwind's numeric spacing and sizing utilities. The adapter also maps `font-sans`, `font-serif`, `font-mono`, and `rounded-base` to Fern's font and radius tokens. Override these tokens on the container to keep components and utilities in sync. Font sizes, spacing, control heights, icons, and radii use rem; borders and focus outlines use px. Sizes shown in pixels assume a 16px root font size. Rem sizes follow the document's root font size, including inside Shadow DOM.
+
 Import individual icons from `@wikimedia/codex-icons`. Put accessible names on the surrounding controls. `buttonVariants()` applies appearance to native links without changing semantics.
+
+Button separates `variant` (`solid`, `soft`, `surface`, `outline`, `ghost`) from `action` (`neutral`, `progressive`, `destructive`). Defaults are `solid` and `neutral`. Set `action="progressive"` for actions that move a task forward. Sizes are `sm` (24px), `default` (32px), and `lg` (44px), with matching `icon-sm`, `icon`, and `icon-lg` squares. `ButtonVariant`, `ButtonAction`, and `ButtonSize` are exported from the package root and `/button`.
 
 The `solid` export condition preserves JSX for the consuming compiler. Default ESM is compiled for browser rendering. Type declarations ship with the package. Solid runtimes are peer dependencies; CSS is marked as having side effects. SSR/hydration is not verified.
 

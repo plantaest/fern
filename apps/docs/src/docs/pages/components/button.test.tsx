@@ -30,28 +30,39 @@ it('renders MDX with Solid 2 and keeps the playground reactive', () => {
   expect(host.querySelector('summary p')).toBeNull();
 
   const rows = host.querySelectorAll('.api-table tbody tr');
-  expect(rows).toHaveLength(6);
+  expect(rows).toHaveLength(7);
   expect([...rows[0].querySelectorAll('td')].map((cell) => cell.textContent)).toEqual([
     'variant',
-    '"default" | "outline" | "secondary" | "ghost" | "destructive" | "link"',
-    '"default"',
+    '"solid" | "soft" | "surface" | "outline" | "ghost"',
+    '"solid"',
+  ]);
+  expect([...rows[1].querySelectorAll('td')].map((cell) => cell.textContent)).toEqual([
+    'action',
+    '"neutral" | "progressive" | "destructive"',
+    '"neutral"',
   ]);
 
   const playground = host.querySelector('.playground')!;
-  const select = playground.querySelector('select')!;
+  const variant = playground.querySelector<HTMLSelectElement>('#button-variant')!;
+  const action = playground.querySelector<HTMLSelectElement>('#button-action')!;
 
   expect(playground.querySelector('pre code')?.textContent).toBe(
     '<Button>\n  Save changes\n</Button>',
   );
 
-  select.value = 'destructive';
-  select.dispatchEvent(new Event('change', { bubbles: true }));
+  variant.value = 'surface';
+  variant.dispatchEvent(new Event('change', { bubbles: true }));
+  action.value = 'destructive';
+  action.dispatchEvent(new Event('change', { bubbles: true }));
   flush();
 
+  expect(playground.querySelector('button')?.className).toContain('fern-button-variant--surface');
   expect(playground.querySelector('button')?.className).toContain(
-    'fern-button-variant--destructive',
+    'fern-button-action--destructive',
   );
-  expect(playground.querySelector('code')?.textContent).toContain('variant="destructive"');
+  expect(playground.querySelector('code')?.textContent).toBe(
+    '<Button variant="surface" action="destructive">\n  Save changes\n</Button>',
+  );
 
   playground.querySelector('button')?.click();
   flush();
@@ -75,7 +86,13 @@ it('keeps native labels associated and copies the playground code with an access
   dispose = render(() => <ButtonPage />, host);
   flush();
 
-  for (const id of ['button-variant', 'button-label', 'button-icon']) {
+  for (const id of [
+    'button-variant',
+    'button-action',
+    'button-size',
+    'button-label',
+    'button-icon',
+  ]) {
     const control = host.querySelector<HTMLInputElement | HTMLSelectElement>(`#${id}`)!;
     expect(control.labels).toHaveLength(1);
     expect(control.labels?.[0].htmlFor).toBe(id);
@@ -121,6 +138,41 @@ it('keeps native labels associated and copies the playground code with an access
       'Copy unavailable. Select the code to copy it.',
     );
   });
+});
+
+it('preserves the selected size when switching between text and icon-only modes', () => {
+  const host = document.createElement('div');
+  document.body.append(host);
+  dispose = render(() => <ButtonPage />, host);
+  flush();
+
+  const size = host.querySelector<HTMLSelectElement>('#button-size')!;
+  const icon = host.querySelector<HTMLSelectElement>('#button-icon')!;
+  const playground = host.querySelector('.playground')!;
+
+  for (const value of ['sm', 'lg', 'default']) {
+    size.value = value;
+    size.dispatchEvent(new Event('change', { bubbles: true }));
+
+    for (const mode of ['only', 'start', 'none']) {
+      icon.value = mode;
+      icon.dispatchEvent(new Event('change', { bubbles: true }));
+      flush();
+
+      const expectedSize =
+        mode === 'only' ? (value === 'default' ? 'icon' : `icon-${value}`) : value;
+      const button = playground.querySelector('button')!;
+      const code = playground.querySelector('pre code')!.textContent!;
+
+      expect(size.value).toBe(value);
+      expect(button.classList.contains(`fern-button-size--${expectedSize}`)).toBe(
+        expectedSize !== 'default',
+      );
+      expect(code.includes(`size="${expectedSize}"`)).toBe(expectedSize !== 'default');
+      expect(button.getAttribute('aria-label')).toBe(mode === 'only' ? 'Save changes' : null);
+      expect(button.querySelectorAll('svg')).toHaveLength(mode === 'none' ? 0 : 1);
+    }
+  }
 });
 
 it('generates valid TSX for labels with quotes and JSX characters in every icon mode', () => {
