@@ -1,15 +1,19 @@
-import { PageIntro, Section } from '../../docs';
-import { SpacingScale, SpacingInUse } from './spacing-examples';
+---
+title: Spacing
+description: A small scale based on Tailwind's 4px unit.
+---
 
-<PageIntro title="Spacing" description="A small scale based on Tailwind's 4px unit." />
+import { Example } from '../../ui';
+import { SpacingScale, spacingInUse } from './spacing-examples';
 
-<Section title="Scale">
-  <SpacingScale />
-</Section>
+## Scale
 
-<Section
-  title="In use"
-  description="8px between related controls, 24px inside panels, and 48px between sections."
->
-  <SpacingInUse />
-</Section>
+<SpacingScale />
+
+## In use
+
+8px between related controls, 24px inside panels, and 48px between sections.
+
+### Related actions
+
+<Example demo={spacingInUse} />

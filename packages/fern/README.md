@@ -15,36 +15,53 @@ import '@taxon-labs/fern/styles.css';
 </div>;
 ```
 
-Switch the container to `data-theme="dark"` for Dark. Both themes expose the same `--fern-*` variables. Values come from Codex 2.7.0; function spacing is normalized. Keep the container around components, including future portal destinations.
+Use `<Button as="a" href="/article">` for navigation, or `as={Link}` with an anchor-rendering router component. Use `buttonVariants()` to style a native anchor directly.
 
-Component selectors use their names directly, such as `.fern-button` and `.fern-icon`, in the `components` layer. Tailwind utilities in the later `utilities` layer can override their styling. The `.fern` container provides theme tokens, fonts, and a scoped box-sizing reset; it is still required for the default theme setup.
-
-CSS is already compiled: consumers do not need Tailwind to render components. There is no global Preflight. Fern declares Inter, Source Serif 4, and JetBrains Mono stacks but does not download or bundle fonts. Applications can load fonts or override `--fern-font-content`, `--fern-font-heading`, and `--fern-font-code` on the container.
+Import icons from `@wikimedia/codex-icons` and render them with `Icon`. Icons are decorative; give the surrounding control an accessible name.
 
 ## Public exports
 
-| Entry           | Contents                                                                          |
-| --------------- | --------------------------------------------------------------------------------- |
-| Package root    | Button, Icon, their types, and `buttonVariants`                                   |
-| `/button`       | Button, `buttonVariants`, and Button types                                        |
-| `/icon`         | Decorative Codex icon helper and its props                                        |
-| `/styles.css`   | Compiled component CSS and both themes                                            |
-| `/tokens.css`   | Both themes without component styling                                             |
-| `/colors.json`  | Values keyed by theme and Codex role                                              |
-| `/tailwind.css` | Optional Tailwind 4 theme adapter for applications generating their own utilities |
+| Entry           | Contents                                        |
+| --------------- | ----------------------------------------------- |
+| Package root    | Button, Icon, their types, and `buttonVariants` |
+| `/button`       | Button, `buttonVariants`, and Button types      |
+| `/icon`         | Icon and its props                              |
+| `/styles.css`   | Themes, shared setup, and component CSS         |
+| `/tokens.css`   | Color tokens for Light and Dark only            |
+| `/colors.json`  | Color values keyed by theme and token name      |
+| `/tailwind.css` | Optional Tailwind 4 theme adapter               |
 
-The Tailwind adapter uses standard utility names without a prefix, such as `flex`, `gap-2`, and `bg-canvas`. Fern component classes and theme tokens retain their `fern-` and `--fern-` names. For a MediaWiki gadget using Shadow DOM, load the compiled Fern CSS inside the shadow root and keep the `.fern` theme container around components and portal destinations.
+## Styling
 
-Within `.fern`, Button gaps and padding share `--fern-spacing` (0.25rem) with Tailwind's numeric spacing and sizing utilities. The adapter also maps `font-sans`, `font-serif`, `font-mono`, and `rounded-base` to Fern's font and radius tokens. Override these tokens on the container to keep components and utilities in sync. Font sizes, spacing, control heights, icons, and radii use rem; borders and focus outlines use px. Sizes shown in pixels assume a 16px root font size. Rem sizes follow the document's root font size, including inside Shadow DOM.
+Keep components inside `.fern` and select `data-theme="light"` or `data-theme="dark"`. Both themes share the same `--fern-*` contract and preserve Codex 2.7.0 color values and semantic roles. Numbered color tokens use names such as `--fern-color-red-300`.
 
-Import individual icons from `@wikimedia/codex-icons`. Put accessible names on the surrounding controls. `buttonVariants()` applies appearance to native links without changing semantics.
+`/styles.css` is compiled and works without Tailwind. It provides theme tokens, fonts, a scoped box-sizing reset, and component styles. `/tokens.css` contains colors only; it does not include typography, spacing, radius, or font setup. Fern does not include global Preflight.
 
-Button separates `variant` (`solid`, `soft`, `surface`, `outline`, `ghost`) from `action` (`neutral`, `progressive`, `destructive`). Defaults are `solid` and `neutral`. Set `action="progressive"` for actions that move a task forward. Sizes are `sm` (24px), `default` (32px), and `lg` (44px), with matching `icon-sm`, `icon`, and `icon-lg` squares. `ButtonVariant`, `ButtonAction`, and `ButtonSize` are exported from the package root and `/button`.
+Applications load fonts. Fern declares Inter, Source Serif 4, and JetBrains Mono stacks; override `--fern-font-content`, `--fern-font-heading`, and `--fern-font-code` on `.fern` to use other fonts. Public tokens can also customize spacing, radius, typography, and transitions.
 
-The `solid` export condition preserves JSX for the consuming compiler. Default ESM is compiled for browser rendering. Type declarations ship with the package. Solid runtimes are peer dependencies; CSS is marked as having side effects. SSR/hydration is not verified.
+Font sizes, spacing, control heights, icons, and radii use rem; borders and focus outlines use px. Pixel descriptions assume a 16px document root font size. Rem follows that root size even inside Shadow DOM.
+
+For MediaWiki embedding, load `/styles.css` inside the shadow root and place the `.fern` container around components and any portal destinations.
+
+## Tailwind
+
+Keep the `/styles.css` import from Usage. Add the following to your application stylesheet and process it with Tailwind 4:
+
+```css
+@import '@taxon-labs/fern/tailwind.css';
+@import 'tailwindcss/utilities.css' layer(utilities);
+```
+
+The adapter maps Fern tokens to utilities such as `bg-canvas`, `text-body`, and `rounded-base`, and shares `--fern-spacing` with numeric spacing utilities. Tailwind generates the utilities, including standard classes such as `flex` and `gap-2`.
+
+Component styles are in the `components` layer; utilities in the later `utilities` layer can override them. Fern classes and tokens remain namespaced, while utilities use standard names without a prefix.
 
 ## Compatibility and license
 
-The tested runtime is Solid and `@solidjs/web` `2.0.0-rc.13`, with Kobalte `2.0.0-alpha.2`. Kobalte's peers target an earlier RC; see the root README for the release limitation.
+The tested runtime is Solid and `@solidjs/web` `2.0.0-rc.13`, with Kobalte `2.0.0-alpha.2`. Kobalte's utils package declares older Solid peers. Resolve that mismatch before claiming strict-install or stable release support. SSR/hydration is not verified.
+
+Run `pnpm release:check` from the repository root to check the packed package with strict peer resolution. It is currently expected to fail on Kobalte peer metadata.
+
+Repository tooling requires Node 22.12 or newer. Codex's own tooling declares a newer Node requirement; Fern reads its prebuilt color and icon data, tested on Node 22.19.0.
 
 License: `GPL-2.0-or-later`.

@@ -1,0 +1,182 @@
+.fern-button {
+  --fern-button-size: 2rem;
+  --fern-button-icon-size: 1rem;
+
+  --fern-button-color: var(--fern-color-neutral);
+  --fern-button-color-hover: var(--fern-color-neutral);
+  --fern-button-color-active: var(--fern-color-neutral);
+
+  --fern-button-solid-color: var(--fern-color-base);
+  --fern-button-solid-bg: var(--fern-background-color-neutral);
+  --fern-button-solid-hover: var(--fern-background-color-interactive--hover);
+  --fern-button-solid-active: var(--fern-background-color-interactive--active);
+
+  --fern-button-subtle-bg: var(--fern-background-color-interactive-subtle);
+  --fern-button-subtle-hover: var(--fern-background-color-interactive-subtle--hover);
+  --fern-button-subtle-active: var(--fern-background-color-interactive-subtle--active);
+
+  --fern-button-border: var(--fern-border-color-interactive);
+  --fern-button-border-hover: var(--fern-border-color-interactive--hover);
+  --fern-button-border-active: var(--fern-border-color-interactive--active);
+
+  --fern-button-fg: var(--fern-button-solid-color);
+  --fern-button-fg-hover: var(--fern-button-solid-color);
+  --fern-button-fg-active: var(--fern-button-solid-color);
+  --fern-button-bg: var(--fern-button-solid-bg);
+  --fern-button-hover: var(--fern-button-solid-hover);
+  --fern-button-active: var(--fern-button-solid-active);
+  --fern-button-line: transparent;
+  --fern-button-line-hover: transparent;
+  --fern-button-line-active: transparent;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: --spacing(2);
+  height: var(--fern-button-size);
+  padding: 0 --spacing(3);
+
+  font: 500 var(--fern-text-control) / 1 var(--fern-font-content);
+  white-space: nowrap;
+
+  border: 1px solid var(--fern-button-line);
+  border-radius: var(--fern-radius-base);
+  color: var(--fern-button-fg);
+  background: var(--fern-button-bg);
+  text-decoration: none;
+  box-shadow: none;
+
+  transition-property: color, background-color, border-color;
+  transition-duration: var(--fern-transition-duration-base);
+  transition-timing-function: var(--fern-transition-easing-base);
+
+  & .fern-icon {
+    width: var(--fern-button-icon-size);
+    height: var(--fern-button-icon-size);
+  }
+
+  &:not(:disabled, [data-disabled]):hover {
+    color: var(--fern-button-fg-hover);
+    background: var(--fern-button-hover);
+    border-color: var(--fern-button-line-hover);
+    text-decoration: none;
+  }
+
+  &:not(:disabled, [data-disabled]):active {
+    color: var(--fern-button-fg-active);
+    background: var(--fern-button-active);
+    border-color: var(--fern-button-line-active);
+    transition-duration: 0ms;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--fern-border-color-progressive--focus);
+    outline-offset: 2px;
+  }
+
+  &:is(:disabled, [data-disabled]) {
+    color: var(--fern-color-disabled-emphasized);
+    background: var(--fern-background-color-disabled);
+    border-color: transparent;
+    text-decoration: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
+}
+
+.fern-button-action--progressive {
+  --fern-button-color: var(--fern-color-progressive);
+  --fern-button-color-hover: var(--fern-color-progressive--hover);
+  --fern-button-color-active: var(--fern-color-progressive--active);
+
+  --fern-button-solid-color: var(--fern-color-inverted-fixed);
+  --fern-button-solid-bg: var(--fern-background-color-progressive);
+  --fern-button-solid-hover: var(--fern-background-color-progressive--hover);
+  --fern-button-solid-active: var(--fern-background-color-progressive--active);
+
+  --fern-button-subtle-bg: var(--fern-background-color-progressive-subtle);
+  --fern-button-subtle-hover: var(--fern-background-color-progressive-subtle--hover);
+  --fern-button-subtle-active: var(--fern-background-color-progressive-subtle--active);
+
+  --fern-button-border: var(--fern-border-color-progressive);
+  --fern-button-border-hover: var(--fern-border-color-progressive--hover);
+  --fern-button-border-active: var(--fern-border-color-progressive--active);
+}
+
+.fern-button-action--destructive {
+  --fern-button-color: var(--fern-color-destructive);
+  --fern-button-color-hover: var(--fern-color-destructive--hover);
+  --fern-button-color-active: var(--fern-color-destructive--active);
+
+  --fern-button-solid-color: var(--fern-color-inverted-fixed);
+  --fern-button-solid-bg: var(--fern-background-color-destructive);
+  --fern-button-solid-hover: var(--fern-background-color-destructive--hover);
+  --fern-button-solid-active: var(--fern-background-color-destructive--active);
+
+  --fern-button-subtle-bg: var(--fern-background-color-destructive-subtle);
+  --fern-button-subtle-hover: var(--fern-background-color-destructive-subtle--hover);
+  --fern-button-subtle-active: var(--fern-background-color-destructive-subtle--active);
+
+  --fern-button-border: var(--fern-border-color-destructive);
+  --fern-button-border-hover: var(--fern-border-color-destructive--hover);
+  --fern-button-border-active: var(--fern-border-color-destructive--active);
+}
+
+.fern-button-variant--soft,
+.fern-button-variant--surface,
+.fern-button-variant--outline,
+.fern-button-variant--ghost {
+  --fern-button-fg: var(--fern-button-color);
+  --fern-button-fg-hover: var(--fern-button-color-hover);
+  --fern-button-fg-active: var(--fern-button-color-active);
+  --fern-button-bg: transparent;
+  --fern-button-hover: var(--fern-button-subtle-hover);
+  --fern-button-active: var(--fern-button-subtle-active);
+}
+
+.fern-button-variant--surface,
+.fern-button-variant--outline {
+  --fern-button-line: var(--fern-button-border);
+  --fern-button-line-hover: var(--fern-button-border-hover);
+  --fern-button-line-active: var(--fern-button-border-active);
+}
+
+.fern-button-variant--soft,
+.fern-button-variant--surface {
+  --fern-button-bg: var(--fern-button-subtle-bg);
+}
+
+.fern-button-variant--ghost {
+  &:is(:disabled, [data-disabled]) {
+    color: var(--fern-color-disabled);
+    background: transparent;
+  }
+}
+
+.fern-button-size--sm,
+.fern-button-size--icon-sm {
+  --fern-button-size: 1.5rem;
+  --fern-button-icon-size: 0.875rem;
+
+  gap: --spacing(1);
+  padding: 0 --spacing(2);
+  font-size: 0.75rem;
+}
+
+.fern-button-size--lg,
+.fern-button-size--icon-lg {
+  --fern-button-size: 2.75rem;
+  --fern-button-icon-size: 1.25rem;
+
+  padding: 0 --spacing(4);
+  font-size: var(--fern-text-body);
+}
+
+.fern-button-size--icon-sm,
+.fern-button-size--icon,
+.fern-button-size--icon-lg {
+  width: var(--fern-button-size);
+  padding: 0;
+}

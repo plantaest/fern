@@ -23,8 +23,8 @@
       "default": "./dist/button.js"
     },
     "./icon": {
-      "types": "./dist/source/components/icon.d.ts",
-      "solid": "./dist/source/components/icon.jsx",
+      "types": "./dist/source/components/icon/icon.d.ts",
+      "solid": "./dist/source/components/icon/icon.jsx",
       "default": "./dist/icon.js"
     },
     "./styles.css": "./dist/styles.css",

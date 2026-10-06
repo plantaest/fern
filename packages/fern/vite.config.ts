@@ -10,13 +10,13 @@ export default defineConfig({
       entry: {
         index: 'src/build.ts',
         button: 'src/components/button/button.tsx',
-        icon: 'src/components/icon.tsx',
+        icon: 'src/components/icon/icon.tsx',
       },
       formats: ['es'],
       fileName: (_format, name) => `${name}.js`,
       cssFileName: 'styles',
     },
-    rollupOptions: {
+    rolldownOptions: {
       external: (id) =>
         [
           'solid-js',

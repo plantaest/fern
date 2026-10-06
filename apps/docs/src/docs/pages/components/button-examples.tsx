@@ -3,18 +3,29 @@ import {
   type ButtonAction,
   type ButtonSize,
   type ButtonVariant,
-  buttonVariants,
 } from '@taxon-labs/fern/button';
 import { Icon } from '@taxon-labs/fern/icon';
-import {
-  cdxIconAdd,
-  cdxIconArrowNext,
-  cdxIconDownload,
-  cdxIconEdit,
-  cdxIconTrash,
-} from '@wikimedia/codex-icons';
+import { cdxIconEdit } from '@wikimedia/codex-icons';
 import { createMemo, createSignal, For, Show } from 'solid-js';
-import { CodeBlock, Example, Field, fieldControlClasses, Preview, PreviewFrame } from '../../docs';
+import { CodeBlock, Field, fieldControlClasses, Preview, PreviewFrame } from '../../ui';
+import ButtonActionsDemo from './button-demos/actions';
+import actionsSource from './button-demos/actions.tsx?raw';
+import ButtonDestructiveDemo from './button-demos/destructive';
+import destructiveSource from './button-demos/destructive.tsx?raw';
+import ButtonDisabledDemo from './button-demos/disabled';
+import disabledSource from './button-demos/disabled.tsx?raw';
+import ButtonFormDemo from './button-demos/form';
+import formSource from './button-demos/form.tsx?raw';
+import ButtonLinkDemo from './button-demos/link';
+import linkSource from './button-demos/link.tsx?raw';
+import ButtonLinkVariantsDemo from './button-demos/link-variants';
+import linkVariantsSource from './button-demos/link-variants.tsx?raw';
+import ButtonSizesDemo from './button-demos/sizes';
+import sizesSource from './button-demos/sizes.tsx?raw';
+import ButtonVariantsDemo from './button-demos/variants';
+import variantsSource from './button-demos/variants.tsx?raw';
+import ButtonWithIconsDemo from './button-demos/with-icons';
+import withIconsSource from './button-demos/with-icons.tsx?raw';
 
 const variants = [
   'solid',
@@ -171,32 +182,6 @@ export function ButtonPlayground() {
   );
 }
 
-function FormExample() {
-  const [message, setMessage] = createSignal('No form submission yet');
-
-  return (
-    <form
-      class="flex flex-col gap-3 items-center"
-      onSubmit={(e) => {
-        e.preventDefault();
-        setMessage('Form submitted');
-      }}
-    >
-      <div class="flex gap-2">
-        <Button action="progressive" type="submit">
-          Submit
-        </Button>
-        <Button variant="outline" onClick={() => setMessage('Preview opened — form not submitted')}>
-          Preview
-        </Button>
-      </div>
-      <span class="text-[0.8125rem] leading-5 text-muted" role="status">
-        {message()}
-      </span>
-    </form>
-  );
-}
-
 export function ButtonBasic() {
   const [basicCount, setBasicCount] = createSignal(0);
 
@@ -210,170 +195,47 @@ export function ButtonBasic() {
   );
 }
 
-export function ButtonExamples() {
-  return (
-    <>
-      <Example
-        title="Variants"
-        code={variants
-          .map(
-            (name) =>
-              `<Button${name !== 'solid' ? ` variant="${name}"` : ''}>${name[0].toUpperCase() + name.slice(1)}</Button>`,
-          )
-          .join('\n')}
-      >
-        <For each={variants}>
-          {(name) => <Button variant={name}>{name[0].toUpperCase() + name.slice(1)}</Button>}
-        </For>
-      </Example>
-      <Example
-        title="Actions"
-        description="Keep the same visual style while changing the meaning of the action."
-        code={`<Button variant="surface">
-  Preview
-</Button>
+export const buttonVariantsExample = {
+  component: ButtonVariantsDemo,
+  source: variantsSource,
+};
 
-<Button variant="surface" action="progressive">
-  Continue
-</Button>
+export const buttonActionsExample = {
+  component: ButtonActionsDemo,
+  source: actionsSource,
+};
 
-<Button variant="surface" action="destructive">
-  Delete draft
-</Button>`}
-      >
-        <Button variant="surface">Preview</Button>
-        <Button variant="surface" action="progressive">
-          Continue
-        </Button>
-        <Button variant="surface" action="destructive">
-          Delete draft
-        </Button>
-      </Example>
-      <Example
-        title="Sizes"
-        code={`<Button variant="outline" size="sm">Small</Button>
-<Button variant="outline" size="icon-sm" aria-label="Edit">
-  <Icon icon={cdxIconEdit} />
-</Button>
+export const buttonSizesExample = {
+  component: ButtonSizesDemo,
+  source: sizesSource,
+};
 
-<Button variant="outline">Default</Button>
-<Button variant="outline" size="icon" aria-label="Edit">
-  <Icon icon={cdxIconEdit} />
-</Button>
+export const buttonWithIconsExample = {
+  component: ButtonWithIconsDemo,
+  source: withIconsSource,
+};
 
-<Button variant="outline" size="lg">Large</Button>
-<Button variant="outline" size="icon-lg" aria-label="Edit">
-  <Icon icon={cdxIconEdit} />
-</Button>`}
-      >
-        <For each={textSizes}>
-          {(size) => (
-            <div class="flex items-center gap-2">
-              <Button variant="outline" size={size}>
-                {size === 'sm' ? 'Small' : size === 'lg' ? 'Large' : 'Default'}
-              </Button>
-              <Button variant="outline" size={iconSize(size)} aria-label="Edit">
-                <Icon icon={cdxIconEdit} />
-              </Button>
-            </div>
-          )}
-        </For>
-      </Example>
-      <Example
-        title="With icons"
-        code={`<Button action="progressive">
-  <Icon icon={cdxIconAdd} />
-  New article
-</Button>
+export const buttonDestructiveExample = {
+  component: ButtonDestructiveDemo,
+  source: destructiveSource,
+};
 
-<Button variant="outline" action="progressive">
-  Continue
-  <Icon icon={cdxIconArrowNext} />
-</Button>
+export const buttonDisabledExample = {
+  component: ButtonDisabledDemo,
+  source: disabledSource,
+};
 
-<Button variant="outline" size="icon" aria-label="Download">
-  <Icon icon={cdxIconDownload} />
-</Button>`}
-      >
-        <Button action="progressive">
-          <Icon icon={cdxIconAdd} />
-          New article
-        </Button>
-        <Button variant="outline" action="progressive">
-          Continue
-          <Icon icon={cdxIconArrowNext} />
-        </Button>
-        <Button variant="outline" size="icon" aria-label="Download">
-          <Icon icon={cdxIconDownload} />
-        </Button>
-      </Example>
-      <Example
-        title="Destructive action"
-        description="Use a clear label alongside the destructive color."
-        code={`<Button action="destructive">
-  <Icon icon={cdxIconTrash} />
-  Delete draft
-</Button>
+export const buttonFormExample = {
+  component: ButtonFormDemo,
+  source: formSource,
+};
 
-<Button variant="outline" action="destructive">
-  Delete draft
-</Button>
+export const buttonLinkExample = {
+  component: ButtonLinkDemo,
+  source: linkSource,
+};
 
-<Button variant="ghost" action="destructive">
-  Delete draft
-</Button>`}
-      >
-        <Button action="destructive">
-          <Icon icon={cdxIconTrash} />
-          Delete draft
-        </Button>
-        <Button variant="outline" action="destructive">
-          Delete draft
-        </Button>
-        <Button variant="ghost" action="destructive">
-          Delete draft
-        </Button>
-      </Example>
-      <Example
-        title="Disabled and busy"
-        description="Keep a visible label for the current state."
-        code={
-          '<Button disabled>Save changes</Button>\n<Button variant="outline" disabled>Unavailable</Button>\n<Button disabled aria-busy="true">Saving…</Button>'
-        }
-      >
-        <Button disabled>Save changes</Button>
-        <Button variant="outline" disabled>
-          Unavailable
-        </Button>
-        <Button disabled aria-busy="true">
-          Saving…
-        </Button>
-      </Example>
-      <Example
-        title="Form actions"
-        description={'Use type="submit" explicitly. Other buttons keep type="button".'}
-        code={
-          '<form onSubmit={handleSubmit}>\n  <Button action="progressive" type="submit">Submit</Button>\n  <Button variant="outline" onClick={openPreview}>Preview</Button>\n</form>'
-        }
-      >
-        <FormExample />
-      </Example>
-      <Example
-        title="As a link"
-        description="Use a native anchor for navigation that needs button styling."
-        code={`<a
-  href="/foundations/colors"
-  class={buttonVariants({ variant: 'outline' })}
->
-  Explore colors
-  <Icon icon={cdxIconArrowNext} />
-</a>`}
-      >
-        <a href="/foundations/colors" class={buttonVariants({ variant: 'outline' })}>
-          Explore colors
-          <Icon icon={cdxIconArrowNext} />
-        </a>
-      </Example>
-    </>
-  );
-}
+export const buttonLinkVariantsExample = {
+  component: ButtonLinkVariantsDemo,
+  source: linkVariantsSource,
+};

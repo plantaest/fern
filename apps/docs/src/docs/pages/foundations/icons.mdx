@@ -1,21 +1,23 @@
-import { PageIntro, Section } from '../../docs';
-import { IconsGallery, IconsInUse } from './icons-examples';
+---
+title: Icons
+description: Familiar Wikimedia icons, using the official Codex package.
+---
 
-<PageIntro
-  title="Icons"
-  description="Familiar Wikimedia icons, using the official Codex package."
-/>
+import { Example } from '../../ui';
+import { IconsGallery, iconsInUse } from './icons-examples';
 
-<Section
-  title="Gallery"
-  description="16px icons inherit the text color. These are a selection, not a separate icon set."
->
-  <IconsGallery />
-</Section>
+## Gallery
 
-<Section
-  title="In use"
-  description="Icons next to a label are decorative. Icon-only controls need an accessible name."
->
-  <IconsInUse />
-</Section>
+16px icons inherit the text color. These are a selection, not a separate icon set.
+
+<IconsGallery />
+
+Explore the [full Codex icon collection](https://doc.wikimedia.org/codex/latest/icons/all-icons.html).
+
+## In use
+
+Icons next to a label are decorative. Icon-only controls need an accessible name.
+
+### Labeled and icon-only buttons
+
+<Example demo={iconsInUse} />

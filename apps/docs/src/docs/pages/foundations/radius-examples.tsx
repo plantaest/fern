@@ -1,5 +1,5 @@
-import { Button } from '@taxon-labs/fern/button';
-import { Example } from '../../docs';
+import RadiusControlsDemo from './radius-demos/controls-and-panels';
+import radiusSource from './radius-demos/controls-and-panels.tsx?raw';
 
 export function RadiusDefault() {
   return (
@@ -25,23 +25,7 @@ export function RadiusDefault() {
   );
 }
 
-export function RadiusInUse() {
-  return (
-    <Example
-      title="Controls and panels"
-      code={
-        '<Button variant="outline">Edit</Button>\n<div class="rounded-base border border-line p-6">Panel content</div>'
-      }
-    >
-      <div
-        class="
-          flex gap-8 items-center text-[0.875rem] flex-wrap rounded-base
-          border border-line p-6
-        "
-      >
-        <span>Panel content</span>
-        <Button variant="outline">Edit</Button>
-      </div>
-    </Example>
-  );
-}
+export const radiusInUse = {
+  component: RadiusControlsDemo,
+  source: radiusSource,
+};

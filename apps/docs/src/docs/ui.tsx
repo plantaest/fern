@@ -1,13 +1,11 @@
-import type { JSX } from '@solidjs/web';
+import { dynamic, type JSX } from '@solidjs/web';
 import { Icon } from '@taxon-labs/fern/icon';
 import { cdxIconCheck, cdxIconCopy } from '@wikimedia/codex-icons';
-import { createSignal } from 'solid-js';
-
-export const sectionId = (title: string) => title.toLowerCase().replaceAll(' ', '-');
+import { type Component, createSignal } from 'solid-js';
 
 export const fieldControlClasses = `
   min-w-0 w-full h-8 px-2.5 py-0 border border-docs-control
-  rounded-base text-content bg-canvas font-normal text-[0.8125rem]
+  rounded-base text-content bg-canvas font-normal text-small
   leading-none placeholder:text-docs-placeholder
 `;
 
@@ -52,40 +50,17 @@ export function Field(props: {
   );
 }
 
-export function ReadingSample(props: { children: JSX.Element; lang?: string }) {
-  return (
-    <div lang={props.lang} class="max-w-[35rem] [&_p]:mt-4">
-      {props.children}
-    </div>
-  );
-}
-
-export function PageIntro(props: { title: string; description: string; category?: string }) {
+export function PageIntro(props: { title: string; description: string; category: string }) {
   return (
     <header class="mb-8">
-      <p class="text-muted text-[0.75rem] leading-5 mb-3">{props.category ?? 'Foundations'}</p>
+      <p class="text-muted text-[0.75rem] leading-5 mb-3">{props.category}</p>
       <h1>{props.title}</h1>
-      <p class="text-muted mt-3 text-[0.9375rem]">{props.description}</p>
+      <p class="text-muted mt-3 text-body">{props.description}</p>
     </header>
   );
 }
 
-export function Section(props: { title: string; children: JSX.Element; description?: string }) {
-  return (
-    <section
-      class="doc-section mt-12 scroll-mt-[6.25rem] docs-mobile:scroll-mt-[5.5rem]"
-      id={sectionId(props.title)}
-    >
-      <h2 class="mb-5">{props.title}</h2>
-      {props.description && (
-        <p class="text-[0.875rem] text-muted -mt-2 mb-5">{props.description}</p>
-      )}
-      {props.children}
-    </section>
-  );
-}
-
-export function CodeBlock(props: { code: string; embedded?: boolean }) {
+export function CodeBlock(props: { code: string; language?: string; embedded?: boolean }) {
   const [copyResult, setCopyResult] = createSignal<{ code: string; message: string }>();
 
   const status = () => {
@@ -106,14 +81,14 @@ export function CodeBlock(props: { code: string; embedded?: boolean }) {
   }
 
   return (
-    <div class={`bg-surface ${props.embedded ? '' : 'border-t border-line'}`}>
+    <div class={`doc-code-block bg-surface ${props.embedded ? '' : 'border-t border-line'}`}>
       <div
         class="
           flex items-center justify-between h-11 px-4 text-[0.6875rem]
           text-muted
         "
       >
-        <span>TSX</span>
+        <span>{(props.language ?? 'tsx').toUpperCase()}</span>
         <button
           class="
             flex items-center gap-1.5 py-1 px-1.5 min-h-7
@@ -129,7 +104,7 @@ export function CodeBlock(props: { code: string; embedded?: boolean }) {
         </button>
       </div>
       <pre>
-        <code>{props.code}</code>
+        <code class={props.language ? `language-${props.language}` : undefined}>{props.code}</code>
       </pre>
       <span class="sr-only" role="status">
         {status()}
@@ -138,37 +113,25 @@ export function CodeBlock(props: { code: string; embedded?: boolean }) {
   );
 }
 
-export function Example(props: {
-  title: string;
-  code: string;
-  children: JSX.Element;
-  description?: string;
-}) {
+export function Example(props: { demo: { component: Component; source: string } }) {
+  const Demo = dynamic(() => props.demo.component);
+
   return (
-    <article class="[&+&]:mt-8">
-      <h3
-        class="
-          font-sans font-medium text-[0.9375rem] leading-6 tracking-normal
-          mb-3
-        "
-      >
-        {props.title}
-      </h3>
-      {props.description && <p class="text-[0.8125rem] text-muted mb-5">{props.description}</p>}
-      <PreviewFrame>
-        <Preview kind="example">{props.children}</Preview>
-        <details>
-          <summary
-            class="
-              border-t border-line py-3 px-4 text-[0.75rem] text-muted
-              bg-surface
-            "
-          >
-            View code
-          </summary>
-          <CodeBlock code={props.code} embedded />
-        </details>
-      </PreviewFrame>
-    </article>
+    <PreviewFrame>
+      <Preview kind="example">
+        <Demo />
+      </Preview>
+      <details>
+        <summary
+          class="
+            border-t border-line py-3 px-4 text-[0.75rem] text-muted
+            bg-surface
+          "
+        >
+          View code
+        </summary>
+        <CodeBlock code={props.demo.source} embedded />
+      </details>
+    </PreviewFrame>
   );
 }

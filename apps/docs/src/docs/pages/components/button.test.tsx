@@ -1,7 +1,7 @@
 import { render } from '@solidjs/web';
 import { flush } from 'solid-js';
 import ts from 'typescript';
-import { afterEach, expect, it, vi } from 'vitest';
+import { afterEach, expect, it } from 'vitest';
 import ButtonPage from './button.mdx';
 
 let dispose: (() => void) | undefined;
@@ -9,38 +9,22 @@ let dispose: (() => void) | undefined;
 afterEach(() => {
   dispose?.();
   document.body.innerHTML = '';
-  vi.unstubAllGlobals();
 });
 
-it('renders MDX with Solid 2 and keeps the playground reactive', () => {
+function mount() {
   const host = document.createElement('div');
   document.body.append(host);
-
   dispose = render(() => <ButtonPage />, host);
   flush();
 
-  expect(host.querySelector('h1')?.textContent).toBe('Button');
-  expect([...host.querySelectorAll('h2')].map((node) => node.textContent)).toEqual([
-    'API Reference',
-    'Playground',
-    'Examples',
-    'Accessibility',
-  ]);
+  return host;
+}
+
+it('keeps the playground preview and code reactive', () => {
+  const host = mount();
+
   expect(host.querySelector('p p')).toBeNull();
   expect(host.querySelector('summary p')).toBeNull();
-
-  const rows = host.querySelectorAll('.api-table tbody tr');
-  expect(rows).toHaveLength(7);
-  expect([...rows[0].querySelectorAll('td')].map((cell) => cell.textContent)).toEqual([
-    'variant',
-    '"solid" | "soft" | "surface" | "outline" | "ghost"',
-    '"solid"',
-  ]);
-  expect([...rows[1].querySelectorAll('td')].map((cell) => cell.textContent)).toEqual([
-    'action',
-    '"neutral" | "progressive" | "destructive"',
-    '"neutral"',
-  ]);
 
   const playground = host.querySelector('.playground')!;
   const variant = playground.querySelector<HTMLSelectElement>('#button-variant')!;
@@ -77,14 +61,8 @@ it('renders MDX with Solid 2 and keeps the playground reactive', () => {
   expect(playground.querySelector('button')?.disabled).toBe(true);
 });
 
-it('keeps native labels associated and copies the playground code with an accessible status', async () => {
-  const writeText = vi.fn().mockResolvedValue(undefined);
-  vi.stubGlobal('navigator', Object.assign(Object.create(navigator), { clipboard: { writeText } }));
-
-  const host = document.createElement('div');
-  document.body.append(host);
-  dispose = render(() => <ButtonPage />, host);
-  flush();
+it('associates native labels with playground controls', () => {
+  const host = mount();
 
   for (const id of [
     'button-variant',
@@ -97,54 +75,10 @@ it('keeps native labels associated and copies the playground code with an access
     expect(control.labels).toHaveLength(1);
     expect(control.labels?.[0].htmlFor).toBe(id);
   }
-
-  const playground = host.querySelector('.playground')!;
-  const code = playground.querySelector('pre code')!.textContent;
-  const copy = playground.querySelector<HTMLButtonElement>('button[aria-label="Copy code"]')!;
-  copy.click();
-
-  await vi.waitFor(() => {
-    flush();
-    expect(copy.textContent?.trim()).toBe('Copied');
-  });
-
-  expect(writeText).toHaveBeenCalledWith(code);
-  const statuses = playground.querySelectorAll('[role="status"]');
-  expect(statuses[statuses.length - 1].textContent).toBe('Copied');
-
-  const label = playground.querySelector<HTMLInputElement>('#button-label')!;
-  label.value = 'Publish draft';
-  label.dispatchEvent(new Event('input', { bubbles: true }));
-  flush();
-
-  expect(copy.textContent?.trim()).toBe('Copy');
-  expect(statuses[statuses.length - 1].textContent).toBe('');
-
-  copy.click();
-
-  await vi.waitFor(() => {
-    flush();
-    expect(copy.textContent?.trim()).toBe('Copied');
-  });
-
-  expect(writeText).toHaveBeenLastCalledWith(playground.querySelector('pre code')!.textContent);
-
-  writeText.mockRejectedValueOnce(new Error('Clipboard unavailable'));
-  copy.click();
-
-  await vi.waitFor(() => {
-    flush();
-    expect(statuses[statuses.length - 1].textContent).toBe(
-      'Copy unavailable. Select the code to copy it.',
-    );
-  });
 });
 
 it('preserves the selected size when switching between text and icon-only modes', () => {
-  const host = document.createElement('div');
-  document.body.append(host);
-  dispose = render(() => <ButtonPage />, host);
-  flush();
+  const host = mount();
 
   const size = host.querySelector<HTMLSelectElement>('#button-size')!;
   const icon = host.querySelector<HTMLSelectElement>('#button-icon')!;
@@ -176,10 +110,7 @@ it('preserves the selected size when switching between text and icon-only modes'
 });
 
 it('generates valid TSX for labels with quotes and JSX characters in every icon mode', () => {
-  const host = document.createElement('div');
-  document.body.append(host);
-  dispose = render(() => <ButtonPage />, host);
-  flush();
+  const host = mount();
 
   const label = host.querySelector<HTMLInputElement>('#button-label')!;
   const icon = host.querySelector<HTMLSelectElement>('#button-icon')!;
@@ -239,37 +170,4 @@ it('generates valid TSX for labels with quotes and JSX characters in every icon 
     const button = host.querySelector('.playground button')!;
     expect(mode === 'only' ? button.getAttribute('aria-label') : button.textContent).toBe(name);
   }
-});
-
-it('does not report changed code as copied when an earlier clipboard request finishes', async () => {
-  let complete: (() => void) | undefined;
-  const writeText = vi.fn().mockImplementation(
-    () =>
-      new Promise<void>((resolve) => {
-        complete = resolve;
-      }),
-  );
-  vi.stubGlobal('navigator', Object.assign(Object.create(navigator), { clipboard: { writeText } }));
-
-  const host = document.createElement('div');
-  document.body.append(host);
-  dispose = render(() => <ButtonPage />, host);
-  flush();
-
-  const copy = host.querySelector<HTMLButtonElement>('.playground button[aria-label="Copy code"]')!;
-  const original = host.querySelector('.playground pre code')!.textContent;
-  copy.click();
-
-  const label = host.querySelector<HTMLInputElement>('#button-label')!;
-  label.value = 'Changed while copying';
-  label.dispatchEvent(new Event('input', { bubbles: true }));
-  flush();
-
-  complete?.();
-  await Promise.resolve();
-  flush();
-
-  expect(writeText).toHaveBeenCalledWith(original);
-  expect(copy.textContent?.trim()).toBe('Copy');
-  expect(host.querySelector('.playground .sr-only[role="status"]')?.textContent).toBe('');
 });

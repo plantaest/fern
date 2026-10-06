@@ -15,5 +15,22 @@
   --font-serif: var(--fern-font-heading);
   --font-mono: var(--fern-font-code);
 
+  --text-heading-1: var(--fern-text-heading-1);
+  --text-heading-1--line-height: var(--fern-leading-heading-1);
+  --text-heading-2: var(--fern-text-heading-2);
+  --text-heading-2--line-height: var(--fern-leading-heading-2);
+  --text-heading-3: var(--fern-text-heading-3);
+  --text-heading-3--line-height: var(--fern-leading-heading-3);
+  --tracking-heading: var(--fern-tracking-heading);
+
+  --text-body: var(--fern-text-body);
+  --text-body--line-height: var(--fern-leading-body);
+  --text-control: var(--fern-text-control);
+  --text-control--line-height: var(--fern-leading-control);
+  --text-small: var(--fern-text-small);
+  --text-small--line-height: var(--fern-leading-small);
+  --text-code: var(--fern-text-code);
+  --text-code--line-height: var(--fern-leading-code);
+
   --radius-base: var(--fern-radius-base);
 }

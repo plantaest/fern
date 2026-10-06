@@ -1,3 +1,5 @@
+// Verify the packed Fern package in a clean application without workspace overrides or Tailwind.
+
 import assert from 'node:assert/strict';
 import { spawn } from 'node:child_process';
 import { mkdtemp, readdir, readFile, writeFile } from 'node:fs/promises';
@@ -93,10 +95,17 @@ await writeFile(
 await writeFile(
   join(temp, 'main.tsx'),
   `
-import { render } from '@solidjs/web';
+import { type JSX, render } from '@solidjs/web';
 import { Button, Icon, buttonVariants, type ButtonProps } from '@taxon-labs/fern';
 import { cdxIconEdit } from '@wikimedia/codex-icons';
+import { omit } from 'solid-js';
 import '@taxon-labs/fern/styles.css';
+
+type LinkProps = Omit<JSX.AnchorHTMLAttributes<HTMLAnchorElement>, 'href'> & { to: string };
+
+function Link(props: LinkProps) {
+  return <a {...omit(props, 'to')} href={props.to} />;
+}
 
 const props: ButtonProps = {
   variant: 'surface',
@@ -104,6 +113,11 @@ const props: ButtonProps = {
   size: 'sm',
   type: 'button',
   'aria-label': 'Edit',
+};
+
+const linkProps: ButtonProps<typeof Link> = {
+  to: '/article',
+  variant: 'outline',
 };
 
 render(
@@ -116,6 +130,12 @@ render(
       <a href="/article" class={buttonVariants({ variant: 'outline', size: 'lg' })}>
         Read
       </a>
+      <Button as={Link} {...linkProps}>
+        Read with Link
+      </Button>
+      <Button as="a" href="/article">
+        Read article
+      </Button>
     </div>
   ),
   document.getElementById('root')!,
@@ -127,7 +147,7 @@ const tests = (
   await readFile(join(root, 'packages/fern/src/components/button/button.test.tsx'), 'utf8')
 )
   .replace("from './button'", "from '@taxon-labs/fern/button'")
-  .replace("from '../icon'", "from '@taxon-labs/fern/icon'");
+  .replace("from '../icon/icon'", "from '@taxon-labs/fern/icon'");
 
 await writeFile(join(temp, 'button.test.tsx'), tests);
 
@@ -166,13 +186,16 @@ it('uses the compiled ESM export without a Solid compiler plugin', () => {
   const [disabled, setDisabled] = createSignal(false);
 
   const dispose = render(
-    () => Button({
-      children: 'Save',
-      get disabled() {
-        return disabled();
-      },
-      onClick: () => clicks++,
-    }),
+    () => [
+      Button({
+        children: 'Save',
+        get disabled() {
+          return disabled();
+        },
+        onClick: () => clicks++,
+      }),
+      Button({ as: 'a', href: '/article', children: 'Read' }),
+    ],
     host,
   );
   flush();
@@ -188,6 +211,11 @@ it('uses the compiled ESM export without a Solid compiler plugin', () => {
   button.click();
   expect(button.disabled).toBe(true);
   expect(clicks).toBe(1);
+
+  const link = host.querySelector('a');
+  expect(link.getAttribute('href')).toBe('/article');
+  expect(link.hasAttribute('role')).toBe(false);
+  expect(link.hasAttribute('type')).toBe(false);
 
   dispose();
   host.remove();

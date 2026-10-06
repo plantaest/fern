@@ -1,6 +1,6 @@
 import colors from '@taxon-labs/fern/colors.json';
 import { createMemo, createSignal, For } from 'solid-js';
-import { Field, fieldControlClasses } from '../../docs';
+import { Field, fieldControlClasses } from '../../ui';
 
 export type Theme = 'light' | 'dark';
 
@@ -61,7 +61,7 @@ export function ColorsRoles(props: { theme: Theme }) {
                   <div>
                     <code
                       class="
-                        block text-[0.6875rem] [overflow-wrap:anywhere]
+                        block text-[0.6875rem] wrap-anywhere
                         docs-mobile:text-[0.625rem]
                       "
                     >
@@ -149,7 +149,7 @@ export function ColorsAllTokens(props: { theme: Theme }) {
         />
       </Field>
       <p class="text-[0.8125rem] leading-5 text-muted" role="status">
-        {entries().length} tokens
+        {entries().length} {entries().length === 1 ? 'token' : 'tokens'}
       </p>
       <div class="max-w-full overflow-x-auto border-y border-line mt-3">
         <table>

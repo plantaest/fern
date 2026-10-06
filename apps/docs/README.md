@@ -1,30 +1,36 @@
 # Fern Docs
 
-Private documentation and playground for the current alpha. Use it to explore designs now; it is intended to become Fern's official documentation. Run commands from the repository root; see [the root README](../../README.md).
+Private documentation and playground for the current alpha, intended to become Fern's official documentation. Run commands from the repository root; see the [root README](../../README.md) and [shared conventions](../../AGENTS.md).
 
-`src/docs/pages/foundations/` and `src/docs/pages/components/` hold the MDX documents. Each page keeps its visual samples and interactions in a neighboring `*-examples.tsx` file; tests stay alongside the relevant pages. MDX holds static content, including API tables.
+`src/docs/app.tsx` assembles routes and pages. The app shell lives in `src/docs/layout/`, theme persistence in `theme.ts`, and page metadata in `navigation.ts`.
 
-`src/docs/navigation.ts` explicitly declares each page component, route, title, group, and table of contents. Add new pages there; Solid Router renders the configured component. Keep section titles in the configuration consistent with the MDX document.
+## Pages and examples
 
-The small MDX provider maps Markdown tags to Solid elements. Its import path is resolved from the Vite configuration, independently of page folder depth.
+Pages live in `src/docs/pages/foundations/` and `src/docs/pages/components/`. Each MDX page has a neighboring `*-examples.tsx` file for samples, playgrounds, and demo imports, with standalone sources in `*-demos/`. Keep tests close to the pages they exercise.
 
-Code examples use single quotes for JavaScript and TypeScript strings, including expressions inside JSX. Use double quotes for JSX attribute values.
+Use YAML frontmatter for `title` and `description`, Markdown headings and paragraphs for structure, and static API tables in MDX. The app renders the intro and wraps the body in `.doc-content`. Register the page in `src/docs/navigation.ts`, importing its frontmatter and declaring the route, group, and section titles. Heading IDs are generated; keep table-of-contents titles consistent with the document.
 
-The Docs app imports Fern through public package exports. It bundles its own fonts, owns global page layout, and generates its own Tailwind utilities without a prefix. Fern component CSS works independently of that utility generation.
+For an interactive example:
 
-Use Tailwind utilities in TSX for layout, spacing, responsive behavior, and visual examples. The small helpers in `docs.tsx` share preview, frame, field, code, and reading-sample styling. Controls inside `Field` remain native HTML; connect their `id` to the field's `for` prop and use `fieldControlClasses`.
+1. Write a standalone TSX component in the page's `*-demos/` directory.
+2. Import it normally and with Vite `?raw` in `*-examples.tsx`; export a `{ component, source }` pair.
+3. Render it in MDX with `<Example demo={buttonVariantsExample} />`, placing headings and descriptions outside the frame.
 
-`styles.css` keeps MDX element defaults in the `base` layer and document structure rules in `components`, so utilities can override them. Docs color aliases reference Fern's Codex tokens. The `docs-narrow`, `docs-mobile`, and `docs-tiny` variants preserve the existing 1150px, 760px, and 360px boundaries. Keep class strings literal so Tailwind can discover them, and split long strings across lines for readability.
+The preview and Copy control use the same demo file. Playground logic stays in TSX, with source generated from the selected props.
 
-Fern component styles live in the `components` layer. Use normal utilities to resize or hide an Icon; no important modifier is needed for those overrides.
+Write static code in fenced Markdown blocks. They render through `CodeBlock` with a language label and Copy control; unlabeled blocks use `TEXT`. Inline code stays inline. Build-time MDX plugins live in `plugins/`.
 
-Add a component and its MDX page after reviewing the previous component. Keep API Reference above playground and examples. Do not add automatic API generation yet.
+## Styling
 
-Development and preview use `http://127.0.0.1:4321/`, configured in `vite.config.ts`. A busy port causes an error instead of silently selecting another port.
+Docs consumes Fern through public package exports, bundles its own fonts, and owns global page layout. Use Tailwind utilities for layout and visual samples, and helpers in `src/docs/ui.tsx` for previews, frames, fields, and code. For native playground controls, match the control's `id` to `Field`'s `for` prop and use `fieldControlClasses`.
 
-Docs uses `@solidjs/router` `2.0.0-next.35` with Solid 2 RC.13. Routes use browser history, such as `/components/button`, with ordinary fragments for sections, such as `#accessibility`. The home URL redirects to `/foundations/colors`. Theme changes and section links keep the current page mounted.
+`src/docs/styles.css` keeps MDX defaults in the `base` layer and document structure rules in `components`, allowing utility overrides. `.doc-content` spaces direct Markdown blocks without changing elements inside examples. Docs color aliases reference Fern tokens; utilities use standard names without a prefix.
 
-Vite development and preview serve `index.html` for direct page URLs. When deploying the Docs SPA, configure the host to serve `index.html` for page routes while serving assets normally. Verify direct URLs and reloads on that host; production hosting and SSR are not yet verified.
+## Development
+
+Development and preview use `http://127.0.0.1:4321/`. A busy port causes an error rather than selecting another port. Docs uses pathname routes such as `/components/button` and fragments such as `#accessibility`; the home URL redirects to `/foundations/colors`.
+
+For deployment, configure the host to serve `index.html` for page routes while serving assets normally. Verify direct URLs and reloads on that host. Production hosting and SSR are not yet verified.
 
 ## Shadow DOM embedding check
 
@@ -39,4 +45,4 @@ Check the fixture in both Light and Dark:
 
 Recheck when changing shared CSS, themes, or embedding behavior.
 
-This fixture checks that Fern's compiled CSS, theme tokens, scoped styles, and keyboard behavior work inside a shadow root on an independently styled host. It does not verify integration with a production MediaWiki skin or ResourceLoader. Keep the fixture small. Do not store historical verification reports or screenshots in this directory.
+The fixture does not verify integration with a production MediaWiki skin or ResourceLoader.

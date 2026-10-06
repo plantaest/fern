@@ -5,7 +5,16 @@ import { readColors } from '../scripts/codex-colors.mjs';
 
 const css = await readFile('src/foundations/tokens.css', 'utf8');
 const json = JSON.parse(await readFile('src/foundations/colors.json', 'utf8'));
-const styles = await readFile('src/styles.css', 'utf8');
+const styles = (
+  await Promise.all(
+    [
+      'src/styles.css',
+      'src/foundations/base.css',
+      'src/components/icon/icon.css',
+      'src/components/button/button.css',
+    ].map((file) => readFile(file, 'utf8')),
+  )
+).join('\n');
 const blocks = [...css.matchAll(/\.fern[^{}]*\{([^}]+)\}/g)];
 
 const parse = (text) =>
@@ -14,8 +23,16 @@ const parse = (text) =>
   );
 
 for (const [index, mode] of ['light', 'dark'].entries()) {
-  test(`${mode}: all 287 Codex values are preserved apart from whitespace`, async () => {
+  test(`${mode}: all 287 Codex values are preserved with Fern's numbered token names`, async () => {
     const official = await readColors(mode, false);
+    const generated = parse(blocks[index][1]);
+
+    const expected = Object.fromEntries(
+      Object.entries(official).map(([name, value]) => [
+        name.replace(/([a-z])(\d+)/g, '$1-$2'),
+        value,
+      ]),
+    );
 
     const canonical = (values) =>
       Object.fromEntries(
@@ -23,9 +40,17 @@ for (const [index, mode] of ['light', 'dark'].entries()) {
       );
 
     assert.equal(Object.keys(official).length, 287);
-    assert.deepEqual(canonical(parse(blocks[index][1])), canonical(official));
-    assert.deepEqual(canonical(json[mode]), canonical(official));
-    assert.deepEqual(parse(blocks[index][1]), json[mode]);
+    assert.equal(Object.keys(generated).length, 287);
+    assert.deepEqual(canonical(generated), canonical(expected));
+    assert.deepEqual(canonical(json[mode]), canonical(expected));
+    assert.deepEqual(generated, json[mode]);
+    assert.equal(json[mode]['color-red-300'], official['color-red300']);
+    assert.equal(json[mode]['color-gray-1000'], official['color-gray1000']);
+    assert.equal(
+      json[mode]['color-modifier-gray-100-translucent'].replace(/\s+/g, ''),
+      official['color-modifier-gray100-translucent'].replace(/\s+/g, ''),
+    );
+    assert.ok(Object.keys(json[mode]).every((name) => !/[a-z]\d/.test(name)));
     assert.ok(!/\(\s|\s\)/.test(Object.values(json[mode]).join('\n')));
   });
 }

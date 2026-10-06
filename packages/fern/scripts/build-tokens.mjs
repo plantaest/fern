@@ -1,8 +1,13 @@
 import { writeFile } from 'node:fs/promises';
 import { readColors } from './codex-colors.mjs';
 
-const light = await readColors('light');
-const dark = await readColors('dark');
+const fernColors = (colors) =>
+  Object.fromEntries(
+    Object.entries(colors).map(([name, value]) => [name.replace(/([a-z])(\d+)/g, '$1-$2'), value]),
+  );
+
+const light = fernColors(await readColors('light'));
+const dark = fernColors(await readColors('dark'));
 
 const declarations = (colors) =>
   ['color', 'background-color', 'border-color', 'box-shadow-color', 'accent-color']
@@ -35,4 +40,4 @@ ${declarations(dark)}
 
 await writeFile('src/foundations/colors.json', `${JSON.stringify({ light, dark }, null, 2)}\n`);
 
-console.log(`Codex: ${Object.keys(light).length} exact color tokens per theme.`);
+console.log(`Codex: ${Object.keys(light).length} color values preserved per theme.`);

@@ -1,13 +1,13 @@
-import { render } from '@solidjs/web';
-import { cdxIconArrowNext, cdxIconEdit } from '@wikimedia/codex-icons';
-import { createRoot, createSignal, flush } from 'solid-js';
+import { type JSX, render } from '@solidjs/web';
+import { cdxIconEdit } from '@wikimedia/codex-icons';
+import { createRoot, createSignal, flush, omit } from 'solid-js';
 import { afterEach, describe, expect, expectTypeOf, it } from 'vitest';
-import { Icon } from '../icon';
+import { Icon } from '../icon/icon';
 import {
   Button,
   type ButtonAction,
+  type ButtonProps,
   type ButtonSize,
-  type ButtonStyleProps,
   type ButtonVariant,
   buttonVariants,
 } from './button';
@@ -28,6 +28,12 @@ function mount(view: () => import('@solidjs/web').JSX.Element) {
   flush();
 
   return host;
+}
+
+type LinkProps = Omit<JSX.AnchorHTMLAttributes<HTMLAnchorElement>, 'href'> & { to: string };
+
+function Link(props: LinkProps) {
+  return <a {...omit(props, 'to')} href={props.to} />;
 }
 
 describe('Button contract on Solid 2', () => {
@@ -53,20 +59,6 @@ describe('Button contract on Solid 2', () => {
     ).toBe(
       `fern-button fern-button-variant--${variant} fern-button-action--destructive fern-button-size--icon custom-class`,
     );
-  });
-
-  it('exposes CVA class composition and explicit omission of default variants', () => {
-    expect(buttonVariants({ className: ['custom-class', { active: true }] })).toBe(
-      'fern-button fern-button-variant--solid fern-button-action--neutral custom-class active',
-    );
-    expect(buttonVariants({ variant: null, action: null, size: null, class: 'custom-class' })).toBe(
-      'fern-button custom-class',
-    );
-
-    expectTypeOf<ButtonStyleProps['variant']>().toEqualTypeOf<ButtonVariant | undefined>();
-    expectTypeOf<ButtonStyleProps['action']>().toEqualTypeOf<ButtonAction | undefined>();
-    expectTypeOf<ButtonStyleProps['size']>().toEqualTypeOf<ButtonSize | undefined>();
-    expectTypeOf<ButtonStyleProps['class']>().toEqualTypeOf<string | undefined>();
   });
 
   it('forwards native attributes, accessible names, refs, children, and events', () => {
@@ -196,45 +188,140 @@ describe('Button contract on Solid 2', () => {
     expect(submits).toBe(1);
   });
 
-  it('shares classes with native links while keeping native link semantics', () => {
+  it('renders an anchor with native link semantics and inferred attributes, refs, and events', () => {
+    let ref: HTMLAnchorElement | undefined;
+    let clicked: HTMLAnchorElement | undefined;
+
     const host = mount(() => (
-      <a
+      <Button
+        as="a"
         href="/article"
-        class={buttonVariants({ variant: 'outline', action: 'neutral', class: 'extra' })}
+        target="_blank"
+        variant="outline"
+        ref={(element) => {
+          expectTypeOf(element).toEqualTypeOf<HTMLAnchorElement>();
+          ref = element;
+        }}
+        onClick={(event) => {
+          expectTypeOf(event.currentTarget).toMatchTypeOf<HTMLAnchorElement>();
+          event.preventDefault();
+          clicked = event.currentTarget;
+        }}
       >
         Read
-      </a>
+      </Button>
     ));
 
     const anchor = host.querySelector('a')!;
 
     expect(anchor.getAttribute('href')).toBe('/article');
+    expect(anchor.target).toBe('_blank');
     expect(anchor.getAttribute('role')).toBeNull();
+    expect(anchor.hasAttribute('type')).toBe(false);
+    expect(anchor.hasAttribute('as')).toBe(false);
     expect(anchor.className).toContain('fern-button-variant--outline');
-    expect(anchor.className).toContain('fern-button-action--neutral');
-    expect(anchor.className).toContain('extra');
+    expect(ref).toBe(anchor);
+
+    anchor.click();
+
+    expect(clicked).toBe(anchor);
   });
 
-  it('keeps icons decorative and resolves RTL data', () => {
-    const host = mount(() => (
-      <>
-        <Button size="icon" aria-label="Edit">
-          <Icon icon={cdxIconEdit} />
+  it('forwards custom component props and keeps the destination and styling reactive', () => {
+    let ref: HTMLAnchorElement | undefined;
+    let clicks = 0;
+
+    const state = createRoot((dispose) => {
+      disposers.push(dispose);
+
+      const [to, setTo] = createSignal('/before');
+      const [variant, setVariant] = createSignal<ButtonVariant>('outline');
+      const host = mount(() => (
+        <Button
+          as={Link}
+          to={to()}
+          variant={variant()}
+          class="custom-link"
+          aria-label="Read article"
+          ref={(element) => {
+            ref = element;
+          }}
+          onClick={(event) => {
+            event.preventDefault();
+            clicks++;
+          }}
+        >
+          Read
         </Button>
-        <Icon icon={cdxIconArrowNext} dir="rtl" />
+      ));
+
+      return { host, setTo, setVariant };
+    });
+
+    const anchor = state.host.querySelector('a')!;
+
+    expect(anchor.getAttribute('href')).toBe('/before');
+    expect(anchor.getAttribute('role')).toBeNull();
+    expect(anchor.hasAttribute('type')).toBe(false);
+    expect(anchor.hasAttribute('to')).toBe(false);
+    expect(anchor.getAttribute('aria-label')).toBe('Read article');
+    expect(anchor.textContent).toBe('Read');
+    expect(ref).toBe(anchor);
+
+    state.setTo('/after');
+    state.setVariant('soft');
+    flush();
+    anchor.click();
+
+    expect(anchor.getAttribute('href')).toBe('/after');
+    expect(anchor.className).toContain('fern-button-variant--soft');
+    expect(anchor.className).toContain('custom-link');
+    expect(clicks).toBe(1);
+  });
+
+  it('requires custom props and keeps the default button type contract', () => {
+    expectTypeOf<ButtonProps>().not.toHaveProperty('href');
+    expectTypeOf<ButtonProps<typeof Link>>().toHaveProperty('to').toEqualTypeOf<string>();
+    expectTypeOf<ButtonProps['type']>().toEqualTypeOf<'button' | 'submit' | 'reset' | undefined>();
+
+    const invalidExamples = () => (
+      <>
+        {/* @ts-expect-error Native button props do not include href. */}
+        <Button href="/article">Read</Button>
+        {/* @ts-expect-error The custom component requires its destination prop. */}
+        <Button as={Link}>Read</Button>
+        {/* @ts-expect-error The destination must match the custom component's type. */}
+        <Button as={Link} to={123}>
+          Read
+        </Button>
+        {/* @ts-expect-error Button variants do not accept null. */}
+        <Button variant={null}>Save</Button>
+        {/* @ts-expect-error Button actions do not accept null. */}
+        <Button action={null}>Save</Button>
+        {/* @ts-expect-error Button sizes do not accept null. */}
+        <Button size={null}>Save</Button>
       </>
+    );
+
+    expectTypeOf(invalidExamples).toBeFunction();
+  });
+
+  it('keeps icon-only buttons named and decorative icons unfocusable', () => {
+    const host = mount(() => (
+      <Button size="icon" aria-label="Edit">
+        <Icon icon={cdxIconEdit} />
+      </Button>
     ));
 
+    const button = host.querySelector('button')!;
     const icon = host.querySelector('svg')!;
 
+    expect(button.getAttribute('aria-label')).toBe('Edit');
     expect(icon.getAttribute('aria-hidden')).toBe('true');
-    expect(icon.querySelector('path')).not.toBeNull();
-    expect(host.querySelector('button')!.getAttribute('aria-label')).toBe('Edit');
-    expect(host.querySelectorAll('svg')[1].innerHTML).not.toBe('');
 
-    host.querySelector('button')!.focus();
+    button.focus();
     icon.focus();
 
-    expect(document.activeElement).toBe(host.querySelector('button'));
+    expect(document.activeElement).toBe(button);
   });
 });

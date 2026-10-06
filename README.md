@@ -1,10 +1,12 @@
 # Fern
 
-A Wikimedia-first design system for Taxon Labs applications. Fern Docs currently supports exploring foundations and components and will grow into the official documentation. Principles and conventions are in [AGENTS.md](AGENTS.md).
+A Wikimedia-first design system for Taxon Labs applications. Fern Docs explores foundations and components and will grow into the official documentation.
+
+See the [package README](packages/fern/README.md) for usage and exports, and [AGENTS.md](AGENTS.md) for development principles and conventions.
 
 ## Develop
 
-Use pnpm 8.15.5 and Node 22.12 or newer. Codex's own tooling declares a newer Node requirement; Fern reads its prebuilt color and icon data, tested on Node 22.19.0.
+Use pnpm 8.15.5 and Node 22.12 or newer.
 
 ```sh
 pnpm install --frozen-lockfile
@@ -37,10 +39,8 @@ Tests cover color fidelity, selected contrast pairs, Button behavior, and MDX. W
 
 ## Package status
 
-The private root workspace is named `fern`. The local package name `@taxon-labs/fern` is provisional and unpublished; the unscoped npm name `fern` is already in use. Start with alpha versions; record changes in [CHANGELOG.md](CHANGELOG.md).
+The private root workspace is named `fern`. The package `@taxon-labs/fern` is an unpublished alpha with a provisional npm scope. Changes are recorded in [CHANGELOG.md](CHANGELOG.md).
 
 Fern is licensed under `GPL-2.0-or-later`. See [LICENSE](LICENSE) and [third-party notices](THIRD_PARTY_NOTICES.md).
 
-The tested combination is Solid and `@solidjs/web` `2.0.0-rc.13`, with Kobalte `2.0.0-alpha.2`. Kobalte and its utils package declare older Solid peers; verify installation independently of development overrides. Resolve upstream peer compatibility before claiming strict-install or stable release support. `pnpm release:check` also requires strict peer resolution; it is a release gate, currently expected to fail on Kobalte peer metadata. SSR/hydration is not yet verified.
-
-See the [package README](packages/fern/README.md) for usage and exports.
+Fern uses Solid 2 RC and Kobalte alpha. Upstream peer compatibility remains a release blocker; SSR/hydration is not verified. See [package compatibility](packages/fern/README.md#compatibility-and-license) for tested versions and the release check.

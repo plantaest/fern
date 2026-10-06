@@ -17,11 +17,8 @@ Fern is a design system for software built by Taxon Labs for Vietnamese Wikipedi
 - `scripts/check-package.mjs`: verify a packed tarball in a clean application without workspace overrides or Tailwind.
 - Use pnpm from the repository root, with one workspace lockfile.
 - Use TypeScript, SolidJS 2, Tailwind CSS 4, and Kobalte. Solid 2 RC and Kobalte alpha are deliberate choices; do not silently switch to Solid 1.
-- Organize Docs pages under `src/docs/pages/foundations/` and `src/docs/pages/components/`. Keep each page's examples in a neighboring `*-examples.tsx` file and tests close to the pages they exercise.
+- Organize Docs pages under `src/docs/pages/foundations/` and `src/docs/pages/components/`. Keep each page's samples, playground, and explicit demo imports in a neighboring `*-examples.tsx` file, with standalone demo sources in its `*-demos/` directory and tests close to the pages they exercise.
 - Use Tailwind utilities without a prefix (`flex`, `gap-2`, `bg-canvas`). Keep Fern component classes and `--fern-*` tokens namespaced. MediaWiki gadgets are intended to use Shadow DOM; the host fixture checks CSS isolation there. ResourceLoader integration remains future work.
-- Use Tailwind utilities for Docs layout, spacing, responsiveness, and visual samples. Share repeated presentation in the small helpers in `docs.tsx`. Keep Docs CSS for MDX defaults and structure-dependent rules in layers that utilities can override; split long utility strings across lines. Keep Docs-only token aliases local and reference Codex values.
-- MDX holds documentation structure, prose, and static API tables. Keep interactive examples and playground logic in TSX. Do not add automatic page discovery or API generation yet.
-- Declare page components, routes, titles, groups, and section titles explicitly in `src/docs/navigation.ts`; the app renders that configuration. Keep section titles consistent with the MDX content. Resolve the MDX provider independently of page folder depth.
 
 ## Foundations
 
@@ -38,26 +35,45 @@ Fern is a design system for software built by Taxon Labs for Vietnamese Wikipedi
 
 The Docs app bundles fonts locally with Vietnamese glyphs. Fern provides font stacks; consuming applications load fonts. Wrap components in `.fern` and select a theme with `data-theme="light"` or `data-theme="dark"`. Do not add global Preflight or a global reset to component CSS. Do not mix or adjust upstream colors. Non-color choices remain provisional.
 
-## Conventions
+## Package conventions
 
 - Use rem for font sizes, spacing, control heights, icon sizes, and radii. Keep border and focus outline dimensions in px, and use unitless line-height where appropriate. Pixel values in the foundations and size descriptions assume a 16px root font size.
 - Use Kobalte behavior where appropriate; forward native props, events, refs, and ARIA attributes.
-- Button defaults to `type="button"`. Keep links as native anchors, using `buttonVariants()` when appropriate.
-- Button sizes are `sm` (24px), `default` (32px), and `lg` (44px), with matching `icon-sm`, `icon`, and `icon-lg` forms. Use 12/14/16px text and 14/16/20px icons in both text and icon-only buttons. Standalone icons default to 16px. Use composition for icons and busy states.
-- Button separates visual `variant` (`solid`, `soft`, `surface`, `outline`, `ghost`) from semantic `action` (`neutral`, `progressive`, `destructive`). Defaults are `solid` and `neutral`.
-- Use direct namespaced component selectors (`.fern-button`, `.fern-icon`) in `@layer components`, so utilities can override them. Keep `.fern` for theme tokens, fonts, and scoped resets rather than repeating it in component selectors.
+- Button defaults to `type="button"` and supports Kobalte's polymorphic `as` prop with inferred element or component props. Render navigation as native anchors through `as="a"`, an anchor-rendering router component, or `buttonVariants()`.
+- Keep the default Button at 32px with 14px text and 16px icons. Text and icon-only buttons share an icon size at each size preset; standalone icons default to 16px. Keep presets consistent with the Button Docs. Use composition for icons and busy states.
+- Button separates visual `variant` from semantic `action`, defaulting to `solid` and `neutral`.
+- Use direct namespaced component selectors (`.fern-button`, `.fern-icon`) in the `components` layer, assigned by `@import "..." layer(components)` in `styles.css`, so utilities can override them. Keep component CSS free of layer wrappers. Keep `.fern` for theme tokens, fonts, and scoped resets rather than repeating it in component selectors.
+- Keep each component's TSX, CSS, and tests together in its own directory under `packages/fern/src/components/`. Keep shared `.fern` setup in `foundations/base.css`; `styles.css` declares layer order and imports the foundations and component styles.
 - Include the styling group in modifier class names: `fern-button-variant--outline`, `fern-button-action--destructive`, and `fern-button-size--icon`. Keep the base class `fern-button`.
-- Docs navigation has Foundations and Components only. Use simple English, no logo or decorative animation.
-- Component pages present an introduction, basic example, API Reference, playground, examples, and accessibility notes, in that order.
-- In API tables, quote string literal types and defaults with straight double quotes, such as `"default" | "icon"`.
-- Use straight apostrophes and quotation marks in authored English text, comments, and code examples. Keep Vietnamese characters intact.
-- Format authored code, including HTML and embedded CSS, with Biome and Markdown/MDX with Prettier only. Keep HTML nested with two-space indentation, separate block elements onto their own lines, and indent `<style>` and `<script>` contents.
-- Use blank lines between logical steps, declarations and execution, helper functions, and test cases. Separate setup, actions, and assertions where useful. Expand complex configuration and generated code examples onto multiple lines; avoid dense one-line blocks. Keep related short statements together, without adding a blank line after every statement.
-- Keep a blank line between CSS rules, including inside media queries. In longer rules, separate logical declaration groups with blank lines, while preserving declaration order. Keep short rules compact and put each declaration on its own line. Separate generated token groups in the generator.
 - Generated `tokens.css` and `colors.json` come from the token script. Change the generator rather than editing its output.
+- Numbered color token names separate the shade with a hyphen, such as `color-red-300` and `color-modifier-gray-100-translucent`. Preserve Codex values and semantic role names.
 - Keep licensing information in root `LICENSE` and `THIRD_PARTY_NOTICES.md`. Do not add copied dependency licenses or license-generation scripts unless explicitly requested.
 - Use CVA (`class-variance-authority`) for component variant classes. Keep semantic CSS classes and public styling APIs explicit; do not add Tailwind class merging without a concrete need.
-- Keep API changes in `CHANGELOG.md`.
+
+## Docs conventions
+
+- Docs navigation has Foundations and Components only. Use simple, concise English, no logo or decorative animation.
+- MDX holds structure, prose, and static API tables. Use YAML frontmatter for title and description, and Markdown headings and paragraphs for content. Keep interactive examples and playground logic in TSX.
+- Declare pages, routes, groups, and section titles explicitly in `src/docs/navigation.ts`, importing titles and descriptions from frontmatter. Keep section titles consistent with MDX. Do not add automatic page discovery or API generation yet.
+- Keep build-time MDX plugins in `apps/docs/plugins/`. Resolve the MDX provider independently of page folder depth.
+- Use Tailwind utilities for layout, spacing, responsiveness, and visual samples. Share repeated presentation in `ui.tsx`. Keep Docs CSS for MDX defaults and structure-dependent rules in layers that utilities can override. Keep Docs-only token aliases local and reference Codex values.
+- Component pages present an introduction, basic example, API Reference, playground, examples, and accessibility notes, in that order.
+- In API tables, quote string literal types and defaults with straight double quotes, such as `"default" | "icon"`.
+
+## Formatting
+
+- Use Biome for authored code, including HTML and CSS, and Prettier for Markdown/MDX. Use single quotes for JS/TS strings and double quotes for JSX attribute values.
+- Use straight apostrophes and quotation marks in authored English, comments, and examples. Keep Vietnamese characters intact.
+- Keep HTML nested with two-space indentation, separate block elements onto their own lines, and indent `<style>` and `<script>` contents.
+- Use blank lines between logical steps, declarations and execution, helper functions, and test cases. Separate setup, actions, and assertions where useful. Expand complex configuration and generated examples onto multiple lines. Keep related short statements together.
+- Keep blank lines between CSS rules, including inside media queries. In longer rules, separate declaration groups while preserving order. Put each declaration on its own line and separate generated token groups in the generator.
+- Split long utility strings across lines and keep classes literal for Tailwind discovery.
+
+## Changelog
+
+- Before the first release, keep the `Unreleased` section in `CHANGELOG.md` as a short summary of the initial alpha. Revise entries as the design changes; omit experimental history and migration notes.
+- Omit internal refactors, formatting, wording, and test maintenance unless they affect users.
+- On release, add the version and date and start a new `Unreleased` section. Record subsequent changes against the latest release, with categories and migration notes as needed.
 
 ## Git commits
 
@@ -71,11 +87,11 @@ The Docs app bundles fonts locally with Vietnamese glyphs. Fern provides font st
 
 ## Verification
 
-Run `pnpm install --frozen-lockfile`, then `pnpm dev` from the root.
+Install dependencies with `pnpm install --frozen-lockfile`. For browser checks, run `pnpm dev` from the root or reuse the existing dev server.
 
 Docs uses `http://127.0.0.1:4321/`. Keep the port and host in its Vite configuration, with `strictPort` enabled.
 
-Before finishing relevant changes, run `pnpm check`, `pnpm typecheck`, `pnpm test`, and `pnpm build`. Run `pnpm pack:check` when changing exports, dependencies, build output, or styles. The package check uses npm network access and a temporary directory.
+For changes limited to Markdown documentation, run `pnpm check`; a dev server and runtime checks are unnecessary. For code, configuration, styles, or MDX changes, run `pnpm check`, `pnpm typecheck`, `pnpm test`, and `pnpm build`. Also run `pnpm pack:check` when changing exports, dependencies, build output, or styles. The package check uses npm network access and a temporary directory.
 
 For visual or interaction changes, check Light and Dark, narrow screens, and keyboard behavior. Give icon-only controls accessible names. Test reactive props and ensure ordinary buttons do not submit forms.
 

@@ -1,12 +1,17 @@
-import { PageIntro, Section } from '../../docs';
-import { RadiusDefault, RadiusInUse } from './radius-examples';
+---
+title: Radius
+description: One restrained corner radius to start with.
+---
 
-<PageIntro title="Radius" description="One restrained corner radius to start with." />
+import { Example } from '../../ui';
+import { RadiusDefault, radiusInUse } from './radius-examples';
 
-<Section title="Default">
-  <RadiusDefault />
-</Section>
+## Default
 
-<Section title="In use">
-  <RadiusInUse />
-</Section>
+<RadiusDefault />
+
+## In use
+
+### Controls and panels
+
+<Example demo={radiusInUse} />

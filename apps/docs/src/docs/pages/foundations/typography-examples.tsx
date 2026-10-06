@@ -1,5 +1,3 @@
-import { CodeBlock, ReadingSample } from '../../docs';
-
 export function TypographyTypeScale() {
   return (
     <div
@@ -16,15 +14,10 @@ export function TypographyTypeScale() {
         >
           Heading 1 · 36 / 44
         </span>
-        <p
-          class="
-            font-serif font-semibold tracking-[-0.02em] text-[2.25rem]
-            leading-[2.75rem]
-          "
-        >
+        <p class="font-serif font-semibold tracking-heading text-heading-1">
           A place for knowledge
         </p>
-        <span class="text-[0.8125rem] leading-5 text-muted">Source Serif 4 · Semibold</span>
+        <span class="text-small text-muted">Source Serif 4 · Semibold</span>
       </div>
       <div>
         <span
@@ -34,15 +27,10 @@ export function TypographyTypeScale() {
         >
           Heading 2 · 28 / 36
         </span>
-        <p
-          class="
-            font-serif font-semibold tracking-[-0.02em] text-[1.75rem]
-            leading-9
-          "
-        >
+        <p class="font-serif font-semibold tracking-heading text-heading-2">
           Built for useful work
         </p>
-        <span class="text-[0.8125rem] leading-5 text-muted">Source Serif 4 · Semibold</span>
+        <span class="text-small text-muted">Source Serif 4 · Semibold</span>
       </div>
       <div>
         <span
@@ -52,15 +40,10 @@ export function TypographyTypeScale() {
         >
           Heading 3 · 22 / 28
         </span>
-        <p
-          class="
-            font-serif font-semibold tracking-[-0.02em] text-[1.375rem]
-            leading-7
-          "
-        >
+        <p class="font-serif font-semibold tracking-heading text-heading-3">
           Every detail has a purpose
         </p>
-        <span class="text-[0.8125rem] leading-5 text-muted">Source Serif 4 · Semibold</span>
+        <span class="text-small text-muted">Source Serif 4 · Semibold</span>
       </div>
       <div>
         <span
@@ -70,8 +53,8 @@ export function TypographyTypeScale() {
         >
           Body · 16 / 26
         </span>
-        <p>Find information, make an edit, and keep moving.</p>
-        <span class="text-[0.8125rem] leading-5 text-muted">Inter · Regular</span>
+        <p class="text-body">Find information, make an edit, and keep moving.</p>
+        <span class="text-small text-muted">Inter · Regular</span>
       </div>
       <div>
         <span
@@ -81,36 +64,23 @@ export function TypographyTypeScale() {
         >
           Control · 14 / 20
         </span>
-        <p class="text-[0.875rem] font-medium">Save changes</p>
-        <span class="text-[0.8125rem] leading-5 text-muted">Inter · Medium</span>
+        <p class="text-control font-medium">Save changes</p>
+        <span class="text-small text-muted">Inter · Medium</span>
+      </div>
+      <div>
+        <span class="block font-mono text-[0.6875rem] leading-5 text-muted mb-3">
+          Small · 13 / 20
+        </span>
+        <p class="text-small">Last edited a few minutes ago.</p>
+        <span class="text-small text-muted">Inter · Regular</span>
+      </div>
+      <div>
+        <span class="block font-mono text-[0.6875rem] leading-5 text-muted mb-3">
+          Code · 12 / 22
+        </span>
+        <p class="font-mono text-code">const theme = 'light';</p>
+        <span class="text-small text-muted">JetBrains Mono · Regular</span>
       </div>
     </div>
-  );
-}
-
-export function TypographyVietnamese() {
-  return (
-    <ReadingSample lang="vi">
-      <h3>Tri thức mở cho mọi người</h3>
-      <p>
-        Những công cụ nhỏ giúp người đóng góp tìm kiếm, biên tập và chia sẻ kiến thức. Mỗi thay đổi
-        đều có thể làm Wikipedia tốt hơn.
-      </p>
-      <p class="leading-[2]">
-        Ă Â Đ Ê Ô Ơ Ư · ă â đ ê ô ơ ư<br />Ắ Ằ Ẳ Ẵ Ặ · Ấ Ầ Ẩ Ẫ Ậ · Ứ Ừ Ử Ữ Ự
-      </p>
-    </ReadingSample>
-  );
-}
-
-export function TypographyCode() {
-  return (
-    <CodeBlock
-      code={`import { Button } from '@taxon-labs/fern/button';
-
-<Button variant="outline" action="progressive">Save changes</Button>
-
-// Vietnamese glyphs: Tri thức mở`}
-    />
   );
 }

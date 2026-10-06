@@ -2,7 +2,7 @@
 @import "tailwindcss/utilities.css" layer(utilities) source(none);
 @source "../";
 
-/* Keep the existing Docs breakpoints, including their boundary widths. */
+/* Docs layout breakpoints. */
 @custom-variant docs-narrow (@media (max-width: 1150px));
 @custom-variant docs-mobile (@media (max-width: 760px));
 @custom-variant docs-tiny (@media (max-width: 360px));
@@ -24,125 +24,161 @@
     margin: 0;
   }
 
-  .fern-docs :where(h1, h2, h3, p) {
-    margin: 0;
-  }
+  .fern-docs {
+    & :where(h1, h2, h3, p) {
+      margin: 0;
+    }
 
-  .fern-docs :where(h1, h2, h3) {
-    font-family: var(--fern-font-heading);
-    font-weight: 600;
-    letter-spacing: -0.02em;
-  }
+    & :where(h1, h2, h3) {
+      font-family: var(--fern-font-heading);
+      font-weight: 600;
+      letter-spacing: var(--fern-tracking-heading);
+    }
 
-  .fern-docs h1 {
-    font-size: 2.25rem;
-    line-height: 2.75rem;
-  }
+    & h1 {
+      font-size: var(--fern-text-heading-1);
+      line-height: var(--fern-leading-heading-1);
+    }
 
-  .fern-docs h2 {
-    font-size: 1.75rem;
-    line-height: 2.25rem;
-  }
+    & h2 {
+      font-size: var(--fern-text-heading-2);
+      line-height: var(--fern-leading-heading-2);
+    }
 
-  .fern-docs h3 {
-    font-size: 1.375rem;
-    line-height: 1.75rem;
-  }
+    & h3 {
+      font-size: var(--fern-text-heading-3);
+      line-height: var(--fern-leading-heading-3);
+    }
 
-  .fern-docs a {
-    color: var(--fern-color-progressive);
-    text-decoration: none;
-  }
+    & a {
+      color: var(--fern-color-progressive);
+      text-decoration: none;
 
-  .fern-docs a:hover {
-    text-decoration: underline;
-  }
+      &:hover {
+        text-decoration: underline;
+      }
+    }
 
-  .fern-docs :where(code, pre) {
-    font-family: var(--fern-font-code);
-  }
+    & :where(code, pre) {
+      font-family: var(--fern-font-code);
+    }
 
-  .fern-docs code {
-    font-size: 0.75rem;
-  }
+    & code {
+      font-size: var(--fern-text-code);
+    }
 
-  .fern-docs :where(button, input, select, summary) {
-    font-family: var(--fern-font-content);
-  }
+    & :where(button, input, select, summary) {
+      font-family: var(--fern-font-content);
+    }
 
-  .fern-docs :where(a, button, input, select, summary):focus-visible {
-    outline: 2px solid var(--fern-border-color-progressive--focus);
-    outline-offset: 3px;
-  }
+    & :where(a, button, input, select, summary):focus-visible {
+      outline: 2px solid var(--fern-border-color-progressive--focus);
+      outline-offset: 3px;
+    }
 
-  .fern-docs pre {
-    margin: 0;
-    padding: 0 --spacing(5) --spacing(5);
-    overflow-x: auto;
-    max-width: 100%;
+    & pre {
+      margin: 0;
+      padding: 0 --spacing(5) --spacing(5);
+      overflow-x: auto;
+      max-width: 100%;
 
-    font-size: 0.75rem;
-    line-height: 1.375rem;
-    tab-size: 2;
-  }
+      font-size: var(--fern-text-code);
+      line-height: var(--fern-leading-code);
+      tab-size: 2;
+    }
 
-  .fern-docs summary {
-    cursor: pointer;
-    font-size: 0.8125rem;
-  }
+    & summary {
+      cursor: pointer;
+      font-size: var(--fern-text-small);
 
-  .fern-docs table {
-    width: 100%;
-    border-collapse: collapse;
-    text-align: left;
-    font-size: 0.8125rem;
-    line-height: 1.25rem;
-  }
+      &:focus-visible {
+        outline-offset: -2px;
+      }
+    }
 
-  .fern-docs th {
-    font-weight: 500;
-    color: var(--fern-color-subtle);
-    font-size: 0.75rem;
-    padding: --spacing(3);
-    background: var(--fern-background-color-neutral-subtle);
-  }
+    & table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: var(--fern-text-small);
+      line-height: var(--fern-leading-small);
+    }
 
-  .fern-docs td {
-    padding: --spacing(3);
-    border-top: 1px solid var(--fern-border-color-subtle);
-    vertical-align: top;
+    & th {
+      font-weight: 500;
+      color: var(--fern-color-subtle);
+      font-size: 0.75rem;
+      padding: --spacing(3);
+      background: var(--fern-background-color-neutral-subtle);
+    }
+
+    & td {
+      padding: --spacing(3);
+      border-top: 1px solid var(--fern-border-color-subtle);
+      vertical-align: top;
+    }
   }
 }
 
-/* Structure-dependent document rules, not layout for individual examples. */
+/* Document spacing and API tables. */
 @layer components {
-  .fern-docs .api-table th:first-child,
-  .fern-docs .api-table th:last-child {
-    width: 18%;
-  }
+  .doc-content {
+    display: flow-root;
 
-  .fern-docs .api-table code {
-    overflow-wrap: normal;
-  }
+    & :where(h2[id], h3[id]) {
+      scroll-margin-top: 6.25rem;
+    }
 
-  .fern-docs .api-table td:first-child code,
-  .fern-docs .api-table td:last-child code {
-    white-space: nowrap;
-  }
+    & > :where(h2, h3) {
+      margin-top: --spacing(12);
+      margin-bottom: --spacing(5);
+    }
 
-  .fern-docs .doc-section > ul {
-    padding-left: --spacing(5);
-    font-size: 0.875rem;
-    line-height: 1.5rem;
-  }
+    & > h2:first-child {
+      margin-top: --spacing(4);
+    }
 
-  .fern-docs .doc-section > ul li + li {
-    margin-top: --spacing(2);
-  }
+    & > :where(h3) {
+      margin-top: --spacing(8);
+    }
 
-  @media (max-width: 760px) {
-    .fern-docs .api-table code {
-      font-size: 0.6875rem;
+    & > :where(h2 + h3) {
+      margin-top: 0;
+    }
+
+    & > :where(p, ul, ol, blockquote, pre, table, .doc-code-block) {
+      margin-top: --spacing(4);
+      margin-bottom: --spacing(5);
+    }
+
+    & > [lang] > p {
+      margin-top: --spacing(4);
+    }
+
+    & > :where(ul, ol) {
+      padding-left: --spacing(5);
+    }
+
+    & > :where(ul, ol) li + li {
+      margin-top: --spacing(2);
+    }
+
+    & .api-table {
+      & th:first-child,
+      & th:last-child {
+        width: 18%;
+      }
+
+      & td:first-child code,
+      & td:last-child code {
+        white-space: nowrap;
+      }
+    }
+
+    @variant docs-mobile {
+      & :where(h2[id], h3[id]) {
+        scroll-margin-top: 5.5rem;
+      }
     }
   }
 }

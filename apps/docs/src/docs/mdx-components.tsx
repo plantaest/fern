@@ -1,4 +1,5 @@
-import { Dynamic, type JSX } from '@solidjs/web';
+import { dynamic } from '@solidjs/web';
+import { CodeBlock } from './ui';
 
 // MDX resolves Markdown elements through component names. Solid needs those
 // names to be functions rather than strings such as "p" or "ul".
@@ -30,12 +31,10 @@ const tags = [
   'del',
 ];
 
-const components = Object.fromEntries(
-  tags.map((tag) => [
-    tag,
-    (props: JSX.HTMLAttributes<HTMLElement>) => <Dynamic component={tag} {...props} />,
-  ]),
-);
+const components = {
+  ...Object.fromEntries(tags.map((tag) => [tag, dynamic(() => tag, { static: true })])),
+  'code-block': CodeBlock,
+};
 
 export function useMDXComponents() {
   return components;

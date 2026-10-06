@@ -1,6 +1,6 @@
-import { Button } from '@taxon-labs/fern/button';
 import { For } from 'solid-js';
-import { Example } from '../../docs';
+import SpacingActionsDemo from './spacing-demos/related-actions';
+import spacingSource from './spacing-demos/related-actions.tsx?raw';
 
 const spacing = [4, 8, 12, 16, 24, 32, 48];
 
@@ -17,7 +17,7 @@ export function SpacingScale() {
           >
             <code>{size / 4}</code>
             <span
-              class="inline-block h-6 bg-docs-progressive rounded-[0.125rem]"
+              class="inline-block h-6 bg-docs-progressive rounded-base"
               style={{ width: `calc(var(--fern-spacing) * ${size / 4})` }}
             />
             <span>{size}px</span>
@@ -29,18 +29,7 @@ export function SpacingScale() {
   );
 }
 
-export function SpacingInUse() {
-  return (
-    <Example
-      title="Related actions"
-      code={
-        '<div class="flex gap-2">\n  <Button action="progressive">Save</Button>\n  <Button variant="outline">Cancel</Button>\n</div>'
-      }
-    >
-      <div class="flex gap-2">
-        <Button action="progressive">Save</Button>
-        <Button variant="outline">Cancel</Button>
-      </div>
-    </Example>
-  );
-}
+export const spacingInUse = {
+  component: SpacingActionsDemo,
+  source: spacingSource,
+};

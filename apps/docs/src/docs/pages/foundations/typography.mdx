@@ -1,17 +1,19 @@
-import { PageIntro, ReadingSample, Section } from '../../docs';
-import { TypographyTypeScale, TypographyVietnamese, TypographyCode } from './typography-examples';
+---
+title: Typography
+description: Serif headings, clear sans-serif content, and readable code.
+---
 
-<PageIntro
-  title="Typography"
-  description="Serif headings, clear sans-serif content, and readable code."
-/>
+import { TypographyTypeScale } from './typography-examples';
 
-<Section title="Type scale">
-  <TypographyTypeScale />
-</Section>
+## Type scale
 
-<Section title="Reading sample">
-  <ReadingSample>
+Sizes shown in pixels assume a 16px root font size.
+
+<TypographyTypeScale />
+
+Tailwind utilities such as `text-heading-1` and `text-body` pair font size with line-height. Use `font-serif font-semibold tracking-heading` for headings and `font-mono` for code.
+
+## Reading sample
 
 ### Small tools, shared knowledge
 
@@ -19,13 +21,32 @@ Good interfaces help people understand what they can do and what happens next. F
 
 Use headings to organize a page. Keep labels short, and use plain language when something needs an explanation.
 
-</ReadingSample>
-</Section>
+## Vietnamese
 
-<Section title="Vietnamese" description="Both text families include Vietnamese characters.">
-  <TypographyVietnamese />
-</Section>
+Both text families include Vietnamese characters.
 
-<Section title="Code" description="JetBrains Mono keeps code distinct from the surrounding text.">
-  <TypographyCode />
-</Section>
+<div lang="vi">
+
+### Tri thức mở cho mọi người
+
+Những công cụ nhỏ giúp người đóng góp tìm kiếm, biên tập và chia sẻ kiến thức. Mỗi thay đổi đều có thể làm Wikipedia tốt hơn.
+
+<p class="leading-8">
+  Ă Â Đ Ê Ô Ơ Ư · ă â đ ê ô ơ ư<br />Ắ Ằ Ẳ Ẵ Ặ · Ấ Ầ Ẩ Ẫ Ậ · Ứ Ừ Ử Ữ Ự
+</p>
+
+</div>
+
+## Code
+
+JetBrains Mono keeps code distinct from the surrounding text.
+
+```tsx
+import { Button } from '@taxon-labs/fern/button';
+
+<Button variant="outline" action="progressive">
+  Save changes
+</Button>;
+
+// Vietnamese glyphs: Tri thức mở
+```

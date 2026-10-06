@@ -1,9 +1,9 @@
-import { Button as KobalteButton } from '@kobalte/core/button';
-import type { JSX } from '@solidjs/web';
+import { type ButtonRootProps, Button as KobalteButton } from '@kobalte/core/button';
+import type { PolymorphicProps } from '@kobalte/core/polymorphic';
+import type { ValidComponent } from '@solidjs/web';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { omit } from 'solid-js';
 
-/** Shared classes for a Button or a native anchor. Does not change semantics. */
 export const buttonVariants = cva('fern-button', {
   variants: {
     variant: {
@@ -38,25 +38,20 @@ export type ButtonVariant = NonNullable<VariantProps<typeof buttonVariants>['var
 export type ButtonAction = NonNullable<VariantProps<typeof buttonVariants>['action']>;
 export type ButtonSize = NonNullable<VariantProps<typeof buttonVariants>['size']>;
 
-export interface ButtonStyleProps {
+export type ButtonProps<T extends ValidComponent = 'button'> = PolymorphicProps<
+  T,
+  ButtonRootProps<T>
+> & {
   variant?: ButtonVariant;
   action?: ButtonAction;
   size?: ButtonSize;
   class?: string;
-}
+  type?: 'button' | 'submit' | 'reset';
+};
 
-export type ButtonProps = Omit<
-  JSX.ButtonHTMLAttributes<HTMLButtonElement>,
-  'type' | 'disabled' | 'tabindex'
-> &
-  ButtonStyleProps & {
-    type?: 'button' | 'submit' | 'reset';
-    disabled?: boolean;
-    tabindex?: number | string;
-  };
-
-export function Button(props: ButtonProps) {
-  const rest = omit(props, 'variant', 'action', 'size', 'class', 'type');
+/** Action button. Render navigation as an anchor with the as prop. */
+export function Button<T extends ValidComponent = 'button'>(props: ButtonProps<T>) {
+  const rest = omit(props as ButtonProps, 'variant', 'action', 'size', 'class', 'type');
 
   return (
     <KobalteButton

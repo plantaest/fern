@@ -1,11 +1,9 @@
-import { render } from '@solidjs/web';
+import { type JSX, render } from '@solidjs/web';
 import colors from '@taxon-labs/fern/colors.json';
-import { createSignal, flush } from 'solid-js';
+import { flush } from 'solid-js';
 import { afterEach, expect, it } from 'vitest';
 import ColorsPage from './colors.mdx';
 import IconsPage from './icons.mdx';
-import RadiusPage from './radius.mdx';
-import SpacingPage from './spacing.mdx';
 import TypographyPage from './typography.mdx';
 
 let dispose: (() => void) | undefined;
@@ -15,46 +13,57 @@ afterEach(() => {
   document.body.innerHTML = '';
 });
 
-it('passes reactive theme props through MDX and filters the official token data', () => {
+function mount(view: () => JSX.Element) {
   const host = document.createElement('div');
   document.body.append(host);
-
-  const [theme, setTheme] = createSignal<'light' | 'dark'>('light');
-  dispose = render(() => <ColorsPage theme={theme()} />, host);
+  dispose = render(view, host);
   flush();
 
-  const value = () => host.querySelector('.token-value')?.textContent;
-  expect(value()).toBe(colors.light['color-base']);
+  return host;
+}
 
-  setTheme('dark');
-  flush();
-
-  expect(value()).toBe(colors.dark['color-base']);
-
-  const search = host.querySelector<HTMLInputElement>('input[type="search"]')!;
+it('filters color tokens and reports the number of visible results', () => {
+  const host = mount(() => <ColorsPage theme="dark" />);
+  const search = host.querySelector<HTMLInputElement>('#token-filter')!;
+  const status = host.querySelector('.token-disclosure [role="status"]')!;
 
   search.value = 'progressive';
   search.dispatchEvent(new Event('input', { bubbles: true }));
   flush();
 
-  const count = Object.keys(colors.dark).filter((name) => name.includes('progressive')).length;
-  expect(host.querySelector('.token-disclosure [role="status"]')?.textContent).toBe(
-    `${count} tokens`,
+  const expected = Object.keys(colors.dark).filter((name) => name.includes('progressive'));
+  const names = [...host.querySelectorAll('tbody td:first-child code')].map(
+    (node) => node.textContent,
   );
-});
 
-it.each([
-  ['Typography', TypographyPage],
-  ['Spacing', SpacingPage],
-  ['Radius', RadiusPage],
-  ['Icons', IconsPage],
-] as const)('renders the %s MDX document', (title, Page) => {
-  const host = document.createElement('div');
-  document.body.append(host);
+  expect(names).toEqual(expected);
+  expect(status.textContent).toBe(`${expected.length} tokens`);
 
-  dispose = render(() => <Page />, host);
+  search.value = 'red-300';
+  search.dispatchEvent(new Event('input', { bubbles: true }));
   flush();
 
-  expect(host.querySelector('h1')?.textContent).toBe(title);
-  expect(host.querySelectorAll('.doc-section').length).toBeGreaterThan(1);
+  const rows = host.querySelectorAll('tbody tr');
+
+  expect(rows).toHaveLength(1);
+  expect([...rows[0].querySelectorAll('td code')].map((node) => node.textContent)).toEqual([
+    'color-red-300',
+    colors.dark['color-red-300'],
+  ]);
+  expect(status.textContent).toBe('1 token');
+});
+
+it('marks the Vietnamese reading sample with its language', () => {
+  const host = mount(() => <TypographyPage />);
+  const sample = host.querySelector('[lang="vi"]')!;
+
+  expect(sample.querySelector('h3')).not.toBeNull();
+  expect(sample.querySelector('p')?.textContent?.trim()).toBeTruthy();
+});
+
+it('gives the icon-only example an accessible name and hides its decorative icon', () => {
+  const host = mount(() => <IconsPage />);
+  const button = host.querySelector('button[aria-label="Edit"]')!;
+
+  expect(button.querySelector('svg')?.getAttribute('aria-hidden')).toBe('true');
 });

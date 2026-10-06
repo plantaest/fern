@@ -1,4 +1,3 @@
-import { Button } from '@taxon-labs/fern/button';
 import { Icon } from '@taxon-labs/fern/icon';
 import {
   cdxIconAdd,
@@ -15,7 +14,8 @@ import {
   cdxIconUserAvatar,
 } from '@wikimedia/codex-icons';
 import { For } from 'solid-js';
-import { Example } from '../../docs';
+import IconsButtonsDemo from './icons-demos/labeled-buttons';
+import iconsSource from './icons-demos/labeled-buttons.tsx?raw';
 
 export const galleryIcons = [
   { name: 'Add', icon: cdxIconAdd },
@@ -34,61 +34,31 @@ export const galleryIcons = [
 
 export function IconsGallery() {
   return (
-    <>
-      <div
-        class="
-          grid grid-cols-4 border-t border-l border-line rounded-base
-          overflow-hidden mb-5 docs-mobile:grid-cols-3
-        "
-      >
-        <For each={galleryIcons}>
-          {(item) => (
-            <div
-              class="
-                min-h-28 flex items-center justify-center flex-col
-                gap-4 border-r border-b border-line text-[0.75rem]
-                text-muted
-              "
-            >
-              <Icon icon={item.icon} class="text-content" />
-              <span>{item.name}</span>
-            </div>
-          )}
-        </For>
-      </div>
-      <p class="text-[0.8125rem] leading-5 text-muted">
-        Explore the{' '}
-        <a href="https://doc.wikimedia.org/codex/latest/icons/all-icons.html">
-          full Codex icon collection
-        </a>
-        .
-      </p>
-    </>
-  );
-}
-
-export function IconsInUse() {
-  return (
-    <Example
-      title="Labeled and icon-only buttons"
-      code={`import { cdxIconEdit } from '@wikimedia/codex-icons';
-
-<Button variant="outline">
-  <Icon icon={cdxIconEdit} />
-  Edit
-</Button>
-
-<Button variant="outline" size="icon" aria-label="Edit">
-  <Icon icon={cdxIconEdit} />
-</Button>`}
+    <div
+      class="
+        grid grid-cols-4 border-t border-l border-line rounded-base
+        overflow-hidden docs-mobile:grid-cols-3
+      "
     >
-      <Button variant="outline">
-        <Icon icon={cdxIconEdit} />
-        Edit
-      </Button>
-      <Button variant="outline" size="icon" aria-label="Edit">
-        <Icon icon={cdxIconEdit} />
-      </Button>
-    </Example>
+      <For each={galleryIcons}>
+        {(item) => (
+          <div
+            class="
+              min-h-28 flex items-center justify-center flex-col
+              gap-4 border-r border-b border-line text-[0.75rem]
+              text-muted
+            "
+          >
+            <Icon icon={item.icon} class="text-content" />
+            <span>{item.name}</span>
+          </div>
+        )}
+      </For>
+    </div>
   );
 }
+
+export const iconsInUse = {
+  component: IconsButtonsDemo,
+  source: iconsSource,
+};

@@ -6,14 +6,7 @@
     "useIgnoreFile": true
   },
   "files": {
-    "includes": [
-      "**",
-      "!**/dist",
-      "!**/node_modules",
-      "!**/src/foundations/tokens.css",
-      "!**/src/foundations/colors.json",
-      "!**/.pnpm-store"
-    ]
+    "includes": ["**", "!**/src/foundations/tokens.css", "!**/src/foundations/colors.json"]
   },
   "formatter": {
     "indentStyle": "space",
@@ -39,7 +32,6 @@
     }
   },
   "linter": {
-    "enabled": true,
     "rules": {
       "preset": "recommended"
     }
@@ -51,16 +43,6 @@
         "rules": {
           "style": {
             "noNonNullAssertion": "off"
-          }
-        }
-      }
-    },
-    {
-      "includes": ["packages/fern/src/components/icon.tsx"],
-      "linter": {
-        "rules": {
-          "a11y": {
-            "noSvgWithoutTitle": "off"
           }
         }
       }

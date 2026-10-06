@@ -1,18 +1,29 @@
-import { PageIntro, Section } from '../../docs';
-import { ButtonBasic, ButtonPlayground, ButtonExamples } from './button-examples';
+---
+title: Button
+description: Trigger an action. Use a link when the destination changes.
+---
 
-<PageIntro
-  category="Components"
-  title="Button"
-  description="Trigger an action. Use a link when the destination changes."
-/>
+import { Example } from '../../ui';
+import {
+  ButtonBasic,
+  ButtonPlayground,
+  buttonVariantsExample,
+  buttonActionsExample,
+  buttonSizesExample,
+  buttonWithIconsExample,
+  buttonDestructiveExample,
+  buttonDisabledExample,
+  buttonFormExample,
+  buttonLinkExample,
+  buttonLinkVariantsExample,
+} from './button-examples';
 
 <ButtonBasic />
 
-<Section
-  title="API Reference"
-  description="Use variant for style and action for meaning."
->
+## API Reference
+
+Use variant for style and action for meaning.
+
 <div class="max-w-full overflow-x-auto border-y border-line api-table">
 
 | Prop       | Type                                                            | Default     |
@@ -24,38 +35,69 @@ import { ButtonBasic, ButtonPlayground, ButtonExamples } from './button-examples
 | `type`     | `"button" \| "submit" \| "reset"`                               | `"button"`  |
 | `class`    | `string`                                                        | —           |
 | `children` | Text, icons, or other JSX                                       | —           |
+| `as`       | Element or component                                            | `"button"`  |
 
 </div>
 
-<div class="text-[0.8125rem] leading-5 text-muted mt-4">
+Supports props, refs, and events for the rendered element or component. See the [Kobalte Button API](https://kobalte.dev/docs/core/components/button/).
 
-Supports native button props, refs, and events. See the [Kobalte Button API](https://kobalte.dev/docs/core/components/button/).
+## Playground
 
-</div>
+Change the props and try the result.
 
-<details class="mt-4 [&_p]:pt-3">
-  <summary><code>buttonVariants()</code> — classes for a native link</summary>
-  <div class="text-[0.8125rem] leading-5">
+<ButtonPlayground />
 
-Returns a class string from `variant`, `action`, `size`, and optional custom classes.
+## Examples
 
-  </div>
-</details>
-</Section>
+### Variants
 
-<Section title="Playground" description="Change the props and try the result.">
-  <ButtonPlayground />
-</Section>
+<Example demo={buttonVariantsExample} />
 
-<Section title="Examples">
-  <ButtonExamples />
-</Section>
+### Actions
 
-<Section title="Accessibility">
+Keep the same visual style while changing the meaning of the action.
 
-- Tab moves focus to enabled buttons. Enter or Space activates them.
+<Example demo={buttonActionsExample} />
+
+### Sizes
+
+<Example demo={buttonSizesExample} />
+
+### With icons
+
+<Example demo={buttonWithIconsExample} />
+
+### Destructive action
+
+Use a clear label alongside the destructive color.
+
+<Example demo={buttonDestructiveExample} />
+
+### Disabled and busy
+
+Keep a visible label for the current state.
+
+<Example demo={buttonDisabledExample} />
+
+### Form actions
+
+Use `type="submit"` explicitly. Other buttons keep `type="button"`.
+
+<Example demo={buttonFormExample} />
+
+### As a link
+
+Use `as="a"` for a native link, or `as={Link}` with a router component's props.
+
+<Example demo={buttonLinkExample} />
+
+Use `buttonVariants()` to style a native anchor directly.
+
+<Example demo={buttonLinkVariantsExample} />
+
+## Accessibility
+
+- Tab moves focus to enabled controls. Buttons activate with Enter or Space; links activate with Enter.
 - Focus has a visible outline in both themes.
 - Give icon-only buttons an `aria-label`. Decorative icons stay hidden from assistive technology.
 - Use words as well as color to describe destructive actions and busy states.
-
-</Section>
