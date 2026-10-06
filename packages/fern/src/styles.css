@@ -1,5 +1,5 @@
 @layer theme, base, components, utilities;
-@import "./foundations/tokens.css";
+@import "./foundations/colors.css";
 @import "./foundations/base.css";
 @import "./foundations/prose.css" layer(components);
 @import "./components/icon/icon.css" layer(components);

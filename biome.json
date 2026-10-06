@@ -6,7 +6,7 @@
     "useIgnoreFile": true
   },
   "files": {
-    "includes": ["**", "!**/src/foundations/tokens.css", "!**/src/foundations/colors.json"]
+    "includes": ["**", "!**/src/foundations/colors.css", "!**/src/foundations/colors.json"]
   },
   "formatter": {
     "indentStyle": "space",

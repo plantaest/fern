@@ -20,7 +20,7 @@ export default function ButtonFormDemo() {
           Preview
         </Button>
       </div>
-      <span class="text-small-xs text-content-subtle" role="status">
+      <span class="text-small text-content-subtle" role="status">
         {message()}
       </span>
     </form>

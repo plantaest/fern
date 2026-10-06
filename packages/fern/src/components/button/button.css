@@ -162,7 +162,7 @@
 
   gap: var(--fern-spacing);
   padding: 0 calc(var(--fern-spacing) * 2);
-  font-size: var(--fern-font-size-xx-small);
+  font-size: var(--fern-font-size-x-small);
 }
 
 .fern-button-size--lg,

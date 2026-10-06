@@ -7,7 +7,7 @@ export function DocsNavigation(props: { currentPath?: string; onSelect?: () => v
     <For each={pageGroups}>
       {(group) => (
         <div class="[&+&]:mt-8 screen-small:[&+&]:mt-5">
-          <p class="text-small-2xs font-semibold text-content-subtle mx-3 mb-3">{group}</p>
+          <p class="text-extra-small font-semibold text-content-subtle mx-3 mb-3">{group}</p>
           <For each={pages.filter((item) => item.group === group)}>
             {(item) => (
               <a
@@ -38,7 +38,7 @@ export function TableOfContents(props: { sections: readonly string[] }) {
     <Show when={props.sections.length}>
       <aside
         class="
-          toc sticky top-18 h-fit py-10 px-6 text-small-2xs
+          sticky top-18 h-fit py-10 px-6 text-extra-small
           screen-narrow:hidden
         "
       >

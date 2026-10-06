@@ -61,14 +61,14 @@ export function ColorsRoles(props: { theme: Theme }) {
                   <div>
                     <code
                       class="
-                        block font-mono text-small-2xs wrap-anywhere
+                        block font-mono text-extra-small wrap-anywhere
                       "
                     >
                       {token}
                     </code>
                     <span
                       class="
-                        token-value block text-content-subtle font-mono text-small-2xs mt-1
+                        token-value block text-content-subtle font-mono text-extra-small mt-1
                       "
                     >
                       {value(token)}
@@ -107,10 +107,10 @@ export function ColorsInteractionStates(props: { theme: Theme }) {
                       class="block w-full h-11 rounded-base mb-2"
                       style={{ background: value(`background-color-${name}${state}`) }}
                     />
-                    <span class="block text-small-2xs capitalize">
+                    <span class="block text-extra-small capitalize">
                       {state.slice(2) || 'Default'}
                     </span>
-                    <code class="font-mono text-content-subtle text-small-2xs">
+                    <code class="font-mono text-content-subtle text-extra-small">
                       {value(`background-color-${name}${state}`)}
                     </code>
                   </div>
@@ -135,7 +135,7 @@ export function ColorsAllTokens(props: { theme: Theme }) {
 
   return (
     <details class="fern-not-prose fern-docs-token-disclosure border border-line-subtle rounded-base p-4">
-      <summary class="text-small-xs">
+      <summary class="text-small">
         Browse all {Object.keys(colors.light).length} color tokens
       </summary>
       <Field label="Filter tokens" for="token-filter" class="mt-5 mb-3">
@@ -148,7 +148,7 @@ export function ColorsAllTokens(props: { theme: Theme }) {
           placeholder="e.g. progressive"
         />
       </Field>
-      <p class="text-small-xs text-content-subtle" role="status">
+      <p class="text-extra-small text-content-subtle" role="status">
         {entries().length} {entries().length === 1 ? 'token' : 'tokens'}
       </p>
       <div class="max-w-full overflow-x-auto border-y border-line-subtle mt-3">
@@ -173,7 +173,7 @@ export function ColorsAllTokens(props: { theme: Theme }) {
                   <td>
                     <span
                       class="
-                        inline-block size-5 border border-line-subtle
+                        block size-5 border border-line-subtle
                         rounded-base shrink-0
                       "
                       style={{ background: value(name) }}

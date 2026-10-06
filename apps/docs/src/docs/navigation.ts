@@ -14,9 +14,9 @@ export const pageGroups = ['Foundations', 'Components'] as const;
 
 type DocPage = {
   path: string;
+  group: (typeof pageGroups)[number];
   title: string;
   description: string;
-  group: (typeof pageGroups)[number];
   sections: readonly string[];
   component: Component<{ theme?: 'light' | 'dark' }>;
 };
@@ -24,50 +24,50 @@ type DocPage = {
 export const pages = [
   {
     path: '/foundations/colors',
+    group: 'Foundations',
     title: colorsMetadata.title,
     description: colorsMetadata.description,
-    component: ColorsPage,
-    group: 'Foundations',
     sections: ['Roles', 'Interaction states', 'Usage', 'All tokens'],
+    component: ColorsPage,
   },
   {
     path: '/foundations/typography',
+    group: 'Foundations',
     title: typographyMetadata.title,
     description: typographyMetadata.description,
-    component: TypographyPage,
-    group: 'Foundations',
     sections: ['Font families', 'Scales', 'Text styles', 'Prose'],
+    component: TypographyPage,
   },
   {
     path: '/foundations/spacing',
+    group: 'Foundations',
     title: spacingMetadata.title,
     description: spacingMetadata.description,
-    component: SpacingPage,
-    group: 'Foundations',
     sections: ['Scale', 'In use'],
+    component: SpacingPage,
   },
   {
     path: '/foundations/radius',
+    group: 'Foundations',
     title: radiusMetadata.title,
     description: radiusMetadata.description,
-    component: RadiusPage,
-    group: 'Foundations',
     sections: ['Default', 'In use'],
+    component: RadiusPage,
   },
   {
     path: '/foundations/icons',
+    group: 'Foundations',
     title: iconsMetadata.title,
     description: iconsMetadata.description,
-    component: IconsPage,
-    group: 'Foundations',
     sections: ['Gallery', 'In use'],
+    component: IconsPage,
   },
   {
     path: '/components/button',
+    group: 'Components',
     title: buttonMetadata.title,
     description: buttonMetadata.description,
-    component: ButtonPage,
-    group: 'Components',
     sections: ['API Reference', 'Playground', 'Examples', 'Accessibility'],
+    component: ButtonPage,
   },
 ] as const satisfies readonly DocPage[];

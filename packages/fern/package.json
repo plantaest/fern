@@ -28,15 +28,15 @@
       "default": "./dist/icon.js"
     },
     "./styles.css": "./dist/styles.css",
-    "./tokens.css": "./dist/tokens.css",
+    "./colors.css": "./dist/colors.css",
     "./colors.json": "./dist/colors.json",
     "./tailwind.css": "./dist/tailwind.css"
   },
   "scripts": {
-    "tokens": "node scripts/build-tokens.mjs",
-    "build": "node scripts/clean.mjs && pnpm tokens && tsc -p tsconfig.build.json && vite build && node scripts/finish-build.mjs",
+    "colors": "node scripts/colors.mjs",
+    "build": "node scripts/build.mjs",
     "typecheck": "tsc --noEmit",
-    "test": "pnpm tokens && node --test tests/tokens.test.mjs && vitest run"
+    "test": "pnpm colors && node --test tests/tokens.test.mjs && vitest run"
   },
   "peerDependencies": {
     "@solidjs/web": "2.0.0-rc.13",

@@ -26,7 +26,7 @@ export function Header(props: {
         Fern{' '}
         <span
           class="
-            pl-3 ml-3 border-l border-line-subtle text-small-xs font-normal
+            pl-3 ml-3 border-l border-line-subtle text-small font-normal
             text-content-subtle screen-small:hidden
           "
         >
@@ -36,7 +36,7 @@ export function Header(props: {
       <div class="flex gap-3 items-center">
         <fieldset
           class="
-            theme-switch flex gap-0.5 m-0 p-0 border-0 min-w-0
+            flex gap-0.5 m-0 p-0 border-0 min-w-0
             rounded-base
           "
           aria-label="Theme"
@@ -47,7 +47,7 @@ export function Header(props: {
                 class="
                   flex items-center justify-center gap-1.5 border-0
                   rounded-base py-1.5 px-2.5 text-content-subtle bg-transparent
-                  text-small-2xs font-medium
+                  text-small font-medium
                   aria-pressed:text-content-base aria-pressed:bg-surface-neutral
                   hover:text-content-base screen-small:px-2
                 "
@@ -64,7 +64,7 @@ export function Header(props: {
         </fieldset>
         <button
           class="
-            menu-toggle hidden size-9 items-center justify-center
+            hidden size-9 items-center justify-center
             text-content-base border border-line-subtle rounded-base bg-surface-base
             screen-small:inline-flex
           "

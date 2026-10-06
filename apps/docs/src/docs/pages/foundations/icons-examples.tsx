@@ -45,7 +45,7 @@ export function IconsGallery() {
           <div
             class="
               min-h-28 flex items-center justify-center flex-col
-              gap-4 border-r border-b border-line-subtle text-small-2xs
+              gap-4 border-r border-b border-line-subtle text-extra-small
               text-content-subtle
             "
           >

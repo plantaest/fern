@@ -4,17 +4,17 @@ import { dirname } from 'node:path';
 import { test } from 'node:test';
 import { fileURLToPath } from 'node:url';
 import { compile } from 'tailwindcss';
-import { readColors } from '../scripts/codex-colors.mjs';
+import { readColors } from '../scripts/colors.mjs';
 
-const css = await readFile('src/foundations/tokens.css', 'utf8');
+const css = await readFile('src/foundations/colors.css', 'utf8');
 const json = JSON.parse(await readFile('src/foundations/colors.json', 'utf8'));
 const styles = (
   await Promise.all(
     [
       'src/styles.css',
+      'src/tailwind.css',
       'src/foundations/base.css',
       'src/foundations/prose.css',
-      'src/foundations/tailwind.css',
       'src/components/icon/icon.css',
       'src/components/button/button.css',
     ].map((file) => readFile(file, 'utf8')),
@@ -80,6 +80,11 @@ test('used text and focus pairs meet their contrast thresholds in both themes', 
       ['color-base', 'background-color-base', 4.5],
       ['color-subtle', 'background-color-neutral-subtle', 4.5],
       ['color-progressive', 'background-color-base', 4.5],
+      ...['', '--hover', '--active'].map((state) => [
+        `color-visited${state}`,
+        'background-color-base',
+        4.5,
+      ]),
       ['border-color-progressive--focus', 'background-color-base', 3],
       ...['progressive', 'destructive'].flatMap((role) =>
         ['', '--hover', '--active'].flatMap((state) => [
@@ -127,7 +132,7 @@ test('style references resolve to declared tokens and upstream colors, without h
 });
 
 test('Tailwind utilities preserve typography and semantic color token roles', async () => {
-  const adapter = await readFile('src/foundations/tailwind.css', 'utf8');
+  const adapter = await readFile('src/tailwind.css', 'utf8');
   const compiler = await compile(`${adapter}\n@tailwind utilities;`, {
     loadStylesheet: async (id) => {
       const path = fileURLToPath(import.meta.resolve(id));
@@ -136,13 +141,15 @@ test('Tailwind utilities preserve typography and semantic color token roles', as
     },
   });
 
-  const typography = [
+  const sizes = [
     ['text-xs', 'x-small'],
-    ['text-base', 'medium'],
+    ['text-xl', 'x-large'],
+  ];
+  const typography = [
+    ...sizes,
     ['text-body', 'medium', 'normal'],
     ['text-small', 'small', 'small'],
-    ['text-small-xs', 'x-small', 'small'],
-    ['text-small-2xs', 'xx-small', 'small'],
+    ['text-extra-small', 'x-small', 'small'],
     ['text-heading-3', 'x-large', 'large'],
   ];
   const expectations = [
@@ -151,6 +158,7 @@ test('Tailwind utilities preserve typography and semantic color token roles', as
       ...(leading ? [[name, 'line-height', `line-height-${leading}`]] : []),
     ]),
     ['leading-sm', 'line-height', 'line-height-small'],
+    ['leading-normal', 'line-height', 'line-height-normal'],
     ['text-content-base', 'color', 'color-base'],
     ['bg-surface-base', 'background-color', 'background-color-base'],
     ['border-line-base', 'border-color', 'border-color-base'],
@@ -170,6 +178,8 @@ test('Tailwind utilities preserve typography and semantic color token roles', as
     );
   }
 
-  assert.ok(!rule('text-xs').includes('line-height'));
-  assert.ok(!rule('text-base').includes('color:'));
+  for (const [name] of sizes) {
+    assert.ok(!rule(name).includes('line-height:'), `${name} sets size without leading`);
+    assert.ok(!rule(name).includes('color:'), `${name} sets size without color`);
+  }
 });

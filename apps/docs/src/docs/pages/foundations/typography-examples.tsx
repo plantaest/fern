@@ -12,12 +12,12 @@ export function TypographyFontFamilies() {
       <For each={families}>
         {(family) => (
           <div class="border border-line-subtle rounded-base p-4">
-            <p class="text-sm leading-sm font-medium mb-1">{family.name}</p>
-            <p class="text-small-xs text-content-subtle mb-4">{family.font}</p>
+            <p class="text-small font-medium mb-1">{family.name}</p>
+            <p class="text-extra-small text-content-subtle mb-4">{family.font}</p>
             <p class={`text-lg leading-md mb-4 ${family.class}`} lang="vi">
               Tri thức mở cho mọi người
             </p>
-            <code class="font-mono text-small-2xs text-content-subtle">{family.class}</code>
+            <code class="font-mono text-extra-small text-content-subtle">{family.class}</code>
           </div>
         )}
       </For>
@@ -44,7 +44,7 @@ export function TypographyFontWeights() {
         {(weight) => (
           <div>
             <p class={`text-base leading-md mb-2 ${weight.class}`}>{weight.name}</p>
-            <code class="font-mono text-small-2xs text-content-subtle">
+            <code class="font-mono text-extra-small text-content-subtle">
               {weight.class} · {weight.value}
             </code>
           </div>
@@ -112,17 +112,10 @@ const textStyles = [
     sample: 'Useful details, kept close to the task.',
   },
   {
-    name: 'Small XS',
-    metrics: '13 / 20',
-    family: 'Sans · 400',
-    class: 'font-sans font-normal text-small-xs',
-    sample: 'Last edited a few minutes ago.',
-  },
-  {
-    name: 'Small 2XS',
+    name: 'Extra small',
     metrics: '12 / 20',
     family: 'Sans · 400',
-    class: 'font-sans font-normal text-small-2xs',
+    class: 'font-sans font-normal text-extra-small',
     sample: 'Additional information at a glance.',
   },
 ];
@@ -139,8 +132,8 @@ export function TypographyTextStyles() {
             "
           >
             <p class={style.class}>{style.sample}</p>
-            <div class="text-small-2xs text-content-subtle text-right screen-small:text-left">
-              <code class="font-mono text-2xs">
+            <div class="text-extra-small text-content-subtle text-right screen-small:text-left">
+              <code class="font-mono text-xs">
                 {style.name} · {style.metrics}
               </code>
               <p>{style.family}</p>
@@ -157,7 +150,7 @@ export function TypographyInterfaceText() {
     <div class="fern-not-prose border border-line-subtle rounded-base p-5 space-y-3">
       <p class="text-sm leading-sm font-medium">Save changes</p>
       <p class="text-xs leading-sm text-content-subtle">Last edited a few minutes ago.</p>
-      <code class="block font-mono text-xs leading-sm">const enabled = true;</code>
+      <code class="block font-mono text-sm leading-sm">const enabled = true;</code>
     </div>
   );
 }

@@ -115,16 +115,16 @@ it.each([
   '/components/button',
 ])('closes mobile navigation after selecting %s', async (path) => {
   const host = mount('/components/button');
-  const toggle = host.querySelector<HTMLButtonElement>('.menu-toggle')!;
+  const toggle = host.querySelector<HTMLButtonElement>('button[aria-label="Open navigation"]')!;
 
   toggle.click();
   flush();
-  host.querySelector<HTMLAnchorElement>(`.mobile-navigation a[href="${path}"]`)!.click();
+  host.querySelector<HTMLAnchorElement>(`#mobile-navigation a[href="${path}"]`)!.click();
 
   await vi.waitFor(() => {
     flush();
     expect(location.pathname).toBe(path);
     expect(toggle.getAttribute('aria-expanded')).toBe('false');
-    expect(host.querySelector('.mobile-navigation')).toBeNull();
+    expect(host.querySelector('#mobile-navigation')).toBeNull();
   });
 });

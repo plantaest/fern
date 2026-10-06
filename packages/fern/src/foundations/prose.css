@@ -98,6 +98,18 @@
         color: var(--fern-color-progressive--active);
       }
 
+      &:visited {
+        color: var(--fern-color-visited);
+      }
+
+      &:visited:hover {
+        color: var(--fern-color-visited--hover);
+      }
+
+      &:visited:active {
+        color: var(--fern-color-visited--active);
+      }
+
       &:focus-visible {
         outline: 2px solid var(--fern-border-color-progressive--focus);
         outline-offset: 3px;
@@ -130,7 +142,7 @@
     &:where(pre) {
       overflow-x: auto;
       font:
-        var(--fern-font-weight-normal) var(--fern-font-size-x-small) / var(--fern-line-height-small)
+        var(--fern-font-weight-normal) var(--fern-font-size-small) / var(--fern-line-height-small)
         var(--fern-font-mono);
       overflow-wrap: normal;
       tab-size: 2;
@@ -180,7 +192,7 @@
     &:where(figcaption) {
       margin-block-start: calc(var(--fern-prose-flow) * 0.5);
       color: var(--fern-color-subtle);
-      font-size: var(--fern-font-size-x-small);
+      font-size: var(--fern-font-size-small);
       line-height: var(--fern-line-height-small);
     }
   }

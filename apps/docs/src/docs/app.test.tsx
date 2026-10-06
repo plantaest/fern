@@ -52,8 +52,10 @@ it('keeps page metadata and navigation correct for a trailing slash', () => {
 
   expect(host.querySelector('main h1')?.textContent).toBe('Button');
   expect(document.title).toBe('Button · Fern Docs');
-  expect(host.querySelector('.sidebar a[aria-current="page"]')?.textContent).toBe('Button');
-  expect(host.querySelectorAll('.toc a')).toHaveLength(4);
+  expect(
+    host.querySelector('nav[aria-label="Main navigation"] a[aria-current="page"]')?.textContent,
+  ).toBe('Button');
+  expect(host.querySelectorAll('nav[aria-label="On this page"] a')).toHaveLength(4);
 });
 
 it('navigates through a polymorphic Button while retaining native link semantics', async () => {
@@ -113,7 +115,11 @@ it('keeps the playground mounted when navigating to a section', async () => {
 
   const accessibility = host.querySelector<HTMLElement>('#accessibility')!;
   accessibility.scrollIntoView = vi.fn();
-  host.querySelector<HTMLAnchorElement>('.toc a[href="/components/button#accessibility"]')!.click();
+  host
+    .querySelector<HTMLAnchorElement>(
+      'nav[aria-label="On this page"] a[href="/components/button#accessibility"]',
+    )!
+    .click();
 
   await vi.waitFor(() => {
     flush();
@@ -123,12 +129,12 @@ it('keeps the playground mounted when navigating to a section', async () => {
   expect(accessibility.scrollIntoView).toHaveBeenCalled();
   expect(
     host
-      .querySelector('.toc a[href="/components/button#accessibility"]')
+      .querySelector('nav[aria-label="On this page"] a[href="/components/button#accessibility"]')
       ?.getAttribute('aria-current'),
   ).toBe('location');
   expect(
     host
-      .querySelector('.toc a[href="/components/button#playground"]')
+      .querySelector('nav[aria-label="On this page"] a[href="/components/button#playground"]')
       ?.getAttribute('aria-current'),
   ).toBe('false');
   expect(host.querySelector('#button-label')).toBe(label);
@@ -152,7 +158,9 @@ it('opens every configured page and links its table of contents to rendered sect
   const host = mount();
 
   for (const page of pages) {
-    const link = host.querySelector<HTMLAnchorElement>(`.sidebar a[href="${page.path}"]`)!;
+    const link = host.querySelector<HTMLAnchorElement>(
+      `nav[aria-label="Main navigation"] a[href="${page.path}"]`,
+    )!;
     link.click();
 
     await vi.waitFor(() => {
@@ -170,7 +178,9 @@ it('opens every configured page and links its table of contents to rendered sect
       page.sections,
     );
 
-    for (const anchor of host.querySelectorAll<HTMLAnchorElement>('.toc a')) {
+    for (const anchor of host.querySelectorAll<HTMLAnchorElement>(
+      'nav[aria-label="On this page"] a',
+    )) {
       const id = decodeURIComponent(anchor.hash.slice(1));
       const target = document.getElementById(id);
       expect(target?.tagName).toBe('H2');
@@ -188,7 +198,7 @@ it('renders a missing page and recovers through its native link', async () => {
   });
 
   expect(document.title).toBe('Page not found · Fern Docs');
-  expect(host.querySelector('.toc')).toBeNull();
+  expect(host.querySelector('nav[aria-label="On this page"]')).toBeNull();
 
   const recoveryLink = host.querySelector<HTMLAnchorElement>('main a')!;
   expect(recoveryLink.textContent).toBe('Explore colors');
@@ -201,12 +211,18 @@ it('renders a missing page and recovers through its native link', async () => {
     expect(document.activeElement).toBe(host.querySelector('main'));
   });
 
-  expect(host.querySelectorAll('.toc a')).toHaveLength(pages[0].sections.length);
+  expect(host.querySelectorAll('nav[aria-label="On this page"] a')).toHaveLength(
+    pages[0].sections.length,
+  );
 });
 
 it('supports browser Back and Forward navigation', async () => {
   const host = mount('/components/button');
-  host.querySelector<HTMLAnchorElement>('.sidebar a[href="/foundations/colors"]')!.click();
+  host
+    .querySelector<HTMLAnchorElement>(
+      'nav[aria-label="Main navigation"] a[href="/foundations/colors"]',
+    )!
+    .click();
 
   await vi.waitFor(() => {
     flush();

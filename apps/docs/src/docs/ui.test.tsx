@@ -8,6 +8,7 @@ let dispose: (() => void) | undefined;
 afterEach(() => {
   dispose?.();
   document.body.innerHTML = '';
+  vi.useRealTimers();
   vi.unstubAllGlobals();
 });
 
@@ -64,6 +65,45 @@ it('copies the current code and resets feedback when the code changes', async ()
   });
 
   expect(writeText).toHaveBeenLastCalledWith('Second example');
+});
+
+it('resets successful copy feedback after one second and restarts it on another copy', async () => {
+  vi.useFakeTimers();
+  const writeText = mockClipboard();
+  const host = mount(() => <CodeBlock code="Example" />);
+  const copy = host.querySelector<HTMLButtonElement>('button[aria-label="Copy code"]')!;
+  const status = host.querySelector('[role="status"]')!;
+
+  copy.click();
+  await Promise.resolve();
+  flush();
+
+  expect(copy.textContent?.trim()).toBe('Copied');
+
+  await vi.advanceTimersByTimeAsync(500);
+  copy.click();
+  await Promise.resolve();
+  flush();
+
+  await vi.advanceTimersByTimeAsync(999);
+  flush();
+  expect(copy.textContent?.trim()).toBe('Copied');
+
+  await vi.advanceTimersByTimeAsync(1);
+  flush();
+  expect(copy.textContent?.trim()).toBe('Copy');
+  expect(status.textContent).toBe('');
+
+  copy.click();
+  await Promise.resolve();
+  flush();
+
+  expect(writeText).toHaveBeenCalledTimes(3);
+  expect(copy.textContent?.trim()).toBe('Copied');
+
+  dispose?.();
+  dispose = undefined;
+  expect(vi.getTimerCount()).toBe(0);
 });
 
 it('reports clipboard errors with an accessible status', async () => {

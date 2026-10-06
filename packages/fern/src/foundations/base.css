@@ -2,13 +2,14 @@
   --fern-font-sans:
     "Inter Variable", Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
     Arial, sans-serif;
-  --fern-font-serif: "Source Serif 4 Variable", "Linux Libertine", Georgia, Times, serif;
+  --fern-font-serif:
+    "Source Serif 4 Variable", "Linux Libertine", "Palatino Linotype", "Palatino",
+    "Times New Roman", Times, serif;
   --fern-font-mono:
     "JetBrains Mono Variable", ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono",
     monospace;
 
-  --fern-font-size-xx-small: 0.75rem;
-  --fern-font-size-x-small: 0.8125rem;
+  --fern-font-size-x-small: 0.75rem;
   --fern-font-size-small: 0.875rem;
   --fern-font-size-medium: 1rem;
   --fern-font-size-large: 1.125rem;

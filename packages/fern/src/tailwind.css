@@ -31,7 +31,6 @@
   --font-weight-bold: var(--fern-font-weight-bold);
 
   --text-*: initial;
-  --text-2xs: var(--fern-font-size-xx-small);
   --text-xs: var(--fern-font-size-x-small);
   --text-sm: var(--fern-font-size-small);
   --text-base: var(--fern-font-size-medium);
@@ -65,10 +64,8 @@
   --text-body--line-height: var(--fern-line-height-normal);
   --text-small: var(--fern-font-size-small);
   --text-small--line-height: var(--fern-line-height-small);
-  --text-small-xs: var(--fern-font-size-x-small);
-  --text-small-xs--line-height: var(--fern-line-height-small);
-  --text-small-2xs: var(--fern-font-size-xx-small);
-  --text-small-2xs--line-height: var(--fern-line-height-small);
+  --text-extra-small: var(--fern-font-size-x-small);
+  --text-extra-small--line-height: var(--fern-line-height-small);
 
   --radius-base: var(--fern-radius-base);
 }

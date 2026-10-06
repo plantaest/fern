@@ -75,7 +75,7 @@ export function Layout(props: {
         <nav
           id="mobile-navigation"
           class="
-            mobile-navigation hidden py-6 px-5 border-b border-line-subtle
+            hidden py-6 px-5 border-b border-line-subtle
             screen-small:block
           "
           aria-label="Mobile navigation"
@@ -92,7 +92,7 @@ export function Layout(props: {
       >
         <aside
           class="
-            sidebar sticky top-18 h-[calc(100vh-4.5rem)] py-10 px-6
+            sticky top-18 h-[calc(100vh-4.5rem)] py-10 px-6
             border-r border-line-subtle flex flex-col screen-small:hidden
           "
         >
@@ -116,7 +116,7 @@ export function Layout(props: {
           <div class="flex-1">{props.children}</div>
           <footer
             class="
-              border-t border-line-subtle text-content-subtle text-small-2xs py-6 mt-16
+              border-t border-line-subtle text-content-subtle text-extra-small py-6 mt-16
             "
           >
             Fern · Taxon Labs

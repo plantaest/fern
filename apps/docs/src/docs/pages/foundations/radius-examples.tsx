@@ -17,7 +17,7 @@ export function RadiusDefault() {
       />
       <div>
         <code class="font-mono text-xs">4px · 0.25rem</code>
-        <p class="text-content-subtle text-small-xs mt-2">The default for controls and panels.</p>
+        <p class="text-content-subtle text-small mt-2">The default for controls and panels.</p>
       </div>
     </div>
   );

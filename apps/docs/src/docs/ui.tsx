@@ -1,7 +1,7 @@
 import { dynamic, type JSX } from '@solidjs/web';
 import { Icon } from '@taxon-labs/fern/icon';
 import { cdxIconCheck, cdxIconCopy } from '@wikimedia/codex-icons';
-import { type Component, createSignal } from 'solid-js';
+import { type Component, createEffect, createSignal } from 'solid-js';
 
 export const fieldControlClasses = `
   min-w-0 w-full h-8 px-2.5 py-0 border border-line-base
@@ -48,7 +48,7 @@ export function Field(props: {
   return (
     <label
       for={props.for}
-      class={`flex flex-col gap-2 text-small-2xs font-medium min-w-0 ${props.class ?? ''}`}
+      class={`flex flex-col gap-2 text-extra-small font-medium min-w-0 ${props.class ?? ''}`}
     >
       {props.label}
       {props.children}
@@ -59,7 +59,7 @@ export function Field(props: {
 export function PageIntro(props: { title: string; description: string; category: string }) {
   return (
     <header class="mb-8">
-      <p class="text-content-subtle text-small-2xs mb-3">{props.category}</p>
+      <p class="text-content-subtle text-extra-small mb-3">{props.category}</p>
       <h1 class="font-serif font-semibold text-heading-1">{props.title}</h1>
       <p class="text-content-subtle mt-3 text-body">{props.description}</p>
     </header>
@@ -68,6 +68,17 @@ export function PageIntro(props: { title: string; description: string; category:
 
 export function CodeBlock(props: { code: string; language?: string; embedded?: boolean }) {
   const [copyResult, setCopyResult] = createSignal<{ code: string; message: string }>();
+
+  createEffect(
+    () => copyResult(),
+    (result) => {
+      if (result?.message !== 'Copied') return;
+
+      const timer = setTimeout(() => setCopyResult(undefined), 1000);
+
+      return () => clearTimeout(timer);
+    },
+  );
 
   const status = () => {
     const result = copyResult();
@@ -92,7 +103,7 @@ export function CodeBlock(props: { code: string; language?: string; embedded?: b
     >
       <div
         class="
-          flex items-center justify-between h-11 px-4 text-small-2xs
+          flex items-center justify-between h-11 px-4 text-extra-small
           text-content-subtle
         "
       >
@@ -100,7 +111,7 @@ export function CodeBlock(props: { code: string; language?: string; embedded?: b
         <button
           class="
             flex items-center gap-1.5 py-1 px-1.5 min-h-7
-            text-small-2xs border-0 rounded-base text-content-subtle bg-transparent
+            text-extra-small border-0 rounded-base text-content-subtle bg-transparent
             hover:text-content-base hover:bg-surface-interactive-subtle-hover
           "
           type="button"
@@ -132,7 +143,7 @@ export function Example(props: { demo: { component: Component; source: string } 
       <details>
         <summary
           class="
-            border-t border-line-subtle py-3 px-4 text-small-2xs text-content-subtle
+            border-t border-line-subtle py-3 px-4 text-extra-small text-content-subtle
             bg-surface-neutral-subtle
           "
         >

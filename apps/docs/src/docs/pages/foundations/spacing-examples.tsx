@@ -12,7 +12,7 @@ export function SpacingScale() {
           <div
             class="
               grid grid-cols-[40px_72px_56px_1fr] items-center gap-4 my-5
-              text-small-xs [&_code]:text-content-subtle
+              text-extra-small [&_code]:text-content-subtle
             "
           >
             <code class="font-mono text-xs">{size / 4}</code>

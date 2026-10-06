@@ -104,7 +104,7 @@ export function ButtonPlayground() {
             </Show>
             <Show when={icon() !== 'only'}>{name()}</Show>
           </Button>
-          <span class="text-content-subtle text-small-2xs" role="status">
+          <span class="text-content-subtle text-extra-small" role="status">
             {clicks() === 0
               ? 'Try the button'
               : `Clicked ${clicks()} ${clicks() === 1 ? 'time' : 'times'}`}
@@ -166,7 +166,7 @@ export function ButtonPlayground() {
               <option value="only">Icon only</option>
             </select>
           </Field>
-          <label class="flex items-center gap-2 text-small-xs font-normal">
+          <label class="flex items-center gap-2 text-small font-normal">
             <input
               class="size-4 m-0 accent-surface-progressive"
               type="checkbox"
@@ -188,7 +188,7 @@ export function ButtonBasic() {
   return (
     <Preview kind="basic">
       <Button onClick={() => setBasicCount((n) => n + 1)}>Save changes</Button>
-      <span class="text-small-xs text-content-subtle" role="status">
+      <span class="text-small text-content-subtle" role="status">
         {basicCount() ? 'Changes saved' : 'Built with Kobalte'}
       </span>
     </Preview>

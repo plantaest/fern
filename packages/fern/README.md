@@ -27,7 +27,7 @@ Import icons from `@wikimedia/codex-icons` and render them with `Icon`. Icons ar
 | `/button`       | Button, `buttonVariants`, and Button types      |
 | `/icon`         | Icon and its props                              |
 | `/styles.css`   | Themes, shared setup, and component CSS         |
-| `/tokens.css`   | Color tokens for Light and Dark only            |
+| `/colors.css`   | Color tokens for Light and Dark only            |
 | `/colors.json`  | Color values keyed by theme and token name      |
 | `/tailwind.css` | Optional Tailwind 4 theme adapter               |
 
@@ -35,11 +35,11 @@ Import icons from `@wikimedia/codex-icons` and render them with `Icon`. Icons ar
 
 Keep components inside `.fern` and select `data-theme="light"` or `data-theme="dark"`. Both themes share the same `--fern-*` contract and preserve Codex 2.7.0 color values and semantic roles. Numbered color tokens use names such as `--fern-color-red-300`.
 
-`/styles.css` is built from standard CSS without the Tailwind compiler and works without Tailwind. It provides theme tokens, font setup, prose, a scoped box-sizing reset, and component styles. `/tokens.css` contains colors only. Fern does not include global Preflight.
+`/styles.css` is built from standard CSS without the Tailwind compiler and works without Tailwind. It provides theme tokens, font setup, prose, a scoped box-sizing reset, and component styles. `/colors.css` contains colors only. Fern does not include global Preflight.
 
 Applications load fonts. Fern declares Inter, Source Serif 4, and JetBrains Mono stacks; override `--fern-font-sans`, `--fern-font-serif`, and `--fern-font-mono` on `.fern` to use other fonts. Public tokens can also customize spacing, radius, typography, and transitions.
 
-Typography uses independent `--fern-font-size-*`, `--fern-font-weight-*`, and `--fern-line-height-*` scales. Prose and components combine them into text styles. Size tokens range from `xx-small` (12px) to `xxx-large` (36px); body uses the unitless `--fern-line-height-normal` (1.625), while fixed leading tokens use rem.
+Typography uses independent `--fern-font-size-*`, `--fern-font-weight-*`, and `--fern-line-height-*` scales. Prose and components combine them into text styles. Size tokens range from `x-small` (12px) to `xxx-large` (36px); body uses the unitless `--fern-line-height-normal` (1.625), while fixed leading tokens use rem.
 
 Font weights are `normal` (400), `medium` (500), `semibold` (600), and `bold` (700).
 
@@ -70,8 +70,7 @@ Font-size utilities use Fern's scale and set size only:
 
 | Utility     | Size token  | Size |
 | ----------- | ----------- | ---- |
-| `text-2xs`  | `xx-small`  | 12px |
-| `text-xs`   | `x-small`   | 13px |
+| `text-xs`   | `x-small`   | 12px |
 | `text-sm`   | `small`     | 14px |
 | `text-base` | `medium`    | 16px |
 | `text-lg`   | `large`     | 18px |
@@ -81,7 +80,7 @@ Font-size utilities use Fern's scale and set size only:
 
 `leading-sm`, `leading-md`, `leading-lg`, `leading-xl`, and `leading-2xl` map to 20, 24, 28, 36, and 44px. `leading-normal` maps to the unitless 1.625. These replace Tailwind's default text and named leading scales.
 
-Combine basic utilities for UI text, such as `text-sm leading-sm font-medium`, or code, such as `font-mono text-xs leading-sm`. The `text-body` (16px / 1.625), `text-small` (14px / 20px), `text-small-xs` (13px / 20px), `text-small-2xs` (12px / 20px), and `text-heading-1` through `text-heading-6` presets combine size and leading; family and weight remain separate.
+Combine basic utilities for UI text, such as `text-sm leading-sm font-medium`, or code, such as `font-mono text-sm leading-sm`. The `text-body` (16px / 1.625), `text-small` (14px / 20px), `text-extra-small` (12px / 20px), and `text-heading-1` through `text-heading-6` presets combine size and leading; family and weight remain separate.
 
 Component styles are in the `components` layer; utilities in the later `utilities` layer can override them. Fern classes and tokens remain namespaced, while utilities use standard names without a prefix.
 

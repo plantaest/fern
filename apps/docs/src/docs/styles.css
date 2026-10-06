@@ -59,7 +59,7 @@
       max-width: 100%;
 
       font:
-        var(--fern-font-weight-normal) var(--fern-font-size-x-small) / var(--fern-line-height-small)
+        var(--fern-font-weight-normal) var(--fern-font-size-small) / var(--fern-line-height-small)
         var(--fern-font-mono);
       tab-size: 2;
     }
@@ -89,7 +89,7 @@
       font-weight: var(--fern-font-weight-medium);
       text-align: inherit;
       color: var(--fern-color-subtle);
-      font-size: var(--fern-font-size-xx-small);
+      font-size: var(--fern-font-size-x-small);
       padding: --spacing(3);
       border: 0;
       background: var(--fern-background-color-neutral-subtle);
@@ -104,6 +104,12 @@
   }
 
   .fern-docs-api-table {
+    & code {
+      padding: 0;
+      border-radius: 0;
+      background: transparent;
+    }
+
     & th:first-child,
     & th:last-child {
       width: 18%;
@@ -112,6 +118,13 @@
     & td:first-child code,
     & td:last-child code {
       white-space: nowrap;
+    }
+  }
+
+  .fern-docs-token-disclosure {
+    & th,
+    & td {
+      padding-block: --spacing(2);
     }
   }
 }
