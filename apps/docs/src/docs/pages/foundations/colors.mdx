@@ -7,18 +7,38 @@ import { ColorsRoles, ColorsInteractionStates, ColorsAllTokens } from './colors-
 
 ## Roles
 
-The same role changes value when the theme changes.
+Roles follow the selected theme.
 
 <ColorsRoles theme={props.theme} />
 
 ## Interaction states
 
-Hover, active, disabled, and focus values also come from Codex.
+Default, hover, and active colors for progressive and destructive actions.
 
 <ColorsInteractionStates theme={props.theme} />
 
+## Usage
+
+Wrap content in `.fern` and select `data-theme="light"` or `data-theme="dark"`. Use semantic tokens in CSS:
+
+```css
+.panel {
+  color: var(--fern-color-base);
+  background: var(--fern-background-color-base);
+  border: 1px solid var(--fern-border-color-subtle);
+}
+```
+
+The optional Tailwind adapter groups colors into `content-*`, `surface-*`, and `line-*`:
+
+```tsx
+<div class="bg-surface-base text-content-base">Panel content</div>
+```
+
+Use `text-content-progressive` for text, `bg-surface-progressive` for a background, and `border-line-progressive` for a border. These roles can have different values in the same theme.
+
 ## All tokens
 
-Color values mirrored from Codex 2.7.0. Fern's token API is in alpha.
+All color tokens from Codex 2.7.0.
 
 <ColorsAllTokens theme={props.theme} />

@@ -36,8 +36,8 @@ export function IconsGallery() {
   return (
     <div
       class="
-        grid grid-cols-4 border-t border-l border-line rounded-base
-        overflow-hidden docs-mobile:grid-cols-3
+        grid grid-cols-4 border-t border-l border-line-subtle rounded-base
+        overflow-hidden screen-small:grid-cols-3
       "
     >
       <For each={galleryIcons}>
@@ -45,11 +45,11 @@ export function IconsGallery() {
           <div
             class="
               min-h-28 flex items-center justify-center flex-col
-              gap-4 border-r border-b border-line text-[0.75rem]
-              text-muted
+              gap-4 border-r border-b border-line-subtle text-small-2xs
+              text-content-subtle
             "
           >
-            <Icon icon={item.icon} class="text-content" />
+            <Icon icon={item.icon} class="text-content-base" />
             <span>{item.name}</span>
           </div>
         )}

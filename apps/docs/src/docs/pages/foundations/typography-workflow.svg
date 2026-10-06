@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="120" viewBox="0 0 480 120">
+  <title>Review, edit, and publish</title>
+  <rect width="480" height="120" fill="#f8f9fa" />
+  <g fill="#fff" stroke="#c8ccd1">
+    <rect x="16" y="32" width="128" height="56" rx="4" />
+    <rect x="176" y="32" width="128" height="56" rx="4" />
+    <rect x="336" y="32" width="128" height="56" rx="4" />
+  </g>
+  <g fill="none" stroke="#72777d" stroke-width="2">
+    <path d="M152 60h16m-5-5 5 5-5 5" />
+    <path d="M312 60h16m-5-5 5 5-5 5" />
+  </g>
+  <g fill="#202122" font-family="Arial, sans-serif" font-size="18" text-anchor="middle">
+    <text x="80" y="66">Review</text>
+    <text x="240" y="66">Edit</text>
+    <text x="400" y="66">Publish</text>
+  </g>
+</svg>

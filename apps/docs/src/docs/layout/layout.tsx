@@ -58,8 +58,8 @@ export function Layout(props: {
     <div class="fern fern-docs min-h-screen" data-theme={props.theme}>
       <a
         class="
-          fixed top-[-6.25rem] left-4 z-20 px-4 py-2 bg-canvas
-          border border-docs-control focus:top-2
+          fixed top-[-6.25rem] left-4 z-20 px-4 py-2 bg-surface-base
+          border border-line-base text-content-progressive no-underline hover:underline focus:top-2
         "
         href={`${current.pathname}#main`}
       >
@@ -75,8 +75,8 @@ export function Layout(props: {
         <nav
           id="mobile-navigation"
           class="
-            mobile-navigation hidden py-6 px-5 border-b border-line
-            docs-mobile:block
+            mobile-navigation hidden py-6 px-5 border-b border-line-subtle
+            screen-small:block
           "
           aria-label="Mobile navigation"
         >
@@ -86,14 +86,14 @@ export function Layout(props: {
       <div
         class="
           grid grid-cols-[216px_minmax(0,792px)_184px] justify-center
-          max-w-[1360px] mx-auto docs-narrow:grid-cols-[200px_minmax(0,792px)]
-          docs-mobile:block
+          max-w-[1360px] mx-auto screen-narrow:grid-cols-[200px_minmax(0,792px)]
+          screen-small:block
         "
       >
         <aside
           class="
             sidebar sticky top-18 h-[calc(100vh-4.5rem)] py-10 px-6
-            border-r border-line flex flex-col docs-mobile:hidden
+            border-r border-line-subtle flex flex-col screen-small:hidden
           "
         >
           <nav aria-label="Main navigation">
@@ -103,9 +103,9 @@ export function Layout(props: {
         <main
           class="
             flex flex-col min-w-0 min-h-[calc(100dvh-4.5rem)]
-            px-12 pt-10 outline-none docs-narrow:px-9
-            docs-mobile:min-h-[calc(100dvh-4rem)]
-            docs-mobile:px-5 docs-mobile:pt-8
+            px-12 pt-10 outline-none screen-narrow:px-9
+            screen-small:min-h-[calc(100dvh-4rem)]
+            screen-small:px-5 screen-small:pt-8
           "
           id="main"
           tabindex="-1"
@@ -116,7 +116,7 @@ export function Layout(props: {
           <div class="flex-1">{props.children}</div>
           <footer
             class="
-              border-t border-line text-muted text-[0.75rem] py-6 mt-16
+              border-t border-line-subtle text-content-subtle text-small-2xs py-6 mt-16
             "
           >
             Fern · Taxon Labs

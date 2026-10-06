@@ -19,7 +19,23 @@ function Fixture() {
           Edit article
         </Button>
       </div>
-      <p>Fern uses its own font and colors inside this container.</p>
+      <article class="fern-prose" style={{ 'margin-block-start': '1.5rem' }}>
+        <h2>Shared knowledge</h2>
+        <p>
+          Fern formats <strong>document content</strong> and <code>inline code</code> inside this
+          container.
+        </p>
+        <ul>
+          <li>Tri thức mở cho mọi người.</li>
+          <li>Host controls keep their own styling.</li>
+        </ul>
+        <pre>
+          <code>const enabled = true;</code>
+        </pre>
+        <p>
+          <a href="#host">Read more</a>
+        </p>
+      </article>
     </div>
   );
 }

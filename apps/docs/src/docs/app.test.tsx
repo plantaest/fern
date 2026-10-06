@@ -38,15 +38,13 @@ function mount(path = '/foundations/colors') {
 it('renders the Colors intro from frontmatter and keeps Markdown content separate', () => {
   const host = mount();
   const header = host.querySelector('main header')!;
-  const content = host.querySelector('.doc-content')!;
+  const content = host.querySelector('.fern-docs-content')!;
 
   expect(host.querySelectorAll('main h1')).toHaveLength(1);
   expect(header.querySelector('h1')?.textContent).toBe(pages[0].title);
   expect(header.querySelector('p')?.textContent).toBe(pages[0].group);
   expect(header.querySelector('p:last-child')?.textContent).toBe(pages[0].description);
-  expect(content.querySelector(':scope > p')?.textContent).toBe(
-    'The same role changes value when the theme changes.',
-  );
+  expect(content.querySelector(':scope > p')?.textContent).toBe('Roles follow the selected theme.');
 });
 
 it('keeps page metadata and navigation correct for a trailing slash', () => {

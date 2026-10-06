@@ -1,52 +1,167 @@
 ---
 title: Typography
-description: Serif headings, clear sans-serif content, and readable code.
+description: Shared font tokens for interfaces and documents.
 ---
 
-import { TypographyTypeScale } from './typography-examples';
+import {
+  TypographyFontFamilies,
+  TypographyFontWeights,
+  TypographyInterfaceText,
+  TypographyTextStyles,
+} from './typography-examples';
+import workflowImage from './typography-workflow.svg';
 
-## Type scale
+## Font families
 
-Sizes shown in pixels assume a 16px root font size.
+<TypographyFontFamilies />
 
-<TypographyTypeScale />
+Fern provides font stacks. Applications load font files; the stacks fall back to fonts available on the device.
 
-Tailwind utilities such as `text-heading-1` and `text-body` pair font size with line-height. Use `font-serif font-semibold tracking-heading` for headings and `font-mono` for code.
+## Scales
 
-## Reading sample
+Size, weight, and line-height are independent tokens. Use them in CSS or through the optional Tailwind adapter, which provides the utilities below.
+
+<div class="grid grid-cols-2 gap-6 screen-small:grid-cols-1">
+<div>
+
+<p class="font-medium mb-3">Size</p>
+
+| Utility     | Size |
+| ----------- | ---- |
+| `text-2xs`  | 12px |
+| `text-xs`   | 13px |
+| `text-sm`   | 14px |
+| `text-base` | 16px |
+| `text-lg`   | 18px |
+| `text-xl`   | 22px |
+| `text-2xl`  | 28px |
+| `text-3xl`  | 36px |
+
+</div>
+<div>
+
+<p class="font-medium mb-3">Line-height</p>
+
+| Utility          | Line-height      |
+| ---------------- | ---------------- |
+| `leading-sm`     | 20px             |
+| `leading-md`     | 24px             |
+| `leading-lg`     | 28px             |
+| `leading-xl`     | 36px             |
+| `leading-2xl`    | 44px             |
+| `leading-normal` | 1.625 (unitless) |
+
+</div>
+</div>
+
+<div>
+
+<p class="font-medium mb-3">Weight</p>
+
+<TypographyFontWeights />
+
+</div>
+
+Sizes and fixed line-heights use rem. Pixel values assume a 16px root font size. These utilities follow Fern's scale.
+
+Use the same tokens directly in CSS inside `.fern`:
+
+```css
+.label {
+  font-size: var(--fern-font-size-small);
+  line-height: var(--fern-line-height-small);
+  font-weight: var(--fern-font-weight-medium);
+}
+```
+
+## Text styles
+
+`text-body` combines 16px text with 1.625 leading. `text-small`, `text-small-xs`, and `text-small-2xs` combine 14px, 13px, and 12px text with 20px leading. `text-heading-1` through `text-heading-6` combine heading sizes and leading. Family and weight remain separate.
+
+<TypographyTextStyles />
+
+Combine basic utilities for interface text:
+
+<TypographyInterfaceText />
+
+{/* prettier-ignore */}
+```tsx
+<div class="space-y-3">
+  <p class="text-sm leading-sm font-medium">
+    Save changes
+  </p>
+  <p class="text-xs leading-sm text-content-subtle">
+    Last edited a few minutes ago.
+  </p>
+  <code class="block font-mono text-xs leading-sm">
+    const enabled = true;
+  </code>
+</div>
+```
+
+## Prose
+
+Use `fern-prose` inside `.fern` for document HTML or rendered Markdown. It styles headings, paragraphs, links, lists, quotes, code, tables, and figures. Layout controls the width.
+
+```html
+<article class="fern-prose">
+  <!-- Document content -->
+</article>
+```
+
+Set `--fern-prose-flow` on the container to adjust block spacing. It defaults to 16px. Add `fern-not-prose` to embedded UI to exclude its elements from prose styles.
 
 ### Small tools, shared knowledge
 
 Good interfaces help people understand what they can do and what happens next. Fern makes room for the content and keeps the controls familiar.
 
-Use headings to organize a page. Keep labels short, and use plain language when something needs an explanation.
+<h3 lang="vi" id="tri-thức-mở-cho-mọi-người">
+  {'Tri thức mở cho mọi người'}
+</h3>
 
-## Vietnamese
-
-Both text families include Vietnamese characters.
-
-<div lang="vi">
-
-### Tri thức mở cho mọi người
-
-Những công cụ nhỏ giúp người đóng góp tìm kiếm, biên tập và chia sẻ kiến thức. Mỗi thay đổi đều có thể làm Wikipedia tốt hơn.
-
-<p class="leading-8">
-  Ă Â Đ Ê Ô Ơ Ư · ă â đ ê ô ơ ư<br />Ắ Ằ Ẳ Ẵ Ặ · Ấ Ầ Ẩ Ẫ Ậ · Ứ Ừ Ử Ữ Ự
+<p lang="vi">
+  {'Tri thức mở bắt đầu từ những đóng góp nhỏ. Mỗi thay đổi đều có thể làm Wikipedia tốt hơn.'}
 </p>
 
-</div>
+#### Clear next steps
 
-## Code
+Use headings to organize a page. Keep labels short, and use plain language when something needs an explanation.
 
-JetBrains Mono keeps code distinct from the surrounding text.
+- **Make the next step clear.** Use familiar words for actions.
+- Let content use _natural HTML_, including lists and links.
+- Read the [Wikimedia typography guide](https://doc.wikimedia.org/codex/latest/style-guide/typography.html) for context.
 
-```tsx
-import { Button } from '@taxon-labs/fern/button';
+> Small tools can make shared knowledge easier to build.
 
-<Button variant="outline" action="progressive">
-  Save changes
-</Button>;
+| Context     | Typography                           |
+| ----------- | ------------------------------------ |
+| Documents   | 16px body with 26px line-height      |
+| Controls    | 14px text with compact spacing       |
+| Code blocks | 13px monospace with 20px line-height |
 
-// Vietnamese glyphs: Tri thức mở
-```
+##### Before publishing
+
+1. Review the change.
+2. Check the preview.
+3. Write an edit summary.
+
+###### Edit summary
+
+Keep the summary short. Store it in `summary` before publishing.
+
+<pre>
+  <code>{`const summary = 'Fix a typo';
+const published = true;`}</code>
+</pre>
+
+---
+
+<figure>
+  <img
+    src={workflowImage}
+    alt="Three steps connected by arrows: review, edit, and publish."
+    width="480"
+    height="120"
+  />
+  <figcaption>A simple workflow for publishing a change.</figcaption>
+</figure>

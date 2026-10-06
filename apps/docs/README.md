@@ -8,7 +8,7 @@ Private documentation and playground for the current alpha, intended to become F
 
 Pages live in `src/docs/pages/foundations/` and `src/docs/pages/components/`. Each MDX page has a neighboring `*-examples.tsx` file for samples, playgrounds, and demo imports, with standalone sources in `*-demos/`. Keep tests close to the pages they exercise.
 
-Use YAML frontmatter for `title` and `description`, Markdown headings and paragraphs for structure, and static API tables in MDX. The app renders the intro and wraps the body in `.doc-content`. Register the page in `src/docs/navigation.ts`, importing its frontmatter and declaring the route, group, and section titles. Heading IDs are generated; keep table-of-contents titles consistent with the document.
+Use YAML frontmatter for `title` and `description`, Markdown headings and paragraphs for structure, and static API tables in MDX. The app renders the intro and wraps the body in `.fern-docs-content`. Register the page in `src/docs/navigation.ts`, importing its frontmatter and declaring the route, group, and section titles. Heading IDs are generated; keep table-of-contents titles consistent with the document.
 
 For an interactive example:
 
@@ -24,7 +24,7 @@ Write static code in fenced Markdown blocks. They render through `CodeBlock` wit
 
 Docs consumes Fern through public package exports, bundles its own fonts, and owns global page layout. Use Tailwind utilities for layout and visual samples, and helpers in `src/docs/ui.tsx` for previews, frames, fields, and code. For native playground controls, match the control's `id` to `Field`'s `for` prop and use `fieldControlClasses`.
 
-`src/docs/styles.css` keeps MDX defaults in the `base` layer and document structure rules in `components`, allowing utility overrides. `.doc-content` spaces direct Markdown blocks without changing elements inside examples. Docs color aliases reference Fern tokens; utilities use standard names without a prefix.
+The page body uses `.fern-prose` from the package for document typography and spacing. Preview helpers use `.fern-not-prose` to keep embedded UI independent. `src/docs/styles.css` owns shell defaults, code controls, API tables, and heading scroll offsets, allowing utility overrides. The package's Tailwind adapter maps Fern tokens to utilities without a prefix.
 
 ## Development
 
@@ -38,7 +38,7 @@ With `pnpm dev` running, open `http://127.0.0.1:4321/checks/mediawiki.html`. The
 
 Check the fixture in both Light and Dark:
 
-- Fern text and buttons use the package font stacks and theme colors instead of the host's Georgia font and custom colors. The fixture does not load font files; consuming applications provide them.
+- Fern text, buttons, and prose use the package font stacks and theme colors instead of the host's custom styles. Check the serif heading, paragraph, inline code, list, and link. The fixture does not load font files; consuming applications provide them.
 - Use Tab and Shift+Tab to move through the host controls and Fern buttons. Each focused Fern button has a visible focus indicator.
 - Activate "Switch theme" with Enter and Space. The Fern theme changes and focus stays on the button.
 - Host controls retain their font, colors, background, and borders when the Fern theme changes.

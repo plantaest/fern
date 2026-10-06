@@ -1,9 +1,8 @@
 import solid from '@solidjs/vite-plugin';
-import tailwind from '@tailwindcss/vite';
 import { defineConfig } from 'vitest/config';
 
 export default defineConfig({
-  plugins: [solid(), tailwind()],
+  plugins: [solid()],
   build: {
     emptyOutDir: false,
     lib: {

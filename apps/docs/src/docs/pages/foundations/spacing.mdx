@@ -1,6 +1,6 @@
 ---
 title: Spacing
-description: A small scale based on Tailwind's 4px unit.
+description: Shared spacing based on a 4px unit.
 ---
 
 import { Example } from '../../ui';
@@ -8,12 +8,14 @@ import { SpacingScale, spacingInUse } from './spacing-examples';
 
 ## Scale
 
+Common steps in the spacing scale. Values use rem; pixels assume a 16px root font size.
+
 <SpacingScale />
+
+Use Tailwind utilities such as `gap-2` and `p-6`, or multiples of `--fern-spacing` in CSS.
 
 ## In use
 
-8px between related controls, 24px inside panels, and 48px between sections.
-
-### Related actions
+For example, use 8px between related controls and 24px inside a panel.
 
 <Example demo={spacingInUse} />

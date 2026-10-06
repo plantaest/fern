@@ -25,7 +25,7 @@ function mount(view: () => JSX.Element) {
 it('filters color tokens and reports the number of visible results', () => {
   const host = mount(() => <ColorsPage theme="dark" />);
   const search = host.querySelector<HTMLInputElement>('#token-filter')!;
-  const status = host.querySelector('.token-disclosure [role="status"]')!;
+  const status = host.querySelector('.fern-docs-token-disclosure [role="status"]')!;
 
   search.value = 'progressive';
   search.dispatchEvent(new Event('input', { bubbles: true }));
@@ -55,10 +55,13 @@ it('filters color tokens and reports the number of visible results', () => {
 
 it('marks the Vietnamese reading sample with its language', () => {
   const host = mount(() => <TypographyPage />);
-  const sample = host.querySelector('[lang="vi"]')!;
+  const heading = host.querySelector('h3[lang="vi"]')!;
+  const paragraph = heading.nextElementSibling;
 
-  expect(sample.querySelector('h3')).not.toBeNull();
-  expect(sample.querySelector('p')?.textContent?.trim()).toBeTruthy();
+  expect(heading.id).toBe('tri-thức-mở-cho-mọi-người');
+  expect(paragraph?.tagName).toBe('P');
+  expect(paragraph?.getAttribute('lang')).toBe('vi');
+  expect(paragraph?.textContent?.trim()).toBeTruthy();
 });
 
 it('gives the icon-only example an accessible name and hides its decorative icon', () => {

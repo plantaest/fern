@@ -1,86 +1,163 @@
-export function TypographyTypeScale() {
+import { For } from 'solid-js';
+
+const families = [
+  { name: 'Sans', font: 'Inter', class: 'font-sans' },
+  { name: 'Serif', font: 'Source Serif 4', class: 'font-serif' },
+  { name: 'Mono', font: 'JetBrains Mono', class: 'font-mono' },
+];
+
+export function TypographyFontFamilies() {
+  return (
+    <div class="fern-not-prose grid grid-cols-3 gap-4 screen-small:grid-cols-1">
+      <For each={families}>
+        {(family) => (
+          <div class="border border-line-subtle rounded-base p-4">
+            <p class="text-sm leading-sm font-medium mb-1">{family.name}</p>
+            <p class="text-small-xs text-content-subtle mb-4">{family.font}</p>
+            <p class={`text-lg leading-md mb-4 ${family.class}`} lang="vi">
+              Tri thức mở cho mọi người
+            </p>
+            <code class="font-mono text-small-2xs text-content-subtle">{family.class}</code>
+          </div>
+        )}
+      </For>
+    </div>
+  );
+}
+
+const weights = [
+  { name: 'Normal', value: 400, class: 'font-normal' },
+  { name: 'Medium', value: 500, class: 'font-medium' },
+  { name: 'Semibold', value: 600, class: 'font-semibold' },
+  { name: 'Bold', value: 700, class: 'font-bold' },
+];
+
+export function TypographyFontWeights() {
   return (
     <div
       class="
-        border-t border-line [&>div]:py-6 [&>div]:border-b
-        [&>div]:border-line [&_p]:mb-3
+        fern-not-prose grid grid-cols-4 gap-4 border-y border-line-subtle py-4
+        screen-small:grid-cols-2
       "
     >
-      <div>
-        <span
-          class="
-            block font-mono text-[0.6875rem] leading-5 text-muted mb-3
-          "
-        >
-          Heading 1 · 36 / 44
-        </span>
-        <p class="font-serif font-semibold tracking-heading text-heading-1">
-          A place for knowledge
-        </p>
-        <span class="text-small text-muted">Source Serif 4 · Semibold</span>
-      </div>
-      <div>
-        <span
-          class="
-            block font-mono text-[0.6875rem] leading-5 text-muted mb-3
-          "
-        >
-          Heading 2 · 28 / 36
-        </span>
-        <p class="font-serif font-semibold tracking-heading text-heading-2">
-          Built for useful work
-        </p>
-        <span class="text-small text-muted">Source Serif 4 · Semibold</span>
-      </div>
-      <div>
-        <span
-          class="
-            block font-mono text-[0.6875rem] leading-5 text-muted mb-3
-          "
-        >
-          Heading 3 · 22 / 28
-        </span>
-        <p class="font-serif font-semibold tracking-heading text-heading-3">
-          Every detail has a purpose
-        </p>
-        <span class="text-small text-muted">Source Serif 4 · Semibold</span>
-      </div>
-      <div>
-        <span
-          class="
-            block font-mono text-[0.6875rem] leading-5 text-muted mb-3
-          "
-        >
-          Body · 16 / 26
-        </span>
-        <p class="text-body">Find information, make an edit, and keep moving.</p>
-        <span class="text-small text-muted">Inter · Regular</span>
-      </div>
-      <div>
-        <span
-          class="
-            block font-mono text-[0.6875rem] leading-5 text-muted mb-3
-          "
-        >
-          Control · 14 / 20
-        </span>
-        <p class="text-control font-medium">Save changes</p>
-        <span class="text-small text-muted">Inter · Medium</span>
-      </div>
-      <div>
-        <span class="block font-mono text-[0.6875rem] leading-5 text-muted mb-3">
-          Small · 13 / 20
-        </span>
-        <p class="text-small">Last edited a few minutes ago.</p>
-        <span class="text-small text-muted">Inter · Regular</span>
-      </div>
-      <div>
-        <span class="block font-mono text-[0.6875rem] leading-5 text-muted mb-3">
-          Code · 12 / 22
-        </span>
-        <p class="font-mono text-code">const theme = 'light';</p>
-        <span class="text-small text-muted">JetBrains Mono · Regular</span>
-      </div>
+      <For each={weights}>
+        {(weight) => (
+          <div>
+            <p class={`text-base leading-md mb-2 ${weight.class}`}>{weight.name}</p>
+            <code class="font-mono text-small-2xs text-content-subtle">
+              {weight.class} · {weight.value}
+            </code>
+          </div>
+        )}
+      </For>
+    </div>
+  );
+}
+
+const textStyles = [
+  {
+    name: 'H1',
+    metrics: '36 / 44',
+    family: 'Serif · 600',
+    class: 'font-serif font-semibold text-heading-1',
+    sample: 'A place for knowledge',
+  },
+  {
+    name: 'H2',
+    metrics: '28 / 36',
+    family: 'Serif · 600',
+    class: 'font-serif font-semibold text-heading-2',
+    sample: 'Built for useful work',
+  },
+  {
+    name: 'H3',
+    metrics: '22 / 28',
+    family: 'Sans · 600',
+    class: 'font-sans font-semibold text-heading-3',
+    sample: 'Every detail has a purpose',
+  },
+  {
+    name: 'H4',
+    metrics: '18 / 24',
+    family: 'Sans · 600',
+    class: 'font-sans font-semibold text-heading-4',
+    sample: 'Make the next step clear',
+  },
+  {
+    name: 'H5',
+    metrics: '16 / 24',
+    family: 'Sans · 600',
+    class: 'font-sans font-semibold text-heading-5',
+    sample: 'Keep useful details close',
+  },
+  {
+    name: 'H6',
+    metrics: '14 / 20',
+    family: 'Sans · 600',
+    class: 'font-sans font-semibold text-heading-6',
+    sample: 'Every contribution matters',
+  },
+  {
+    name: 'Body',
+    metrics: '16 / 26',
+    family: 'Sans · 400',
+    class: 'font-sans font-normal text-body',
+    sample: 'Find information, make an edit, and keep moving.',
+  },
+  {
+    name: 'Small',
+    metrics: '14 / 20',
+    family: 'Sans · 400',
+    class: 'font-sans font-normal text-small',
+    sample: 'Useful details, kept close to the task.',
+  },
+  {
+    name: 'Small XS',
+    metrics: '13 / 20',
+    family: 'Sans · 400',
+    class: 'font-sans font-normal text-small-xs',
+    sample: 'Last edited a few minutes ago.',
+  },
+  {
+    name: 'Small 2XS',
+    metrics: '12 / 20',
+    family: 'Sans · 400',
+    class: 'font-sans font-normal text-small-2xs',
+    sample: 'Additional information at a glance.',
+  },
+];
+
+export function TypographyTextStyles() {
+  return (
+    <div class="fern-not-prose border-t border-line-subtle">
+      <For each={textStyles}>
+        {(style) => (
+          <div
+            class="
+              grid grid-cols-[minmax(0,1fr)_max-content] items-center gap-4 py-4
+              border-b border-line-subtle screen-small:grid-cols-1 screen-small:gap-2
+            "
+          >
+            <p class={style.class}>{style.sample}</p>
+            <div class="text-small-2xs text-content-subtle text-right screen-small:text-left">
+              <code class="font-mono text-2xs">
+                {style.name} · {style.metrics}
+              </code>
+              <p>{style.family}</p>
+            </div>
+          </div>
+        )}
+      </For>
+    </div>
+  );
+}
+
+export function TypographyInterfaceText() {
+  return (
+    <div class="fern-not-prose border border-line-subtle rounded-base p-5 space-y-3">
+      <p class="text-sm leading-sm font-medium">Save changes</p>
+      <p class="text-xs leading-sm text-content-subtle">Last edited a few minutes ago.</p>
+      <code class="block font-mono text-xs leading-sm">const enabled = true;</code>
     </div>
   );
 }

@@ -1,6 +1,6 @@
 @layer theme, base, components, utilities;
 @import "./foundations/tokens.css";
 @import "./foundations/base.css";
+@import "./foundations/prose.css" layer(components);
 @import "./components/icon/icon.css" layer(components);
 @import "./components/button/button.css" layer(components);
-@reference "./foundations/tailwind.css";

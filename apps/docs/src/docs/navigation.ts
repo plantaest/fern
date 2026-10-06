@@ -28,7 +28,7 @@ export const pages = [
     description: colorsMetadata.description,
     component: ColorsPage,
     group: 'Foundations',
-    sections: ['Roles', 'Interaction states', 'All tokens'],
+    sections: ['Roles', 'Interaction states', 'Usage', 'All tokens'],
   },
   {
     path: '/foundations/typography',
@@ -36,7 +36,7 @@ export const pages = [
     description: typographyMetadata.description,
     component: TypographyPage,
     group: 'Foundations',
-    sections: ['Type scale', 'Reading sample', 'Vietnamese', 'Code'],
+    sections: ['Font families', 'Scales', 'Text styles', 'Prose'],
   },
   {
     path: '/foundations/spacing',

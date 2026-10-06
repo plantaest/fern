@@ -104,7 +104,7 @@ export function ButtonPlayground() {
             </Show>
             <Show when={icon() !== 'only'}>{name()}</Show>
           </Button>
-          <span class="text-muted text-[0.75rem]" role="status">
+          <span class="text-content-subtle text-small-2xs" role="status">
             {clicks() === 0
               ? 'Try the button'
               : `Clicked ${clicks()} ${clicks() === 1 ? 'time' : 'times'}`}
@@ -112,7 +112,7 @@ export function ButtonPlayground() {
         </Preview>
         <div
           class="
-            flex flex-col gap-4 p-5 bg-surface border-t border-line
+            flex flex-col gap-4 p-5 bg-surface-neutral-subtle border-t border-line-subtle
             @min-[35rem]:border-t-0 @min-[35rem]:border-l
           "
         >
@@ -166,9 +166,9 @@ export function ButtonPlayground() {
               <option value="only">Icon only</option>
             </select>
           </Field>
-          <label class="flex items-center gap-2 text-[0.8125rem] font-normal">
+          <label class="flex items-center gap-2 text-small-xs font-normal">
             <input
-              class="size-4 m-0 accent-action"
+              class="size-4 m-0 accent-surface-progressive"
               type="checkbox"
               checked={disabled()}
               onChange={(e) => setDisabled(e.currentTarget.checked)}
@@ -188,7 +188,7 @@ export function ButtonBasic() {
   return (
     <Preview kind="basic">
       <Button onClick={() => setBasicCount((n) => n + 1)}>Save changes</Button>
-      <span class="text-[0.8125rem] leading-5 text-muted" role="status">
+      <span class="text-small-xs text-content-subtle" role="status">
         {basicCount() ? 'Changes saved' : 'Built with Kobalte'}
       </span>
     </Preview>

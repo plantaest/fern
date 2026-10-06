@@ -36,41 +36,39 @@ export function ColorsRoles(props: { theme: Theme }) {
   return (
     <div
       class="
-        grid grid-cols-2 gap-8 docs-mobile:gap-6 docs-tiny:grid-cols-1
+        fern-not-prose grid grid-cols-2 gap-8 screen-small:gap-6 screen-tiny:grid-cols-1
       "
     >
       <For each={roleGroups}>
         {(group) => (
           <div>
-            <h3 class="font-sans font-medium text-[0.875rem] leading-5 mb-4">{group.title}</h3>
+            <h3 class="font-sans font-medium text-small mb-4">{group.title}</h3>
             <For each={group.tokens}>
               {(token) => (
                 <div
                   class="
                     flex gap-3 items-center mt-4 min-w-0
-                    docs-mobile:gap-2
+                    screen-small:gap-2
                   "
                 >
                   <span
                     class="
-                      inline-block size-9 border border-line rounded-base
-                      shrink-0 docs-mobile:size-7
+                      inline-block size-9 border border-line-subtle rounded-base
+                      shrink-0 screen-small:size-7
                     "
                     style={{ background: value(token) }}
                   />
                   <div>
                     <code
                       class="
-                        block text-[0.6875rem] wrap-anywhere
-                        docs-mobile:text-[0.625rem]
+                        block font-mono text-small-2xs wrap-anywhere
                       "
                     >
                       {token}
                     </code>
                     <span
                       class="
-                        token-value block text-muted font-mono text-[0.6875rem]
-                        leading-[1.125rem] mt-1
+                        token-value block text-content-subtle font-mono text-small-2xs mt-1
                       "
                     >
                       {value(token)}
@@ -92,13 +90,13 @@ export function ColorsInteractionStates(props: { theme: Theme }) {
   return (
     <div
       class="
-        grid grid-cols-2 gap-8 docs-mobile:grid-cols-1 docs-mobile:gap-6
+        fern-not-prose grid grid-cols-2 gap-8 screen-small:grid-cols-1 screen-small:gap-6
       "
     >
       <For each={['progressive', 'destructive']}>
         {(name) => (
           <div>
-            <h3 class="font-sans font-medium text-[0.875rem] leading-5 mb-4">
+            <h3 class="font-sans font-medium text-small mb-4">
               {name === 'progressive' ? 'Progressive' : 'Destructive'}
             </h3>
             <div class="flex gap-3">
@@ -109,10 +107,10 @@ export function ColorsInteractionStates(props: { theme: Theme }) {
                       class="block w-full h-11 rounded-base mb-2"
                       style={{ background: value(`background-color-${name}${state}`) }}
                     />
-                    <span class="block text-[0.75rem] capitalize">
+                    <span class="block text-small-2xs capitalize">
                       {state.slice(2) || 'Default'}
                     </span>
-                    <code class="text-muted text-[0.625rem]">
+                    <code class="font-mono text-content-subtle text-small-2xs">
                       {value(`background-color-${name}${state}`)}
                     </code>
                   </div>
@@ -136,8 +134,10 @@ export function ColorsAllTokens(props: { theme: Theme }) {
   );
 
   return (
-    <details class="token-disclosure border border-line rounded-base p-4">
-      <summary>Browse all {Object.keys(colors.light).length} color tokens</summary>
+    <details class="fern-not-prose fern-docs-token-disclosure border border-line-subtle rounded-base p-4">
+      <summary class="text-small-xs">
+        Browse all {Object.keys(colors.light).length} color tokens
+      </summary>
       <Field label="Filter tokens" for="token-filter" class="mt-5 mb-3">
         <input
           id="token-filter"
@@ -148,10 +148,10 @@ export function ColorsAllTokens(props: { theme: Theme }) {
           placeholder="e.g. progressive"
         />
       </Field>
-      <p class="text-[0.8125rem] leading-5 text-muted" role="status">
+      <p class="text-small-xs text-content-subtle" role="status">
         {entries().length} {entries().length === 1 ? 'token' : 'tokens'}
       </p>
-      <div class="max-w-full overflow-x-auto border-y border-line mt-3">
+      <div class="max-w-full overflow-x-auto border-y border-line-subtle mt-3">
         <table>
           <thead>
             <tr>
@@ -173,7 +173,7 @@ export function ColorsAllTokens(props: { theme: Theme }) {
                   <td>
                     <span
                       class="
-                        inline-block size-5 border border-line
+                        inline-block size-5 border border-line-subtle
                         rounded-base shrink-0
                       "
                       style={{ background: value(name) }}

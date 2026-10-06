@@ -13,22 +13,21 @@ export function Header(props: {
     <header
       class="
         sticky top-0 z-10 h-18 flex items-center @container
-        justify-between px-8 border-b border-line bg-canvas
-        docs-mobile:h-16 docs-mobile:px-5
+        justify-between px-8 border-b border-line-subtle bg-surface-base
+        screen-small:h-16 screen-small:px-5
       "
     >
       <a
         class="
-          text-[1.125rem] font-[650] tracking-[-0.03em] text-content
-          hover:no-underline docs-mobile:text-[1.0625rem]
+          text-lg leading-md font-semibold text-content-base no-underline
         "
         href="/foundations/colors"
       >
         Fern{' '}
         <span
           class="
-            pl-3 ml-3 border-l border-line text-[0.8125rem] font-normal
-            tracking-normal text-muted docs-mobile:hidden
+            pl-3 ml-3 border-l border-line-subtle text-small-xs font-normal
+            text-content-subtle screen-small:hidden
           "
         >
           Docs
@@ -47,10 +46,10 @@ export function Header(props: {
               <button
                 class="
                   flex items-center justify-center gap-1.5 border-0
-                  rounded-base py-1.5 px-2.5 text-muted bg-transparent
-                  text-[0.75rem] font-medium
-                  aria-pressed:text-content aria-pressed:bg-docs-neutral
-                  hover:text-content docs-mobile:px-2
+                  rounded-base py-1.5 px-2.5 text-content-subtle bg-transparent
+                  text-small-2xs font-medium
+                  aria-pressed:text-content-base aria-pressed:bg-surface-neutral
+                  hover:text-content-base screen-small:px-2
                 "
                 type="button"
                 aria-label={value === 'light' ? 'Light' : 'Dark'}
@@ -66,8 +65,8 @@ export function Header(props: {
         <button
           class="
             menu-toggle hidden size-9 items-center justify-center
-            text-content border border-line rounded-base bg-canvas
-            docs-mobile:inline-flex
+            text-content-base border border-line-subtle rounded-base bg-surface-base
+            screen-small:inline-flex
           "
           type="button"
           aria-label={props.menuOpen ? 'Close navigation' : 'Open navigation'}

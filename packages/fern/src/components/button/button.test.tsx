@@ -30,6 +30,10 @@ function mount(view: () => import('@solidjs/web').JSX.Element) {
   return host;
 }
 
+function classes(value: string) {
+  return new Set(value.trim().split(/\s+/));
+}
+
 type LinkProps = Omit<JSX.AnchorHTMLAttributes<HTMLAnchorElement>, 'href'> & { to: string };
 
 function Link(props: LinkProps) {
@@ -38,13 +42,26 @@ function Link(props: LinkProps) {
 
 describe('Button contract on Solid 2', () => {
   it('preserves default classes when style props are omitted or undefined', () => {
-    const expected = 'fern-button fern-button-variant--solid fern-button-action--neutral';
+    const expected = new Set([
+      'fern-button',
+      'fern-button-variant--solid',
+      'fern-button-action--neutral',
+    ]);
 
-    expect(buttonVariants()).toBe(expected);
+    expect(classes(buttonVariants())).toEqual(expected);
     expect(
-      buttonVariants({ variant: undefined, action: undefined, size: undefined, class: undefined }),
-    ).toBe(expected);
-    expect(buttonVariants({ variant: 'solid', action: 'neutral', size: 'default' })).toBe(expected);
+      classes(
+        buttonVariants({
+          variant: undefined,
+          action: undefined,
+          size: undefined,
+          class: undefined,
+        }),
+      ),
+    ).toEqual(expected);
+    expect(
+      classes(buttonVariants({ variant: 'solid', action: 'neutral', size: 'default' })),
+    ).toEqual(expected);
   });
 
   it.each([
@@ -55,9 +72,17 @@ describe('Button contract on Solid 2', () => {
     'ghost',
   ] as const)('combines %s, icon size, and custom classes', (variant) => {
     expect(
-      buttonVariants({ variant, action: 'destructive', size: 'icon', class: 'custom-class' }),
-    ).toBe(
-      `fern-button fern-button-variant--${variant} fern-button-action--destructive fern-button-size--icon custom-class`,
+      classes(
+        buttonVariants({ variant, action: 'destructive', size: 'icon', class: 'custom-class' }),
+      ),
+    ).toEqual(
+      new Set([
+        'fern-button',
+        `fern-button-variant--${variant}`,
+        'fern-button-action--destructive',
+        'fern-button-size--icon',
+        'custom-class',
+      ]),
     );
   });
 
@@ -132,8 +157,14 @@ describe('Button contract on Solid 2', () => {
     state.setLabel('After');
     flush();
 
-    expect(button.className).toBe(
-      'fern-button fern-button-variant--surface fern-button-action--destructive fern-button-size--icon-lg custom-class',
+    expect(new Set(button.classList)).toEqual(
+      new Set([
+        'fern-button',
+        'fern-button-variant--surface',
+        'fern-button-action--destructive',
+        'fern-button-size--icon-lg',
+        'custom-class',
+      ]),
     );
     expect(button.textContent).toBe('After');
     expect(button.disabled).toBe(true);
@@ -147,8 +178,8 @@ describe('Button contract on Solid 2', () => {
     state.setSize('sm');
     flush();
 
-    expect(button.className).toContain('fern-button-size--sm');
-    expect(button.className).not.toContain('fern-button-size--icon-lg');
+    expect(button.classList.contains('fern-button-size--sm')).toBe(true);
+    expect(button.classList.contains('fern-button-size--icon-lg')).toBe(false);
 
     state.setSize(undefined);
     state.setAction('progressive');
@@ -156,8 +187,8 @@ describe('Button contract on Solid 2', () => {
     state.setDisabled(false);
     flush();
 
-    expect(button.className).toBe(
-      'fern-button fern-button-variant--surface fern-button-action--progressive',
+    expect(new Set(button.classList)).toEqual(
+      new Set(['fern-button', 'fern-button-variant--surface', 'fern-button-action--progressive']),
     );
 
     button.click();
@@ -219,7 +250,7 @@ describe('Button contract on Solid 2', () => {
     expect(anchor.getAttribute('role')).toBeNull();
     expect(anchor.hasAttribute('type')).toBe(false);
     expect(anchor.hasAttribute('as')).toBe(false);
-    expect(anchor.className).toContain('fern-button-variant--outline');
+    expect(anchor.classList.contains('fern-button-variant--outline')).toBe(true);
     expect(ref).toBe(anchor);
 
     anchor.click();
@@ -274,8 +305,9 @@ describe('Button contract on Solid 2', () => {
     anchor.click();
 
     expect(anchor.getAttribute('href')).toBe('/after');
-    expect(anchor.className).toContain('fern-button-variant--soft');
-    expect(anchor.className).toContain('custom-link');
+    expect(anchor.classList.contains('fern-button-variant--soft')).toBe(true);
+    expect(anchor.classList.contains('fern-button-variant--outline')).toBe(false);
+    expect(anchor.classList.contains('custom-link')).toBe(true);
     expect(clicks).toBe(1);
   });
 

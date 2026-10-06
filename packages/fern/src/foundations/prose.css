@@ -1,0 +1,191 @@
+.fern-prose {
+  --fern-prose-flow: calc(var(--fern-spacing) * 4);
+
+  display: flow-root;
+  font:
+    var(--fern-font-weight-normal) var(--fern-font-size-medium) / var(--fern-line-height-normal)
+    var(--fern-font-sans);
+  color: var(--fern-color-base);
+  overflow-wrap: break-word;
+
+  &
+    :where(h1, h2, h3, h4, h5, h6, p, ul, ol, blockquote, pre, table, figure, hr):not(
+      :where(.fern-not-prose, .fern-not-prose *)
+    ) {
+    margin: 0;
+  }
+
+  & > :where(* + *) {
+    margin-block-start: var(--fern-prose-flow);
+  }
+
+  /* Embedded UI keeps its own element styles and spacing. */
+  & :where(:not(.fern-not-prose, .fern-not-prose *)) {
+    &:where(blockquote, li) > :where(* + *):not(:where(.fern-not-prose, .fern-not-prose *)) {
+      margin-block-start: var(--fern-prose-flow);
+    }
+
+    &:where(blockquote, li) > :first-child {
+      margin-block-start: 0;
+    }
+
+    &:where(h1, h2, h3, h4, h5, h6) {
+      font-family: var(--fern-font-sans);
+      font-weight: var(--fern-font-weight-semibold);
+      letter-spacing: var(--fern-letter-spacing-normal);
+      margin-block-start: calc(var(--fern-prose-flow) * 1.5);
+    }
+
+    &:where(h1, h2) {
+      font-family: var(--fern-font-serif);
+      margin-block-start: calc(var(--fern-prose-flow) * 2.5);
+    }
+
+    &:where(h1) {
+      font-size: var(--fern-font-size-xxx-large);
+      line-height: var(--fern-line-height-xx-large);
+    }
+
+    &:where(h2) {
+      font-size: var(--fern-font-size-xx-large);
+      line-height: var(--fern-line-height-x-large);
+    }
+
+    &:where(h3) {
+      font-size: var(--fern-font-size-x-large);
+      line-height: var(--fern-line-height-large);
+      margin-block-start: calc(var(--fern-prose-flow) * 2);
+    }
+
+    &:where(h4) {
+      font-size: var(--fern-font-size-large);
+      line-height: var(--fern-line-height-medium);
+    }
+
+    &:where(h5) {
+      font-size: var(--fern-font-size-medium);
+      line-height: var(--fern-line-height-medium);
+    }
+
+    &:where(h6) {
+      font-size: var(--fern-font-size-small);
+      line-height: var(--fern-line-height-small);
+    }
+
+    &:where(h1, h2, h3, h4, h5, h6) + :where(*) {
+      margin-block-start: calc(var(--fern-prose-flow) * 0.75);
+    }
+
+    &:where(strong) {
+      font-weight: var(--fern-font-weight-semibold);
+    }
+
+    &:where(a) {
+      color: var(--fern-color-progressive);
+      text-decoration: none;
+      text-underline-offset: 0.15em;
+
+      &:hover,
+      &:focus-visible {
+        text-decoration: underline;
+      }
+
+      &:hover {
+        color: var(--fern-color-progressive--hover);
+      }
+
+      &:active {
+        color: var(--fern-color-progressive--active);
+      }
+
+      &:focus-visible {
+        outline: 2px solid var(--fern-border-color-progressive--focus);
+        outline-offset: 3px;
+      }
+    }
+
+    &:where(ul, ol) {
+      padding-inline-start: calc(var(--fern-spacing) * 6);
+    }
+
+    &:where(li + li) {
+      margin-block-start: calc(var(--fern-prose-flow) * 0.25);
+    }
+
+    &:where(blockquote) {
+      border-inline-start: 2px solid var(--fern-border-color-subtle);
+      padding-inline-start: calc(var(--fern-spacing) * 4);
+      color: var(--fern-color-subtle);
+    }
+
+    &:where(code) {
+      font-family: var(--fern-font-mono);
+      font-size: 0.875em;
+      line-height: inherit;
+      padding: 0.1em 0.3em;
+      border-radius: var(--fern-radius-base);
+      background: var(--fern-background-color-neutral-subtle);
+    }
+
+    &:where(pre) {
+      overflow-x: auto;
+      font:
+        var(--fern-font-weight-normal) var(--fern-font-size-x-small) / var(--fern-line-height-small)
+        var(--fern-font-mono);
+      overflow-wrap: normal;
+      tab-size: 2;
+      padding: calc(var(--fern-spacing) * 4);
+      border: 1px solid var(--fern-border-color-subtle);
+      border-radius: var(--fern-radius-base);
+      background: var(--fern-background-color-neutral-subtle);
+    }
+
+    &:where(pre code) {
+      font-size: inherit;
+      padding: 0;
+      border-radius: 0;
+      background: transparent;
+    }
+
+    &:where(hr) {
+      border: 0;
+      border-block-start: 1px solid var(--fern-border-color-subtle);
+    }
+
+    &:where(table) {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: start;
+      font-size: var(--fern-font-size-small);
+      line-height: var(--fern-line-height-small);
+    }
+
+    &:where(th, td) {
+      padding: calc(var(--fern-spacing) * 3);
+      border-block-end: 1px solid var(--fern-border-color-subtle);
+      vertical-align: top;
+    }
+
+    &:where(th) {
+      font-weight: var(--fern-font-weight-semibold);
+      text-align: inherit;
+    }
+
+    &:where(img) {
+      display: block;
+      max-width: 100%;
+      height: auto;
+    }
+
+    &:where(figcaption) {
+      margin-block-start: calc(var(--fern-prose-flow) * 0.5);
+      color: var(--fern-color-subtle);
+      font-size: var(--fern-font-size-x-small);
+      line-height: var(--fern-line-height-small);
+    }
+  }
+
+  & > :first-child {
+    margin-block-start: 0;
+  }
+}

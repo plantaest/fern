@@ -6,16 +6,16 @@ export function DocsNavigation(props: { currentPath?: string; onSelect?: () => v
   return (
     <For each={pageGroups}>
       {(group) => (
-        <div class="[&+&]:mt-8 docs-mobile:[&+&]:mt-5">
-          <p class="text-[0.75rem] font-semibold text-muted mx-3 mb-3">{group}</p>
+        <div class="[&+&]:mt-8 screen-small:[&+&]:mt-5">
+          <p class="text-small-2xs font-semibold text-content-subtle mx-3 mb-3">{group}</p>
           <For each={pages.filter((item) => item.group === group)}>
             {(item) => (
               <a
                 class="
-                  block py-[0.4375rem] px-3 my-0.5 rounded-base
-                  text-[0.875rem] text-content hover:bg-docs-hover
-                  hover:no-underline aria-[current=page]:bg-docs-selected
-                  aria-[current=page]:text-action aria-[current=page]:font-[550]
+                  block py-2 px-3 my-0.5 rounded-base
+                  text-small text-content-base hover:bg-surface-interactive-subtle-hover
+                  no-underline aria-[current=page]:bg-surface-progressive-subtle
+                  aria-[current=page]:text-content-progressive aria-[current=page]:font-medium
                 "
                 href={item.path}
                 aria-current={props.currentPath === item.path ? 'page' : undefined}
@@ -38,8 +38,8 @@ export function TableOfContents(props: { sections: readonly string[] }) {
     <Show when={props.sections.length}>
       <aside
         class="
-          toc sticky top-18 h-fit py-10 px-6 text-[0.75rem]
-          docs-narrow:hidden
+          toc sticky top-18 h-fit py-10 px-6 text-small-2xs
+          screen-narrow:hidden
         "
       >
         <nav aria-label="On this page">
@@ -50,7 +50,7 @@ export function TableOfContents(props: { sections: readonly string[] }) {
 
               return (
                 <a
-                  class="block text-muted py-1.5 hover:text-action"
+                  class="block text-content-subtle py-1.5 no-underline hover:underline hover:text-content-progressive"
                   href={`${current.pathname}#${id}`}
                   aria-current={
                     current.hash === `#${encodeURIComponent(id)}` ? 'location' : 'false'

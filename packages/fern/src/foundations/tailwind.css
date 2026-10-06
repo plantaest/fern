@@ -2,35 +2,73 @@
 
 @theme inline {
   --color-*: initial;
-  --color-canvas: var(--fern-background-color-base);
-  --color-surface: var(--fern-background-color-neutral-subtle);
-  --color-content: var(--fern-color-base);
-  --color-muted: var(--fern-color-subtle);
-  --color-line: var(--fern-border-color-subtle);
-  --color-action: var(--fern-color-progressive);
+  --color-content-base: var(--fern-color-base);
+  --color-content-subtle: var(--fern-color-subtle);
+  --color-content-placeholder: var(--fern-color-placeholder);
+  --color-content-progressive: var(--fern-color-progressive);
+  --color-content-progressive-hover: var(--fern-color-progressive--hover);
+  --color-content-progressive-active: var(--fern-color-progressive--active);
+  --color-surface-base: var(--fern-background-color-base);
+  --color-surface-neutral: var(--fern-background-color-neutral);
+  --color-surface-neutral-subtle: var(--fern-background-color-neutral-subtle);
+  --color-surface-progressive: var(--fern-background-color-progressive);
+  --color-surface-progressive-subtle: var(--fern-background-color-progressive-subtle);
+  --color-surface-interactive-subtle-hover: var(--fern-background-color-interactive-subtle--hover);
+  --color-line-base: var(--fern-border-color-base);
+  --color-line-subtle: var(--fern-border-color-subtle);
+  --color-line-progressive: var(--fern-border-color-progressive);
+  --color-line-progressive-focus: var(--fern-border-color-progressive--focus);
 
   --spacing: var(--fern-spacing);
 
-  --font-sans: var(--fern-font-content);
-  --font-serif: var(--fern-font-heading);
-  --font-mono: var(--fern-font-code);
+  --font-sans: var(--fern-font-sans);
+  --font-serif: var(--fern-font-serif);
+  --font-mono: var(--fern-font-mono);
 
-  --text-heading-1: var(--fern-text-heading-1);
-  --text-heading-1--line-height: var(--fern-leading-heading-1);
-  --text-heading-2: var(--fern-text-heading-2);
-  --text-heading-2--line-height: var(--fern-leading-heading-2);
-  --text-heading-3: var(--fern-text-heading-3);
-  --text-heading-3--line-height: var(--fern-leading-heading-3);
-  --tracking-heading: var(--fern-tracking-heading);
+  --font-weight-normal: var(--fern-font-weight-normal);
+  --font-weight-medium: var(--fern-font-weight-medium);
+  --font-weight-semibold: var(--fern-font-weight-semibold);
+  --font-weight-bold: var(--fern-font-weight-bold);
 
-  --text-body: var(--fern-text-body);
-  --text-body--line-height: var(--fern-leading-body);
-  --text-control: var(--fern-text-control);
-  --text-control--line-height: var(--fern-leading-control);
-  --text-small: var(--fern-text-small);
-  --text-small--line-height: var(--fern-leading-small);
-  --text-code: var(--fern-text-code);
-  --text-code--line-height: var(--fern-leading-code);
+  --text-*: initial;
+  --text-2xs: var(--fern-font-size-xx-small);
+  --text-xs: var(--fern-font-size-x-small);
+  --text-sm: var(--fern-font-size-small);
+  --text-base: var(--fern-font-size-medium);
+  --text-lg: var(--fern-font-size-large);
+  --text-xl: var(--fern-font-size-x-large);
+  --text-2xl: var(--fern-font-size-xx-large);
+  --text-3xl: var(--fern-font-size-xxx-large);
+
+  --leading-*: initial;
+  --leading-sm: var(--fern-line-height-small);
+  --leading-md: var(--fern-line-height-medium);
+  --leading-lg: var(--fern-line-height-large);
+  --leading-xl: var(--fern-line-height-x-large);
+  --leading-2xl: var(--fern-line-height-xx-large);
+  --leading-normal: var(--fern-line-height-normal);
+
+  --text-heading-1: var(--fern-font-size-xxx-large);
+  --text-heading-1--line-height: var(--fern-line-height-xx-large);
+  --text-heading-2: var(--fern-font-size-xx-large);
+  --text-heading-2--line-height: var(--fern-line-height-x-large);
+  --text-heading-3: var(--fern-font-size-x-large);
+  --text-heading-3--line-height: var(--fern-line-height-large);
+  --text-heading-4: var(--fern-font-size-large);
+  --text-heading-4--line-height: var(--fern-line-height-medium);
+  --text-heading-5: var(--fern-font-size-medium);
+  --text-heading-5--line-height: var(--fern-line-height-medium);
+  --text-heading-6: var(--fern-font-size-small);
+  --text-heading-6--line-height: var(--fern-line-height-small);
+
+  --text-body: var(--fern-font-size-medium);
+  --text-body--line-height: var(--fern-line-height-normal);
+  --text-small: var(--fern-font-size-small);
+  --text-small--line-height: var(--fern-line-height-small);
+  --text-small-xs: var(--fern-font-size-x-small);
+  --text-small-xs--line-height: var(--fern-line-height-small);
+  --text-small-2xs: var(--fern-font-size-xx-small);
+  --text-small-2xs--line-height: var(--fern-line-height-small);
 
   --radius-base: var(--fern-radius-base);
 }

@@ -143,13 +143,58 @@ render(
 `,
 );
 
-const tests = (
-  await readFile(join(root, 'packages/fern/src/components/button/button.test.tsx'), 'utf8')
-)
-  .replace("from './button'", "from '@taxon-labs/fern/button'")
-  .replace("from '../icon/icon'", "from '@taxon-labs/fern/icon'");
+await writeFile(
+  join(temp, 'consumer.test.tsx'),
+  `
+import { render } from '@solidjs/web';
+import { Button } from '@taxon-labs/fern/button';
+import { Icon } from '@taxon-labs/fern/icon';
+import { cdxIconEdit } from '@wikimedia/codex-icons';
+import { createSignal, flush } from 'solid-js';
+import { expect, it } from 'vitest';
 
-await writeFile(join(temp, 'button.test.tsx'), tests);
+it('renders public subpath exports in a Solid JSX consumer', () => {
+  const host = document.createElement('div');
+  document.body.append(host);
+  const [disabled, setDisabled] = createSignal(false);
+
+  const dispose = render(
+    () => (
+      <>
+        <Button disabled={disabled()}>
+          <Icon icon={cdxIconEdit} />
+          Save
+        </Button>
+        <Button as="a" href="/article">Read</Button>
+      </>
+    ),
+    host,
+  );
+
+  try {
+    flush();
+
+    const button = host.querySelector('button')!;
+    expect(button.type).toBe('button');
+    expect(button.textContent).toBe('Save');
+    expect(button.querySelector('svg')).not.toBeNull();
+    expect(button.disabled).toBe(false);
+
+    setDisabled(true);
+    flush();
+    expect(button.disabled).toBe(true);
+
+    const anchor = host.querySelector('a')!;
+    expect(anchor.getAttribute('href')).toBe('/article');
+    expect(anchor.hasAttribute('role')).toBe(false);
+    expect(anchor.hasAttribute('type')).toBe(false);
+  } finally {
+    dispose();
+    host.remove();
+  }
+});
+`,
+);
 
 await writeFile(
   join(temp, 'vite.default.config.ts'),
@@ -250,7 +295,9 @@ const cssFile = assets.find((file) => file.endsWith('.css'));
 assert.ok(cssFile, 'The consumer build must include Fern CSS');
 
 const css = await readFile(join(temp, 'dist/assets', cssFile), 'utf8');
-assert.ok(css.includes('.fern-button') && css.includes('[data-theme=dark]'));
+assert.ok(
+  css.includes('.fern-button') && css.includes('.fern-prose') && css.includes('[data-theme=dark]'),
+);
 assert.ok(!/@(?:apply|theme|reference)\b|--spacing\(/.test(css), 'CSS must already be compiled');
 
 console.log(

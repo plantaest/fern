@@ -18,7 +18,7 @@ Fern is a design system for software built by Taxon Labs for Vietnamese Wikipedi
 - Use pnpm from the repository root, with one workspace lockfile.
 - Use TypeScript, SolidJS 2, Tailwind CSS 4, and Kobalte. Solid 2 RC and Kobalte alpha are deliberate choices; do not silently switch to Solid 1.
 - Organize Docs pages under `src/docs/pages/foundations/` and `src/docs/pages/components/`. Keep each page's samples, playground, and explicit demo imports in a neighboring `*-examples.tsx` file, with standalone demo sources in its `*-demos/` directory and tests close to the pages they exercise.
-- Use Tailwind utilities without a prefix (`flex`, `gap-2`, `bg-canvas`). Keep Fern component classes and `--fern-*` tokens namespaced. MediaWiki gadgets are intended to use Shadow DOM; the host fixture checks CSS isolation there. ResourceLoader integration remains future work.
+- Use Tailwind utilities without a prefix (`flex`, `gap-2`, `bg-surface-base`). Keep Fern component classes and `--fern-*` tokens namespaced. MediaWiki gadgets are intended to use Shadow DOM; the host fixture checks CSS isolation there. ResourceLoader integration remains future work.
 
 ## Foundations
 
@@ -26,7 +26,7 @@ Fern is a design system for software built by Taxon Labs for Vietnamese Wikipedi
 | -------------------- | ------------------------------------------------------------------------ |
 | Colors               | Codex 2.7.0 semantic values; equivalent whitespace formatting is allowed |
 | Themes               | Light and Dark, sharing the same prefixed CSS token contract             |
-| Headings             | Source Serif 4; 36, 28, and 22px                                         |
+| Headings             | Source Serif 4 for H1/H2; Inter for H3–H6; sizes and leading follow Docs |
 | Content and controls | Inter; 16px body, 14px labels                                            |
 | Code                 | JetBrains Mono                                                           |
 | Spacing              | Tailwind scale with a 4px base; 4, 8, 12, 16, 24, 32, 48px               |
@@ -43,7 +43,12 @@ The Docs app bundles fonts locally with Vietnamese glyphs. Fern provides font st
 - Keep the default Button at 32px with 14px text and 16px icons. Text and icon-only buttons share an icon size at each size preset; standalone icons default to 16px. Keep presets consistent with the Button Docs. Use composition for icons and busy states.
 - Button separates visual `variant` from semantic `action`, defaulting to `solid` and `neutral`.
 - Use direct namespaced component selectors (`.fern-button`, `.fern-icon`) in the `components` layer, assigned by `@import "..." layer(components)` in `styles.css`, so utilities can override them. Keep component CSS free of layer wrappers. Keep `.fern` for theme tokens, fonts, and scoped resets rather than repeating it in component selectors.
+- Keep core CSS independent of the Tailwind compiler. Use standard CSS such as `calc(var(--fern-spacing) * 2)`; Tailwind belongs to Docs and the optional adapter.
 - Keep each component's TSX, CSS, and tests together in its own directory under `packages/fern/src/components/`. Keep shared `.fern` setup in `foundations/base.css`; `styles.css` declares layer order and imports the foundations and component styles.
+- Use `.fern-prose` for document HTML and `.fern-not-prose` for embedded UI. Derive document block spacing from `--fern-prose-flow`. Keep document styles in `foundations/prose.css`, with low specificity and no content width or page layout. Font family tokens are `--fern-font-sans`, `--fern-font-serif`, and `--fern-font-mono`.
+- Keep font size, weight, and line-height tokens independent of heading levels and components. Prose, components, and Tailwind text presets combine the shared scales. Body leading stays unitless; fixed leading values use rem.
+- Tailwind color aliases use `content-*`, `surface-*`, and `line-*` in `@theme`; choose the matching role for each CSS property (`text-content-progressive`, `bg-surface-progressive`, `border-line-progressive`). Use `text-content-base` for base text color; `text-base` remains a font-size utility.
+- Tailwind size utilities use Fern's scale, from `text-2xs` to `text-3xl`, and set size only. Combine them with `leading-sm` through `leading-2xl` or `leading-normal`; keep combined presets to `text-body`, `text-small`, `text-small-xs`, `text-small-2xs`, and `text-heading-1` through `text-heading-6`.
 - Include the styling group in modifier class names: `fern-button-variant--outline`, `fern-button-action--destructive`, and `fern-button-size--icon`. Keep the base class `fern-button`.
 - Generated `tokens.css` and `colors.json` come from the token script. Change the generator rather than editing its output.
 - Numbered color token names separate the shade with a hyphen, such as `color-red-300` and `color-modifier-gray-100-translucent`. Preserve Codex values and semantic role names.

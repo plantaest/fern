@@ -20,7 +20,7 @@ export function App() {
           component: () => (
             <>
               <PageIntro title={page.title} description={page.description} category={page.group} />
-              <div class="doc-content">
+              <div class="fern-docs-content fern-prose">
                 <Page theme={theme()} />
               </div>
             </>

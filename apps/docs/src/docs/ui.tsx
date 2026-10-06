@@ -4,30 +4,36 @@ import { cdxIconCheck, cdxIconCopy } from '@wikimedia/codex-icons';
 import { type Component, createSignal } from 'solid-js';
 
 export const fieldControlClasses = `
-  min-w-0 w-full h-8 px-2.5 py-0 border border-docs-control
-  rounded-base text-content bg-canvas font-normal text-small
-  leading-none placeholder:text-docs-placeholder
+  min-w-0 w-full h-8 px-2.5 py-0 border border-line-base
+  rounded-base text-content-base bg-surface-base font-sans font-normal text-small
+  placeholder:text-content-placeholder
 `;
 
 const previewClasses = {
   basic: `
-    flex-wrap gap-4 py-7 px-6 border border-line rounded-base
-    docs-mobile:py-6 docs-mobile:px-4
+    flex-wrap gap-4 py-7 px-6 border border-line-subtle rounded-base
+    screen-small:py-6 screen-small:px-4
   `,
   example: `
     min-h-28 flex-wrap justify-center gap-3 py-8 px-6
-    docs-mobile:py-6 docs-mobile:px-4
+    screen-small:py-6 screen-small:px-4
   `,
   playground: 'min-w-0 min-h-40 flex-col justify-center gap-5 py-8 px-6',
 };
 
 export function Preview(props: { kind: keyof typeof previewClasses; children: JSX.Element }) {
-  return <div class={`flex items-center ${previewClasses[props.kind]}`}>{props.children}</div>;
+  return (
+    <div class={`fern-not-prose flex items-center ${previewClasses[props.kind]}`}>
+      {props.children}
+    </div>
+  );
 }
 
 export function PreviewFrame(props: { children: JSX.Element; class?: string }) {
   return (
-    <div class={`border border-line rounded-base overflow-hidden ${props.class ?? ''}`}>
+    <div
+      class={`fern-not-prose border border-line-subtle rounded-base overflow-hidden ${props.class ?? ''}`}
+    >
       {props.children}
     </div>
   );
@@ -42,7 +48,7 @@ export function Field(props: {
   return (
     <label
       for={props.for}
-      class={`flex flex-col gap-2 text-[0.75rem] font-medium min-w-0 ${props.class ?? ''}`}
+      class={`flex flex-col gap-2 text-small-2xs font-medium min-w-0 ${props.class ?? ''}`}
     >
       {props.label}
       {props.children}
@@ -53,9 +59,9 @@ export function Field(props: {
 export function PageIntro(props: { title: string; description: string; category: string }) {
   return (
     <header class="mb-8">
-      <p class="text-muted text-[0.75rem] leading-5 mb-3">{props.category}</p>
-      <h1>{props.title}</h1>
-      <p class="text-muted mt-3 text-body">{props.description}</p>
+      <p class="text-content-subtle text-small-2xs mb-3">{props.category}</p>
+      <h1 class="font-serif font-semibold text-heading-1">{props.title}</h1>
+      <p class="text-content-subtle mt-3 text-body">{props.description}</p>
     </header>
   );
 }
@@ -81,19 +87,21 @@ export function CodeBlock(props: { code: string; language?: string; embedded?: b
   }
 
   return (
-    <div class={`doc-code-block bg-surface ${props.embedded ? '' : 'border-t border-line'}`}>
+    <div
+      class={`fern-not-prose fern-docs-code-block bg-surface-neutral-subtle ${props.embedded ? '' : 'border-t border-line-subtle'}`}
+    >
       <div
         class="
-          flex items-center justify-between h-11 px-4 text-[0.6875rem]
-          text-muted
+          flex items-center justify-between h-11 px-4 text-small-2xs
+          text-content-subtle
         "
       >
         <span>{(props.language ?? 'tsx').toUpperCase()}</span>
         <button
           class="
             flex items-center gap-1.5 py-1 px-1.5 min-h-7
-            text-[0.6875rem] border-0 rounded-base text-muted bg-transparent
-            hover:text-content hover:bg-docs-hover
+            text-small-2xs border-0 rounded-base text-content-subtle bg-transparent
+            hover:text-content-base hover:bg-surface-interactive-subtle-hover
           "
           type="button"
           onClick={copy}
@@ -124,8 +132,8 @@ export function Example(props: { demo: { component: Component; source: string } 
       <details>
         <summary
           class="
-            border-t border-line py-3 px-4 text-[0.75rem] text-muted
-            bg-surface
+            border-t border-line-subtle py-3 px-4 text-small-2xs text-content-subtle
+            bg-surface-neutral-subtle
           "
         >
           View code

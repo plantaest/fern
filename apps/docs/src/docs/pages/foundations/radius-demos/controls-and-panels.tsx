@@ -4,8 +4,8 @@ export default function RadiusControlsDemo() {
   return (
     <div
       class="
-        flex gap-8 items-center text-[0.875rem] flex-wrap rounded-base
-        border border-line p-6
+        flex gap-8 items-center text-small flex-wrap rounded-base
+        border border-line-subtle p-6
       "
     >
       <span>Panel content</span>
