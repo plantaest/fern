@@ -17,6 +17,7 @@
     "@taxon-labs/fern": "workspace:*",
     "@wikimedia/codex-icons": "2.7.0",
     "github-slugger": "2.0.0",
+    "shiki": "4.5.0",
     "solid-js": "2.0.0-rc.13"
   },
   "devDependencies": {

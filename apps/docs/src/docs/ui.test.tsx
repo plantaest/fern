@@ -28,6 +28,50 @@ function mockClipboard() {
   return writeText;
 }
 
+it('highlights reactive code without changing its text or interpreting it as HTML', async () => {
+  let updateCode!: (value: string) => void;
+  let updateLanguage!: (value: string) => void;
+  const source = '// Example\r\nconst label = "<img src=x>";\r\n\r\n';
+  const host = mount(() => {
+    const [code, setCode] = createSignal(source);
+    const [language, setLanguage] = createSignal('tsx');
+    updateCode = setCode;
+    updateLanguage = setLanguage;
+
+    return <CodeBlock code={code()} language={language()} />;
+  });
+  const code = host.querySelector('pre code')!;
+
+  await vi.waitFor(() => {
+    flush();
+    expect(code.querySelectorAll('.fern-docs-code-token').length).toBeGreaterThan(1);
+  });
+
+  expect(code.textContent).toBe(source);
+  expect(code.querySelector('img')).toBeNull();
+  const token = code.querySelector<HTMLElement>('.fern-docs-code-token')!;
+  expect(token.style.getPropertyValue('--fern-docs-code-light')).not.toBe('');
+  expect(token.style.getPropertyValue('--fern-docs-code-dark')).not.toBe('');
+
+  updateCode('<p>Updated</p>');
+  updateLanguage('html');
+  flush();
+
+  await vi.waitFor(() => {
+    flush();
+    expect(code.querySelectorAll('.fern-docs-code-token').length).toBeGreaterThan(1);
+    expect(code.textContent).toBe('<p>Updated</p>');
+  });
+
+  expect(code.querySelector('p')).toBeNull();
+
+  updateLanguage('unknown');
+  flush();
+
+  expect(code.textContent).toBe('<p>Updated</p>');
+  expect(code.querySelector('.fern-docs-code-token')).toBeNull();
+});
+
 it('copies the current code and resets feedback when the code changes', async () => {
   const writeText = mockClipboard();
   let updateCode!: (value: string) => void;

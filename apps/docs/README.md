@@ -20,6 +20,8 @@ The preview and Copy control use the same demo file. Playground logic stays in T
 
 Write static code in fenced Markdown blocks. They render through `CodeBlock` with a language label and Copy control; unlabeled blocks use `TEXT`. Inline code stays inline. Build-time MDX plugins live in `plugins/`.
 
+`CodeBlock` highlights TSX, CSS, and HTML with a shared, lazy-loaded Shiki instance. GitHub Light/Dark Default syntax colors follow the Docs theme while the background stays in Fern's palette; muted syntax in Light uses Fern's subtle text color for contrast. Other languages remain plain text. Copy always uses the original source, including in reactive playgrounds.
+
 ## Styling
 
 Docs consumes Fern through public package exports, bundles its own fonts, and owns global page layout. Use Tailwind utilities for layout and visual samples, and helpers in `src/docs/ui.tsx` for previews, frames, fields, and code. For native playground controls, match the control's `id` to `Field`'s `for` prop and use `fieldControlClasses`.

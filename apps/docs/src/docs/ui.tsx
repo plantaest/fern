@@ -1,7 +1,8 @@
 import { dynamic, type JSX } from '@solidjs/web';
 import { Icon } from '@taxon-labs/fern/icon';
 import { cdxIconCheck, cdxIconCopy } from '@wikimedia/codex-icons';
-import { type Component, createEffect, createSignal } from 'solid-js';
+import { type Component, createEffect, createSignal, For, Show } from 'solid-js';
+import { type CodeToken, highlightCode } from './highlight';
 
 export const fieldControlClasses = `
   min-w-0 w-full h-8 px-2.5 py-0 border border-line-base
@@ -68,6 +69,38 @@ export function PageIntro(props: { title: string; description: string; category:
 
 export function CodeBlock(props: { code: string; language?: string; embedded?: boolean }) {
   const [copyResult, setCopyResult] = createSignal<{ code: string; message: string }>();
+  const [highlighted, setHighlighted] = createSignal<{
+    code: string;
+    language: string;
+    tokens: CodeToken[];
+  }>();
+
+  createEffect(
+    () => [props.code, props.language ?? 'tsx'] as const,
+    ([code, language]) => {
+      let cancelled = false;
+
+      highlightCode(code, language)
+        .then((tokens) => {
+          if (!cancelled) setHighlighted(tokens ? { code, language, tokens } : undefined);
+        })
+        .catch(() => {
+          if (!cancelled) setHighlighted(undefined);
+        });
+
+      return () => {
+        cancelled = true;
+      };
+    },
+  );
+
+  const tokens = () => {
+    const result = highlighted();
+
+    return result?.code === props.code && result.language === (props.language ?? 'tsx')
+      ? result.tokens
+      : undefined;
+  };
 
   createEffect(
     () => copyResult(),
@@ -123,7 +156,25 @@ export function CodeBlock(props: { code: string; language?: string; embedded?: b
         </button>
       </div>
       <pre>
-        <code class={props.language ? `language-${props.language}` : undefined}>{props.code}</code>
+        <code class={props.language ? `language-${props.language}` : undefined}>
+          <Show when={tokens()} fallback={props.code}>
+            {(items) => (
+              <For each={items()}>
+                {(token) => (
+                  <span
+                    class="fern-docs-code-token"
+                    style={{
+                      '--fern-docs-code-light': token.light,
+                      '--fern-docs-code-dark': token.dark,
+                    }}
+                  >
+                    {token.content}
+                  </span>
+                )}
+              </For>
+            )}
+          </Show>
+        </code>
       </pre>
       <span class="sr-only" role="status">
         {status()}
