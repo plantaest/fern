@@ -32,7 +32,34 @@ The page body uses `.fern-prose` from the package for document typography and sp
 
 Development and preview use `http://127.0.0.1:4321/`. A busy port causes an error rather than selecting another port. Docs uses pathname routes such as `/components/button` and fragments such as `#accessibility`; the home URL redirects to `/foundations/colors`.
 
-For deployment, configure the host to serve `index.html` for page routes while serving assets normally. Verify direct URLs and reloads on that host. Production hosting and SSR are not yet verified.
+## Deployment
+
+Build and run the static production app from the repository root:
+
+```sh
+pnpm install --frozen-lockfile
+pnpm build
+PORT=8000 pnpm --filter fern-docs start
+```
+
+`serve` reads `PORT` and serves `apps/docs/dist` with SPA fallback. Check direct URLs and reloads at `/components/button` and `/foundations/colors`, and verify that CSS, fonts, and syntax-highlighting chunks load.
+
+For [Toolforge Build Service](https://wikitech.wikimedia.org/wiki/Help:Toolforge/Build_service), the root `Procfile` starts Docs after the buildpack installs dependencies and runs the root build script. After committing and pushing the changes, run these commands on Toolforge as the `fern` tool:
+
+```sh
+toolforge build start https://github.com/plantaest/fern.git
+toolforge build show
+```
+
+Once the build reports `ok(Succeeded)`, start the webservice:
+
+```sh
+toolforge webservice buildservice start --mount=none
+```
+
+Verify direct routes and reloads at `https://fern.toolforge.org/`. On Toolforge, save `type: buildservice` and `mount: none` in `~/service.template`. For later deployments, build again, wait for success, and run `toolforge webservice restart`. Inspect runtime logs with `toolforge webservice buildservice logs -f`.
+
+Toolforge hosting and SSR remain unverified until checked in their respective environments.
 
 ## Shadow DOM embedding check
 

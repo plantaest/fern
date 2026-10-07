@@ -6,7 +6,7 @@ See the [package README](packages/fern/README.md) for usage and exports, and [AG
 
 ## Develop
 
-Use pnpm 8.15.5 and Node 22.12 or newer.
+Use pnpm 8.15.5 and Node 22.12 or newer within Node 22.
 
 ```sh
 pnpm install --frozen-lockfile
