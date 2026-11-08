@@ -1,6 +1,6 @@
+import { parseExpression } from '@babel/parser';
 import { render } from '@solidjs/web';
 import { flush } from 'solid-js';
-import ts from 'typescript';
 import { afterEach, expect, it } from 'vitest';
 import ButtonPage from './button.mdx';
 
@@ -143,29 +143,29 @@ it('generates valid TSX for labels with quotes and JSX characters in every icon 
     flush();
 
     const code = host.querySelector('.playground pre code')!.textContent!;
-    const compiled = ts.transpileModule(code, {
-      fileName: 'example.tsx',
-      compilerOptions: { jsx: ts.JsxEmit.Preserve },
-      reportDiagnostics: true,
-    });
+    const source = parseExpression(code, { plugins: ['typescript', 'jsx'] });
+    expect(source.type).toBe('JSXElement');
+    if (source.type !== 'JSXElement') throw new Error('Expected a JSX element');
 
-    expect(compiled.diagnostics).toEqual([]);
-
-    const source = ts.createSourceFile('example.tsx', code, ts.ScriptTarget.Latest, true);
-    const labels: ts.StringLiteral[] = [];
-
-    function findLabel(node: ts.Node) {
-      if (ts.isStringLiteral(node) && node.text === name) {
-        labels.push(node);
-      }
-
-      ts.forEachChild(node, findLabel);
-    }
-
-    findLabel(source);
+    const expressions =
+      mode === 'only'
+        ? source.openingElement.attributes.flatMap((attribute) =>
+            attribute.type === 'JSXAttribute' &&
+            attribute.name.type === 'JSXIdentifier' &&
+            attribute.name.name === 'aria-label' &&
+            attribute.value?.type === 'JSXExpressionContainer'
+              ? [attribute.value.expression]
+              : [],
+          )
+        : source.children.flatMap((child) =>
+            child.type === 'JSXExpressionContainer' ? [child.expression] : [],
+          );
+    const labels = expressions.filter(
+      (expression) => expression.type === 'StringLiteral' && expression.value === name,
+    );
 
     expect(labels).toHaveLength(1);
-    expect(labels[0].getText(source).startsWith("'")).toBe(true);
+    expect(labels[0].extra?.raw).toMatch(/^'/);
 
     const button = host.querySelector('.playground button')!;
     expect(mode === 'only' ? button.getAttribute('aria-label') : button.textContent).toBe(name);

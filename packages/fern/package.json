@@ -39,20 +39,20 @@
     "test": "pnpm colors && node --test tests/tokens.test.mjs && vitest run"
   },
   "peerDependencies": {
-    "@solidjs/web": "2.0.0-rc.13",
-    "solid-js": "2.0.0-rc.13"
+    "@solidjs/web": "2.0.0-rc.21",
+    "solid-js": "2.0.0-rc.21"
   },
   "dependencies": {
-    "@kobalte/core": "2.0.0-alpha.2",
+    "@kobalte/core": "2.0.0-alpha.4",
     "@wikimedia/codex-icons": "2.7.0",
     "class-variance-authority": "0.7.1"
   },
   "devDependencies": {
-    "@solidjs/web": "2.0.0-rc.13",
+    "@solidjs/web": "2.0.0-rc.21",
     "@wikimedia/codex-design-tokens": "2.7.0",
-    "jsdom": "^26.1.0",
-    "solid-js": "2.0.0-rc.13",
-    "tailwindcss": "4.3.3",
-    "vitest": "^4.1.0"
+    "jsdom": "^31.0.0",
+    "solid-js": "2.0.0-rc.21",
+    "tailwindcss": "4.3.5",
+    "vitest": "^5.1.0"
   }
 }

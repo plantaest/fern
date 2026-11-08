@@ -110,21 +110,21 @@ it('opens and closes mobile navigation with an accessible toggle', () => {
   expect(host.querySelector('#mobile-navigation')).toBeNull();
 });
 
-it.each([
-  '/foundations/colors',
-  '/components/button',
-])('closes mobile navigation after selecting %s', async (path) => {
-  const host = mount('/components/button');
-  const toggle = host.querySelector<HTMLButtonElement>('button[aria-label="Open navigation"]')!;
+it.each(['/foundations/colors', '/components/button'])(
+  'closes mobile navigation after selecting %s',
+  async (path) => {
+    const host = mount('/components/button');
+    const toggle = host.querySelector<HTMLButtonElement>('button[aria-label="Open navigation"]')!;
 
-  toggle.click();
-  flush();
-  host.querySelector<HTMLAnchorElement>(`#mobile-navigation a[href="${path}"]`)!.click();
-
-  await vi.waitFor(() => {
+    toggle.click();
     flush();
-    expect(location.pathname).toBe(path);
-    expect(toggle.getAttribute('aria-expanded')).toBe('false');
-    expect(host.querySelector('#mobile-navigation')).toBeNull();
-  });
-});
+    host.querySelector<HTMLAnchorElement>(`#mobile-navigation a[href="${path}"]`)!.click();
+
+    await vi.waitFor(() => {
+      flush();
+      expect(location.pathname).toBe(path);
+      expect(toggle.getAttribute('aria-expanded')).toBe('false');
+      expect(host.querySelector('#mobile-navigation')).toBeNull();
+    });
+  },
+);

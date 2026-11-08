@@ -33,16 +33,16 @@ const manifest = {
   type: 'module',
   dependencies: {
     '@taxon-labs/fern': `file:${join(temp, tarball)}`,
-    'solid-js': '2.0.0-rc.13',
-    '@solidjs/web': '2.0.0-rc.13',
+    'solid-js': '2.0.0-rc.21',
+    '@solidjs/web': '2.0.0-rc.21',
     '@wikimedia/codex-icons': '2.7.0',
   },
   devDependencies: {
-    '@solidjs/vite-plugin': '3.0.0-next.46',
-    vite: '8.3.2',
-    typescript: '5.9.3',
-    vitest: '4.1.11',
-    jsdom: '26.1.0',
+    '@solidjs/vite-plugin': '3.0.0-next.57',
+    vite: '8.3.6',
+    typescript: '7.0.2',
+    vitest: '5.1.0',
+    jsdom: '31.0.0',
   },
 };
 
@@ -73,6 +73,7 @@ await writeFile(
       moduleResolution: 'Bundler',
       jsx: 'preserve',
       jsxImportSource: '@solidjs/web',
+      types: ['vite/client'],
       strict: true,
       skipLibCheck: true,
       noEmit: true,
@@ -281,7 +282,7 @@ const runtimeDirs = (await readdir(join(temp, 'node_modules/.pnpm'))).filter((na
 );
 assert.ok(runtimeDirs.length >= 3);
 assert.ok(
-  runtimeDirs.every((name) => name.includes('@2.0.0-rc.13')),
+  runtimeDirs.every((name) => name.includes('@2.0.0-rc.21')),
   `Unexpected Solid runtime: ${runtimeDirs.join(', ')}`,
 );
 

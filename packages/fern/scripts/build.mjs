@@ -23,7 +23,12 @@ function run(script, args = []) {
 await rm(join(root, 'dist'), { recursive: true, force: true });
 await generateColors();
 
-await run(require.resolve('typescript/bin/tsc'), ['-p', 'tsconfig.build.json']);
+const typescriptManifest = require.resolve('typescript/package.json');
+const {
+  bin: { tsc },
+} = require(typescriptManifest);
+
+await run(join(dirname(typescriptManifest), tsc), ['-p', 'tsconfig.build.json']);
 await run(join(dirname(require.resolve('vite/package.json')), 'bin/vite.js'), ['build']);
 
 for (const file of ['colors.css', 'colors.json']) {

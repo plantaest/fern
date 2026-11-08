@@ -64,27 +64,24 @@ describe('Button contract on Solid 2', () => {
     ).toEqual(expected);
   });
 
-  it.each([
-    'solid',
-    'soft',
-    'surface',
-    'outline',
-    'ghost',
-  ] as const)('combines %s, icon size, and custom classes', (variant) => {
-    expect(
-      classes(
-        buttonVariants({ variant, action: 'destructive', size: 'icon', class: 'custom-class' }),
-      ),
-    ).toEqual(
-      new Set([
-        'fern-button',
-        `fern-button-variant--${variant}`,
-        'fern-button-action--destructive',
-        'fern-button-size--icon',
-        'custom-class',
-      ]),
-    );
-  });
+  it.each(['solid', 'soft', 'surface', 'outline', 'ghost'] as const)(
+    'combines %s, icon size, and custom classes',
+    (variant) => {
+      expect(
+        classes(
+          buttonVariants({ variant, action: 'destructive', size: 'icon', class: 'custom-class' }),
+        ),
+      ).toEqual(
+        new Set([
+          'fern-button',
+          `fern-button-variant--${variant}`,
+          'fern-button-action--destructive',
+          'fern-button-size--icon',
+          'custom-class',
+        ]),
+      );
+    },
+  );
 
   it('forwards native attributes, accessible names, refs, children, and events', () => {
     let clicks = 0;
