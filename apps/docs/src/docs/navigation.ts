@@ -67,7 +67,7 @@ export const pages = [
     group: 'Components',
     title: buttonMetadata.title,
     description: buttonMetadata.description,
-    sections: ['API Reference', 'Playground', 'Examples', 'Accessibility'],
+    sections: ['Playground', 'Examples', 'API Reference', 'Accessibility'],
     component: ButtonPage,
   },
 ] as const satisfies readonly DocPage[];

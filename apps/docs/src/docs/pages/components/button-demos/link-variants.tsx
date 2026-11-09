@@ -1,5 +1,5 @@
-import { buttonVariants } from '@taxon-labs/fern/button';
-import { Icon } from '@taxon-labs/fern/icon';
+import { buttonVariants } from '@taxonlabs/fern/button';
+import { Icon } from '@taxonlabs/fern/icon';
 import { cdxIconArrowNext } from '@wikimedia/codex-icons';
 
 export default function ButtonLinkVariantsDemo() {

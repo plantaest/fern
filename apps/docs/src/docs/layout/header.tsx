@@ -1,4 +1,4 @@
-import { Icon } from '@taxon-labs/fern/icon';
+import { Icon } from '@taxonlabs/fern/icon';
 import { cdxIconClose, cdxIconLightbulb, cdxIconMenu, cdxIconMoon } from '@wikimedia/codex-icons';
 import { For } from 'solid-js';
 import type { Theme } from '../theme';

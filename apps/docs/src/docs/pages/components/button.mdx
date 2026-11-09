@@ -20,27 +20,6 @@ import {
 
 <ButtonBasic />
 
-## API Reference
-
-Use `variant` for style and `action` for meaning.
-
-<div class="max-w-full overflow-x-auto border-y border-line-subtle fern-docs-api-table">
-
-| Prop       | Type                                                            | Default     |
-| ---------- | --------------------------------------------------------------- | ----------- |
-| `variant`  | `"solid" \| "soft" \| "surface" \| "outline" \| "ghost"`        | `"solid"`   |
-| `action`   | `"neutral" \| "progressive" \| "destructive"`                   | `"neutral"` |
-| `size`     | `"sm" \| "default" \| "lg" \| "icon-sm" \| "icon" \| "icon-lg"` | `"default"` |
-| `disabled` | `boolean`                                                       | `false`     |
-| `type`     | `"button" \| "submit" \| "reset"`                               | `"button"`  |
-| `class`    | `string`                                                        | —           |
-| `children` | Text, icons, or other JSX                                       | —           |
-| `as`       | Element or component                                            | `"button"`  |
-
-</div>
-
-Supports props, refs, and events for the rendered element or component. See the [Kobalte Button API](https://kobalte.dev/docs/core/components/button/).
-
 ## Playground
 
 Change the props and try the result.
@@ -92,6 +71,27 @@ Use `as="a"` for a native link, or `as={Link}` with a router component that rend
 Use `buttonVariants()` to style a native anchor directly.
 
 <Example demo={buttonLinkVariantsExample} />
+
+## API Reference
+
+Use `variant` for style and `action` for meaning.
+
+<div class="max-w-full overflow-x-auto border-y border-line-subtle fern-docs-api-table">
+
+| Prop       | Type                                                            | Default     |
+| ---------- | --------------------------------------------------------------- | ----------- |
+| `variant`  | `"solid" \| "soft" \| "surface" \| "outline" \| "ghost"`        | `"solid"`   |
+| `action`   | `"neutral" \| "progressive" \| "destructive"`                   | `"neutral"` |
+| `size`     | `"sm" \| "default" \| "lg" \| "icon-sm" \| "icon" \| "icon-lg"` | `"default"` |
+| `disabled` | `boolean`                                                       | `false`     |
+| `type`     | `"button" \| "submit" \| "reset"`                               | `"button"`  |
+| `class`    | `string`                                                        | —           |
+| `children` | Text, icons, or other JSX                                       | —           |
+| `as`       | Element or component                                            | `"button"`  |
+
+</div>
+
+Supports props, refs, and events for the rendered element or component. See the [Kobalte Button API](https://kobalte.dev/docs/core/components/button/).
 
 ## Accessibility
 

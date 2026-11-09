@@ -5,8 +5,8 @@ Reusable Solid components and Codex-based themes. This is an unpublished alpha p
 ## Usage
 
 ```tsx
-import { Button } from '@taxon-labs/fern/button';
-import '@taxon-labs/fern/styles.css';
+import { Button } from '@taxonlabs/fern/button';
+import '@taxonlabs/fern/styles.css';
 
 <div class="fern" data-theme="light">
   <Button variant="outline" action="progressive">
@@ -56,7 +56,7 @@ For MediaWiki embedding, load `/styles.css` inside the shadow root and place the
 Keep the `/styles.css` import from Usage. Add the following to your application stylesheet and process it with Tailwind 4:
 
 ```css
-@import '@taxon-labs/fern/tailwind.css';
+@import '@taxonlabs/fern/tailwind.css';
 @import 'tailwindcss/utilities.css' layer(utilities);
 ```
 

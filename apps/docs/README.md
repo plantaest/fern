@@ -20,6 +20,8 @@ The preview and Copy control use the same demo file. Playground logic stays in T
 
 Write static code in fenced Markdown blocks. They render through `CodeBlock` with a language label and Copy control; unlabeled blocks use `TEXT`. Inline code stays inline. Build-time MDX plugins live in `plugins/`.
 
+Markdown links to external websites open in a new tab and show an external link icon. Internal links and section fragments stay in the current tab.
+
 `CodeBlock` highlights TSX, CSS, and HTML with a shared, lazy-loaded Shiki instance. GitHub Light/Dark Default syntax colors follow the Docs theme while the background stays in Fern's palette; muted syntax in Light uses Fern's subtle text color for contrast. Other languages remain plain text. Copy always uses the original source, including in reactive playgrounds.
 
 ## Styling
@@ -60,18 +62,3 @@ toolforge webservice buildservice start --mount=none
 Verify direct routes and reloads at `https://fern.toolforge.org/`. On Toolforge, save `type: buildservice` and `mount: none` in `~/service.template`. For later deployments, build again, wait for success, and run `toolforge webservice restart`. Inspect runtime logs with `toolforge webservice buildservice logs -f`.
 
 Toolforge hosting and SSR remain unverified until checked in their respective environments.
-
-## Shadow DOM embedding check
-
-With `pnpm dev` running, open `http://127.0.0.1:4321/checks/mediawiki.html`. The HTML host has its own button, input, and link styles; `src/checks/mediawiki.tsx` renders Fern in an open shadow root with the compiled package CSS loaded inside it.
-
-Check the fixture in both Light and Dark:
-
-- Fern text, buttons, and prose use the package font stacks and theme colors instead of the host's custom styles. Check the serif heading, paragraph, inline code, list, and link. The fixture does not load font files; consuming applications provide them.
-- Use Tab and Shift+Tab to move through the host controls and Fern buttons. Each focused Fern button has a visible focus indicator.
-- Activate "Switch theme" with Enter and Space. The Fern theme changes and focus stays on the button.
-- Host controls retain their font, colors, background, and borders when the Fern theme changes.
-
-Recheck when changing shared CSS, themes, or embedding behavior.
-
-The fixture does not verify integration with a production MediaWiki skin or ResourceLoader.

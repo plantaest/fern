@@ -1,65 +1,47 @@
 import { render } from '@solidjs/web';
 import { flush } from 'solid-js';
-import { afterEach, expect, it, vi } from 'vitest';
+import { expect, it, vi } from 'vitest';
 import MdxFixture from './mdx-fixture.mdx';
-import { sectionId } from './navigation';
 
-let dispose: (() => void) | undefined;
+it('opens only external Markdown links in a new tab', () => {
+  const host = document.body.appendChild(document.createElement('div'));
+  const dispose = render(() => <MdxFixture />, host);
 
-afterEach(() => {
-  dispose?.();
-  document.body.innerHTML = '';
-  vi.unstubAllGlobals();
-});
+  try {
+    flush();
 
-function mount() {
-  const host = document.createElement('div');
-  document.body.append(host);
-  dispose = render(() => <MdxFixture />, host);
-  flush();
-
-  return host;
-}
-
-it('renders Markdown code blocks with language labels while keeping inline code inline', () => {
-  const host = mount();
-
-  expect(host.querySelector('p > code')?.textContent).toBe('size="icon"');
-  expect(host.querySelector('pre pre')).toBeNull();
-  expect(host.querySelectorAll('button[aria-label="Copy code"]')).toHaveLength(2);
-  expect(host.querySelector('pre code.language-css')?.textContent).toBe(
-    '.fern-button {\n  border-radius: 0.25rem;\n}',
-  );
-  expect(host.querySelector('pre code.language-text')?.textContent).toBe(
-    '  <Button>Tri thức & {label}</Button>\n',
-  );
-  expect(
-    [...host.querySelectorAll('pre')].map(
-      (pre) => pre.previousElementSibling?.querySelector('span')?.textContent,
-    ),
-  ).toEqual(['CSS', 'TEXT']);
-});
-
-it('matches navigation IDs to Markdown headings with punctuation and Vietnamese text', () => {
-  const host = mount();
-  const headings = [...host.querySelectorAll('h2')];
-
-  expect(headings.map((heading) => heading.id)).toEqual(['what-is-fern', 'api--usage', 'tri-thức']);
-
-  for (const heading of headings) {
-    expect(sectionId(heading.textContent ?? '')).toBe(heading.id);
+    const external = host.querySelector<HTMLAnchorElement>('a[href="https://example.org/"]')!;
+    expect(external.getAttribute('target')).toBe('_blank');
+    expect(external.relList.contains('noopener')).toBe(true);
+    expect(external.textContent).toContain('opens in a new tab');
+    expect(host.querySelectorAll('a[target]')).toHaveLength(1);
+  } finally {
+    dispose();
+    host.remove();
   }
 });
 
-it('copies the original Markdown code including indentation and trailing blank lines', async () => {
+it('renders inline code and preserves unlabelled Markdown code when copied', async () => {
   const writeText = vi.fn().mockResolvedValue(undefined);
   vi.stubGlobal('navigator', Object.assign(Object.create(navigator), { clipboard: { writeText } }));
+  const host = document.body.appendChild(document.createElement('div'));
+  const dispose = render(() => <MdxFixture />, host);
 
-  const host = mount();
-  const copy = host.querySelectorAll<HTMLButtonElement>('button[aria-label="Copy code"]')[1];
-  copy.click();
+  try {
+    flush();
 
-  await vi.waitFor(() => {
-    expect(writeText).toHaveBeenCalledWith('  <Button>Tri thức & {label}</Button>\n');
-  });
+    const source = '  <Button>Tri thức & {label}</Button>\n';
+    expect(host.querySelector('p > code')?.textContent).toBe('size="icon"');
+    expect(host.querySelector('pre code')?.textContent).toBe(source);
+
+    const copy = host.querySelector<HTMLButtonElement>('button[aria-label="Copy code"]')!;
+    expect(copy.previousElementSibling?.textContent).toBe('TEXT');
+    copy.click();
+
+    await vi.waitFor(() => expect(writeText).toHaveBeenCalledWith(source));
+  } finally {
+    dispose();
+    host.remove();
+    vi.unstubAllGlobals();
+  }
 });

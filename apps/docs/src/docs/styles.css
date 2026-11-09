@@ -1,4 +1,4 @@
-@import "@taxon-labs/fern/tailwind.css";
+@import "@taxonlabs/fern/tailwind.css";
 @import "tailwindcss/utilities.css" layer(utilities) source(none);
 @source "../";
 

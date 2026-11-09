@@ -1,4 +1,4 @@
-import { Button } from '@taxon-labs/fern/button';
+import { Button } from '@taxonlabs/fern/button';
 
 export default function ButtonDisabledDemo() {
   return (

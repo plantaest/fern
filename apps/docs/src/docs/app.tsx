@@ -1,5 +1,5 @@
 import { createRouter, useLocation, useNavigate } from '@solidjs/router';
-import { buttonVariants } from '@taxon-labs/fern/button';
+import { buttonVariants } from '@taxonlabs/fern/button';
 import { onSettled } from 'solid-js';
 import { Layout } from './layout/layout';
 import { pages } from './navigation';

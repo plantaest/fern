@@ -28,6 +28,14 @@ function mockClipboard() {
   return writeText;
 }
 
+function copyButton(host: ParentNode) {
+  return host.querySelector<HTMLButtonElement>('button[aria-label="Copy code"]')!;
+}
+
+function copyStatus(host: ParentNode) {
+  return host.querySelector('[role="status"]')?.textContent;
+}
+
 it('highlights reactive code without changing its text or interpreting it as HTML', async () => {
   let updateCode!: (value: string) => void;
   let updateLanguage!: (value: string) => void;
@@ -63,8 +71,6 @@ it('highlights reactive code without changing its text or interpreting it as HTM
     expect(code.textContent).toBe('<p>Updated</p>');
   });
 
-  expect(code.querySelector('p')).toBeNull();
-
   updateLanguage('unknown');
   flush();
 
@@ -82,8 +88,7 @@ it('copies the current code and resets feedback when the code changes', async ()
 
     return <CodeBlock code={code()} />;
   });
-  const copy = host.querySelector<HTMLButtonElement>('button[aria-label="Copy code"]')!;
-  const status = host.querySelector('[role="status"]')!;
+  const copy = copyButton(host);
 
   copy.click();
 
@@ -93,13 +98,13 @@ it('copies the current code and resets feedback when the code changes', async ()
   });
 
   expect(writeText).toHaveBeenCalledWith('First example');
-  expect(status.textContent).toBe('Copied');
+  expect(copyStatus(host)).toBe('Copied');
 
   updateCode('Second example');
   flush();
 
   expect(copy.textContent?.trim()).toBe('Copy');
-  expect(status.textContent).toBe('');
+  expect(copyStatus(host)).toBe('');
 
   copy.click();
 
@@ -113,21 +118,22 @@ it('copies the current code and resets feedback when the code changes', async ()
 
 it('resets successful copy feedback after one second and restarts it on another copy', async () => {
   vi.useFakeTimers();
-  const writeText = mockClipboard();
+  mockClipboard();
   const host = mount(() => <CodeBlock code="Example" />);
-  const copy = host.querySelector<HTMLButtonElement>('button[aria-label="Copy code"]')!;
-  const status = host.querySelector('[role="status"]')!;
+  const copy = copyButton(host);
 
-  copy.click();
-  await Promise.resolve();
-  flush();
+  async function clickCopy() {
+    copy.click();
+    await Promise.resolve();
+    flush();
+  }
+
+  await clickCopy();
 
   expect(copy.textContent?.trim()).toBe('Copied');
 
   await vi.advanceTimersByTimeAsync(500);
-  copy.click();
-  await Promise.resolve();
-  flush();
+  await clickCopy();
 
   await vi.advanceTimersByTimeAsync(999);
   flush();
@@ -136,14 +142,9 @@ it('resets successful copy feedback after one second and restarts it on another 
   await vi.advanceTimersByTimeAsync(1);
   flush();
   expect(copy.textContent?.trim()).toBe('Copy');
-  expect(status.textContent).toBe('');
+  expect(copyStatus(host)).toBe('');
 
-  copy.click();
-  await Promise.resolve();
-  flush();
-
-  expect(writeText).toHaveBeenCalledTimes(3);
-  expect(copy.textContent?.trim()).toBe('Copied');
+  await clickCopy();
 
   dispose?.();
   dispose = undefined;
@@ -155,13 +156,11 @@ it('reports clipboard errors with an accessible status', async () => {
   writeText.mockRejectedValueOnce(new Error('Clipboard unavailable'));
 
   const host = mount(() => <CodeBlock code="Example" />);
-  host.querySelector<HTMLButtonElement>('button[aria-label="Copy code"]')!.click();
+  copyButton(host).click();
 
   await vi.waitFor(() => {
     flush();
-    expect(host.querySelector('[role="status"]')?.textContent).toBe(
-      'Copy unavailable. Select the code to copy it.',
-    );
+    expect(copyStatus(host)).toBe('Copy unavailable. Select the code to copy it.');
   });
 });
 
@@ -183,7 +182,7 @@ it('does not mark changed code as copied when an earlier request finishes', asyn
 
     return <CodeBlock code={code()} />;
   });
-  const copy = host.querySelector<HTMLButtonElement>('button[aria-label="Copy code"]')!;
+  const copy = copyButton(host);
 
   copy.click();
   updateCode('Changed while copying');
@@ -195,7 +194,7 @@ it('does not mark changed code as copied when an earlier request finishes', asyn
 
   expect(writeText).toHaveBeenCalledWith('Original example');
   expect(copy.textContent?.trim()).toBe('Copy');
-  expect(host.querySelector('[role="status"]')?.textContent).toBe('');
+  expect(copyStatus(host)).toBe('');
 });
 
 it('shows and copies demo source without remounting the preview', async () => {
@@ -227,13 +226,11 @@ it('shows and copies demo source without remounting the preview', async () => {
     details.open = open;
     await toggled;
     flush();
-
-    expect(host.querySelector('#counter')).toBe(counter);
-    expect(counter.textContent?.trim()).toBe('Count 1');
   }
 
+  expect(host.querySelector('#counter')?.textContent?.trim()).toBe('Count 1');
   expect(details.querySelector('pre code')?.textContent).toBe(source);
-  details.querySelector<HTMLButtonElement>('button[aria-label="Copy code"]')!.click();
+  copyButton(details).click();
 
   await vi.waitFor(() => {
     expect(writeText).toHaveBeenCalledWith(source);

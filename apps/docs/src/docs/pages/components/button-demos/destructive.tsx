@@ -1,5 +1,5 @@
-import { Button } from '@taxon-labs/fern/button';
-import { Icon } from '@taxon-labs/fern/icon';
+import { Button } from '@taxonlabs/fern/button';
+import { Icon } from '@taxonlabs/fern/icon';
 import { cdxIconTrash } from '@wikimedia/codex-icons';
 
 export default function ButtonDestructiveDemo() {

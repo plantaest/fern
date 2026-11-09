@@ -1,5 +1,5 @@
 import { type JSX, render } from '@solidjs/web';
-import colors from '@taxon-labs/fern/colors.json';
+import colors from '@taxonlabs/fern/colors.json';
 import { flush } from 'solid-js';
 import { afterEach, expect, it } from 'vitest';
 import ColorsPage from './colors.mdx';

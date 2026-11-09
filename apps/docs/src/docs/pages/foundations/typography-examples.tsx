@@ -25,35 +25,6 @@ export function TypographyFontFamilies() {
   );
 }
 
-const weights = [
-  { name: 'Normal', value: 400, class: 'font-normal' },
-  { name: 'Medium', value: 500, class: 'font-medium' },
-  { name: 'Semibold', value: 600, class: 'font-semibold' },
-  { name: 'Bold', value: 700, class: 'font-bold' },
-];
-
-export function TypographyFontWeights() {
-  return (
-    <div
-      class="
-        fern-not-prose grid grid-cols-4 gap-4 border-y border-line-subtle py-4
-        screen-small:grid-cols-2
-      "
-    >
-      <For each={weights}>
-        {(weight) => (
-          <div>
-            <p class={`text-base leading-md mb-2 ${weight.class}`}>{weight.name}</p>
-            <code class="font-mono text-extra-small text-content-subtle">
-              {weight.class} · {weight.value}
-            </code>
-          </div>
-        )}
-      </For>
-    </div>
-  );
-}
-
 const textStyles = [
   {
     name: 'H1',

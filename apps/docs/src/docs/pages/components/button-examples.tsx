@@ -3,8 +3,8 @@ import {
   type ButtonAction,
   type ButtonSize,
   type ButtonVariant,
-} from '@taxon-labs/fern/button';
-import { Icon } from '@taxon-labs/fern/icon';
+} from '@taxonlabs/fern/button';
+import { Icon } from '@taxonlabs/fern/icon';
 import { cdxIconEdit } from '@wikimedia/codex-icons';
 import { createMemo, createSignal, For, Show } from 'solid-js';
 import { CodeBlock, Field, fieldControlClasses, Preview, PreviewFrame } from '../../ui';

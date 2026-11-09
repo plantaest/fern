@@ -1,4 +1,4 @@
-import colors from '@taxon-labs/fern/colors.json';
+import colors from '@taxonlabs/fern/colors.json';
 import { createMemo, createSignal, For } from 'solid-js';
 import { Field, fieldControlClasses } from '../../ui';
 
@@ -68,7 +68,7 @@ export function ColorsRoles(props: { theme: Theme }) {
                     </code>
                     <span
                       class="
-                        token-value block text-content-subtle font-mono text-extra-small mt-1
+                        token-value block text-content-subtle font-mono text-extra-small
                       "
                     >
                       {value(token)}

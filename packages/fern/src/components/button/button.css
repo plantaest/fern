@@ -46,10 +46,6 @@
   text-decoration: none;
   box-shadow: none;
 
-  transition-property: color, background-color, border-color;
-  transition-duration: var(--fern-transition-duration-base);
-  transition-timing-function: var(--fern-transition-easing-base);
-
   & .fern-icon {
     width: var(--fern-button-icon-size);
     height: var(--fern-button-icon-size);
@@ -66,7 +62,6 @@
     color: var(--fern-button-fg-active);
     background: var(--fern-button-active);
     border-color: var(--fern-button-line-active);
-    transition-duration: 0ms;
   }
 
   &:focus-visible {
@@ -79,10 +74,6 @@
     background: var(--fern-background-color-disabled);
     border-color: transparent;
     text-decoration: none;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    transition: none;
   }
 }
 

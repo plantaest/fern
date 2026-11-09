@@ -54,7 +54,7 @@ importers:
       '@solidjs/web':
         specifier: 2.0.0-rc.21
         version: 2.0.0-rc.21(solid-js@2.0.0-rc.21)
-      '@taxon-labs/fern':
+      '@taxonlabs/fern':
         specifier: workspace:*
         version: link:../../packages/fern
       '@wikimedia/codex-icons':

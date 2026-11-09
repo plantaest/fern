@@ -18,7 +18,7 @@ Fern is a design system for software built by Taxon Labs for Vietnamese Wikipedi
 - Use pnpm from the repository root, with one workspace lockfile.
 - Use TypeScript, SolidJS 2, Tailwind CSS 4, and Kobalte. Solid 2 RC and Kobalte alpha are deliberate choices; do not silently switch to Solid 1.
 - Organize Docs pages under `src/docs/pages/foundations/` and `src/docs/pages/components/`. Keep each page's samples, playground, and explicit demo imports in a neighboring `*-examples.tsx` file, with standalone demo sources in its `*-demos/` directory and tests close to the pages they exercise.
-- Use Tailwind utilities without a prefix (`flex`, `gap-2`, `bg-surface-base`). Keep Fern component classes and `--fern-*` tokens namespaced. MediaWiki gadgets are intended to use Shadow DOM; the host fixture checks CSS isolation there. ResourceLoader integration remains future work.
+- Use Tailwind utilities without a prefix (`flex`, `gap-2`, `bg-surface-base`). Keep Fern component classes and `--fern-*` tokens namespaced. MediaWiki gadgets are intended to use Shadow DOM. ResourceLoader integration remains future work.
 
 ## Foundations
 
@@ -52,7 +52,7 @@ The Docs app bundles fonts locally with Vietnamese glyphs. Fern provides font st
 - Include the styling group in modifier class names: `fern-button-variant--outline`, `fern-button-action--destructive`, and `fern-button-size--icon`. Keep the base class `fern-button`.
 - Generated `colors.css` and `colors.json` come from `scripts/colors.mjs`. Change the generator rather than editing its output.
 - Numbered color token names separate the shade with a hyphen, such as `color-red-300` and `color-modifier-gray-100-translucent`. Preserve Codex values and semantic role names.
-- Keep licensing information in root `LICENSE` and `THIRD_PARTY_NOTICES.md`. Do not add copied dependency licenses or license-generation scripts unless explicitly requested.
+- Keep Fern's license in root `LICENSE`. Do not add copied dependency licenses or license-generation scripts unless explicitly requested.
 - Use CVA (`class-variance-authority`) for component variant classes. Keep semantic CSS classes and public styling APIs explicit; do not add Tailwind class merging without a concrete need.
 
 ## Docs conventions
@@ -62,7 +62,7 @@ The Docs app bundles fonts locally with Vietnamese glyphs. Fern provides font st
 - Declare pages, routes, groups, and section titles explicitly in `src/docs/navigation.ts`, importing titles and descriptions from frontmatter. Keep section titles consistent with MDX. Do not add automatic page discovery or API generation yet.
 - Keep build-time MDX plugins in `apps/docs/plugins/`. Resolve the MDX provider independently of page folder depth.
 - Use Tailwind utilities for layout, spacing, responsiveness, and visual samples. Share repeated presentation in `ui.tsx`. Keep Docs CSS for MDX defaults and structure-dependent rules in layers that utilities can override. Keep Docs-only token aliases local and reference Codex values.
-- Component pages present an introduction, basic example, API Reference, playground, examples, and accessibility notes, in that order.
+- Component pages present an introduction, basic example, playground, examples, API Reference, and accessibility notes, in that order.
 - In API tables, quote string literal types and defaults with straight double quotes, such as `"default" | "icon"`.
 
 ## Formatting
@@ -100,7 +100,7 @@ For changes limited to Markdown documentation, run `pnpm check`; a dev server an
 
 For visual or interaction changes, check Light and Dark, narrow screens, and keyboard behavior. Give icon-only controls accessible names. Test reactive props and ensure ordinary buttons do not submit forms.
 
-When changing shared CSS, themes, or embedding behavior, use `/checks/mediawiki.html` during development to verify that host controls retain their styling. Keep the fixture and its instructions in the Docs README; do not accumulate historical verification reports or screenshots in the repository.
+When changing MediaWiki embedding behavior, verify in a representative host that Fern styles stay inside the shadow root and host controls retain their styling.
 
 Keep prerelease compatibility explicit. A successful Docs build does not prove a tarball works elsewhere. Do not claim SSR, ResourceLoader integration, or stable release support before verifying them.
 

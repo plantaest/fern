@@ -5,7 +5,6 @@ description: Shared font tokens for interfaces and documents.
 
 import {
   TypographyFontFamilies,
-  TypographyFontWeights,
   TypographyInterfaceText,
   TypographyTextStyles,
 } from './typography-examples';
@@ -19,51 +18,55 @@ Fern provides font stacks. Applications load font files; the stacks fall back to
 
 ## Scales
 
-Size, weight, and line-height are independent tokens. Use them in CSS or through the optional Tailwind adapter, which provides the utilities below.
+Font size, line height, and weight use independent scales. Use the CSS variables inside `.fern` or the matching utilities from the optional Tailwind adapter.
 
-<div class="grid grid-cols-2 gap-6 screen-small:grid-cols-1">
-<div>
+Pixel equivalents assume a 16px root font size. Unitless line height scales with the element's font size.
 
-<p class="font-medium mb-3">Size</p>
+### Font sizes
 
-| Utility     | Size |
-| ----------- | ---- |
-| `text-xs`   | 12px |
-| `text-sm`   | 14px |
-| `text-base` | 16px |
-| `text-lg`   | 18px |
-| `text-xl`   | 22px |
-| `text-2xl`  | 28px |
-| `text-3xl`  | 36px |
+<div class="max-w-full overflow-x-auto">
 
-</div>
-<div>
-
-<p class="font-medium mb-3">Line-height</p>
-
-| Utility          | Line-height      |
-| ---------------- | ---------------- |
-| `leading-sm`     | 20px             |
-| `leading-md`     | 24px             |
-| `leading-lg`     | 28px             |
-| `leading-xl`     | 36px             |
-| `leading-2xl`    | 44px             |
-| `leading-normal` | 1.625 (unitless) |
-
-</div>
-</div>
-
-<div>
-
-<p class="font-medium mb-3">Weight</p>
-
-<TypographyFontWeights />
+| Size            | CSS variable                 | Tailwind utility |
+| --------------- | ---------------------------- | ---------------- |
+| 0.75rem (12px)  | `--fern-font-size-x-small`   | `text-xs`        |
+| 0.875rem (14px) | `--fern-font-size-small`     | `text-sm`        |
+| 1rem (16px)     | `--fern-font-size-medium`    | `text-base`      |
+| 1.125rem (18px) | `--fern-font-size-large`     | `text-lg`        |
+| 1.375rem (22px) | `--fern-font-size-x-large`   | `text-xl`        |
+| 1.75rem (28px)  | `--fern-font-size-xx-large`  | `text-2xl`       |
+| 2.25rem (36px)  | `--fern-font-size-xxx-large` | `text-3xl`       |
 
 </div>
 
-Sizes and fixed line-heights use rem. Pixel values assume a 16px root font size. These utilities follow Fern's scale.
+### Line heights
 
-Use the same tokens directly in CSS inside `.fern`:
+<div class="max-w-full overflow-x-auto">
+
+| Line height      | CSS variable                  | Tailwind utility |
+| ---------------- | ----------------------------- | ---------------- |
+| 1.25rem (20px)   | `--fern-line-height-small`    | `leading-sm`     |
+| 1.5rem (24px)    | `--fern-line-height-medium`   | `leading-md`     |
+| 1.75rem (28px)   | `--fern-line-height-large`    | `leading-lg`     |
+| 2.25rem (36px)   | `--fern-line-height-x-large`  | `leading-xl`     |
+| 2.75rem (44px)   | `--fern-line-height-xx-large` | `leading-2xl`    |
+| 1.625 (unitless) | `--fern-line-height-normal`   | `leading-normal` |
+
+</div>
+
+### Font weights
+
+<div class="max-w-full overflow-x-auto">
+
+| Weight   | Value | CSS variable                  | Tailwind utility |
+| -------- | ----- | ----------------------------- | ---------------- |
+| Normal   | 400   | `--fern-font-weight-normal`   | `font-normal`    |
+| Medium   | 500   | `--fern-font-weight-medium`   | `font-medium`    |
+| Semibold | 600   | `--fern-font-weight-semibold` | `font-semibold`  |
+| Bold     | 700   | `--fern-font-weight-bold`     | `font-bold`      |
+
+</div>
+
+Combine one token from each scale to style an interface label:
 
 ```css
 .label {
@@ -109,6 +112,8 @@ Use `fern-prose` inside `.fern` for document HTML or rendered Markdown. It style
 ```
 
 Set `--fern-prose-flow` on the container to adjust block spacing. It defaults to 16px. Add `fern-not-prose` to embedded UI to exclude its elements from prose styles.
+
+The example below shows how `fern-prose` styles a document.
 
 ### Small tools, shared knowledge
 

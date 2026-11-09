@@ -1,4 +1,4 @@
-import { Icon } from '@taxon-labs/fern/icon';
+import { Icon } from '@taxonlabs/fern/icon';
 import {
   cdxIconAdd,
   cdxIconArrowNext,

@@ -15,7 +15,7 @@
     "@fontsource-variable/source-serif-4": "^5.3.1",
     "@solidjs/router": "2.0.0-next.44",
     "@solidjs/web": "2.0.0-rc.21",
-    "@taxon-labs/fern": "workspace:*",
+    "@taxonlabs/fern": "workspace:*",
     "@wikimedia/codex-icons": "2.7.0",
     "github-slugger": "2.0.0",
     "serve": "^14.2.7",

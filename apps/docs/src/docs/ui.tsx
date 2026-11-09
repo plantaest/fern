@@ -1,5 +1,5 @@
 import { dynamic, type JSX } from '@solidjs/web';
-import { Icon } from '@taxon-labs/fern/icon';
+import { Icon } from '@taxonlabs/fern/icon';
 import { cdxIconCheck, cdxIconCopy } from '@wikimedia/codex-icons';
 import { type Component, createEffect, createSignal, For, Show } from 'solid-js';
 import { type CodeToken, highlightCode } from './highlight';
