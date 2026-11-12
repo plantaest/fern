@@ -35,7 +35,7 @@ pnpm pack:check
 
 Automatic CI is disabled during early development. The GitHub Actions workflow can run these checks manually, using Ubuntu, Node 22, and the pnpm version declared in `package.json`.
 
-Tests cover color fidelity, selected contrast pairs, Button behavior, and MDX.
+Tests cover color fidelity, selected contrast pairs, component behavior, and MDX.
 
 ## Package status
 

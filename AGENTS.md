@@ -17,7 +17,7 @@ Fern is a design system for software built by Taxon Labs for Vietnamese Wikipedi
 - `scripts/check-package.mjs`: verify a packed tarball in a clean application without workspace overrides or Tailwind.
 - Use pnpm from the repository root, with one workspace lockfile.
 - Use TypeScript, SolidJS 2, Tailwind CSS 4, and Kobalte. Solid 2 RC and Kobalte alpha are deliberate choices; do not silently switch to Solid 1.
-- Organize Docs pages under `src/docs/pages/foundations/` and `src/docs/pages/components/`. Keep each page's samples, playground, and explicit demo imports in a neighboring `*-examples.tsx` file, with standalone demo sources in its `*-demos/` directory and tests close to the pages they exercise.
+- Organize Docs pages under `src/docs/pages/foundations/` and `src/docs/pages/components/`. Keep samples, playgrounds, and explicit demo imports in a neighboring `*-examples.tsx` file. Put standalone demos in `*-demos/` and keep tests close to the pages they exercise.
 - Use Tailwind utilities without a prefix (`flex`, `gap-2`, `bg-surface-base`). Keep Fern component classes and `--fern-*` tokens namespaced. MediaWiki gadgets are intended to use Shadow DOM. ResourceLoader integration remains future work.
 
 ## Foundations
@@ -45,6 +45,8 @@ The Docs app bundles fonts locally with Vietnamese glyphs. Fern provides font st
 - Use direct namespaced component selectors (`.fern-button`, `.fern-icon`) in the `components` layer, assigned by `@import "..." layer(components)` in `styles.css`, so utilities can override them. Keep component CSS free of layer wrappers. Keep `.fern` for theme tokens, fonts, and scoped resets rather than repeating it in component selectors.
 - Keep core CSS independent of the Tailwind compiler. Use standard CSS such as `calc(var(--fern-spacing) * 2)`; Tailwind belongs to Docs and the optional adapter.
 - Keep each component's TSX, CSS, and tests together in its own directory under `packages/fern/src/components/`. Keep shared `.fern` setup in `foundations/base.css`; `styles.css` declares layer order and imports the foundations and component styles.
+- When adding a public component, update the root export, subpath export, Vite entry, and stylesheet import together. Register its route and sections in Docs when adding a page.
+- When updating Solid or build tooling, review the workspace manifests, overrides, and pins in `scripts/check-package.mjs` together. Keep the clean consumer free of workspace overrides.
 - Use `.fern-prose` for document HTML and `.fern-not-prose` for embedded UI. Derive document block spacing from `--fern-prose-flow`. Keep document styles in `foundations/prose.css`, with low specificity and no content width or page layout. Font family tokens are `--fern-font-sans`, `--fern-font-serif`, and `--fern-font-mono`.
 - Keep font size, weight, and line-height tokens independent of heading levels and components. Prose, components, and Tailwind text presets combine the shared scales. Body leading stays unitless; fixed leading values use rem.
 - Tailwind color aliases use `content-*`, `surface-*`, and `line-*` in `@theme`; choose the matching role for each CSS property (`text-content-progressive`, `bg-surface-progressive`, `border-line-progressive`). Use `text-content-base` for base text color; `text-base` remains a font-size utility.
@@ -62,8 +64,7 @@ The Docs app bundles fonts locally with Vietnamese glyphs. Fern provides font st
 - Declare pages, routes, groups, and section titles explicitly in `src/docs/navigation.ts`, importing titles and descriptions from frontmatter. Keep section titles consistent with MDX. Do not add automatic page discovery or API generation yet.
 - Keep build-time MDX plugins in `apps/docs/plugins/`. Resolve the MDX provider independently of page folder depth.
 - Use Tailwind utilities for layout, spacing, responsiveness, and visual samples. Share repeated presentation in `ui.tsx`. Keep Docs CSS for MDX defaults and structure-dependent rules in layers that utilities can override. Keep Docs-only token aliases local and reference Codex values.
-- Component pages present an introduction, basic example, playground, examples, API Reference, and accessibility notes, in that order.
-- In API tables, quote string literal types and defaults with straight double quotes, such as `"default" | "icon"`.
+- Component pages present an introduction, playground, optional examples, API Reference, and accessibility notes, in that order. Follow the [Docs README](apps/docs/README.md) for API tables and playground conventions.
 
 ## Formatting
 
@@ -96,7 +97,9 @@ Install dependencies with `pnpm install --frozen-lockfile`. For browser checks, 
 
 Docs uses `http://127.0.0.1:4321/`. Keep the port and host in its Vite configuration, with `strictPort` enabled.
 
-For changes limited to Markdown documentation, run `pnpm check`; a dev server and runtime checks are unnecessary. For code, configuration, styles, or MDX changes, run `pnpm check`, `pnpm typecheck`, `pnpm test`, and `pnpm build`. Also run `pnpm pack:check` when changing exports, dependencies, build output, or styles. The package check uses npm network access and a temporary directory.
+For changes limited to Markdown documentation, run `pnpm check`. For code, configuration, styles, or MDX changes, run `pnpm check`, `pnpm typecheck`, `pnpm test`, and `pnpm build`. Also run `pnpm pack:check` for changes that can affect the tarball, such as package exports, dependencies, styles, or the package build pipeline. The package check uses npm network access and a temporary directory.
+
+Test component-specific behavior in the component tests. The clean consumer exercises representative runtime behavior and checks all declared export targets. Extend it when a change introduces a packaging path the existing example does not exercise.
 
 For visual or interaction changes, check Light and Dark, narrow screens, and keyboard behavior. Give icon-only controls accessible names. Test reactive props and ensure ordinary buttons do not submit forms.
 
@@ -106,7 +109,7 @@ Keep prerelease compatibility explicit. A successful Docs build does not prove a
 
 ## Later
 
-Additional themes, ResourceLoader integration, automatic skin theme detection, and components beyond Kobalte remain future work. Add components after reviewing Button.
+Additional themes, ResourceLoader integration, automatic skin theme detection, and components beyond Kobalte remain future work.
 
 ## References
 
