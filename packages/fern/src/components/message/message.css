@@ -1,0 +1,73 @@
+.fern-message {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: start;
+  gap: calc(var(--fern-spacing) * 2);
+
+  font:
+    var(--fern-font-weight-normal) var(--fern-font-size-small) / var(--fern-line-height-small)
+    var(--fern-font-sans);
+  color: var(--fern-color-base);
+  overflow-wrap: anywhere;
+}
+
+.fern-message-icon {
+  margin-block-start: calc((var(--fern-line-height-small) - 1rem) / 2);
+  color: var(--fern-message-icon-color);
+}
+
+.fern-message:has(> .fern-message-close) {
+  grid-template-columns: auto minmax(0, 1fr) auto;
+}
+
+.fern-message-close {
+  /* Center the button on the first line while keeping its full hit area. */
+  margin-block: calc((var(--fern-line-height-small) - var(--fern-button-size)) / 2);
+}
+
+.fern-message-content {
+  min-block-size: var(--fern-line-height-small);
+}
+
+.fern-message-title {
+  font-weight: var(--fern-font-weight-semibold);
+}
+
+.fern-message-title + .fern-message-body:not(:empty) {
+  margin-block-start: calc(var(--fern-spacing) / 2);
+}
+
+.fern-message-layout--block {
+  padding: calc(var(--fern-spacing) * 3);
+  border: 1px solid var(--fern-message-border-color);
+  border-radius: var(--fern-radius-base);
+  background: var(--fern-message-background);
+}
+
+.fern-message-type--notice {
+  --fern-message-icon-color: var(--fern-color-notice);
+  --fern-message-border-color: var(--fern-border-color-notice);
+  --fern-message-background: var(--fern-background-color-notice-subtle);
+}
+
+.fern-message-type--success {
+  --fern-message-icon-color: var(--fern-color-success);
+  --fern-message-border-color: var(--fern-border-color-success);
+  --fern-message-background: var(--fern-background-color-success-subtle);
+}
+
+.fern-message-type--warning {
+  --fern-message-icon-color: var(--fern-color-warning);
+  --fern-message-border-color: var(--fern-border-color-warning);
+  --fern-message-background: var(--fern-background-color-warning-subtle);
+}
+
+.fern-message-type--error {
+  --fern-message-icon-color: var(--fern-color-error);
+  --fern-message-border-color: var(--fern-border-color-error);
+  --fern-message-background: var(--fern-background-color-error-subtle);
+}
+
+.fern-message-layout--inline.fern-message-type--error {
+  color: var(--fern-color-error);
+}

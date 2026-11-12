@@ -4,3 +4,4 @@
 @import "./foundations/prose.css" layer(components);
 @import "./components/icon/icon.css" layer(components);
 @import "./components/button/button.css" layer(components);
+@import "./components/message/message.css" layer(components);

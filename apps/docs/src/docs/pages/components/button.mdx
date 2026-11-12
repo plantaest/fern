@@ -5,7 +5,6 @@ description: Trigger an action. Use a link when the destination changes.
 
 import { Example } from '../../ui';
 import {
-  ButtonBasic,
   ButtonPlayground,
   buttonVariantsExample,
   buttonActionsExample,
@@ -17,8 +16,6 @@ import {
   buttonLinkExample,
   buttonLinkVariantsExample,
 } from './button-examples';
-
-<ButtonBasic />
 
 ## Playground
 
@@ -74,24 +71,21 @@ Use `buttonVariants()` to style a native anchor directly.
 
 ## API Reference
 
-Use `variant` for style and `action` for meaning.
+<div class="fern-docs-api-table" role="region" aria-labelledby="api-reference" tabindex="0">
 
-<div class="max-w-full overflow-x-auto border-y border-line-subtle fern-docs-api-table">
-
-| Prop       | Type                                                            | Default     |
-| ---------- | --------------------------------------------------------------- | ----------- |
-| `variant`  | `"solid" \| "soft" \| "surface" \| "outline" \| "ghost"`        | `"solid"`   |
-| `action`   | `"neutral" \| "progressive" \| "destructive"`                   | `"neutral"` |
-| `size`     | `"sm" \| "default" \| "lg" \| "icon-sm" \| "icon" \| "icon-lg"` | `"default"` |
-| `disabled` | `boolean`                                                       | `false`     |
-| `type`     | `"button" \| "submit" \| "reset"`                               | `"button"`  |
-| `class`    | `string`                                                        | —           |
-| `children` | Text, icons, or other JSX                                       | —           |
-| `as`       | Element or component                                            | `"button"`  |
+| Prop       | Type                                                                                               | Default     | Description                                                                                                                |
+| ---------- | -------------------------------------------------------------------------------------------------- | ----------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `variant`  | `"solid"`<br />`\| "soft"`<br />`\| "surface"`<br />`\| "outline"`<br />`\| "ghost"`               | `"solid"`   | Selects the visual style.                                                                                                  |
+| `action`   | `"neutral"`<br />`\| "progressive"`<br />`\| "destructive"`                                        | `"neutral"` | Conveys the meaning of the action.                                                                                         |
+| `size`     | `"sm"`<br />`\| "default"`<br />`\| "lg"`<br />`\| "icon-sm"`<br />`\| "icon"`<br />`\| "icon-lg"` | `"default"` | Sets the size. Use an icon size for buttons with no visible text.                                                          |
+| `disabled` | `boolean`                                                                                          | `false`     | Prevents activation.                                                                                                       |
+| `type`     | `"button"`<br />`\| "submit"`<br />`\| "reset"`                                                    | `"button"`  | Sets the native button behavior in a form.                                                                                 |
+| `class`    | `string`                                                                                           | —           | Adds CSS classes to the rendered element.                                                                                  |
+| `children` | Text or JSX                                                                                        | —           | Content of the button, including its label and any icons.                                                                  |
+| `as`       | Element or component                                                                               | `"button"`  | Renders another element or component. Use an anchor for navigation.                                                        |
+| `...props` | Props of the rendered target                                                                       | —           | Forwards other props, events, and the ref. See the [Kobalte Button API](https://kobalte.dev/docs/core/components/button/). |
 
 </div>
-
-Supports props, refs, and events for the rendered element or component. See the [Kobalte Button API](https://kobalte.dev/docs/core/components/button/).
 
 ## Accessibility
 

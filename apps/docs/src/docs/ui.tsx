@@ -11,10 +11,6 @@ export const fieldControlClasses = `
 `;
 
 const previewClasses = {
-  basic: `
-    flex-wrap gap-4 py-7 px-6 border border-line-subtle rounded-base
-    screen-small:py-6 screen-small:px-4
-  `,
   example: `
     min-h-28 flex-wrap justify-center gap-3 py-8 px-6
     screen-small:py-6 screen-small:px-4

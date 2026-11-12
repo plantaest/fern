@@ -182,19 +182,6 @@ export function ButtonPlayground() {
   );
 }
 
-export function ButtonBasic() {
-  const [basicCount, setBasicCount] = createSignal(0);
-
-  return (
-    <Preview kind="basic">
-      <Button onClick={() => setBasicCount((n) => n + 1)}>Save changes</Button>
-      <span class="text-small text-content-subtle" role="status">
-        {basicCount() ? 'Changes saved' : 'Built with Kobalte'}
-      </span>
-    </Preview>
-  );
-}
-
 export const buttonVariantsExample = {
   component: ButtonVariantsDemo,
   source: variantsSource,

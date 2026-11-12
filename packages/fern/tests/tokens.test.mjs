@@ -17,6 +17,7 @@ const styles = (
       'src/foundations/prose.css',
       'src/components/icon/icon.css',
       'src/components/button/button.css',
+      'src/components/message/message.css',
     ].map((file) => readFile(file, 'utf8')),
   )
 ).join('\n');
@@ -74,7 +75,7 @@ function contrast(a, b) {
   return (high + 0.05) / (low + 0.05);
 }
 
-test('used text and focus pairs meet their contrast thresholds in both themes', () => {
+test('used text, icon, and focus pairs meet their contrast thresholds in both themes', () => {
   for (const [mode, colors] of Object.entries(json)) {
     const pairs = [
       ['color-base', 'background-color-base', 4.5],
@@ -86,6 +87,12 @@ test('used text and focus pairs meet their contrast thresholds in both themes', 
         4.5,
       ]),
       ['border-color-progressive--focus', 'background-color-base', 3],
+      ['color-error', 'background-color-base', 4.5],
+      ...['notice', 'success', 'warning', 'error'].flatMap((status) => [
+        ['color-base', `background-color-${status}-subtle`, 4.5],
+        [`color-${status}`, `background-color-${status}-subtle`, 3],
+        [`color-${status}`, 'background-color-base', 3],
+      ]),
       ...['progressive', 'destructive'].flatMap((role) =>
         ['', '--hover', '--active'].flatMap((state) => [
           ['color-inverted-fixed', `background-color-${role}${state}`, 4.5],

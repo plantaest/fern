@@ -1,5 +1,6 @@
 import type { Component } from 'solid-js';
 import ButtonPage, { frontmatter as buttonMetadata } from './pages/components/button.mdx';
+import MessagePage, { frontmatter as messageMetadata } from './pages/components/message.mdx';
 import ColorsPage, { frontmatter as colorsMetadata } from './pages/foundations/colors.mdx';
 import IconsPage, { frontmatter as iconsMetadata } from './pages/foundations/icons.mdx';
 import RadiusPage, { frontmatter as radiusMetadata } from './pages/foundations/radius.mdx';
@@ -69,5 +70,13 @@ export const pages = [
     description: buttonMetadata.description,
     sections: ['Playground', 'Examples', 'API Reference', 'Accessibility'],
     component: ButtonPage,
+  },
+  {
+    path: '/components/message',
+    group: 'Components',
+    title: messageMetadata.title,
+    description: messageMetadata.description,
+    sections: ['Playground', 'API Reference', 'Accessibility'],
+    component: MessagePage,
   },
 ] as const satisfies readonly DocPage[];

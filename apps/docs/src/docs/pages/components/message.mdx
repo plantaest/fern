@@ -1,0 +1,36 @@
+---
+title: Message
+description: Show notices, confirmations, warnings, and errors.
+---
+
+import { MessagePlayground } from './message-examples';
+
+## Playground
+
+Use a block message for feedback about a task or page. Set `inline` for feedback next to a control.
+
+<MessagePlayground />
+
+## API Reference
+
+<div class="fern-docs-api-table" role="region" aria-labelledby="api-reference" tabindex="0">
+
+| Prop               | Type                                                                 | Default    | Description                                                                                          |
+| ------------------ | -------------------------------------------------------------------- | ---------- | ---------------------------------------------------------------------------------------------------- |
+| `type`             | `"notice"`<br />`\| "success"`<br />`\| "warning"`<br />`\| "error"` | `"notice"` | Selects the feedback colors and default icon.                                                        |
+| `inline`           | `boolean`                                                            | `false`    | Removes the background, border, and padding. Inline errors use red text.                             |
+| `icon`             | Codex icon                                                           | —          | Replaces the default icon for any type.                                                              |
+| `title`            | `string`                                                             | —          | Shows a title above the message content.                                                             |
+| `children`         | Text or JSX                                                          | —          | Content of the message.                                                                              |
+| `withCloseButton`  | `boolean`                                                            | `false`    | Shows a close button on a block message. Requires `onClose`.                                         |
+| `closeButtonLabel` | `string`                                                             | `"Close"`  | Accessible name of the close button. Set it to match the user's language.                            |
+| `onClose`          | `() => void`                                                         | —          | Called when the user activates the close button. Remove the message in this callback if appropriate. |
+| `...props`         | Native div props                                                     | —          | Forwards other attributes, events, and the ref to the root `div`.                                    |
+
+</div>
+
+## Accessibility
+
+- Explain the status in the text. The icon is decorative and hidden from assistive technology.
+- For inline validation, set `aria-invalid="true"` on the control and point `aria-describedby` to the Message's `id`.
+- Errors default to `role="alert"`. Notice, success, and warning default to `aria-live="polite"`.

@@ -2,9 +2,10 @@
 
 ## Unreleased
 
-- A reusable Solid package with Button, decorative Codex Icons, public types, and compiled CSS.
+- A reusable Solid package with Button, Message, decorative Codex Icons, public types, and compiled CSS.
 - Light and Dark themes preserving Codex 2.7.0 colors and semantic roles, scoped to `.fern`. Independent typography tokens, shared spacing, radius, and transition tokens, document styles with visited link states and adjustable block spacing through `.fern-prose`, color data, and an optional Tailwind 4 adapter.
 - Button with separate visual variants and semantic actions, three sizes with matching icon-only forms, and polymorphic rendering. Navigation uses native anchors.
+- Message with four feedback statuses, block and inline layouts, optional titles and custom icons, and an app-controlled close button.
 - Fern Docs with MDX pages, syntax-highlighted code blocks, interactive playgrounds, standalone demos for previews and displayed source, and pathname routing.
 - Formatting, linting, component and Docs tests, clean tarball verification, and manually triggered CI.
 

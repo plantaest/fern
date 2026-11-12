@@ -8,3 +8,6 @@ export { Button, buttonVariants } from './components/button/button.jsx';
 
 export type { IconProps } from './components/icon/icon.jsx';
 export { Icon } from './components/icon/icon.jsx';
+
+export type { MessageProps, MessageType } from './components/message/message.jsx';
+export { Message } from './components/message/message.jsx';

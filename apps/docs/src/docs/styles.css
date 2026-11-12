@@ -112,19 +112,22 @@
   }
 
   .fern-docs-api-table {
+    max-width: 100%;
+    overflow-x: auto;
+    border-block: 1px solid var(--fern-border-color-subtle);
+
     & code {
       padding: 0;
       border-radius: 0;
       background: transparent;
     }
 
-    & th:first-child,
     & th:last-child {
-      width: 18%;
+      width: 55%;
+      min-width: 12rem;
     }
 
-    & td:first-child code,
-    & td:last-child code {
+    & td:not(:last-child) code {
       white-space: nowrap;
     }
   }

@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { execFileSync } from 'node:child_process';
-import { mkdtemp, readdir, readFile, rm, writeFile } from 'node:fs/promises';
+import { access, mkdtemp, readdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 
@@ -109,6 +109,15 @@ it('renders packed exports and updates a reactive prop', () => {
     '--ignore-scripts',
     ...(process.argv.includes('--strict-peers') ? ['--strict-peer-dependencies'] : []),
   ]);
+
+  const installedFern = join(temp, 'node_modules/@taxonlabs/fern');
+  const { exports: packedExports } = JSON.parse(
+    await readFile(join(installedFern, 'package.json'), 'utf8'),
+  );
+  const exportTargets = Object.values(packedExports).flatMap((entry) =>
+    typeof entry === 'string' ? [entry] : Object.values(entry),
+  );
+  await Promise.all(exportTargets.map((target) => access(join(installedFern, target))));
 
   const runtimes = (await readdir(join(temp, 'node_modules/.pnpm'))).filter((name) =>
     /^(solid-js|@solidjs\+(?:web|signals))@/.test(name),

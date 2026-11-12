@@ -140,6 +140,14 @@
 }
 
 .fern-button-variant--ghost {
+  &:not(:disabled, [data-disabled]):is(:hover, :active) {
+    mix-blend-mode: multiply;
+
+    :where(.fern[data-theme="dark"]) & {
+      mix-blend-mode: screen;
+    }
+  }
+
   &:is(:disabled, [data-disabled]) {
     color: var(--fern-color-disabled);
     background: transparent;
