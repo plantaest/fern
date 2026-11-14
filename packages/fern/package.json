@@ -32,6 +32,11 @@
       "solid": "./dist/source/components/message/message.jsx",
       "default": "./dist/message.js"
     },
+    "./separator": {
+      "types": "./dist/source/components/separator/separator.d.ts",
+      "solid": "./dist/source/components/separator/separator.jsx",
+      "default": "./dist/separator.js"
+    },
     "./styles.css": "./dist/styles.css",
     "./colors.css": "./dist/colors.css",
     "./colors.json": "./dist/colors.json",

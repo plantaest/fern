@@ -1,0 +1,15 @@
+.fern-separator {
+  flex-shrink: 0;
+  inline-size: 100%;
+  margin: 0;
+  border: 0 solid var(--fern-border-color-divider);
+  border-block-start-width: 1px;
+}
+
+.fern-separator-orientation--vertical {
+  align-self: stretch;
+  inline-size: 0;
+  min-block-size: 1rem;
+  border-block-start-width: 0;
+  border-inline-start-width: 1px;
+}

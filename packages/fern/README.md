@@ -21,16 +21,17 @@ Import icons from `@wikimedia/codex-icons` and render them with `Icon`. Icons ar
 
 ## Public exports
 
-| Entry           | Contents                                                 |
-| --------------- | -------------------------------------------------------- |
-| Package root    | Button, Icon, Message, their types, and `buttonVariants` |
-| `/button`       | Button, `buttonVariants`, and Button types               |
-| `/icon`         | Icon and its props                                       |
-| `/message`      | Message and its types                                    |
-| `/styles.css`   | Themes, shared setup, and component CSS                  |
-| `/colors.css`   | Color tokens for Light and Dark only                     |
-| `/colors.json`  | Color values keyed by theme and token name               |
-| `/tailwind.css` | Optional Tailwind 4 theme adapter                        |
+| Entry           | Contents                                                            |
+| --------------- | ------------------------------------------------------------------- |
+| Package root    | Button, Icon, Message, Separator, their types, and `buttonVariants` |
+| `/button`       | Button, `buttonVariants`, and Button types                          |
+| `/icon`         | Icon and its props                                                  |
+| `/message`      | Message and its types                                               |
+| `/separator`    | Separator and its types                                             |
+| `/styles.css`   | Themes, shared setup, and component CSS                             |
+| `/colors.css`   | Color tokens for Light and Dark only                                |
+| `/colors.json`  | Color values keyed by theme and token name                          |
+| `/tailwind.css` | Optional Tailwind 4 theme adapter                                   |
 
 ## Styling
 

@@ -11,6 +11,7 @@ export default defineConfig({
         button: 'src/components/button/button.tsx',
         icon: 'src/components/icon/icon.tsx',
         message: 'src/components/message/message.tsx',
+        separator: 'src/components/separator/separator.tsx',
       },
       formats: ['es'],
       fileName: (_format, name) => `${name}.js`,

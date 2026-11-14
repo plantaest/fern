@@ -11,3 +11,6 @@ export { Icon } from './components/icon/icon.jsx';
 
 export type { MessageProps, MessageType } from './components/message/message.jsx';
 export { Message } from './components/message/message.jsx';
+
+export type { SeparatorOrientation, SeparatorProps } from './components/separator/separator.jsx';
+export { Separator } from './components/separator/separator.jsx';

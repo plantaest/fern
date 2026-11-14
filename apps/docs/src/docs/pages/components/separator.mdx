@@ -1,0 +1,48 @@
+---
+title: Separator
+description: Separate sections or groups of items with a line.
+---
+
+import { Example } from '../../ui';
+import {
+  separatorHorizontalExample,
+  separatorResponsiveExample,
+  separatorVerticalExample,
+} from './separator-examples';
+
+## Examples
+
+### Horizontal
+
+Use the default orientation between stacked sections. Set the space around the line in the surrounding layout.
+
+<Example demo={separatorHorizontalExample} />
+
+### Vertical
+
+Set `orientation="vertical"` for items side by side. The line stretches to the height of its flex or grid row.
+
+<Example demo={separatorVerticalExample} />
+
+### Responsive
+
+Resize the window to see the horizontal separator switch to vertical at Tailwind's `lg` breakpoint.
+
+<Example demo={separatorResponsiveExample} />
+
+## API Reference
+
+<div class="fern-docs-api-table" role="region" aria-labelledby="api-reference" tabindex="0">
+
+| Prop          | Type                                | Default        | Description                                                   |
+| ------------- | ----------------------------------- | -------------- | ------------------------------------------------------------- |
+| `orientation` | `"horizontal"`<br />`\| "vertical"` | `"horizontal"` | Sets the direction of the line.                               |
+| `decorative`  | `boolean`                           | `false`        | Hides the line from assistive technology.                     |
+| `...props`    | Native `hr` props                   | —              | Forwards attributes, events, and the ref to the `hr` element. |
+
+</div>
+
+## Accessibility
+
+- Use `decorative` for a visual line between items that already have a clear structure, such as links in one navigation group.
+- A semantic vertical separator sets `aria-orientation="vertical"`. Separators are static and stay out of the tab order.

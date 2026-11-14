@@ -64,7 +64,7 @@ The Docs app bundles fonts locally with Vietnamese glyphs. Fern provides font st
 - Declare pages, routes, groups, and section titles explicitly in `src/docs/navigation.ts`, importing titles and descriptions from frontmatter. Keep section titles consistent with MDX. Do not add automatic page discovery or API generation yet.
 - Keep build-time MDX plugins in `apps/docs/plugins/`. Resolve the MDX provider independently of page folder depth.
 - Use Tailwind utilities for layout, spacing, responsiveness, and visual samples. Share repeated presentation in `ui.tsx`. Keep Docs CSS for MDX defaults and structure-dependent rules in layers that utilities can override. Keep Docs-only token aliases local and reference Codex values.
-- Component pages present an introduction, playground, optional examples, API Reference, and accessibility notes, in that order. Follow the [Docs README](apps/docs/README.md) for API tables and playground conventions.
+- Component pages present an introduction, a playground and examples as needed, API Reference, and accessibility notes, in that order. Follow the [Docs README](apps/docs/README.md) for API tables and playground conventions.
 
 ## Formatting
 
