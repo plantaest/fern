@@ -21,17 +21,14 @@ Import icons from `@wikimedia/codex-icons` and render them with `Icon`. Icons ar
 
 ## Public exports
 
-| Entry           | Contents                                                            |
-| --------------- | ------------------------------------------------------------------- |
-| Package root    | Button, Icon, Message, Separator, their types, and `buttonVariants` |
-| `/button`       | Button, `buttonVariants`, and Button types                          |
-| `/icon`         | Icon and its props                                                  |
-| `/message`      | Message and its types                                               |
-| `/separator`    | Separator and its types                                             |
-| `/styles.css`   | Themes, shared setup, and component CSS                             |
-| `/colors.css`   | Color tokens for Light and Dark only                                |
-| `/colors.json`  | Color values keyed by theme and token name                          |
-| `/tailwind.css` | Optional Tailwind 4 theme adapter                                   |
+Import components and their types from `@taxonlabs/fern` or a component subpath such as `@taxonlabs/fern/button`. Browse [Fern Docs](https://fern.toolforge.org/) for component APIs and examples. The `exports` field in [package.json](package.json) lists all public entry points.
+
+| Entry           | Contents                                   |
+| --------------- | ------------------------------------------ |
+| `/styles.css`   | Themes, shared setup, and component CSS    |
+| `/colors.css`   | Color tokens for Light and Dark only       |
+| `/colors.json`  | Color values keyed by theme and token name |
+| `/tailwind.css` | Optional Tailwind 4 theme adapter          |
 
 ## Styling
 

@@ -14,3 +14,6 @@ export { Message } from './components/message/message.jsx';
 
 export type { SeparatorOrientation, SeparatorProps } from './components/separator/separator.jsx';
 export { Separator } from './components/separator/separator.jsx';
+
+export type { SkeletonProps } from './components/skeleton/skeleton.jsx';
+export { Skeleton } from './components/skeleton/skeleton.jsx';

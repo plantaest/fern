@@ -37,6 +37,11 @@
       "solid": "./dist/source/components/separator/separator.jsx",
       "default": "./dist/separator.js"
     },
+    "./skeleton": {
+      "types": "./dist/source/components/skeleton/skeleton.d.ts",
+      "solid": "./dist/source/components/skeleton/skeleton.jsx",
+      "default": "./dist/skeleton.js"
+    },
     "./styles.css": "./dist/styles.css",
     "./colors.css": "./dist/colors.css",
     "./colors.json": "./dist/colors.json",

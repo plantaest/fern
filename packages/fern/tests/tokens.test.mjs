@@ -19,6 +19,7 @@ const styles = (
       'src/components/button/button.css',
       'src/components/message/message.css',
       'src/components/separator/separator.css',
+      'src/components/skeleton/skeleton.css',
     ].map((file) => readFile(file, 'utf8')),
   )
 ).join('\n');

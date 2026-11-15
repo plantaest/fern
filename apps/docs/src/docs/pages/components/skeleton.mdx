@@ -1,0 +1,38 @@
+---
+title: Skeleton
+description: Reserve space for content while it loads.
+---
+
+import { Example } from '../../ui';
+import { skeletonSearchResultsExample, skeletonShapesExample } from './skeleton-examples';
+
+## Examples
+
+### Shapes
+
+Set the size and shape with CSS. Combine placeholders to approximate the layout of the loaded content.
+
+<Example demo={skeletonShapesExample} />
+
+### Loading search results
+
+Show the placeholders while results are loading, then replace them with the results.
+
+<Example demo={skeletonSearchResultsExample} />
+
+## API Reference
+
+<div class="fern-docs-api-table" role="region" aria-labelledby="api-reference" tabindex="0">
+
+| Prop       | Type               | Default | Description                                                   |
+| ---------- | ------------------ | ------- | ------------------------------------------------------------- |
+| `animate`  | `boolean`          | `true`  | Pulses continuously. Set to `false` for a static placeholder. |
+| `...props` | Native `div` props | —       | Use `class` or `style` to size and shape the placeholder.     |
+
+</div>
+
+## Accessibility
+
+- Skeletons are hidden from assistive technology. Set `aria-busy` on the region being updated while its content loads.
+- If you need to announce loading, use one `role="status"` message outside the busy region for the whole group.
+- Skeletons are static when reduced motion is enabled.

@@ -1,0 +1,16 @@
+.fern-skeleton {
+  border-radius: var(--fern-radius-base);
+  background-color: var(--fern-background-color-neutral);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .fern-skeleton-animation--pulse {
+    animation: fern-skeleton-pulse 2s ease-in-out infinite;
+  }
+}
+
+@keyframes fern-skeleton-pulse {
+  50% {
+    opacity: 0.5;
+  }
+}
