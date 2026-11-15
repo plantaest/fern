@@ -73,6 +73,7 @@ render(() => <div class="fern"><Button {...props}>Save</Button></div>, document.
 import { render } from '@solidjs/web';
 import { Button } from '@taxonlabs/fern/button';
 import { Icon } from '@taxonlabs/fern/icon';
+import { ToggleButton } from '@taxonlabs/fern/toggle-button';
 import { cdxIconEdit } from '@wikimedia/codex-icons';
 import { createSignal, flush } from 'solid-js';
 import { expect, it } from 'vitest';
@@ -81,17 +82,24 @@ it('renders packed exports and updates a reactive prop', () => {
   const host = document.body.appendChild(document.createElement('div'));
   const [disabled, setDisabled] = createSignal(false);
   const dispose = render(() => (
-    <Button disabled={disabled()} aria-label="Edit"><Icon icon={cdxIconEdit} /></Button>
+    <>
+      <Button disabled={disabled()} aria-label="Edit"><Icon icon={cdxIconEdit} /></Button>
+      <ToggleButton>Bookmark</ToggleButton>
+    </>
   ), host);
 
   try {
     flush();
-    const button = host.querySelector('button')!;
+    const [button, toggle] = host.querySelectorAll('button');
     expect(button.querySelector('svg')).not.toBeNull();
     expect(button.disabled).toBe(false);
     setDisabled(true);
     flush();
     expect(button.disabled).toBe(true);
+
+    toggle.click();
+    flush();
+    expect(toggle.getAttribute('aria-pressed')).toBe('true');
   } finally {
     dispose();
     host.remove();

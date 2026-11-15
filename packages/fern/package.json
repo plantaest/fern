@@ -42,6 +42,11 @@
       "solid": "./dist/source/components/skeleton/skeleton.jsx",
       "default": "./dist/skeleton.js"
     },
+    "./toggle-button": {
+      "types": "./dist/source/components/toggle-button/toggle-button.d.ts",
+      "solid": "./dist/source/components/toggle-button/toggle-button.jsx",
+      "default": "./dist/toggle-button.js"
+    },
     "./styles.css": "./dist/styles.css",
     "./colors.css": "./dist/colors.css",
     "./colors.json": "./dist/colors.json",

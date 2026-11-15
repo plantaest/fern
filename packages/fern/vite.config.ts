@@ -13,6 +13,7 @@ export default defineConfig({
         message: 'src/components/message/message.tsx',
         separator: 'src/components/separator/separator.tsx',
         skeleton: 'src/components/skeleton/skeleton.tsx',
+        'toggle-button': 'src/components/toggle-button/toggle-button.tsx',
       },
       formats: ['es'],
       fileName: (_format, name) => `${name}.js`,

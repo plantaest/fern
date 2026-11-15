@@ -17,3 +17,9 @@ export { Separator } from './components/separator/separator.jsx';
 
 export type { SkeletonProps } from './components/skeleton/skeleton.jsx';
 export { Skeleton } from './components/skeleton/skeleton.jsx';
+
+export type {
+  ToggleButtonProps,
+  ToggleButtonVariant,
+} from './components/toggle-button/toggle-button.jsx';
+export { ToggleButton } from './components/toggle-button/toggle-button.jsx';

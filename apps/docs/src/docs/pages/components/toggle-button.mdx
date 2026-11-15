@@ -1,0 +1,60 @@
+---
+title: ToggleButton
+description: A button that can be toggled on and off.
+---
+
+import { Example } from '../../ui';
+import {
+  ToggleButtonPlayground,
+  toggleButtonChangingTheIconExample,
+  toggleButtonFormattingExample,
+  toggleButtonVariantsExample,
+} from './toggle-button-examples';
+
+## Playground
+
+<ToggleButtonPlayground />
+
+## Examples
+
+### Variants
+
+Use `surface` for a framed button or `ghost` for a quieter control in a toolbar. Both examples start pressed with `defaultPressed`.
+
+<Example demo={toggleButtonVariantsExample} />
+
+### Changing the icon
+
+Use `group-aria-pressed/toggle:` to switch from an outline icon to a filled icon when the button is pressed.
+
+<Example demo={toggleButtonChangingTheIconExample} />
+
+### Formatting
+
+Use `pressed` and `onPressedChange` when the application needs to read or update the state.
+
+<Example demo={toggleButtonFormattingExample} />
+
+## API Reference
+
+<div class="fern-docs-api-table" role="region" aria-labelledby="api-reference" tabindex="0">
+
+| Prop              | Type                                                                                               | Default     | Description                                                                       |
+| ----------------- | -------------------------------------------------------------------------------------------------- | ----------- | --------------------------------------------------------------------------------- |
+| `pressed`         | `boolean`                                                                                          | —           | Controls the pressed state from the application.                                  |
+| `defaultPressed`  | `boolean`                                                                                          | `false`     | Sets the initial state for an uncontrolled button.                                |
+| `onPressedChange` | `(pressed: boolean) => void`                                                                       | —           | Receives the next pressed state when the user activates the button.               |
+| `variant`         | `"surface"`<br />`\| "ghost"`                                                                      | `"surface"` | Selects the visual style.                                                         |
+| `size`            | `"sm"`<br />`\| "default"`<br />`\| "lg"`<br />`\| "icon-sm"`<br />`\| "icon"`<br />`\| "icon-lg"` | `"default"` | Uses the same sizes as Button. Use an icon size for buttons with no visible text. |
+| `disabled`        | `boolean`                                                                                          | `false`     | Prevents activation.                                                              |
+| `class`           | `string`                                                                                           | —           | Adds CSS classes to the button.                                                   |
+| `children`        | Text or JSX                                                                                        | —           | Provides the label and any icons.                                                 |
+| `...props`        | Native `button` props                                                                              | —           | Forwards native attributes, events, and the ref. The button has `type="button"`.  |
+
+</div>
+
+## Accessibility
+
+- Keep the label the same in both states. `aria-pressed` conveys whether the button is on or off.
+- Give icon-only buttons an `aria-label`, such as `"Bold"`.
+- Tab moves focus to enabled buttons. Enter or Space toggles the focused button.
