@@ -16,7 +16,9 @@ For an interactive example:
 2. Import it normally and with Vite `?raw` in `*-examples.tsx`; export a `{ component, source }` pair.
 3. Render it in MDX with `<Example demo={buttonVariantsExample} />`, placing headings and descriptions outside the frame.
 
-The preview and Copy control use the same demo file. Playground logic stays in TSX, with source generated from the selected props. Keep demo-specific behavior, such as focus management in the playground, in the demo.
+The preview and Copy control use the same demo file, including its imports.
+
+Add a playground when trying combinations of props helps explain the component. Keep its logic in TSX and generate the source from the selected props. Playground code usually shows a short JSX snippet with defaults omitted. Include imports and setup for complete examples, such as those that demonstrate app-managed state. Keep demo-specific behavior, such as focus management in the playground, in the demo.
 
 Use `Prop | Type | Default | Description` for API tables. Wrap the table in `.fern-docs-api-table` and give the wrapper `role="region"`, `aria-labelledby` pointing to the API Reference heading, and `tabindex="0"` for keyboard scrolling. Use straight double quotes for string literal types and defaults. For long unions, put each literal on its own line with `<br />` and escape the pipe characters for the Markdown table.
 
@@ -36,7 +38,7 @@ The page body uses `.fern-prose` from the package for document typography and sp
 
 Development and preview use `http://127.0.0.1:4321/`. A busy port causes an error rather than selecting another port. Docs uses pathname routes such as `/components/button` and fragments such as `#accessibility`; the home URL redirects to `/foundations/colors`.
 
-After changing package source, run `pnpm --filter @taxonlabs/fern build` before checking Docs in the browser. The app reads Fern's built public exports.
+After changing package source, run `pnpm --filter @taxonlabs/fern build` before checking Docs in the browser. The app reads Fern's built public exports. If Vite still cannot resolve a new package subpath after the build, restart the Docs dev server.
 
 ## Deployment
 

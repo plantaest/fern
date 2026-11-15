@@ -38,7 +38,7 @@ The Docs app bundles fonts locally with Vietnamese glyphs. Fern provides font st
 ## Package conventions
 
 - Use rem for font sizes, spacing, control heights, icon sizes, and radii. Keep border and focus outline dimensions in px, and use unitless line-height where appropriate. Pixel values in the foundations and size descriptions assume a 16px root font size.
-- Use Kobalte behavior where appropriate; forward native props, events, refs, and ARIA attributes.
+- Prefer native HTML when it provides the required semantics and behavior. Use Kobalte when it supplies needed state, keyboard interaction, or focus management. Expose polymorphic rendering when callers need a different root element. Forward applicable native props, events, refs, and ARIA attributes.
 - Button defaults to `type="button"` and supports Kobalte's polymorphic `as` prop with inferred element or component props. Render navigation as native anchors through `as="a"`, an anchor-rendering router component, or `buttonVariants()`.
 - Keep the default Button at 32px with 14px text and 16px icons. Text and icon-only buttons share an icon size at each size preset; standalone icons default to 16px. Keep presets consistent with the Button Docs. Use composition for icons and busy states.
 - Button separates visual `variant` from semantic `action`, defaulting to `solid` and `neutral`.
@@ -46,6 +46,7 @@ The Docs app bundles fonts locally with Vietnamese glyphs. Fern provides font st
 - Keep core CSS independent of the Tailwind compiler. Use standard CSS such as `calc(var(--fern-spacing) * 2)`; Tailwind belongs to Docs and the optional adapter.
 - Keep each component's TSX, CSS, and tests together in its own directory under `packages/fern/src/components/`. Keep shared `.fern` setup in `foundations/base.css`; `styles.css` declares layer order and imports the foundations and component styles.
 - When adding a public component, update the root export, subpath export, Vite entry, and stylesheet import together. Register its route and sections in Docs when adding a page.
+- The `exports` field in `package.json` lists the public entry points. Keep the package README focused on import patterns and CSS and data entry points.
 - When updating Solid or build tooling, review the workspace manifests, overrides, and pins in `scripts/check-package.mjs` together. Keep the clean consumer free of workspace overrides.
 - Use `.fern-prose` for document HTML and `.fern-not-prose` for embedded UI. Derive document block spacing from `--fern-prose-flow`. Keep document styles in `foundations/prose.css`, with low specificity and no content width or page layout. Font family tokens are `--fern-font-sans`, `--fern-font-serif`, and `--fern-font-mono`.
 - Keep font size, weight, and line-height tokens independent of heading levels and components. Prose, components, and Tailwind text presets combine the shared scales. Body leading stays unitless; fixed leading values use rem.
@@ -99,7 +100,7 @@ Docs uses `http://127.0.0.1:4321/`. Keep the port and host in its Vite configura
 
 For changes limited to Markdown documentation, run `pnpm check`. For code, configuration, styles, or MDX changes, run `pnpm check`, `pnpm typecheck`, `pnpm test`, and `pnpm build`. Also run `pnpm pack:check` for changes that can affect the tarball, such as package exports, dependencies, styles, or the package build pipeline. The package check uses npm network access and a temporary directory.
 
-Test component-specific behavior in the component tests. The clean consumer exercises representative runtime behavior and checks all declared export targets. Extend it when a change introduces a packaging path the existing example does not exercise.
+Test component-specific behavior in the component tests. The clean consumer checks all declared export targets and exercises representative runtime behavior. Add a runtime case only when a new integration or build path needs verification outside the workspace.
 
 For visual or interaction changes, check Light and Dark, narrow screens, and keyboard behavior. Give icon-only controls accessible names. Test reactive props and ensure ordinary buttons do not submit forms.
 
@@ -109,7 +110,7 @@ Keep prerelease compatibility explicit. A successful Docs build does not prove a
 
 ## Later
 
-Additional themes, ResourceLoader integration, automatic skin theme detection, and components beyond Kobalte remain future work.
+Additional themes, ResourceLoader integration, automatic skin theme detection, and support for other headless UI libraries remain future work.
 
 ## References
 
