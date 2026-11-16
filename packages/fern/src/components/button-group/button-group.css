@@ -1,9 +1,22 @@
 .fern-button-group {
+  --fern-button-group-disabled-divider: var(--fern-color-white);
+
   display: inline-flex;
 
+  :where(.fern[data-theme="dark"]) & {
+    --fern-button-group-disabled-divider: var(--fern-color-black);
+  }
+
   & > :where(.fern-button:not(.fern-toggle-button)) {
+    --fern-button-group-divider-start: var(--fern-border-color-interactive);
+    --fern-button-group-divider-end: var(--fern-border-color-interactive);
+
     position: relative;
     flex: none;
+
+    &:where(:has(+ .fern-button:not(.fern-toggle-button):is(:disabled, [data-disabled]))) {
+      --fern-button-group-divider-end: var(--fern-button-group-disabled-divider);
+    }
 
     &:where(:not(:disabled, [data-disabled]):hover) {
       z-index: 1;
@@ -18,7 +31,7 @@
     }
   }
 
-  /* Leave a seam between borderless buttons, butt up to one border, and overlap two borders. */
+  /* Determine spacing by variant so changing the disabled state cannot move the buttons. */
   &
     > :where(.fern-button:not(.fern-toggle-button))
     + :where(.fern-button:not(.fern-toggle-button)) {
@@ -27,51 +40,55 @@
 
   &
     > :where(.fern-button:not(.fern-toggle-button))
-    + :where(
-      :is(.fern-button-variant--surface, .fern-button-variant--outline):not(
-        :disabled,
-        [data-disabled]
-      )
-    ),
+    + :where(.fern-button-variant--surface, .fern-button-variant--outline),
   &
-    > :where(
-      :is(.fern-button-variant--surface, .fern-button-variant--outline):not(
-        :disabled,
-        [data-disabled]
-      )
-    )
+    > :where(.fern-button-variant--surface, .fern-button-variant--outline)
     + :where(.fern-button:not(.fern-toggle-button)) {
     --fern-button-group-seam: 0px;
   }
 
   &
-    > :where(
-      :is(.fern-button-variant--surface, .fern-button-variant--outline):not(
-        :disabled,
-        [data-disabled]
-      )
-    )
-    + :where(
-      :is(.fern-button-variant--surface, .fern-button-variant--outline):not(
-        :disabled,
-        [data-disabled]
-      )
-    ) {
+    > :where(.fern-button-variant--surface, .fern-button-variant--outline)
+    + :where(.fern-button-variant--surface, .fern-button-variant--outline) {
     --fern-button-group-seam: -1px;
   }
 
+  &
+    > :where(.fern-button:not(.fern-toggle-button):is(:disabled, [data-disabled]))
+    + :where(.fern-button:not(.fern-toggle-button)) {
+    --fern-button-group-divider-start: var(--fern-button-group-disabled-divider);
+  }
+
   &:where(:not(.fern-button-group-orientation--vertical)) {
-    & > :where(.fern-button:not(.fern-toggle-button):has(+ .fern-button:not(.fern-toggle-button))) {
+    & > .fern-button:where(:not(.fern-toggle-button):has(+ .fern-button:not(.fern-toggle-button))) {
       border-start-end-radius: 0;
       border-end-end-radius: 0;
+
+      &:where(
+          :is(.fern-button-variant--surface, .fern-button-variant--outline):is(
+            :disabled,
+            [data-disabled]
+          )
+        ) {
+        border-inline-end-color: var(--fern-button-group-divider-end);
+      }
     }
 
     &
       > :where(.fern-button:not(.fern-toggle-button))
-      + :where(.fern-button:not(.fern-toggle-button)) {
+      + .fern-button:where(:not(.fern-toggle-button)) {
       margin-inline-start: var(--fern-button-group-seam);
       border-start-start-radius: 0;
       border-end-start-radius: 0;
+
+      &:where(
+          :is(.fern-button-variant--surface, .fern-button-variant--outline):is(
+            :disabled,
+            [data-disabled]
+          )
+        ) {
+        border-inline-start-color: var(--fern-button-group-divider-start);
+      }
     }
   }
 }
@@ -79,16 +96,34 @@
 .fern-button-group-orientation--vertical {
   flex-direction: column;
 
-  & > :where(.fern-button:not(.fern-toggle-button):has(+ .fern-button:not(.fern-toggle-button))) {
+  & > .fern-button:where(:not(.fern-toggle-button):has(+ .fern-button:not(.fern-toggle-button))) {
     border-end-start-radius: 0;
     border-end-end-radius: 0;
+
+    &:where(
+        :is(.fern-button-variant--surface, .fern-button-variant--outline):is(
+          :disabled,
+          [data-disabled]
+        )
+      ) {
+      border-block-end-color: var(--fern-button-group-divider-end);
+    }
   }
 
   &
     > :where(.fern-button:not(.fern-toggle-button))
-    + :where(.fern-button:not(.fern-toggle-button)) {
+    + .fern-button:where(:not(.fern-toggle-button)) {
     margin-block-start: var(--fern-button-group-seam);
     border-start-start-radius: 0;
     border-start-end-radius: 0;
+
+    &:where(
+        :is(.fern-button-variant--surface, .fern-button-variant--outline):is(
+          :disabled,
+          [data-disabled]
+        )
+      ) {
+      border-block-start-color: var(--fern-button-group-divider-start);
+    }
   }
 }
