@@ -1,13 +1,12 @@
 import { Icon } from '@taxonlabs/fern/icon';
-import { cdxIconClose, cdxIconLightbulb, cdxIconMenu, cdxIconMoon } from '@wikimedia/codex-icons';
+import { cdxIconLightbulb, cdxIconMenu, cdxIconMoon } from '@wikimedia/codex-icons';
 import { For } from 'solid-js';
 import type { Theme } from '../theme';
 
 export function Header(props: {
   theme: Theme;
   onThemeChange: (theme: Theme) => void;
-  menuOpen: boolean;
-  onMenuToggle: () => void;
+  onOpenNavigation: () => void;
 }) {
   return (
     <header
@@ -33,7 +32,7 @@ export function Header(props: {
           Docs
         </span>
       </a>
-      <div class="flex gap-3 items-center">
+      <div class="flex items-center gap-3 no-script:hidden">
         <fieldset
           class="
             flex gap-0.5 m-0 p-0 border-0 min-w-0
@@ -65,16 +64,19 @@ export function Header(props: {
         <button
           class="
             hidden size-9 items-center justify-center
-            text-content-base border border-line-subtle rounded-base bg-surface-base
+            border border-line-subtle rounded-base bg-surface-base text-content-base
             screen-small:inline-flex
           "
           type="button"
-          aria-label={props.menuOpen ? 'Close navigation' : 'Open navigation'}
-          aria-expanded={props.menuOpen ? 'true' : 'false'}
+          aria-label="Open navigation"
+          aria-haspopup="dialog"
           aria-controls="mobile-navigation"
-          onClick={props.onMenuToggle}
+          onClick={(event) => {
+            event.currentTarget.focus();
+            props.onOpenNavigation();
+          }}
         >
-          <Icon icon={props.menuOpen ? cdxIconClose : cdxIconMenu} />
+          <Icon icon={cdxIconMenu} />
         </button>
       </div>
     </header>

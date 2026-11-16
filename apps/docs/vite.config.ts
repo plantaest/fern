@@ -2,6 +2,7 @@ import { fileURLToPath } from 'node:url';
 import mdx from '@mdx-js/rollup';
 import solid from '@solidjs/vite-plugin';
 import tailwind from '@tailwindcss/vite';
+import { prerender } from 'prerender-crawler/vite';
 import rehypeSlug from 'rehype-slug';
 import remarkFrontmatter from 'remark-frontmatter';
 import remarkGfm from 'remark-gfm';
@@ -26,8 +27,13 @@ export default defineConfig({
       }),
       enforce: 'pre',
     },
-    solid({ extensions: ['.mdx'] }),
+    solid({ extensions: ['.mdx'], start: true, ssr: true }),
     tailwind(),
+    prerender({
+      mode: 'static',
+      pages: ['/', { path: '/404', filename: '404.html' }],
+      failOnError: true,
+    }),
   ],
   test: { environment: 'jsdom', include: ['src/**/*.test.tsx'] },
 });

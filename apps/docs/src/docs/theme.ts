@@ -1,28 +1,42 @@
-import { createEffect, createSignal } from 'solid-js';
+import { createSignal, onSettled } from 'solid-js';
 
 export type Theme = 'light' | 'dark';
 
+const themeStorageKey = 'fern-docs-theme';
+
+// Apply the saved palette before the rest of the document is painted.
+export const themeBootScript = `
+try {
+  if (localStorage.getItem(${JSON.stringify(themeStorageKey)}) === 'dark') {
+    document.currentScript.parentElement.dataset.theme = 'dark';
+  }
+} catch {}
+`;
+
 function savedTheme(): Theme {
   try {
-    return localStorage.getItem('fern-docs-theme') === 'dark' ? 'dark' : 'light';
+    return localStorage.getItem(themeStorageKey) === 'dark' ? 'dark' : 'light';
   } catch {
     return 'light';
   }
 }
 
 export function createDocsTheme() {
-  const [theme, setTheme] = createSignal<Theme>(savedTheme());
+  const [theme, updateTheme] = createSignal<Theme>('light');
 
-  createEffect(
-    () => theme(),
-    (value) => {
-      try {
-        localStorage.setItem('fern-docs-theme', value);
-      } catch {
-        /* The theme still works without storage. */
-      }
-    },
-  );
+  onSettled(() => {
+    updateTheme(savedTheme());
+  });
+
+  function setTheme(value: Theme) {
+    updateTheme(value);
+
+    try {
+      localStorage.setItem(themeStorageKey, value);
+    } catch {
+      /* The theme still works without storage. */
+    }
+  }
 
   return [theme, setTheme] as const;
 }

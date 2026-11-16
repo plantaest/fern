@@ -36,7 +36,7 @@ The page body uses `.fern-prose` from the package for document typography and sp
 
 ## Development
 
-Development and preview use `http://127.0.0.1:4321/`. A busy port causes an error rather than selecting another port. Docs uses pathname routes such as `/components/button` and fragments such as `#accessibility`; the home URL redirects to `/foundations/colors`.
+Development uses `http://127.0.0.1:4321/`. A busy port causes an error rather than selecting another port. Docs uses pathname routes such as `/components/button` and fragments such as `#accessibility`. The home page links to Colors and redirects there when JavaScript is available.
 
 After changing package source, run `pnpm --filter @taxonlabs/fern build` before checking Docs in the browser. The app reads Fern's built public exports. If Vite still cannot resolve a new package subpath after the build, restart the Docs dev server.
 
@@ -50,7 +50,9 @@ pnpm build
 PORT=8000 pnpm --filter fern-docs start
 ```
 
-`serve` reads `PORT` and serves `apps/docs/dist` with SPA fallback. Check direct URLs and reloads at `/components/button` and `/foundations/colors`, and verify that CSS, fonts, and syntax-highlighting chunks load.
+During the build, `prerender-crawler` follows the navigation links rendered from `navigation.ts` to write a static HTML file per route. The build also generates `404.html`. Solid hydrates the interactive controls in the browser.
+
+`serve` reads `PORT` and serves `apps/docs/dist/client`. Check direct URLs and reloads at `/components/button` and `/foundations/colors`, and confirm that an unknown URL returns HTTP 404. With JavaScript disabled, content and page links should still work. With JavaScript enabled, check the playgrounds, theme controls, and syntax highlighting.
 
 For [Toolforge Build Service](https://wikitech.wikimedia.org/wiki/Help:Toolforge/Build_service), the root `Procfile` starts Docs after the buildpack installs dependencies and runs the root build script. After committing and pushing the changes, run these commands on Toolforge as the `fern` tool:
 

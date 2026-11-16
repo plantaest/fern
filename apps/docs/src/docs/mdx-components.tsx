@@ -1,4 +1,4 @@
-import { dynamic, type JSX } from '@solidjs/web';
+import { dynamic, getRequestEvent, type JSX } from '@solidjs/web';
 import { Icon } from '@taxonlabs/fern/icon';
 import { cdxIconLinkExternal } from '@wikimedia/codex-icons';
 import { createMemo, Show } from 'solid-js';
@@ -10,8 +10,14 @@ function MarkdownLink(props: JSX.AnchorHTMLAttributes<HTMLAnchorElement>) {
     if (typeof href !== 'string' || !href) return false;
 
     try {
-      const url = new URL(href, window.location.href);
-      return /^https?:$/.test(url.protocol) && url.origin !== window.location.origin;
+      const docsOrigin = 'https://fern.toolforge.org';
+      const base = new URL(
+        getRequestEvent()?.request.url ?? globalThis.location?.href ?? docsOrigin,
+      );
+      const url = new URL(href, base);
+      return (
+        /^https?:$/.test(url.protocol) && url.origin !== base.origin && url.origin !== docsOrigin
+      );
     } catch {
       return false;
     }

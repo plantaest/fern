@@ -50,7 +50,18 @@ function HomeRedirect() {
     navigate(`/foundations/colors${current.search}${current.hash}`, { replace: true }),
   );
 
-  return null;
+  return (
+    <>
+      <PageIntro
+        category="Documentation"
+        title="Fern Docs"
+        description="Explore Fern foundations and components."
+      />
+      <a href="/foundations/colors" class={buttonVariants({ variant: 'outline' })}>
+        Explore colors
+      </a>
+    </>
+  );
 }
 
 function NotFound() {

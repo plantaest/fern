@@ -84,41 +84,29 @@ it('keeps the playground mounted when changing theme', () => {
   expect(host.querySelector('.playground button')?.textContent?.trim()).toBe('Publish draft');
 });
 
-it('opens and closes mobile navigation with an accessible toggle', () => {
-  const host = mount();
-  const toggle = host.querySelector<HTMLButtonElement>('button[aria-label="Open navigation"]')!;
-
-  toggle.click();
-  flush();
-
-  expect(toggle.getAttribute('aria-expanded')).toBe('true');
-  expect(toggle.getAttribute('aria-label')).toBe('Close navigation');
-  expect(host.querySelector('nav[aria-label="Mobile navigation"]')?.id).toBe(
-    toggle.getAttribute('aria-controls'),
-  );
-
-  toggle.click();
-  flush();
-
-  expect(toggle.getAttribute('aria-expanded')).toBe('false');
-  expect(toggle.getAttribute('aria-label')).toBe('Open navigation');
-  expect(host.querySelector('#mobile-navigation')).toBeNull();
-});
-
 it.each(['/foundations/colors', '/components/button'])(
   'closes mobile navigation after selecting %s',
   async (path) => {
     const host = mount('/components/button');
-    const toggle = host.querySelector<HTMLButtonElement>('button[aria-label="Open navigation"]')!;
+    const menu = host.querySelector<HTMLDialogElement>('#mobile-navigation')!;
+    Object.assign(menu, {
+      showModal: () => {
+        menu.open = true;
+      },
+      close: () => {
+        menu.open = false;
+      },
+    });
 
-    toggle.click();
-    flush();
-    host.querySelector<HTMLAnchorElement>(`#mobile-navigation a[href="${path}"]`)!.click();
+    host.querySelector<HTMLButtonElement>('button[aria-label="Open navigation"]')!.click();
+    expect(menu.open).toBe(true);
+
+    menu.querySelector<HTMLAnchorElement>(`a[href="${path}"]`)!.click();
 
     await vi.waitFor(() => {
       flush();
       expect(location.pathname).toBe(path);
-      expect(toggle.getAttribute('aria-expanded')).toBe('false');
+      expect(menu.open).toBe(false);
     });
   },
 );

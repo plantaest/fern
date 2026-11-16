@@ -6,9 +6,14 @@
 @custom-variant screen-narrow (@media (max-width: 1150px));
 @custom-variant screen-small (@media (max-width: 760px));
 @custom-variant screen-tiny (@media (max-width: 360px));
+@custom-variant no-script (@media (scripting: none));
 
 /* Defaults for the Docs shell and embedded examples. */
 @layer base {
+  html:has(#mobile-navigation[open]) {
+    overflow: hidden;
+  }
+
   body:has(.fern-docs) {
     margin: 0;
   }
