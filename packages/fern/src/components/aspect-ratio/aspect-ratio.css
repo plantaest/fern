@@ -1,0 +1,4 @@
+.fern-aspect-ratio {
+  position: relative;
+  aspect-ratio: var(--fern-aspect-ratio);
+}

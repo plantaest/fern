@@ -1,3 +1,6 @@
+export type { AspectRatioProps } from './components/aspect-ratio/aspect-ratio.jsx';
+export { AspectRatio } from './components/aspect-ratio/aspect-ratio.jsx';
+
 export type {
   ButtonAction,
   ButtonProps,

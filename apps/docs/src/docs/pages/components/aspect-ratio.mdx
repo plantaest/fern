@@ -1,0 +1,31 @@
+---
+title: AspectRatio
+description: Keep a frame at a consistent width-to-height ratio.
+---
+
+import { Example } from '../../ui';
+import { aspectRatioImageExample, aspectRatioVideoEmbedExample } from './aspect-ratio-examples';
+
+## Examples
+
+### Image
+
+<Example demo={aspectRatioImageExample} />
+
+[Photo](https://commons.wikimedia.org/wiki/File:Mangrove_Reflection_Wide_Ashtamudi_Kollam_Kerala_Mar22_A7C_01464.jpg) by Timothy A. Gonsalves, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/), resized.
+
+### Video embed
+
+<Example demo={aspectRatioVideoEmbedExample} />
+
+## API Reference
+
+<div class="fern-docs-api-table" role="region" aria-labelledby="api-reference" tabindex="0">
+
+| Prop       | Type               | Default | Description                                                                         |
+| ---------- | ------------------ | ------- | ----------------------------------------------------------------------------------- |
+| `ratio`    | `number`           | `1`     | Width divided by height. Use a finite positive number, such as `4 / 3` or `16 / 9`. |
+| `children` | `JSX.Element`      | —       | Content inside the frame. Size and position it with CSS.                            |
+| `...props` | Native `div` props | —       | Forwards attributes, events, and the ref to the frame.                              |
+
+</div>

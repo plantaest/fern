@@ -17,6 +17,11 @@
       "solid": "./dist/source/index.js",
       "default": "./dist/index.js"
     },
+    "./aspect-ratio": {
+      "types": "./dist/source/components/aspect-ratio/aspect-ratio.d.ts",
+      "solid": "./dist/source/components/aspect-ratio/aspect-ratio.jsx",
+      "default": "./dist/aspect-ratio.js"
+    },
     "./button": {
       "types": "./dist/source/components/button/button.d.ts",
       "solid": "./dist/source/components/button/button.jsx",

@@ -1,4 +1,7 @@
 import type { Component } from 'solid-js';
+import AspectRatioPage, {
+  frontmatter as aspectRatioMetadata,
+} from './pages/components/aspect-ratio.mdx';
 import ButtonPage, { frontmatter as buttonMetadata } from './pages/components/button.mdx';
 import ButtonGroupPage, {
   frontmatter as buttonGroupMetadata,
@@ -73,6 +76,14 @@ export const pages = [
     description: iconsMetadata.description,
     sections: ['Gallery', 'In use'],
     component: IconsPage,
+  },
+  {
+    path: '/components/aspect-ratio',
+    group: 'Components',
+    title: aspectRatioMetadata.title,
+    description: aspectRatioMetadata.description,
+    sections: ['Examples', 'API Reference'],
+    component: AspectRatioPage,
   },
   {
     path: '/components/button',

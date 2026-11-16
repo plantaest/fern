@@ -2,7 +2,7 @@
 
 ## Unreleased
 
-- A reusable Solid package with Button, ButtonGroup, Message, Separator, Skeleton, ToggleButton, ToggleButtonGroup, decorative Codex Icons, public types, and compiled CSS.
+- A reusable Solid package with AspectRatio, Button, ButtonGroup, Message, Separator, Skeleton, ToggleButton, ToggleButtonGroup, decorative Codex Icons, public types, and compiled CSS.
 - Light and Dark themes preserving Codex 2.7.0 colors and semantic roles, scoped to `.fern`. Independent typography tokens, shared spacing, radius, and transition tokens, document styles with visited link states and adjustable block spacing through `.fern-prose`, color data, and an optional Tailwind 4 adapter.
 - Button with separate visual variants and semantic actions, three sizes with matching icon-only forms, and polymorphic rendering. Navigation uses native anchors.
 - ButtonGroup with joined buttons in horizontal or vertical layouts.
