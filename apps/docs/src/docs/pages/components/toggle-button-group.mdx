@@ -1,0 +1,101 @@
+---
+title: ToggleButtonGroup
+description: Select one or more options from a group of toggle buttons.
+---
+
+import { Example } from '../../ui';
+import {
+  toggleButtonGroupCustomExample,
+  toggleButtonGroupDisabledExample,
+  toggleButtonGroupDisabledItemExample,
+  toggleButtonGroupGhostExample,
+  toggleButtonGroupMultipleSelectionExample,
+  toggleButtonGroupSingleSelectionExample,
+  toggleButtonGroupSizesExample,
+} from './toggle-button-group-examples';
+
+## Examples
+
+Use `ToggleButtonGroupItem` as a direct child of the group. Give each item a unique `value`.
+
+### Single selection
+
+Select a page type to highlight the matching result. Select it again to clear the highlight.
+
+<Example demo={toggleButtonGroupSingleSelectionExample} />
+
+### Multiple selection
+
+Set `multiple` to toggle each option independently. This example stacks the formatting controls with `orientation="vertical"`.
+
+<Example demo={toggleButtonGroupMultipleSelectionExample} />
+
+### Ghost
+
+Set `variant="ghost"` for borderless buttons with a small gap between them.
+
+<Example demo={toggleButtonGroupGhostExample} />
+
+### Sizes
+
+Set `size` on the group to give all its buttons the same size.
+
+<Example demo={toggleButtonGroupSizesExample} />
+
+### Disabled group
+
+Set `disabled` on the group to disable all its buttons.
+
+<Example demo={toggleButtonGroupDisabledExample} />
+
+### Disabled item
+
+Set `disabled` on an item to disable it individually. Here, Talk starts selected, and keyboard navigation skips it.
+
+<Example demo={toggleButtonGroupDisabledItemExample} />
+
+### Custom
+
+Use JSX and `class` to stack an icon above its label. Choose an image layout to update the preview below.
+
+<Example demo={toggleButtonGroupCustomExample} />
+
+## API Reference
+
+### ToggleButtonGroup
+
+<div class="fern-docs-api-table" role="region" aria-labelledby="api-reference" tabindex="0">
+
+| Prop           | Type                                | Default        | Description                                                                        |
+| -------------- | ----------------------------------- | -------------- | ---------------------------------------------------------------------------------- |
+| `multiple`     | `boolean`                           | `false`        | Allows multiple items to be pressed at once.                                       |
+| `value`        | `string \| null`<br />`string[]`    | —              | Controls the selection. Pass `null` or an empty array to clear it.                 |
+| `defaultValue` | `string \| null`<br />`string[]`    | —              | Sets the initial selection when the group manages its own state.                   |
+| `onChange`     | `(value) => void`                   | —              | Receives a string or `null` in single selection, or an array with `multiple`.      |
+| `orientation`  | `"horizontal"`<br />`\| "vertical"` | `"horizontal"` | Arranges the buttons in a row or column and sets the direction of arrow keys.      |
+| `variant`      | `"surface"`<br />`\| "ghost"`       | `"surface"`    | Joins `surface` buttons by their borders or spaces out borderless `ghost` buttons. |
+| `size`         | `ButtonSize`                        | `"default"`    | Sets the same [Button size](/components/button#sizes) for every item.              |
+| `disabled`     | `boolean`                           | `false`        | Disables every item in the group.                                                  |
+| `children`     | `JSX.Element`                       | —              | The toggle items in the group.                                                     |
+| `...props`     | Native `div` props                  | —              | Forwards applicable attributes, events, and the ref to the group element.          |
+
+</div>
+
+### ToggleButtonGroupItem
+
+<div class="fern-docs-api-table" role="region" aria-labelledby="togglebuttongroupitem" tabindex="0">
+
+| Prop       | Type                  | Default | Description                                                                          |
+| ---------- | --------------------- | ------- | ------------------------------------------------------------------------------------ |
+| `value`    | `string`              | —       | Identifies the item in the group's selection.                                        |
+| `disabled` | `boolean`             | `false` | Disables this item.                                                                  |
+| `children` | `JSX.Element`         | —       | Provides the label or icon.                                                          |
+| `...props` | Native `button` props | —       | Forwards applicable attributes, events, and the ref. The button has `type="button"`. |
+
+</div>
+
+## Accessibility
+
+- Name the group with `aria-label` or `aria-labelledby`. Give each icon-only button its own `aria-label` and keep its name stable when pressed.
+- Tab and Shift+Tab move through enabled buttons. Use Left and Right in a horizontal group, or Up and Down in a vertical group, to move focus between enabled buttons. Arrow keys stop at the ends. In RTL, horizontal arrows follow the visual order.
+- Press Enter or Space to change the selection.

@@ -9,3 +9,4 @@
 @import "./components/separator/separator.css" layer(components);
 @import "./components/skeleton/skeleton.css" layer(components);
 @import "./components/toggle-button/toggle-button.css" layer(components);
+@import "./components/toggle-button-group/toggle-button-group.css" layer(components);

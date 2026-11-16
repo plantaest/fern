@@ -52,6 +52,11 @@
       "solid": "./dist/source/components/toggle-button/toggle-button.jsx",
       "default": "./dist/toggle-button.js"
     },
+    "./toggle-button-group": {
+      "types": "./dist/source/components/toggle-button-group/toggle-button-group.d.ts",
+      "solid": "./dist/source/components/toggle-button-group/toggle-button-group.jsx",
+      "default": "./dist/toggle-button-group.js"
+    },
     "./styles.css": "./dist/styles.css",
     "./colors.css": "./dist/colors.css",
     "./colors.json": "./dist/colors.json",

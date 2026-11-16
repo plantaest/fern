@@ -15,6 +15,7 @@ export default defineConfig({
         separator: 'src/components/separator/separator.tsx',
         skeleton: 'src/components/skeleton/skeleton.tsx',
         'toggle-button': 'src/components/toggle-button/toggle-button.tsx',
+        'toggle-button-group': 'src/components/toggle-button-group/toggle-button-group.tsx',
       },
       formats: ['es'],
       fileName: (_format, name) => `${name}.js`,

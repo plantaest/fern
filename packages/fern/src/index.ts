@@ -29,3 +29,13 @@ export type {
   ToggleButtonVariant,
 } from './components/toggle-button/toggle-button.jsx';
 export { ToggleButton } from './components/toggle-button/toggle-button.jsx';
+
+export type {
+  ToggleButtonGroupItemProps,
+  ToggleButtonGroupOrientation,
+  ToggleButtonGroupProps,
+} from './components/toggle-button-group/toggle-button-group.jsx';
+export {
+  ToggleButtonGroup,
+  ToggleButtonGroupItem,
+} from './components/toggle-button-group/toggle-button-group.jsx';

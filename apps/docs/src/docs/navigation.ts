@@ -9,6 +9,9 @@ import SkeletonPage, { frontmatter as skeletonMetadata } from './pages/component
 import ToggleButtonPage, {
   frontmatter as toggleButtonMetadata,
 } from './pages/components/toggle-button.mdx';
+import ToggleButtonGroupPage, {
+  frontmatter as toggleButtonGroupMetadata,
+} from './pages/components/toggle-button-group.mdx';
 import ColorsPage, { frontmatter as colorsMetadata } from './pages/foundations/colors.mdx';
 import IconsPage, { frontmatter as iconsMetadata } from './pages/foundations/icons.mdx';
 import RadiusPage, { frontmatter as radiusMetadata } from './pages/foundations/radius.mdx';
@@ -118,5 +121,13 @@ export const pages = [
     description: toggleButtonMetadata.description,
     sections: ['Playground', 'Examples', 'API Reference', 'Accessibility'],
     component: ToggleButtonPage,
+  },
+  {
+    path: '/components/toggle-button-group',
+    group: 'Components',
+    title: toggleButtonGroupMetadata.title,
+    description: toggleButtonGroupMetadata.description,
+    sections: ['Examples', 'API Reference', 'Accessibility'],
+    component: ToggleButtonGroupPage,
   },
 ] as const satisfies readonly DocPage[];
