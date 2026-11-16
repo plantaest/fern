@@ -1,5 +1,8 @@
 import type { Component } from 'solid-js';
 import ButtonPage, { frontmatter as buttonMetadata } from './pages/components/button.mdx';
+import ButtonGroupPage, {
+  frontmatter as buttonGroupMetadata,
+} from './pages/components/button-group.mdx';
 import MessagePage, { frontmatter as messageMetadata } from './pages/components/message.mdx';
 import SeparatorPage, { frontmatter as separatorMetadata } from './pages/components/separator.mdx';
 import SkeletonPage, { frontmatter as skeletonMetadata } from './pages/components/skeleton.mdx';
@@ -75,6 +78,14 @@ export const pages = [
     description: buttonMetadata.description,
     sections: ['Playground', 'Examples', 'API Reference', 'Accessibility'],
     component: ButtonPage,
+  },
+  {
+    path: '/components/button-group',
+    group: 'Components',
+    title: buttonGroupMetadata.title,
+    description: buttonGroupMetadata.description,
+    sections: ['Examples', 'API Reference', 'Accessibility'],
+    component: ButtonGroupPage,
   },
   {
     path: '/components/message',

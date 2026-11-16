@@ -17,6 +17,7 @@ const styles = (
       'src/foundations/prose.css',
       'src/components/icon/icon.css',
       'src/components/button/button.css',
+      'src/components/button-group/button-group.css',
       'src/components/message/message.css',
       'src/components/separator/separator.css',
       'src/components/skeleton/skeleton.css',

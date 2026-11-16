@@ -22,6 +22,11 @@
       "solid": "./dist/source/components/button/button.jsx",
       "default": "./dist/button.js"
     },
+    "./button-group": {
+      "types": "./dist/source/components/button-group/button-group.d.ts",
+      "solid": "./dist/source/components/button-group/button-group.jsx",
+      "default": "./dist/button-group.js"
+    },
     "./icon": {
       "types": "./dist/source/components/icon/icon.d.ts",
       "solid": "./dist/source/components/icon/icon.jsx",

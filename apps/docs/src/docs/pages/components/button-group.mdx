@@ -1,0 +1,48 @@
+---
+title: ButtonGroup
+description: Join related buttons in a row or column.
+---
+
+import { Example } from '../../ui';
+import {
+  buttonGroupIconOnlyExample,
+  buttonGroupOrientationExample,
+  buttonGroupVariantsExample,
+} from './button-group-examples';
+
+## Examples
+
+### Variants
+
+Use `Button` components as direct children of the group. Prefer `surface` for a tinted background or `outline` for a clear border on the page background.
+
+<Example demo={buttonGroupVariantsExample} />
+
+### Orientation
+
+Buttons sit in a single row by default. Set `orientation="vertical"` to stack them, for example when a row would be too wide for its container.
+
+<Example demo={buttonGroupOrientationExample} />
+
+### Icon-only
+
+Use an icon-only group for recognizable actions such as zooming. Give each button its own `aria-label`.
+
+<Example demo={buttonGroupIconOnlyExample} />
+
+## API Reference
+
+<div class="fern-docs-api-table" role="region" aria-labelledby="api-reference" tabindex="0">
+
+| Prop          | Type                                | Default        | Description                                                    |
+| ------------- | ----------------------------------- | -------------- | -------------------------------------------------------------- |
+| `orientation` | `"horizontal"`<br />`\| "vertical"` | `"horizontal"` | Arranges the buttons in a row or column.                       |
+| `children`    | `JSX.Element`                       | —              | The buttons to join.                                           |
+| `...props`    | Native `div` props                  | —              | Forwards attributes, events, and the ref to the group element. |
+
+</div>
+
+## Accessibility
+
+- Name the group by its purpose. Use `aria-labelledby` when there is a visible label or `aria-label` when there is none.
+- Give each button its own accessible name. Use Tab and Shift+Tab to move between enabled controls.

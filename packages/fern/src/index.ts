@@ -6,6 +6,12 @@ export type {
 } from './components/button/button.jsx';
 export { Button, buttonVariants } from './components/button/button.jsx';
 
+export type {
+  ButtonGroupOrientation,
+  ButtonGroupProps,
+} from './components/button-group/button-group.jsx';
+export { ButtonGroup } from './components/button-group/button-group.jsx';
+
 export type { IconProps } from './components/icon/icon.jsx';
 export { Icon } from './components/icon/icon.jsx';
 

@@ -9,6 +9,7 @@ export default defineConfig({
       entry: {
         index: 'src/build.ts',
         button: 'src/components/button/button.tsx',
+        'button-group': 'src/components/button-group/button-group.tsx',
         icon: 'src/components/icon/icon.tsx',
         message: 'src/components/message/message.tsx',
         separator: 'src/components/separator/separator.tsx',
