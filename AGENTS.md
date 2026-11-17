@@ -24,7 +24,7 @@ Fern is a design system for software built by Taxon Labs for Vietnamese Wikipedi
 
 | Foundation           | Starting point                                                           |
 | -------------------- | ------------------------------------------------------------------------ |
-| Colors               | Codex 2.7.0 semantic values; equivalent whitespace formatting is allowed |
+| Colors               | Codex 2.8.0 semantic values; equivalent whitespace formatting is allowed |
 | Themes               | Light and Dark, sharing the same prefixed CSS token contract             |
 | Headings             | Source Serif 4 for H1/H2; Inter for H3–H6; sizes and leading follow Docs |
 | Content and controls | Inter; 16px body, 14px labels                                            |

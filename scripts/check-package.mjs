@@ -18,7 +18,7 @@ try {
   const tarball = (await readdir(temp)).find((name) => name.endsWith('.tgz'));
   assert.ok(tarball, 'Expected a packed Fern tarball');
 
-  const solid = '2.0.0-rc.21';
+  const solid = '2.0.0-rc.23';
   const files = {
     'package.json': JSON.stringify({
       name: 'fern-clean-consumer',
@@ -28,13 +28,13 @@ try {
         '@taxonlabs/fern': `file:./${tarball}`,
         '@solidjs/web': solid,
         'solid-js': solid,
-        '@wikimedia/codex-icons': '2.7.0',
+        '@wikimedia/codex-icons': '2.8.0',
       },
       devDependencies: {
         '@solidjs/vite-plugin': '3.0.0-next.57',
-        jsdom: '31.0.0',
+        jsdom: '31.0.1',
         typescript: '7.0.2',
-        vite: '8.3.6',
+        vite: '8.3.8',
         vitest: '5.1.0',
       },
     }),

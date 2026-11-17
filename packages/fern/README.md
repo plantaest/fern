@@ -32,7 +32,7 @@ Import components and their types from `@taxonlabs/fern` or a component subpath 
 
 ## Styling
 
-Keep components inside `.fern` and select `data-theme="light"` or `data-theme="dark"`. Both themes share the same `--fern-*` contract and preserve Codex 2.7.0 color values and semantic roles. Numbered color tokens use names such as `--fern-color-red-300`.
+Keep components inside `.fern` and select `data-theme="light"` or `data-theme="dark"`. Both themes share the same `--fern-*` contract and preserve Codex 2.8.0 color values and semantic roles. Numbered color tokens use names such as `--fern-color-red-300`.
 
 `/styles.css` is built from standard CSS without the Tailwind compiler and works without Tailwind. It provides theme tokens, font setup, prose, a scoped box-sizing reset, and component styles. `/colors.css` contains colors only. Fern does not include global Preflight.
 
@@ -85,7 +85,7 @@ Component styles are in the `components` layer; utilities in the later `utilitie
 
 ## Compatibility and license
 
-The tested runtime is Solid and `@solidjs/web` `2.0.0-rc.21`, with Kobalte `2.0.0-alpha.4`. Kobalte and some upstream tooling dependencies declare older Solid peers. Resolve these mismatches before claiming strict-install or stable release support. SSR/hydration is not verified.
+The tested runtime is Solid and `@solidjs/web` `2.0.0-rc.23`, with Kobalte `2.0.0-alpha.4`. Kobalte and some upstream tooling dependencies declare older Solid peers. Resolve these mismatches before claiming strict-install or stable release support. SSR/hydration is not verified.
 
 Run `pnpm release:check` from the repository root to check the packed package with strict peer resolution. It is currently expected to fail on upstream peer metadata.
 

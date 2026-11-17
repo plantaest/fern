@@ -43,7 +43,7 @@ export async function generateColors() {
 
   await writeFile(
     new URL('../src/foundations/colors.css', import.meta.url),
-    `/* Generated from Codex 2.7.0 (GPL-2.0-or-later). Run pnpm colors. */
+    `/* Generated from Codex 2.8.0 (GPL-2.0-or-later). Run pnpm colors. */
 
 .fern {
   color-scheme: light;
