@@ -30,6 +30,7 @@ export function PreviewFrame(props: { children: JSX.Element; class?: string }) {
   return (
     <div
       class={`fern-not-prose border border-line-subtle rounded-base overflow-hidden ${props.class ?? ''}`}
+      tabindex="-1"
     >
       {props.children}
     </div>

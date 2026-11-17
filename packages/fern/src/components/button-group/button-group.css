@@ -14,6 +14,12 @@
     position: relative;
     flex: none;
 
+    &::before,
+    &::after {
+      position: absolute;
+      pointer-events: none;
+    }
+
     &:where(:has(+ .fern-button:not(.fern-toggle-button):is(:disabled, [data-disabled]))) {
       --fern-button-group-divider-end: var(--fern-button-group-disabled-divider);
     }
@@ -69,8 +75,12 @@
             :disabled,
             [data-disabled]
           )
-        ) {
-        border-inline-end-color: var(--fern-button-group-divider-end);
+        )::after {
+        content: "";
+        inset-block: -1px;
+        inset-inline-end: -1px;
+        inline-size: 1px;
+        background-color: var(--fern-button-group-divider-end);
       }
     }
 
@@ -86,8 +96,12 @@
             :disabled,
             [data-disabled]
           )
-        ) {
-        border-inline-start-color: var(--fern-button-group-divider-start);
+        )::before {
+        content: "";
+        inset-block: -1px;
+        inset-inline-start: -1px;
+        inline-size: 1px;
+        background-color: var(--fern-button-group-divider-start);
       }
     }
   }
@@ -105,8 +119,12 @@
           :disabled,
           [data-disabled]
         )
-      ) {
-      border-block-end-color: var(--fern-button-group-divider-end);
+      )::after {
+      content: "";
+      inset-inline: -1px;
+      inset-block-end: -1px;
+      block-size: 1px;
+      background-color: var(--fern-button-group-divider-end);
     }
   }
 
@@ -122,8 +140,12 @@
           :disabled,
           [data-disabled]
         )
-      ) {
-      border-block-start-color: var(--fern-button-group-divider-start);
+      )::before {
+      content: "";
+      inset-inline: -1px;
+      inset-block-start: -1px;
+      block-size: 1px;
+      background-color: var(--fern-button-group-divider-start);
     }
   }
 }
