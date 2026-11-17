@@ -46,6 +46,9 @@ const tailwindPalette = (colors) =>
 export async function generateColors() {
   const light = fernColors(await readColors('light'));
   const dark = fernColors(await readColors('dark'));
+  const darkOverrides = Object.fromEntries(
+    Object.entries(dark).filter(([name, value]) => value !== light[name]),
+  );
 
   const adapterUrl = new URL('../src/tailwind.css', import.meta.url);
   const adapter = await readFile(adapterUrl, 'utf8');
@@ -71,7 +74,7 @@ ${declarations(light)}
 .fern[data-theme="dark"] {
   color-scheme: dark;
 
-${declarations(dark)}
+${declarations(darkOverrides)}
 }
 `,
   );

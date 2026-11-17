@@ -34,10 +34,12 @@ const parse = (text) =>
     [...text.matchAll(/--fern-([\w-]+):\s*([^;]+);/g)].map(([, key, value]) => [key, value.trim()]),
   );
 
-for (const [index, mode] of ['light', 'dark'].entries()) {
+const [baseColors, darkOverrides] = blocks.map(([, declarations]) => parse(declarations));
+
+for (const mode of ['light', 'dark']) {
   test(`${mode}: all 287 Codex values are preserved with Fern's numbered token names`, async () => {
     const official = await readColors(mode, false);
-    const generated = parse(blocks[index][1]);
+    const generated = mode === 'dark' ? { ...baseColors, ...darkOverrides } : baseColors;
 
     const expected = Object.fromEntries(
       Object.entries(official).map(([name, value]) => [
@@ -59,6 +61,14 @@ for (const [index, mode] of ['light', 'dark'].entries()) {
     assert.ok(!/\(\s|\s\)/.test(Object.values(json[mode]).join('\n')));
   });
 }
+
+test('Dark CSS declares only color tokens that differ from Light', () => {
+  const expected = Object.fromEntries(
+    Object.entries(json.dark).filter(([name, value]) => value !== json.light[name]),
+  );
+
+  assert.deepEqual(darkOverrides, expected);
+});
 
 function luminance(hex) {
   let value = hex.slice(1);
