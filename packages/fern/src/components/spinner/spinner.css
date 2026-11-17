@@ -1,0 +1,36 @@
+.fern-spinner {
+  --fern-spinner-size: 1rem;
+
+  display: inline-block;
+  flex: none;
+  inline-size: var(--fern-spinner-size);
+  block-size: var(--fern-spinner-size);
+  vertical-align: middle;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+}
+
+.fern-spinner-size--xs {
+  --fern-spinner-size: 0.625rem;
+}
+
+.fern-spinner-size--sm {
+  --fern-spinner-size: 0.875rem;
+}
+
+.fern-spinner-size--lg {
+  --fern-spinner-size: 1.25rem;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .fern-spinner {
+    animation: fern-spinner-rotate 800ms linear infinite;
+  }
+}
+
+@keyframes fern-spinner-rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}

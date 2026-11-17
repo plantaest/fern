@@ -1,0 +1,68 @@
+---
+title: Spinner
+description: Show that an operation is still in progress.
+---
+
+import { Example } from '../../ui';
+import {
+  spinnerSizesExample,
+  spinnerColorExample,
+  spinnerWithALabelExample,
+  spinnerButtonExample,
+  spinnerBadgeExample,
+  spinnerCustomSizeExample,
+} from './spinner-examples';
+
+## Examples
+
+### Sizes
+
+<Example demo={spinnerSizesExample} />
+
+### Color
+
+The spinner inherits the text color. Use `text-content-progressive` for a progressive blue.
+
+<Example demo={spinnerColorExample} />
+
+### With a label
+
+Use a short label to say what is loading.
+
+<Example demo={spinnerWithALabelExample} />
+
+### Button
+
+Use the same size for the button and spinner, and label the action in progress.
+
+<Example demo={spinnerButtonExample} />
+
+### Badge
+
+Use a smaller spinner inside a badge.
+
+<Example demo={spinnerBadgeExample} />
+
+### Custom size
+
+Use a size utility for a larger loading area. Here, `size-8` makes the spinner 32px at a 16px root size.
+
+<Example demo={spinnerCustomSizeExample} />
+
+## API Reference
+
+<div class="fern-docs-api-table" role="region" aria-labelledby="api-reference" tabindex="0">
+
+| Prop         | Type                                                     | Default     | Description                                                   |
+| ------------ | -------------------------------------------------------- | ----------- | ------------------------------------------------------------- |
+| `size`       | `"xs"`<br />`\| "sm"`<br />`\| "default"`<br />`\| "lg"` | `"default"` | Sets the diameter to 10, 14, 16, or 20px at a 16px root size. |
+| `aria-label` | `string`                                                 | `"Loading"` | Names the status for assistive technology.                    |
+| `...props`   | Native `span` props                                      | —           | Forwards attributes, events, and the ref.                     |
+
+</div>
+
+## Accessibility
+
+- The spinner has `role="status"` by default. Set `aria-hidden="true"` when nearby text already describes the loading state.
+- Set `aria-busy` on the region being updated. To announce changes, update the text of an existing `role="status"` region outside the busy region.
+- The spinner stops rotating when reduced motion is enabled.

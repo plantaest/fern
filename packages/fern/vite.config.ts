@@ -17,6 +17,7 @@ export default defineConfig({
         message: 'src/components/message/message.tsx',
         separator: 'src/components/separator/separator.tsx',
         skeleton: 'src/components/skeleton/skeleton.tsx',
+        spinner: 'src/components/spinner/spinner.tsx',
         'toggle-button': 'src/components/toggle-button/toggle-button.tsx',
         'toggle-button-group': 'src/components/toggle-button-group/toggle-button-group.tsx',
       },

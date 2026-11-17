@@ -62,6 +62,11 @@
       "solid": "./dist/source/components/skeleton/skeleton.jsx",
       "default": "./dist/skeleton.js"
     },
+    "./spinner": {
+      "types": "./dist/source/components/spinner/spinner.d.ts",
+      "solid": "./dist/source/components/spinner/spinner.jsx",
+      "default": "./dist/spinner.js"
+    },
     "./toggle-button": {
       "types": "./dist/source/components/toggle-button/toggle-button.d.ts",
       "solid": "./dist/source/components/toggle-button/toggle-button.jsx",

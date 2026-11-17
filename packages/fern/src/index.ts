@@ -45,6 +45,9 @@ export { Separator } from './components/separator/separator.jsx';
 export type { SkeletonProps } from './components/skeleton/skeleton.jsx';
 export { Skeleton } from './components/skeleton/skeleton.jsx';
 
+export type { SpinnerProps, SpinnerSize } from './components/spinner/spinner.jsx';
+export { Spinner } from './components/spinner/spinner.jsx';
+
 export type {
   ToggleButtonProps,
   ToggleButtonVariant,

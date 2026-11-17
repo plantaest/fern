@@ -13,6 +13,7 @@ import CollapsiblePage, {
 import MessagePage, { frontmatter as messageMetadata } from './pages/components/message.mdx';
 import SeparatorPage, { frontmatter as separatorMetadata } from './pages/components/separator.mdx';
 import SkeletonPage, { frontmatter as skeletonMetadata } from './pages/components/skeleton.mdx';
+import SpinnerPage, { frontmatter as spinnerMetadata } from './pages/components/spinner.mdx';
 import ToggleButtonPage, {
   frontmatter as toggleButtonMetadata,
 } from './pages/components/toggle-button.mdx';
@@ -144,6 +145,14 @@ export const pages = [
     description: skeletonMetadata.description,
     sections: ['Examples', 'API Reference', 'Accessibility'],
     component: SkeletonPage,
+  },
+  {
+    path: '/components/spinner',
+    group: 'Components',
+    title: spinnerMetadata.title,
+    description: spinnerMetadata.description,
+    sections: ['Examples', 'API Reference', 'Accessibility'],
+    component: SpinnerPage,
   },
   {
     path: '/components/toggle-button',

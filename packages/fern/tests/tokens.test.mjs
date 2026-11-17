@@ -22,6 +22,7 @@ const styles = (
       'src/components/message/message.css',
       'src/components/separator/separator.css',
       'src/components/skeleton/skeleton.css',
+      'src/components/spinner/spinner.css',
       'src/components/toggle-button/toggle-button.css',
       'src/components/toggle-button-group/toggle-button-group.css',
     ].map((file) => readFile(file, 'utf8')),
