@@ -1,0 +1,4 @@
+.fern-collapsible-content[hidden] {
+  /* biome-ignore lint/complexity/noImportantStyles: Closed content must stay hidden when the caller sets display. */
+  display: none !important;
+}

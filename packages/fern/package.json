@@ -32,6 +32,11 @@
       "solid": "./dist/source/components/button-group/button-group.jsx",
       "default": "./dist/button-group.js"
     },
+    "./collapsible": {
+      "types": "./dist/source/components/collapsible/collapsible.d.ts",
+      "solid": "./dist/source/components/collapsible/collapsible.jsx",
+      "default": "./dist/collapsible.js"
+    },
     "./icon": {
       "types": "./dist/source/components/icon/icon.d.ts",
       "solid": "./dist/source/components/icon/icon.jsx",

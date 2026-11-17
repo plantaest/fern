@@ -6,6 +6,7 @@
 @import "./components/aspect-ratio/aspect-ratio.css" layer(components);
 @import "./components/button/button.css" layer(components);
 @import "./components/button-group/button-group.css" layer(components);
+@import "./components/collapsible/collapsible.css" layer(components);
 @import "./components/message/message.css" layer(components);
 @import "./components/separator/separator.css" layer(components);
 @import "./components/skeleton/skeleton.css" layer(components);

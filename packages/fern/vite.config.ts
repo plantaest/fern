@@ -11,6 +11,7 @@ export default defineConfig({
         'aspect-ratio': 'src/components/aspect-ratio/aspect-ratio.tsx',
         button: 'src/components/button/button.tsx',
         'button-group': 'src/components/button-group/button-group.tsx',
+        collapsible: 'src/components/collapsible/collapsible.tsx',
         icon: 'src/components/icon/icon.tsx',
         message: 'src/components/message/message.tsx',
         separator: 'src/components/separator/separator.tsx',

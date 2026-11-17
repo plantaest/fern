@@ -1,0 +1,53 @@
+---
+title: Collapsible
+description: Show or hide a section of content.
+---
+
+import { Example } from '../../ui';
+import {
+  collapsibleRevisionDetailsExample,
+  collapsibleSearchFiltersExample,
+} from './collapsible-examples';
+
+## Examples
+
+### Revision details
+
+Show the page and edit time at a glance. Use the icon button to reveal the editor and edit summary.
+
+<Example demo={collapsibleRevisionDetailsExample} />
+
+### Search filters
+
+Use `open` and `onOpenChange` to update the trigger icon. Set a filter, then close and reopen the panel to see that the value is preserved.
+
+<Example demo={collapsibleSearchFiltersExample} />
+
+## API Reference
+
+### Collapsible
+
+<div class="fern-docs-api-table" role="region" aria-labelledby="collapsible" tabindex="0">
+
+| Prop           | Type                      | Default | Description                                                    |
+| -------------- | ------------------------- | ------- | -------------------------------------------------------------- |
+| `open`         | `boolean`                 | —       | Controls whether the panel is open.                            |
+| `defaultOpen`  | `boolean`                 | `false` | Sets the initial uncontrolled state.                           |
+| `onOpenChange` | `(open: boolean) => void` | —       | Runs when the trigger requests a change.                       |
+| `disabled`     | `boolean`                 | `false` | Disables the trigger. The panel still follows the `open` prop. |
+| `...props`     | Native `div` props        | —       | Forwards attributes, events, and the ref to the wrapper.       |
+
+</div>
+
+### CollapsibleTrigger
+
+The trigger renders an unstyled `<button type="button">` by default. Style it with `class` or pass a button-rendering component to `as`, such as `as={Button}` with a Fern Button variant. The trigger accepts its own `disabled` prop. Collapsible manages `aria-expanded` and `aria-controls`.
+
+### CollapsibleContent
+
+The panel accepts native `div` props. Collapsible manages visibility. The panel stays mounted when closed, so fields keep their values.
+
+## Accessibility
+
+- Give the trigger a clear name and use Enter or Space to activate it.
+- If your app closes the panel while focus is inside it, move focus to the trigger or another visible control first.

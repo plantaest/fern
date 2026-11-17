@@ -15,6 +15,17 @@ export type {
 } from './components/button-group/button-group.jsx';
 export { ButtonGroup } from './components/button-group/button-group.jsx';
 
+export type {
+  CollapsibleContentProps,
+  CollapsibleProps,
+  CollapsibleTriggerProps,
+} from './components/collapsible/collapsible.jsx';
+export {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from './components/collapsible/collapsible.jsx';
+
 export type { IconProps } from './components/icon/icon.jsx';
 export { Icon } from './components/icon/icon.jsx';
 
