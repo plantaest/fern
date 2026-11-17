@@ -24,7 +24,6 @@ export interface SkeletonProps
     | 'textContent'
   > {
   animate?: boolean;
-  class?: string;
 }
 
 /** A visual placeholder for content that is loading. */
@@ -34,7 +33,7 @@ export function Skeleton(props: SkeletonProps) {
   return (
     <div
       {...rest}
-      class={skeletonVariants({ animate: props.animate, class: props.class })}
+      class={[skeletonVariants({ animate: props.animate }), props.class]}
       aria-hidden="true"
     />
   );

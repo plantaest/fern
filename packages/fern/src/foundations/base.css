@@ -33,6 +33,7 @@
 
   --fern-spacing: 0.25rem;
   --fern-radius-base: 0.25rem;
+  --fern-radius-pill: 999rem;
 
   --fern-transition-duration-base: 100ms;
   --fern-transition-easing-base: ease;

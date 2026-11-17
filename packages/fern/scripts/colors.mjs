@@ -37,9 +37,26 @@ const declarations = (colors) =>
     .filter(Boolean)
     .join('\n\n');
 
+const tailwindPalette = (colors) =>
+  Object.keys(colors)
+    .filter((name) => /^color-(?:[a-z]+-\d+|accent|black|white)$/.test(name))
+    .map((name) => `  --${name}: var(--fern-${name});`)
+    .join('\n');
+
 export async function generateColors() {
   const light = fernColors(await readColors('light'));
   const dark = fernColors(await readColors('dark'));
+
+  const adapterUrl = new URL('../src/tailwind.css', import.meta.url);
+  const adapter = await readFile(adapterUrl, 'utf8');
+  const paletteStart = '  /* Codex palette. Run pnpm colors. */';
+  const paletteEnd = '  /* End Codex palette. */';
+  const start = adapter.indexOf(paletteStart);
+  const end = adapter.indexOf(paletteEnd);
+
+  if (start === -1 || end <= start) {
+    throw new Error('Expected a marked Codex palette in tailwind.css.');
+  }
 
   await writeFile(
     new URL('../src/foundations/colors.css', import.meta.url),
@@ -63,6 +80,16 @@ ${declarations(dark)}
     new URL('../src/foundations/colors.json', import.meta.url),
     `${JSON.stringify({ light, dark }, null, 2)}\n`,
   );
+
+  const updatedAdapter = [
+    adapter.slice(0, start + paletteStart.length),
+    tailwindPalette(light),
+    adapter.slice(end),
+  ].join('\n');
+
+  if (updatedAdapter !== adapter) {
+    await writeFile(adapterUrl, updatedAdapter);
+  }
 
   console.log(`Codex: ${Object.keys(light).length} color values preserved per theme.`);
 }

@@ -124,7 +124,7 @@ describe('Button contract on Solid 2', () => {
       const [variant, setVariant] = createSignal<ButtonVariant>('outline');
       const [action, setAction] = createSignal<ButtonAction>('neutral');
       const [size, setSize] = createSignal<ButtonSize | undefined>();
-      const [customClass, setCustomClass] = createSignal<string | undefined>();
+      const [customClass, setCustomClass] = createSignal<ButtonProps['class']>();
       const [disabled, setDisabled] = createSignal(false);
       const [label, setLabel] = createSignal('Before');
 
@@ -149,7 +149,11 @@ describe('Button contract on Solid 2', () => {
     state.setVariant('surface');
     state.setAction('destructive');
     state.setSize('icon-lg');
-    state.setCustomClass('custom-class');
+    state.setCustomClass([
+      'custom-class',
+      'suppressed-class',
+      { 'suppressed-class': false, 'active-class': true },
+    ]);
     state.setDisabled(true);
     state.setLabel('After');
     flush();
@@ -161,6 +165,7 @@ describe('Button contract on Solid 2', () => {
         'fern-button-action--destructive',
         'fern-button-size--icon-lg',
         'custom-class',
+        'active-class',
       ]),
     );
     expect(button.textContent).toBe('After');
@@ -269,7 +274,7 @@ describe('Button contract on Solid 2', () => {
           as={Link}
           to={to()}
           variant={variant()}
-          class="custom-link"
+          class={['custom-link', { 'soft-link': variant() === 'soft' }]}
           aria-label="Read article"
           ref={(element) => {
             ref = element;
@@ -305,6 +310,7 @@ describe('Button contract on Solid 2', () => {
     expect(anchor.classList.contains('fern-button-variant--soft')).toBe(true);
     expect(anchor.classList.contains('fern-button-variant--outline')).toBe(false);
     expect(anchor.classList.contains('custom-link')).toBe(true);
+    expect(anchor.classList.contains('soft-link')).toBe(true);
     expect(clicks).toBe(1);
   });
 
@@ -338,7 +344,7 @@ describe('Button contract on Solid 2', () => {
   it('keeps icon-only buttons named and decorative icons unfocusable', () => {
     const host = mount(() => (
       <Button size="icon" aria-label="Edit">
-        <Icon icon={cdxIconEdit} />
+        <Icon icon={cdxIconEdit} class={['edit-icon', { 'icon-ready': true }]} />
       </Button>
     ));
 
@@ -347,6 +353,7 @@ describe('Button contract on Solid 2', () => {
 
     expect(button.getAttribute('aria-label')).toBe('Edit');
     expect(icon.getAttribute('aria-hidden')).toBe('true');
+    expect(new Set(icon.classList)).toEqual(new Set(['fern-icon', 'edit-icon', 'icon-ready']));
 
     button.focus();
     icon.focus();

@@ -1,0 +1,70 @@
+---
+title: Badge
+description: Label content with a category or status.
+---
+
+import { Example } from '../../ui';
+import {
+  BadgePlayground,
+  badgeVariantsExample,
+  badgeStatusesExample,
+  badgeSizesExample,
+  badgeWithIconsExample,
+  badgeLinkExample,
+  badgeCustomColorsExample,
+} from './badge-examples';
+
+## Playground
+
+<BadgePlayground />
+
+## Examples
+
+### Variants
+
+<Example demo={badgeVariantsExample} />
+
+### Statuses
+
+<Example demo={badgeStatusesExample} />
+
+### Sizes
+
+<Example demo={badgeSizesExample} />
+
+### With icons
+
+Place an `Icon` before or after the label.
+
+<Example demo={badgeWithIconsExample} />
+
+### Link
+
+Use `as="a"` and `href` when the badge links to a destination.
+
+<Example demo={badgeLinkExample} />
+
+### Custom colors
+
+Use `class` for custom colors. If your app switches themes with `data-theme`, configure Tailwind's `dark:` variant to match `[data-theme="dark"]`.
+
+<Example demo={badgeCustomColorsExample} />
+
+## API Reference
+
+<div class="fern-docs-api-table" role="region" aria-labelledby="api-reference" tabindex="0">
+
+| Prop       | Type                                                                                                            | Default     | Description                                                         |
+| ---------- | --------------------------------------------------------------------------------------------------------------- | ----------- | ------------------------------------------------------------------- |
+| `variant`  | `"solid"`<br />`\| "soft"`<br />`\| "surface"`<br />`\| "outline"`<br />`\| "ghost"`                            | `"soft"`    | Selects the visual style.                                           |
+| `status`   | `"subtle"`<br />`\| "notice"`<br />`\| "progressive"`<br />`\| "success"`<br />`\| "warning"`<br />`\| "error"` | `"notice"`  | Sets the semantic colors.                                           |
+| `size`     | `"sm"`<br />`\| "default"`<br />`\| "lg"`                                                                       | `"default"` | Sets the text, icon, and padding sizes.                             |
+| `children` | `JSX.Element`                                                                                                   | —           | The visible label and any icons.                                    |
+| `as`       | Element or component                                                                                            | `"span"`    | Renders another element or component. Use an anchor for navigation. |
+| `...props` | Props of the rendered element                                                                                   | —           | Forwards attributes, events, and the ref.                           |
+
+</div>
+
+## Accessibility
+
+Use a label that conveys the category or status in words. When the badge is a link, make its destination clear from the label. If a status change needs to be announced, place the badge in a live region such as one with `role="status"`.

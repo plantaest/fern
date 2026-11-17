@@ -45,7 +45,6 @@ export type ButtonProps<T extends ValidComponent = 'button'> = PolymorphicProps<
   variant?: ButtonVariant;
   action?: ButtonAction;
   size?: ButtonSize;
-  class?: string;
   type?: 'button' | 'submit' | 'reset';
 };
 
@@ -57,12 +56,10 @@ export function Button<T extends ValidComponent = 'button'>(props: ButtonProps<T
     <KobalteButton
       {...rest}
       type={props.type ?? 'button'}
-      class={buttonVariants({
-        variant: props.variant,
-        action: props.action,
-        size: props.size,
-        class: props.class,
-      })}
+      class={[
+        buttonVariants({ variant: props.variant, action: props.action, size: props.size }),
+        props.class,
+      ]}
     />
   );
 }

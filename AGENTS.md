@@ -30,7 +30,7 @@ Fern is a design system for software built by Taxon Labs for Vietnamese Wikipedi
 | Content and controls | Inter; 16px body, 14px labels                                            |
 | Code                 | JetBrains Mono                                                           |
 | Spacing              | Tailwind scale with a 4px base; 4, 8, 12, 16, 24, 32, 48px               |
-| Radius               | 4px                                                                      |
+| Radius               | 4px base and a pill token for fully rounded ends                         |
 | Icons                | Wikimedia Codex Icons                                                    |
 
 The Docs app bundles fonts locally with Vietnamese glyphs. Fern provides font stacks; consuming applications load fonts. Wrap components in `.fern` and select a theme with `data-theme="light"` or `data-theme="dark"`. Do not add global Preflight or a global reset to component CSS. Do not mix or adjust upstream colors. Non-color choices remain provisional.
@@ -50,13 +50,14 @@ The Docs app bundles fonts locally with Vietnamese glyphs. Fern provides font st
 - When updating Solid or build tooling, review the workspace manifests, overrides, and pins in `scripts/check-package.mjs` together. Keep the clean consumer free of workspace overrides.
 - Use `.fern-prose` for document HTML and `.fern-not-prose` for embedded UI. Derive document block spacing from `--fern-prose-flow`. Keep document styles in `foundations/prose.css`, with low specificity and no content width or page layout. Font family tokens are `--fern-font-sans`, `--fern-font-serif`, and `--fern-font-mono`.
 - Keep font size, weight, and line-height tokens independent of heading levels and components. Prose, components, and Tailwind text presets combine the shared scales. Body leading stays unitless; fixed leading values use rem.
-- Tailwind color aliases use `content-*`, `surface-*`, and `line-*` in `@theme`; choose the matching role for each CSS property (`text-content-progressive`, `bg-surface-progressive`, `border-line-progressive`). Use `text-content-base` for base text color; `text-base` remains a font-size utility.
+- Tailwind semantic color aliases use `content-*`, `surface-*`, and `line-*` in `@theme`. Choose the matching role for each CSS property (`text-content-progressive`, `bg-surface-progressive`, `border-line-progressive`). Use `text-content-base` for base text color. `text-base` remains a font-size utility. Palette utilities such as `bg-pink-200` map to Codex colors.
 - Tailwind size utilities use Fern's scale, from `text-xs` to `text-3xl`, and set size only. Combine them with `leading-sm` through `leading-2xl` or `leading-normal`; keep combined presets to `text-body`, `text-small`, `text-extra-small`, and `text-heading-1` through `text-heading-6`.
 - Include the styling group in modifier class names: `fern-button-variant--outline`, `fern-button-action--destructive`, and `fern-button-size--icon`. Keep the base class `fern-button`.
-- Generated `colors.css` and `colors.json` come from `scripts/colors.mjs`. Change the generator rather than editing its output.
+- `pnpm colors` runs `scripts/colors.mjs` to generate `colors.css`, `colors.json`, and the marked Codex palette block in `tailwind.css`. Make changes to generated declarations through the generator.
 - Numbered color token names separate the shade with a hyphen, such as `color-red-300` and `color-modifier-gray-100-translucent`. Preserve Codex values and semantic role names.
 - Keep Fern's license in root `LICENSE`. Do not add copied dependency licenses or license-generation scripts unless explicitly requested.
-- Use CVA (`class-variance-authority`) for component variant classes. Keep semantic CSS classes and public styling APIs explicit; do not add Tailwind class merging without a concrete need.
+- Use CVA (`class-variance-authority`) for component variant classes. Combine variant classes and the caller's `class` with a Solid class array. Preserve Solid's native class types and forward class values through custom `as` targets.
+- Keep semantic CSS classes and public styling APIs explicit; do not add Tailwind class merging without a concrete need.
 
 ## Docs conventions
 

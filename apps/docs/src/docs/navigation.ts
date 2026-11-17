@@ -2,6 +2,7 @@ import type { Component } from 'solid-js';
 import AspectRatioPage, {
   frontmatter as aspectRatioMetadata,
 } from './pages/components/aspect-ratio.mdx';
+import BadgePage, { frontmatter as badgeMetadata } from './pages/components/badge.mdx';
 import ButtonPage, { frontmatter as buttonMetadata } from './pages/components/button.mdx';
 import ButtonGroupPage, {
   frontmatter as buttonGroupMetadata,
@@ -69,7 +70,7 @@ export const pages = [
     group: 'Foundations',
     title: radiusMetadata.title,
     description: radiusMetadata.description,
-    sections: ['Default', 'In use'],
+    sections: ['Default', 'Pill', 'In use'],
     component: RadiusPage,
   },
   {
@@ -87,6 +88,14 @@ export const pages = [
     description: aspectRatioMetadata.description,
     sections: ['Examples', 'API Reference'],
     component: AspectRatioPage,
+  },
+  {
+    path: '/components/badge',
+    group: 'Components',
+    title: badgeMetadata.title,
+    description: badgeMetadata.description,
+    sections: ['Playground', 'Examples', 'API Reference', 'Accessibility'],
+    component: BadgePage,
   },
   {
     path: '/components/button',

@@ -9,6 +9,7 @@ export default defineConfig({
       entry: {
         index: 'src/build.ts',
         'aspect-ratio': 'src/components/aspect-ratio/aspect-ratio.tsx',
+        badge: 'src/components/badge/badge.tsx',
         button: 'src/components/button/button.tsx',
         'button-group': 'src/components/button-group/button-group.tsx',
         collapsible: 'src/components/collapsible/collapsible.tsx',

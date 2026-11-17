@@ -1,5 +1,5 @@
 import type { JSX } from '@solidjs/web';
-import { cva, cx } from 'class-variance-authority';
+import { cva } from 'class-variance-authority';
 import { createContext, createSignal, omit, useContext } from 'solid-js';
 import type { ButtonSize } from '../button/button.jsx';
 import {
@@ -44,7 +44,6 @@ export type ToggleButtonGroupProps = ToggleButtonGroupSelection &
     variant?: ToggleButtonVariant;
     size?: ButtonSize;
     disabled?: boolean;
-    class?: string;
   };
 
 export interface ToggleButtonGroupItemProps
@@ -177,11 +176,13 @@ export function ToggleButtonGroup(props: ToggleButtonGroupProps) {
         {...rest}
         role="group"
         aria-disabled={props.disabled ? 'true' : undefined}
-        class={toggleButtonGroupVariants({
-          variant: props.variant,
-          orientation: props.orientation,
-          class: props.class,
-        })}
+        class={[
+          toggleButtonGroupVariants({
+            variant: props.variant,
+            orientation: props.orientation,
+          }),
+          props.class,
+        ]}
         onKeyDown={onKeyDown}
       />
     </ToggleButtonGroupContext>
@@ -206,7 +207,7 @@ export function ToggleButtonGroupItem(props: ToggleButtonGroupItemProps) {
       disabled={group.isDisabled() || props.disabled}
       pressed={group.isPressed(props.value)}
       onPressedChange={() => group.toggle(props.value)}
-      class={cx('fern-toggle-button-group-item', props.class)}
+      class={['fern-toggle-button-group-item', props.class]}
     />
   );
 }

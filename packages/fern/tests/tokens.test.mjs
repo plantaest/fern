@@ -16,6 +16,7 @@ const styles = (
       'src/foundations/base.css',
       'src/foundations/prose.css',
       'src/components/icon/icon.css',
+      'src/components/badge/badge.css',
       'src/components/button/button.css',
       'src/components/button-group/button-group.css',
       'src/components/message/message.css',
@@ -95,7 +96,7 @@ test('used text, icon, and focus pairs meet their contrast thresholds in both th
       ['color-error', 'background-color-base', 4.5],
       ...['notice', 'success', 'warning', 'error'].flatMap((status) => [
         ['color-base', `background-color-${status}-subtle`, 4.5],
-        [`color-${status}`, `background-color-${status}-subtle`, 3],
+        [`color-${status}`, `background-color-${status}-subtle`, 4.5],
         [`color-${status}`, 'background-color-base', 3],
       ]),
       ...['progressive', 'destructive'].flatMap((role) =>
@@ -143,7 +144,7 @@ test('style references resolve to declared tokens and upstream colors, without h
   assert.ok(!/#(?:[a-f\d]{3}){1,2}\b/i.test(styles));
 });
 
-test('Tailwind utilities preserve typography and semantic color token roles', async () => {
+test('Tailwind utilities use Fern typography, radius, and colors', async () => {
   const adapter = await readFile('src/tailwind.css', 'utf8');
   const compiler = await compile(`${adapter}\n@tailwind utilities;`, {
     loadStylesheet: async (id) => {
@@ -171,6 +172,7 @@ test('Tailwind utilities preserve typography and semantic color token roles', as
     ]),
     ['leading-sm', 'line-height', 'line-height-small'],
     ['leading-normal', 'line-height', 'line-height-normal'],
+    ['rounded-pill', 'border-radius', 'radius-pill'],
     ['text-content-base', 'color', 'color-base'],
     ['bg-surface-base', 'background-color', 'background-color-base'],
     ['border-line-base', 'border-color', 'border-color-base'],
@@ -178,8 +180,13 @@ test('Tailwind utilities preserve typography and semantic color token roles', as
     ['bg-surface-progressive', 'background-color', 'background-color-progressive'],
     ['border-line-progressive', 'border-color', 'border-color-progressive'],
     ['accent-surface-progressive', 'accent-color', 'background-color-progressive'],
+    ...Object.keys(json.light)
+      .filter((name) => /^color-(?:[a-z]+-\d+|accent|black|white)$/.test(name))
+      .map((name) => [name.replace(/^color-/, 'bg-'), 'background-color', name]),
+    ['text-pink-200', 'color', 'color-pink-200'],
+    ['border-maroon-900', 'border-color', 'color-maroon-900'],
   ];
-  const css = compiler.build([...new Set(expectations.map(([name]) => name))]);
+  const css = compiler.build([...new Set(expectations.map(([name]) => name)), 'bg-fuchsia-500']);
   const rule = (name) => css.match(new RegExp(`\\.${name} \\{([^}]+)\\}`))?.[1] ?? '';
 
   for (const [name, property, token] of expectations) {
@@ -189,6 +196,8 @@ test('Tailwind utilities preserve typography and semantic color token roles', as
       `${name}: ${property} uses --fern-${token}`,
     );
   }
+
+  assert.equal(rule('bg-fuchsia-500'), '');
 
   for (const [name] of sizes) {
     assert.ok(!rule(name).includes('line-height:'), `${name} sets size without leading`);

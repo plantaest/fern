@@ -10,7 +10,11 @@ export default function CollapsibleSearchFiltersDemo() {
   const [open, setOpen] = createSignal(false);
 
   return (
-    <Collapsible open={open()} onOpenChange={setOpen} class="w-full max-w-md text-small">
+    <Collapsible
+      open={open()}
+      onOpenChange={setOpen}
+      class="w-full max-w-md text-small screen-small:self-start"
+    >
       <div class="flex flex-wrap items-end gap-2">
         <label class="grid min-w-32 flex-1 gap-1">
           Search terms

@@ -1,8 +1,9 @@
+import type { JSX } from '@solidjs/web';
 import { type Icon as IconData, resolveIcon, shouldIconFlip } from '@wikimedia/codex-icons';
 
 export interface IconProps {
   icon: IconData;
-  class?: string;
+  class?: JSX.SvgSVGAttributes<SVGSVGElement>['class'];
   lang?: string;
   dir?: 'ltr' | 'rtl';
 }
@@ -19,7 +20,7 @@ export function Icon(props: IconProps) {
 
   return (
     <svg
-      class={`fern-icon ${props.class ?? ''}`}
+      class={['fern-icon', props.class]}
       viewBox="0 0 20 20"
       aria-hidden="true"
       style={{

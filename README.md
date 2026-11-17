@@ -31,7 +31,7 @@ pnpm build
 pnpm pack:check
 ```
 
-`pnpm format` applies Biome to code and Prettier to Markdown/MDX. Generated tokens are excluded from formatting. `pack:check` creates a consumer in the operating system's temporary directory, installs the tarball without overrides, checks types and behavior, and builds without Tailwind. It does not publish anything.
+`pnpm format` applies Biome to code and Prettier to Markdown/MDX. The generated `colors.css` and `colors.json` files are excluded from formatting. `pack:check` creates a consumer in the operating system's temporary directory, installs the tarball without overrides, checks types and behavior, and builds without Tailwind. It does not publish anything.
 
 Automatic CI is disabled during early development. The GitHub Actions workflow can run these checks manually, using Ubuntu, Node 22, and the pnpm version declared in `package.json`.
 

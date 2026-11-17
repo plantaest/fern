@@ -1,0 +1,124 @@
+.fern-badge {
+  --fern-badge-font-size: var(--fern-font-size-small);
+  --fern-badge-line-height: var(--fern-line-height-small);
+  --fern-badge-padding-inline: calc(var(--fern-spacing) * 1.5);
+  --fern-badge-icon-size: 1rem;
+  --fern-badge-foreground: var(--fern-badge-color, var(--fern-color-base));
+  --fern-badge-solid-background: var(--fern-badge-color);
+  --fern-badge-solid-color: var(--fern-color-inverted);
+
+  display: inline-flex;
+  align-items: center;
+  gap: var(--fern-spacing);
+  max-inline-size: 100%;
+  box-sizing: border-box;
+  padding-inline: var(--fern-badge-padding-inline);
+  border: 1px solid transparent;
+  border-radius: var(--fern-radius-pill);
+  font:
+    var(--fern-font-weight-normal) var(--fern-badge-font-size) / var(--fern-badge-line-height)
+    var(--fern-font-sans);
+  color: var(--fern-badge-foreground);
+  overflow-wrap: anywhere;
+  white-space: normal;
+}
+
+.fern-badge:any-link {
+  color: var(--fern-badge-foreground);
+  text-decoration: none;
+}
+
+.fern-badge:any-link:focus-visible {
+  outline: 2px solid var(--fern-border-color-progressive--focus);
+  outline-offset: 2px;
+}
+
+.fern-badge-size--sm {
+  --fern-badge-font-size: var(--fern-font-size-x-small);
+  --fern-badge-line-height: 1rem;
+  --fern-badge-padding-inline: var(--fern-spacing);
+  --fern-badge-icon-size: 0.75rem;
+}
+
+.fern-badge-size--lg {
+  --fern-badge-font-size: var(--fern-font-size-medium);
+  --fern-badge-line-height: var(--fern-line-height-medium);
+  --fern-badge-padding-inline: calc(var(--fern-spacing) * 2);
+  --fern-badge-icon-size: 1.25rem;
+}
+
+.fern-badge-status--subtle {
+  --fern-badge-background: var(--fern-background-color-neutral-subtle);
+  --fern-badge-border: var(--fern-border-color-base);
+  --fern-badge-icon-color: var(--fern-color-subtle);
+  --fern-badge-color: var(--fern-color-subtle);
+  --fern-badge-solid-background: var(--fern-background-color-neutral);
+  --fern-badge-solid-color: var(--fern-color-base);
+}
+
+.fern-badge-status--notice {
+  --fern-badge-background: var(--fern-background-color-notice-subtle);
+  --fern-badge-border: var(--fern-border-color-notice);
+  --fern-badge-icon-color: var(--fern-color-icon-notice);
+  --fern-badge-color: var(--fern-color-base);
+  --fern-badge-solid-background: var(--fern-color-subtle);
+}
+
+.fern-badge-status--progressive {
+  --fern-badge-background: var(--fern-background-color-progressive-subtle);
+  --fern-badge-border: var(--fern-border-color-progressive);
+  --fern-badge-icon-color: var(--fern-color-icon-progressive);
+  --fern-badge-color: var(--fern-color-progressive);
+}
+
+.fern-badge-status--success {
+  --fern-badge-background: var(--fern-background-color-success-subtle);
+  --fern-badge-border: var(--fern-border-color-success);
+  --fern-badge-icon-color: var(--fern-color-icon-success);
+  --fern-badge-color: var(--fern-color-success);
+}
+
+.fern-badge-status--warning {
+  --fern-badge-background: var(--fern-background-color-warning-subtle);
+  --fern-badge-border: var(--fern-border-color-warning);
+  --fern-badge-icon-color: var(--fern-color-icon-warning);
+  --fern-badge-color: var(--fern-color-warning);
+}
+
+.fern-badge-status--error {
+  --fern-badge-background: var(--fern-background-color-error-subtle);
+  --fern-badge-border: var(--fern-border-color-error);
+  --fern-badge-icon-color: var(--fern-color-icon-error);
+  --fern-badge-color: var(--fern-color-error);
+}
+
+.fern-badge-variant--solid {
+  --fern-badge-foreground: var(--fern-badge-solid-color);
+
+  background-color: var(--fern-badge-solid-background);
+}
+
+.fern-badge-variant--soft,
+.fern-badge-variant--surface {
+  background-color: var(--fern-badge-background);
+}
+
+.fern-badge-variant--surface,
+.fern-badge-variant--outline {
+  border-color: var(--fern-badge-border);
+}
+
+.fern-badge-variant--ghost:hover {
+  background-color: var(--fern-badge-background);
+}
+
+.fern-badge > .fern-icon {
+  width: var(--fern-badge-icon-size);
+  height: var(--fern-badge-icon-size);
+  color: var(--fern-badge-icon-color);
+}
+
+.fern-badge-variant--solid > .fern-icon,
+.fern-badge-variant--ghost > .fern-icon {
+  color: inherit;
+}

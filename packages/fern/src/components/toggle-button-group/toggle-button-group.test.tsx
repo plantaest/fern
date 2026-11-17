@@ -109,8 +109,18 @@ it('toggles multiple values independently without mutating the controlled value'
 it('uses surface by default and applies the group variant and size to every item', () => {
   const [variant, setVariant] = createSignal<ToggleButtonVariant>();
   const { group, buttons, pressed } = mount(() => (
-    <ToggleButtonGroup variant={variant()} size="sm" defaultValue="bold">
-      <ToggleButtonGroupItem value="bold">Bold</ToggleButtonGroupItem>
+    <ToggleButtonGroup
+      variant={variant()}
+      size="sm"
+      defaultValue="bold"
+      class={{ 'formatting-group': true }}
+    >
+      <ToggleButtonGroupItem
+        value="bold"
+        class={['bold-control', { 'ghost-control': variant() === 'ghost' }]}
+      >
+        Bold
+      </ToggleButtonGroupItem>
       <ToggleButtonGroupItem value="italic">Italic</ToggleButtonGroupItem>
     </ToggleButtonGroup>
   ));
@@ -120,6 +130,8 @@ it('uses surface by default and applies the group variant and size to every item
     buttons.every((button) => button.classList.contains('fern-toggle-button-variant--surface')),
   ).toBe(true);
   expect(buttons.every((button) => button.classList.contains('fern-button-size--sm'))).toBe(true);
+  expect(group.classList.contains('formatting-group')).toBe(true);
+  expect(buttons[0].classList.contains('ghost-control')).toBe(false);
 
   setVariant('ghost');
   flush();
@@ -129,6 +141,8 @@ it('uses surface by default and applies the group variant and size to every item
     buttons.every((button) => button.classList.contains('fern-toggle-button-variant--ghost')),
   ).toBe(true);
   expect(pressed()).toEqual([buttons[0]]);
+  expect(buttons[0].classList.contains('bold-control')).toBe(true);
+  expect(buttons[0].classList.contains('ghost-control')).toBe(true);
 });
 
 it('inherits group disabled state and preserves disabled items and selection', () => {

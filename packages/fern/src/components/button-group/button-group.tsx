@@ -16,7 +16,6 @@ export type ButtonGroupOrientation = 'horizontal' | 'vertical';
 
 export interface ButtonGroupProps extends Omit<JSX.HTMLAttributes<HTMLDivElement>, 'role'> {
   orientation?: ButtonGroupOrientation;
-  class?: string;
 }
 
 /** A group of related action buttons. */
@@ -28,7 +27,7 @@ export function ButtonGroup(props: ButtonGroupProps) {
     <div
       {...rest}
       role="group"
-      class={buttonGroupVariants({ orientation: props.orientation, class: props.class })}
+      class={[buttonGroupVariants({ orientation: props.orientation }), props.class]}
     />
   );
 }

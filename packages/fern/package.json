@@ -22,6 +22,11 @@
       "solid": "./dist/source/components/aspect-ratio/aspect-ratio.jsx",
       "default": "./dist/aspect-ratio.js"
     },
+    "./badge": {
+      "types": "./dist/source/components/badge/badge.d.ts",
+      "solid": "./dist/source/components/badge/badge.jsx",
+      "default": "./dist/badge.js"
+    },
     "./button": {
       "types": "./dist/source/components/button/button.d.ts",
       "solid": "./dist/source/components/button/button.jsx",

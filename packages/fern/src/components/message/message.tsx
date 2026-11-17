@@ -36,7 +36,6 @@ type MessageContentProps = Omit<JSX.HTMLAttributes<HTMLDivElement>, 'title' | 'o
   icon?: IconData;
   title?: string;
   closeButtonLabel?: string;
-  class?: string;
 };
 
 export type MessageProps = MessageContentProps &
@@ -73,7 +72,7 @@ export function Message(props: MessageProps) {
       role={type() === 'error' ? 'alert' : undefined}
       aria-live={type() === 'error' ? undefined : 'polite'}
       {...rest}
-      class={messageVariants({ type: type(), inline: props.inline, class: props.class })}
+      class={[messageVariants({ type: type(), inline: props.inline }), props.class]}
     >
       <Icon icon={props.icon ?? messageIcons[type()]} class="fern-message-icon" />
       <div class="fern-message-content">

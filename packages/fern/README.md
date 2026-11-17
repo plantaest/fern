@@ -34,6 +34,8 @@ Import components and their types from `@taxonlabs/fern` or a component subpath 
 
 Keep components inside `.fern` and select `data-theme="light"` or `data-theme="dark"`. Both themes share the same `--fern-*` contract and preserve Codex 2.8.0 color values and semantic roles. Numbered color tokens use names such as `--fern-color-red-300`.
 
+Component `class` props accept Solid's class syntax, including strings, arrays, and conditional objects such as `class={['preview', { muted: isMuted() }]}`. Custom components passed to `as` forward the Solid `class` value to their element.
+
 `/styles.css` is built from standard CSS without the Tailwind compiler and works without Tailwind. It provides theme tokens, font setup, prose, a scoped box-sizing reset, and component styles. `/colors.css` contains colors only. Fern does not include global Preflight.
 
 Applications load fonts. Fern declares Inter, Source Serif 4, and JetBrains Mono stacks; override `--fern-font-sans`, `--fern-font-serif`, and `--fern-font-mono` on `.fern` to use other fonts. Public tokens can also customize spacing, radius, typography, and transitions.
@@ -61,9 +63,11 @@ Keep the `/styles.css` import from Usage. Add the following to your application 
 
 The adapter maps Fern tokens to utilities such as `bg-surface-base`, `text-body`, and `rounded-base`, and shares `--fern-spacing` with numeric spacing utilities. Tailwind generates the utilities, including standard classes such as `flex` and `gap-2`.
 
-Color aliases in `@theme` use `content-*`, `surface-*`, and `line-*` to preserve Codex roles. Choose the role that matches the CSS property. Use `bg-surface-base`, `bg-surface-neutral-subtle`, and `bg-surface-neutral` for backgrounds; `text-content-base`, `text-content-subtle`, and `placeholder:text-content-placeholder` for text; and `border-line-base` or `border-line-subtle` for borders. `text-base` remains a font-size utility.
+Semantic color aliases in `@theme` use `content-*`, `surface-*`, and `line-*` to preserve Codex roles. Choose the role that matches the CSS property. Use `bg-surface-base`, `bg-surface-neutral-subtle`, and `bg-surface-neutral` for backgrounds; `text-content-base`, `text-content-subtle`, and `placeholder:text-content-placeholder` for text; and `border-line-base` or `border-line-subtle` for borders. `text-base` remains a font-size utility.
 
 Progressive roles include `text-content-progressive`, `bg-surface-progressive`, and `border-line-progressive`. Combine state aliases with variants, such as `hover:text-content-progressive-hover` and `focus-visible:outline-line-progressive-focus`.
+
+The adapter replaces Tailwind's default palette with Codex colors. Utilities such as `bg-pink-200`, `text-pink-900`, and `border-maroon-300` reference the corresponding Fern tokens.
 
 Font-size utilities use Fern's scale and set size only:
 

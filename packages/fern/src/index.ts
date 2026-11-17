@@ -1,5 +1,12 @@
 export type { AspectRatioProps } from './components/aspect-ratio/aspect-ratio.jsx';
 export { AspectRatio } from './components/aspect-ratio/aspect-ratio.jsx';
+export type {
+  BadgeProps,
+  BadgeSize,
+  BadgeStatus,
+  BadgeVariant,
+} from './components/badge/badge.jsx';
+export { Badge } from './components/badge/badge.jsx';
 
 export type {
   ButtonAction,

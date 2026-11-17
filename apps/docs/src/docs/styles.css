@@ -7,6 +7,7 @@
 @custom-variant screen-small (@media (max-width: 760px));
 @custom-variant screen-tiny (@media (max-width: 360px));
 @custom-variant no-script (@media (scripting: none));
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 
 /* Defaults for the Docs shell and embedded examples. */
 @layer base {

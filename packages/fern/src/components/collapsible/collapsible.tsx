@@ -48,16 +48,22 @@ export function CollapsibleTrigger<T extends ValidComponent = 'button'>(
   props: CollapsibleTriggerProps<T>,
 ) {
   const context = useCollapsibleContext();
-  const local = props as CollapsibleTriggerProps;
-  const rest = omit(local, 'as', 'class', 'disabled', 'aria-expanded', 'aria-controls');
+  const rest = omit(
+    props as CollapsibleTriggerProps,
+    'as',
+    'class',
+    'disabled',
+    'aria-expanded',
+    'aria-controls',
+  );
 
   return (
     <Trigger
       {...rest}
       as={props.as ?? 'button'}
       type="button"
-      disabled={context.disabled() || local.disabled}
-      class={['fern-collapsible-trigger', local.class]}
+      disabled={context.disabled() || props.disabled}
+      class={['fern-collapsible-trigger', props.class]}
     />
   );
 }

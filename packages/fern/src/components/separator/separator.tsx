@@ -17,7 +17,6 @@ export type SeparatorOrientation = 'horizontal' | 'vertical';
 export interface SeparatorProps extends Omit<JSX.HTMLAttributes<HTMLHRElement>, 'children'> {
   orientation?: SeparatorOrientation;
   decorative?: boolean;
-  class?: string;
 }
 
 /** A static boundary between sections or groups. */
@@ -31,7 +30,7 @@ export function Separator(props: SeparatorProps) {
         !props.decorative && props.orientation === 'vertical' ? 'vertical' : undefined
       }
       {...rest}
-      class={separatorVariants({ orientation: props.orientation, class: props.class })}
+      class={[separatorVariants({ orientation: props.orientation }), props.class]}
     />
   );
 }

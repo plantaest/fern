@@ -25,7 +25,6 @@ export interface ToggleButtonProps
   variant?: ToggleButtonVariant;
   size?: ButtonSize;
   disabled?: boolean;
-  class?: string;
 }
 
 /** A button that toggles a persistent pressed state. */
@@ -38,10 +37,11 @@ export function ToggleButton(props: ToggleButtonProps) {
       as="button"
       type="button"
       onChange={props.onPressedChange}
-      class={toggleButtonVariants({
-        variant: props.variant,
-        class: [buttonVariants({ variant: null, action: null, size: props.size }), props.class],
-      })}
+      class={[
+        toggleButtonVariants({ variant: props.variant }),
+        buttonVariants({ variant: null, action: null, size: props.size }),
+        props.class,
+      ]}
     />
   );
 }
