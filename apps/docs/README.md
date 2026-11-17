@@ -69,4 +69,4 @@ toolforge webservice buildservice start --mount=none
 
 Verify direct routes and reloads at `https://fern.toolforge.org/`. On Toolforge, save `type: buildservice` and `mount: none` in `~/service.template`. For later deployments, build again, wait for success, and run `toolforge webservice restart`. Inspect runtime logs with `toolforge webservice buildservice logs -f`.
 
-Toolforge hosting and SSR remain unverified until checked in their respective environments.
+Fern Docs runs on Toolforge. The deployed Button and Colors routes return prerendered HTML, and unknown routes return HTTP 404.

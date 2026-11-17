@@ -65,7 +65,7 @@ The Docs app bundles fonts locally with Vietnamese glyphs. Fern provides font st
 - Declare pages, routes, groups, and section titles explicitly in `src/docs/navigation.ts`, importing titles and descriptions from frontmatter. Keep section titles consistent with MDX. Do not add automatic page discovery or API generation yet.
 - Keep build-time MDX plugins in `apps/docs/plugins/`. Resolve the MDX provider independently of page folder depth.
 - Use Tailwind utilities for layout, spacing, responsiveness, and visual samples. Share repeated presentation in `ui.tsx`. Keep Docs CSS for MDX defaults and structure-dependent rules in layers that utilities can override. Keep Docs-only token aliases local and reference Codex values.
-- Component pages present an introduction, a playground and examples as needed, API Reference, and accessibility notes, in that order. Follow the [Docs README](apps/docs/README.md) for API tables and playground conventions.
+- Component pages present an introduction, an optional playground, examples as needed, and an API Reference. Add accessibility notes after the API Reference when the component has specific guidance. Give each example a distinct purpose and use Wikimedia scenarios when they clarify how the component is used. Follow the [Docs README](apps/docs/README.md) for API tables and playground conventions.
 
 ## Formatting
 
@@ -103,6 +103,8 @@ For changes limited to Markdown documentation, run `pnpm check`. For code, confi
 Test component-specific behavior in the component tests. The clean consumer checks all declared export targets and exercises representative runtime behavior. Add a runtime case only when a new integration or build path needs verification outside the workspace.
 
 For visual or interaction changes, check Light and Dark, narrow screens, and keyboard behavior. Give icon-only controls accessible names. Test reactive props and ensure ordinary buttons do not submit forms.
+
+When changing joined buttons, check both ends of the dividers and verify that buttons stay in place as states change.
 
 When changing MediaWiki embedding behavior, verify in a representative host that Fern styles stay inside the shadow root and host controls retain their styling.
 
