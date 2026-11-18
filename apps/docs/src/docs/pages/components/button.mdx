@@ -12,6 +12,7 @@ import {
   buttonWithIconsExample,
   buttonDestructiveExample,
   buttonDisabledExample,
+  buttonLoadingExample,
   buttonFormExample,
   buttonLinkExample,
   buttonLinkVariantsExample,
@@ -45,11 +46,15 @@ Use a clear label alongside the destructive color.
 
 <Example demo={buttonDestructiveExample} />
 
-### Disabled and busy
-
-Keep a visible label for the current state.
+### Disabled
 
 <Example demo={buttonDisabledExample} />
+
+### Loading
+
+Compose a [Spinner](/components/spinner) with a label and set `aria-busy="true"`. Use `disabled` to prevent repeated activation.
+
+<Example demo={buttonLoadingExample} />
 
 ### Form actions
 

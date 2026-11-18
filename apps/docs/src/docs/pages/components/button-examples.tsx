@@ -20,6 +20,8 @@ import ButtonLinkDemo from './button-demos/link';
 import linkSource from './button-demos/link.tsx?raw';
 import ButtonLinkVariantsDemo from './button-demos/link-variants';
 import linkVariantsSource from './button-demos/link-variants.tsx?raw';
+import ButtonLoadingDemo from './button-demos/loading';
+import loadingSource from './button-demos/loading.tsx?raw';
 import ButtonSizesDemo from './button-demos/sizes';
 import sizesSource from './button-demos/sizes.tsx?raw';
 import ButtonVariantsDemo from './button-demos/variants';
@@ -210,6 +212,11 @@ export const buttonDestructiveExample = {
 export const buttonDisabledExample = {
   component: ButtonDisabledDemo,
   source: disabledSource,
+};
+
+export const buttonLoadingExample = {
+  component: ButtonLoadingDemo,
+  source: loadingSource,
 };
 
 export const buttonFormExample = {

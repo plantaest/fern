@@ -132,11 +132,25 @@
   --fern-button-line: var(--fern-button-border);
   --fern-button-line-hover: var(--fern-button-border-hover);
   --fern-button-line-active: var(--fern-button-border-active);
+
+  &:is(:disabled, [data-disabled]) {
+    border-color: var(--fern-border-color-disabled);
+  }
 }
 
 .fern-button-variant--soft,
 .fern-button-variant--surface {
   --fern-button-bg: var(--fern-button-subtle-bg);
+
+  &:is(:disabled, [data-disabled]) {
+    background: var(--fern-background-color-disabled-subtle);
+  }
+}
+
+.fern-button-variant--outline {
+  &:is(:disabled, [data-disabled]) {
+    background: transparent;
+  }
 }
 
 .fern-button-variant--ghost {

@@ -3,12 +3,18 @@ import { Button } from '@taxonlabs/fern/button';
 export default function ButtonDisabledDemo() {
   return (
     <>
-      <Button disabled>Save changes</Button>
-      <Button variant="outline" disabled>
-        Unavailable
+      <Button disabled>Solid</Button>
+      <Button variant="soft" disabled>
+        Soft
       </Button>
-      <Button disabled aria-busy="true">
-        Saving…
+      <Button variant="surface" disabled>
+        Surface
+      </Button>
+      <Button variant="outline" disabled>
+        Outline
+      </Button>
+      <Button variant="ghost" disabled>
+        Ghost
       </Button>
     </>
   );
