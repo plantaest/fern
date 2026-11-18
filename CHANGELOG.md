@@ -18,4 +18,4 @@
 - Fern Docs with MDX pages, syntax-highlighted code blocks, interactive playgrounds, standalone demos for previews and displayed source, and pathname routing.
 - Formatting, linting, component and Docs tests, clean tarball verification, and manually triggered CI.
 
-The initial alpha is unpublished. Solid and Kobalte remain prerelease dependencies; publication is pending compatibility and package scope confirmation.
+The initial alpha is unpublished. Kobalte remains a prerelease dependency; publication is pending compatibility and package scope confirmation.

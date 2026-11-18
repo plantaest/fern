@@ -16,7 +16,7 @@ Fern is a design system for software built by Taxon Labs for Vietnamese Wikipedi
 - `apps/docs`: private Docs application, currently used to explore foundations and components and intended to become the official documentation. Consume Fern through package exports, without source aliases.
 - `scripts/check-package.mjs`: verify a packed tarball in a clean application without workspace overrides or Tailwind.
 - Use pnpm from the repository root, with one workspace lockfile.
-- Use TypeScript, SolidJS 2, Tailwind CSS 4, and Kobalte. Solid 2 RC and Kobalte alpha are deliberate choices; do not silently switch to Solid 1.
+- Use TypeScript, SolidJS 2, Tailwind CSS 4, and Kobalte. Solid 2 and Kobalte alpha are deliberate choices; do not silently switch to Solid 1.
 - Organize Docs pages under `src/docs/pages/foundations/` and `src/docs/pages/components/`. Keep samples, playgrounds, and explicit demo imports in a neighboring `*-examples.tsx` file. Put standalone demos in `*-demos/` and keep tests close to the pages they exercise.
 - Use Tailwind utilities without a prefix (`flex`, `gap-2`, `bg-surface-base`). Keep Fern component classes and `--fern-*` tokens namespaced. MediaWiki gadgets are intended to use Shadow DOM. ResourceLoader integration remains future work.
 

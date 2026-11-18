@@ -43,4 +43,4 @@ The private root workspace is named `fern`. The package `@taxonlabs/fern` is an 
 
 Fern is licensed under `GPL-2.0-or-later`. See [LICENSE](LICENSE).
 
-Fern uses Solid 2 RC and Kobalte alpha. Upstream peer compatibility remains a release blocker. Docs uses static rendering and hydration. The package's SSR and hydration support in other applications still needs verification. See [package compatibility](packages/fern/README.md#compatibility-and-license) for tested versions and the release check.
+Fern uses Solid 2 and Kobalte alpha. Upstream peer compatibility remains a release blocker. Docs uses static rendering and hydration. The package's SSR and hydration support in other applications still needs verification. See [package compatibility](packages/fern/README.md#compatibility-and-license) for tested versions and the release check.

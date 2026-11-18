@@ -89,7 +89,7 @@ Component styles are in the `components` layer; utilities in the later `utilitie
 
 ## Compatibility and license
 
-The tested runtime is Solid and `@solidjs/web` `2.0.0-rc.23`, with Kobalte `2.0.0-alpha.4`. Kobalte and some upstream tooling dependencies declare older Solid peers. Resolve these mismatches before claiming strict-install or stable release support. SSR/hydration is not verified.
+The tested runtime is Solid and `@solidjs/web` `2.0.0`, with Kobalte `2.0.0-alpha.4`. Kobalte and some of its dependencies still declare Solid RC peers. Resolve these mismatches before claiming strict-install or stable release support. SSR/hydration is not verified.
 
 Run `pnpm release:check` from the repository root to check the packed package with strict peer resolution. It is currently expected to fail on upstream peer metadata.
 
