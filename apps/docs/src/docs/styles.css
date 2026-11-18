@@ -118,6 +118,8 @@
   }
 
   .fern-docs-api-table {
+    /* Keep absolutely positioned link hints inside the table's scroll area. */
+    position: relative;
     max-width: 100%;
     overflow-x: auto;
     border-block: 1px solid var(--fern-border-color-subtle);
