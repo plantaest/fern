@@ -14,6 +14,13 @@ import { Icon } from '../icon/icon.jsx';
 
 const messageVariants = cva('fern-message', {
   variants: {
+    variant: {
+      solid: 'fern-message-variant--solid',
+      soft: 'fern-message-variant--soft',
+      surface: 'fern-message-variant--surface',
+      outline: 'fern-message-variant--outline',
+      ghost: 'fern-message-variant--ghost',
+    },
     type: {
       notice: 'fern-message-type--notice',
       success: 'fern-message-type--success',
@@ -25,12 +32,14 @@ const messageVariants = cva('fern-message', {
       true: 'fern-message-layout--inline',
     },
   },
-  defaultVariants: { type: 'notice', inline: false },
+  defaultVariants: { variant: 'surface', type: 'notice', inline: false },
 });
 
+export type MessageVariant = NonNullable<VariantProps<typeof messageVariants>['variant']>;
 export type MessageType = NonNullable<VariantProps<typeof messageVariants>['type']>;
 
 type MessageContentProps = Omit<JSX.HTMLAttributes<HTMLDivElement>, 'title' | 'onClose'> & {
+  variant?: MessageVariant;
   type?: MessageType;
   inline?: boolean;
   icon?: IconData;
@@ -55,6 +64,7 @@ const messageIcons = {
 export function Message(props: MessageProps) {
   const rest = omit(
     props,
+    'variant',
     'type',
     'inline',
     'icon',
@@ -72,7 +82,14 @@ export function Message(props: MessageProps) {
       role={type() === 'error' ? 'alert' : undefined}
       aria-live={type() === 'error' ? undefined : 'polite'}
       {...rest}
-      class={[messageVariants({ type: type(), inline: props.inline }), props.class]}
+      class={[
+        messageVariants({
+          variant: props.inline ? null : props.variant,
+          type: type(),
+          inline: props.inline,
+        }),
+        props.class,
+      ]}
     >
       <Icon icon={props.icon ?? messageIcons[type()]} class="fern-message-icon" />
       <div class="fern-message-content">

@@ -1,8 +1,22 @@
 import { Button } from '@taxonlabs/fern/button';
-import { Message, type MessageType } from '@taxonlabs/fern/message';
+import { Message, type MessageType, type MessageVariant } from '@taxonlabs/fern/message';
 import { cdxIconArticle } from '@wikimedia/codex-icons';
 import { createEffect, createSignal, For, Show } from 'solid-js';
 import { CodeBlock, Field, fieldControlClasses, Preview, PreviewFrame } from '../../ui';
+import MessageInlineValidationDemo from './message-demos/inline-validation';
+import inlineValidationSource from './message-demos/inline-validation.tsx?raw';
+import MessageTypesDemo from './message-demos/types';
+import typesSource from './message-demos/types.tsx?raw';
+import MessageVariantsDemo from './message-demos/variants';
+import variantsSource from './message-demos/variants.tsx?raw';
+import MessageWithACloseButtonDemo from './message-demos/with-a-close-button';
+import withACloseButtonSource from './message-demos/with-a-close-button.tsx?raw';
+import MessageWithACustomIconDemo from './message-demos/with-a-custom-icon';
+import withACustomIconSource from './message-demos/with-a-custom-icon.tsx?raw';
+import MessageWithATitleDemo from './message-demos/with-a-title';
+import withATitleSource from './message-demos/with-a-title.tsx?raw';
+
+const variants = ['solid', 'soft', 'surface', 'outline', 'ghost'] satisfies MessageVariant[];
 
 const messageText = {
   notice: 'This draft is only visible to you.',
@@ -12,6 +26,7 @@ const messageText = {
 } satisfies Record<MessageType, string>;
 
 export function MessagePlayground() {
+  const [variant, setVariant] = createSignal<MessageVariant>('surface');
   const [type, setType] = createSignal<MessageType>('notice');
   const [inline, setInline] = createSignal(false);
   const [title, setTitle] = createSignal('');
@@ -29,6 +44,7 @@ export function MessagePlayground() {
   });
 
   const code = () => {
+    const variantAttr = inline() || variant() === 'surface' ? '' : ` variant="${variant()}"`;
     const typeAttr = type() === 'notice' ? '' : ` type="${type()}"`;
     const inlineAttr = inline() ? ' inline' : '';
     const titleValue = title();
@@ -42,7 +58,7 @@ export function MessagePlayground() {
     const iconImport = useArticleIcon()
       ? "import { cdxIconArticle } from '@wikimedia/codex-icons';\n\n"
       : '';
-    const attrs = typeAttr + inlineAttr + titleAttr + iconAttr + closeAttr;
+    const attrs = variantAttr + typeAttr + inlineAttr + titleAttr + iconAttr + closeAttr;
     const message = `<Message${attrs}>\n  ${content}\n</Message>`;
 
     if (!canClose()) return iconImport + message;
@@ -75,6 +91,7 @@ ${message.replace(/^/gm, '      ')}
           >
             <Message
               class="w-full"
+              variant={variant()}
               type={type()}
               inline={inline()}
               title={title()}
@@ -94,6 +111,17 @@ ${message.replace(/^/gm, '      ')}
             @min-[35rem]:border-t-0 @min-[35rem]:border-l
           "
         >
+          <Field label="Variant" for="message-variant">
+            <select
+              id="message-variant"
+              class={fieldControlClasses}
+              value={variant()}
+              disabled={inline()}
+              onChange={(event) => setVariant(event.currentTarget.value as MessageVariant)}
+            >
+              <For each={variants}>{(name) => <option value={name}>{name}</option>}</For>
+            </select>
+          </Field>
           <Field label="Type" for="message-type">
             <select
               id="message-type"
@@ -156,3 +184,33 @@ ${message.replace(/^/gm, '      ')}
     </PreviewFrame>
   );
 }
+
+export const messageVariantsExample = {
+  component: MessageVariantsDemo,
+  source: variantsSource,
+};
+
+export const messageTypesExample = {
+  component: MessageTypesDemo,
+  source: typesSource,
+};
+
+export const messageWithATitleExample = {
+  component: MessageWithATitleDemo,
+  source: withATitleSource,
+};
+
+export const messageWithACustomIconExample = {
+  component: MessageWithACustomIconDemo,
+  source: withACustomIconSource,
+};
+
+export const messageInlineValidationExample = {
+  component: MessageInlineValidationDemo,
+  source: inlineValidationSource,
+};
+
+export const messageWithACloseButtonExample = {
+  component: MessageWithACloseButtonDemo,
+  source: withACloseButtonSource,
+};

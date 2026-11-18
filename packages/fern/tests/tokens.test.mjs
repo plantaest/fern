@@ -109,6 +109,7 @@ test('used text, icon, and focus pairs meet their contrast thresholds in both th
         ['color-base', `background-color-${status}-subtle`, 4.5],
         [`color-${status}`, `background-color-${status}-subtle`, 4.5],
         [`color-${status}`, 'background-color-base', 3],
+        ['color-inverted', `color-${status}`, 4.5],
       ]),
       ...['progressive', 'destructive'].flatMap((role) =>
         ['', '--hover', '--active'].flatMap((state) => [

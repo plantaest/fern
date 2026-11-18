@@ -21,6 +21,9 @@
 }
 
 .fern-message-close {
+  --fern-button-hover: color-mix(in oklab, currentColor 10%, transparent);
+  --fern-button-active: color-mix(in oklab, currentColor 15%, transparent);
+
   /* Center the button on the first line while keeping its full hit area. */
   margin-block: calc((var(--fern-line-height-small) - var(--fern-button-size)) / 2);
 }
@@ -39,9 +42,44 @@
 
 .fern-message-layout--block {
   padding: calc(var(--fern-spacing) * 3);
-  border: 1px solid var(--fern-message-border-color);
+  border: 1px solid transparent;
   border-radius: var(--fern-radius-base);
+}
+
+.fern-message-variant--solid {
+  color: var(--fern-color-inverted);
+  background: var(--fern-message-icon-color);
+
+  & > .fern-message-icon {
+    color: inherit;
+  }
+
+  & .fern-message-body :where(a:any-link:not(.fern-button, .fern-badge)) {
+    color: inherit;
+    text-decoration: underline;
+  }
+
+  & > .fern-message-close {
+    --fern-button-color: var(--fern-color-inverted);
+    --fern-button-color-hover: var(--fern-button-color);
+    --fern-button-color-active: var(--fern-button-color);
+  }
+
+  & > .fern-message-close:focus-visible,
+  & .fern-message-body :where(a:any-link:not(.fern-button, .fern-badge)):focus-visible {
+    outline: 2px solid var(--fern-color-inverted);
+    outline-offset: 2px;
+  }
+}
+
+.fern-message-variant--soft,
+.fern-message-variant--surface {
   background: var(--fern-message-background);
+}
+
+.fern-message-variant--surface,
+.fern-message-variant--outline {
+  border-color: var(--fern-message-border-color);
 }
 
 .fern-message-type--notice {

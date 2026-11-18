@@ -9,7 +9,7 @@
 - Button with separate visual variants and semantic actions, variant-specific disabled styles, three sizes with matching icon-only forms, and polymorphic rendering. Navigation uses native anchors.
 - ButtonGroup with joined buttons in horizontal or vertical layouts.
 - Collapsible disclosures that preserve content and form values when closed.
-- Message with four feedback statuses, block and inline layouts, optional titles and custom icons, and an app-controlled close button.
+- Message with five block variants, four feedback types, an inline layout, optional titles and custom icons, and an app-controlled close button.
 - Separator with horizontal and vertical orientations and a decorative option.
 - Skeleton placeholders with a pulse that respects reduced motion.
 - Spinner loading indicators with four sizes and reduced-motion support.

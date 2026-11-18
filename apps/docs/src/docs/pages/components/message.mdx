@@ -3,7 +3,16 @@ title: Message
 description: Show notices, confirmations, warnings, and errors.
 ---
 
-import { MessagePlayground } from './message-examples';
+import { Example } from '../../ui';
+import {
+  MessagePlayground,
+  messageVariantsExample,
+  messageTypesExample,
+  messageWithATitleExample,
+  messageWithACustomIconExample,
+  messageInlineValidationExample,
+  messageWithACloseButtonExample,
+} from './message-examples';
 
 ## Playground
 
@@ -11,21 +20,60 @@ Use a block message for feedback about a task or page. Set `inline` for feedback
 
 <MessagePlayground />
 
+## Examples
+
+### Variants
+
+`surface` is the default, with a tinted background and a border. Use `solid` for stronger emphasis, `soft` for a tint alone, `outline` for a border alone, or `ghost` for a transparent block.
+
+<Example demo={messageVariantsExample} />
+
+### Types
+
+Choose a type based on what happened or what the reader needs to know.
+
+<Example demo={messageTypesExample} />
+
+### With a title
+
+Use a short title to name the issue and the body to explain what to do next.
+
+<Example demo={messageWithATitleExample} />
+
+### With a custom icon
+
+Pass a Codex icon through `icon` when it helps clarify the message.
+
+<Example demo={messageWithACustomIconExample} />
+
+### Inline validation
+
+Place an inline error beside the field it describes.
+
+<Example demo={messageInlineValidationExample} />
+
+### With a close button
+
+Use `withCloseButton` and update visibility in `onClose`.
+
+<Example demo={messageWithACloseButtonExample} />
+
 ## API Reference
 
 <div class="fern-docs-api-table" role="region" aria-labelledby="api-reference" tabindex="0">
 
-| Prop               | Type                                                                 | Default    | Description                                                                                          |
-| ------------------ | -------------------------------------------------------------------- | ---------- | ---------------------------------------------------------------------------------------------------- |
-| `type`             | `"notice"`<br />`\| "success"`<br />`\| "warning"`<br />`\| "error"` | `"notice"` | Selects the feedback colors and default icon.                                                        |
-| `inline`           | `boolean`                                                            | `false`    | Removes the background, border, and padding. Inline errors use red text.                             |
-| `icon`             | Codex icon                                                           | —          | Replaces the default icon for any type.                                                              |
-| `title`            | `string`                                                             | —          | Shows a title above the message content.                                                             |
-| `children`         | Text or JSX                                                          | —          | Content of the message.                                                                              |
-| `withCloseButton`  | `boolean`                                                            | `false`    | Shows a close button on a block message. Requires `onClose`.                                         |
-| `closeButtonLabel` | `string`                                                             | `"Close"`  | Accessible name of the close button. Set it to match the user's language.                            |
-| `onClose`          | `() => void`                                                         | —          | Called when the user activates the close button. Remove the message in this callback if appropriate. |
-| `...props`         | Native div props                                                     | —          | Forwards other attributes, events, and the ref to the root `div`.                                    |
+| Prop               | Type                                                                                 | Default     | Description                                                                                          |
+| ------------------ | ------------------------------------------------------------------------------------ | ----------- | ---------------------------------------------------------------------------------------------------- |
+| `variant`          | `"solid"`<br />`\| "soft"`<br />`\| "surface"`<br />`\| "outline"`<br />`\| "ghost"` | `"surface"` | Selects the visual style of a block message.                                                         |
+| `type`             | `"notice"`<br />`\| "success"`<br />`\| "warning"`<br />`\| "error"`                 | `"notice"`  | Selects the feedback colors and default icon.                                                        |
+| `inline`           | `boolean`                                                                            | `false`     | Uses an unframed layout without padding, regardless of variant. Inline errors use red text.          |
+| `icon`             | Codex icon                                                                           | —           | Replaces the default icon for any type.                                                              |
+| `title`            | `string`                                                                             | —           | Shows a title above the message content.                                                             |
+| `children`         | Text or JSX                                                                          | —           | Content of the message.                                                                              |
+| `withCloseButton`  | `boolean`                                                                            | `false`     | Shows a close button on a block message. Requires `onClose`.                                         |
+| `closeButtonLabel` | `string`                                                                             | `"Close"`   | Accessible name of the close button. Set it to match the user's language.                            |
+| `onClose`          | `() => void`                                                                         | —           | Called when the user activates the close button. Remove the message in this callback if appropriate. |
+| `...props`         | Native div props                                                                     | —           | Forwards other attributes, events, and the ref to the root `div`.                                    |
 
 </div>
 

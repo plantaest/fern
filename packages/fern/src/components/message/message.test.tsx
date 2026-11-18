@@ -2,7 +2,7 @@ import { type JSX, render } from '@solidjs/web';
 import { cdxIconArticle } from '@wikimedia/codex-icons';
 import { createSignal, flush } from 'solid-js';
 import { afterEach, expect, it, vi } from 'vitest';
-import { Message, type MessageType } from './message';
+import { Message, type MessageType, type MessageVariant } from './message';
 
 let dispose: (() => void) | undefined;
 
@@ -81,6 +81,32 @@ it('keeps the custom icon when the type changes and restores the type icon when 
   flush();
 
   expect(iconMarkup()).not.toBe(articleIcon);
+});
+
+it('defaults to surface and restores the selected variant when returning to block layout', () => {
+  const [variant, setVariant] = createSignal<MessageVariant>();
+  const [inline, setInline] = createSignal(false);
+  const message = mount(() => (
+    <Message variant={variant()} inline={inline()}>
+      This page is protected.
+    </Message>
+  ));
+
+  expect(message.classList.contains('fern-message-variant--surface')).toBe(true);
+  expect(message.hasAttribute('variant')).toBe(false);
+
+  setVariant('solid');
+  flush();
+  expect(message.classList.contains('fern-message-variant--solid')).toBe(true);
+
+  setInline(true);
+  flush();
+  expect(message.classList.contains('fern-message-variant--solid')).toBe(false);
+
+  setVariant('outline');
+  setInline(false);
+  flush();
+  expect(message.classList.contains('fern-message-variant--outline')).toBe(true);
 });
 
 it('requests closing from a named button in block layout without removing the message', () => {

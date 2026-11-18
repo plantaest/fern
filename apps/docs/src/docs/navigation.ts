@@ -127,7 +127,7 @@ export const pages = [
     group: 'Components',
     title: messageMetadata.title,
     description: messageMetadata.description,
-    sections: ['Playground', 'API Reference', 'Accessibility'],
+    sections: ['Playground', 'Examples', 'API Reference', 'Accessibility'],
     component: MessagePage,
   },
   {
