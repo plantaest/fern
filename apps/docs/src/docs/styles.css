@@ -11,6 +11,12 @@
 
 /* Defaults for the Docs shell and embedded examples. */
 @layer base {
+  html {
+    @variant screen-small {
+      overscroll-behavior-x: none;
+    }
+  }
+
   html:has(#mobile-navigation[open]) {
     overflow: hidden;
   }
