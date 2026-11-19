@@ -4,7 +4,8 @@ import { Icon } from '@taxonlabs/fern/icon';
 import { cdxIconAdd, cdxIconSubtract } from '@wikimedia/codex-icons';
 import { createSignal } from 'solid-js';
 
-const controlClass = 'h-8 min-w-0 rounded-base border border-line-base bg-surface-base px-2';
+const controlClass =
+  'h-8 min-w-0 rounded-base border border-line-base bg-surface-base px-2 text-small';
 
 export default function CollapsibleSearchFiltersDemo() {
   const [open, setOpen] = createSignal(false);

@@ -10,7 +10,7 @@ export default function MessageInlineValidationDemo() {
       <label class="grid gap-1">
         Article title
         <input
-          class="h-8 min-w-0 rounded-base border border-line-base bg-surface-base px-2"
+          class="h-8 min-w-0 rounded-base border border-line-base bg-surface-base px-2 text-small"
           value={title()}
           aria-invalid={invalid() ? 'true' : undefined}
           aria-describedby={invalid() ? 'article-title-error' : undefined}
