@@ -2,9 +2,10 @@
 
 ## Unreleased
 
-- A reusable Solid package with AspectRatio, Badge, Button, ButtonGroup, Collapsible, Kbd, Message, Separator, Skeleton, Spinner, ToggleButton, ToggleButtonGroup, decorative Codex Icons, public types, and compiled CSS.
+- A reusable Solid package with AspectRatio, Avatar, Badge, Button, ButtonGroup, Collapsible, Kbd, Message, Separator, Skeleton, Spinner, ToggleButton, ToggleButtonGroup, decorative Codex Icons, public types, and compiled CSS.
 - Light and Dark themes preserving Codex 2.8.0 colors and semantic roles, scoped to `.fern`. Independent typography tokens, shared spacing, radius, and transition tokens, document styles with visited link states and adjustable block spacing through `.fern-prose`, color data, and an optional Tailwind 4 adapter.
 - The Tailwind adapter provides utilities for the Codex palette and semantic color roles.
+- Avatar with image fallbacks, presence indicators, overlapping groups, and polymorphic rendering.
 - Badge with five variants, six statuses, three sizes, icon composition, and native link rendering.
 - Button with separate visual variants and semantic actions, variant-specific disabled styles, three sizes with matching icon-only forms, and polymorphic rendering. Navigation uses native anchors.
 - ButtonGroup with joined buttons in horizontal or vertical layouts.

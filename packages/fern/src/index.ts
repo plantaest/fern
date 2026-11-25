@@ -1,6 +1,24 @@
 export type { AspectRatioProps } from './components/aspect-ratio/aspect-ratio.jsx';
 export { AspectRatio } from './components/aspect-ratio/aspect-ratio.jsx';
 export type {
+  AvatarFallbackProps,
+  AvatarGroupCountProps,
+  AvatarGroupProps,
+  AvatarImageProps,
+  AvatarProps,
+  AvatarSize,
+  AvatarStatusProps,
+  AvatarStatusValue,
+} from './components/avatar/avatar.jsx';
+export {
+  Avatar,
+  AvatarFallback,
+  AvatarGroup,
+  AvatarGroupCount,
+  AvatarImage,
+  AvatarStatus,
+} from './components/avatar/avatar.jsx';
+export type {
   BadgeProps,
   BadgeSize,
   BadgeStatus,

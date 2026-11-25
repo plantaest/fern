@@ -1,0 +1,92 @@
+---
+title: Avatar
+description: Display a profile image or initials.
+---
+
+import { Example } from '../../ui';
+import {
+  avatarCustomizationExample,
+  avatarGroupExample,
+  avatarImageAndFallbackExample,
+  avatarLinkExample,
+  avatarSizesExample,
+  avatarWithStatusExample,
+} from './avatar-examples';
+
+## Examples
+
+### Image and fallback
+
+When the image is missing or fails to load, Avatar shows `AvatarFallback` if provided, or a person icon.
+
+<Example demo={avatarImageAndFallbackExample} />
+
+### Sizes
+
+The diameters are 24px, 32px, and 40px, with initials at 10px, 14px, and 16px.
+
+<Example demo={avatarSizesExample} />
+
+### With status
+
+Add `AvatarStatus` to show a status dot.
+
+<Example demo={avatarWithStatusExample} />
+
+### Group
+
+Use `AvatarGroup` to overlap related avatars. Add `AvatarGroupCount` with text like `+3` or an icon to indicate more contributors.
+
+<Example demo={avatarGroupExample} />
+
+### Link
+
+<Example demo={avatarLinkExample} />
+
+### Customization
+
+Use Tailwind classes on `Avatar` to change its colors and border. Use `AvatarFallback` to supply a custom icon.
+
+<Example demo={avatarCustomizationExample} />
+
+## API Reference
+
+### Avatar
+
+<div class="fern-docs-api-table" role="region" aria-labelledby="avatar" tabindex="0">
+
+| Prop       | Type                                             | Default     | Description                                                                  |
+| ---------- | ------------------------------------------------ | ----------- | ---------------------------------------------------------------------------- |
+| `as`       | Element tag or Solid component                   | `"span"`    | Element or component to render.                                              |
+| `size`     | <code>"sm"<br />\| "default"<br />\| "lg"</code> | `"default"` | Avatar diameter.                                                             |
+| `children` | JSX                                              | —           | Direct children such as `AvatarImage`, `AvatarFallback`, and `AvatarStatus`. |
+| `...props` | Props of the rendered element                    | —           | Forwards attributes, events, and the ref.                                    |
+
+</div>
+
+### AvatarImage
+
+Accepts native `img` props, including `src`, `srcset`, and `alt`. The default `alt` is an empty string.
+
+### AvatarFallback
+
+Shows initials or other JSX when the image is missing or fails to load. Accepts native `span` props.
+
+### AvatarStatus
+
+Shows a status dot. The `status` prop accepts `"online"`, `"away"`, `"busy"`, or `"offline"` and defaults to `"online"`.
+
+### AvatarGroup
+
+Place avatars and the optional count directly inside. `AvatarGroup` accepts native `div` props, including `aria-label`.
+
+### AvatarGroupCount
+
+Accepts text or an icon as `children` and forwards native `span` props. Matches the avatars when they all use the same size. Otherwise, it defaults to 32px. For an icon alone, give the count `role="img"` and an `aria-label`.
+
+## Accessibility
+
+- Set `alt` when the image identifies the person. Omit it when their name appears beside the avatar.
+- To give a standalone avatar a name beyond its initials or icon, set `role="img"` and `aria-label` on `Avatar`.
+- Give an avatar-only link or button its own accessible name.
+- Use visible text or an accessible name to convey status. The dot is hidden from assistive technology.

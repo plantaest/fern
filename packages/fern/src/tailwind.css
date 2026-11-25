@@ -190,4 +190,5 @@
 
   --radius-base: var(--fern-radius-base);
   --radius-pill: var(--fern-radius-pill);
+  --radius-circle: var(--fern-radius-circle);
 }

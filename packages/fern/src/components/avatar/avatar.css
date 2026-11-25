@@ -1,0 +1,134 @@
+.fern-avatar,
+.fern-avatar-group-count {
+  --fern-avatar-radius: var(--fern-radius-circle);
+
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  inline-size: var(--fern-avatar-size, 2rem);
+  block-size: var(--fern-avatar-size, 2rem);
+  padding: 0;
+  vertical-align: middle;
+
+  font:
+    var(--fern-font-weight-semibold) var(--fern-avatar-font-size, var(--fern-font-size-small)) / 1
+    var(--fern-font-sans);
+  border: 0;
+  border-radius: var(--fern-avatar-radius);
+  color: var(--fern-color-base);
+  background: var(--fern-background-color-neutral);
+  text-decoration: none;
+
+  &:focus-visible {
+    outline: 2px solid var(--fern-border-color-progressive--focus);
+    outline-offset: 2px;
+  }
+}
+
+.fern-avatar-image,
+.fern-avatar-fallback {
+  grid-area: 1 / 1;
+  inline-size: 100%;
+  block-size: 100%;
+  border-radius: inherit;
+}
+
+.fern-avatar-image {
+  display: block;
+  object-fit: cover;
+}
+
+.fern-avatar-fallback {
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+
+:is(.fern-avatar-fallback, .fern-avatar-group-count) > svg {
+  inline-size: 50%;
+  block-size: 50%;
+}
+
+.fern-avatar {
+  grid-template: minmax(0, 1fr) / minmax(0, 1fr);
+}
+
+.fern-avatar-image[hidden],
+.fern-avatar-fallback[hidden],
+.fern-avatar:has(> .fern-avatar-image:not([hidden])) > .fern-avatar-fallback,
+.fern-avatar:has(> .fern-avatar-fallback:not(.fern-avatar-default-fallback, [hidden]))
+  > .fern-avatar-default-fallback {
+  /* biome-ignore lint/complexity/noImportantStyles: Inactive images and fallbacks must stay hidden when the caller sets display. */
+  display: none !important;
+}
+
+.fern-avatar-size--sm,
+:where(
+    .fern-avatar-group:has(> .fern-avatar-size--sm):not(
+      :has(> .fern-avatar:not(.fern-avatar-size--sm))
+    )
+  )
+  > .fern-avatar-group-count {
+  --fern-avatar-size: 1.5rem;
+  --fern-avatar-font-size: 0.625rem;
+}
+
+.fern-avatar-size--lg,
+:where(
+    .fern-avatar-group:has(> .fern-avatar-size--lg):not(
+      :has(> .fern-avatar:not(.fern-avatar-size--lg))
+    )
+  )
+  > .fern-avatar-group-count {
+  --fern-avatar-size: 2.5rem;
+  --fern-avatar-font-size: var(--fern-font-size-medium);
+}
+
+.fern-avatar-status {
+  position: absolute;
+  inset-block-end: 6.25%;
+  inset-inline-end: 6.25%;
+  inline-size: 25%;
+  block-size: 25%;
+  border-radius: var(--fern-radius-circle);
+  box-shadow: 0 0 0 2px var(--fern-avatar-ring-color, var(--fern-background-color-base));
+}
+
+.fern-avatar-status--online {
+  background-color: var(--fern-color-success);
+}
+
+.fern-avatar-status--away {
+  background-color: var(--fern-color-warning);
+}
+
+.fern-avatar-status--busy {
+  background-color: var(--fern-color-error);
+}
+
+.fern-avatar-status--offline {
+  background-color: var(--fern-color-subtle);
+}
+
+.fern-avatar-group {
+  --fern-avatar-ring-color: var(--fern-background-color-base);
+  --fern-avatar-group-overlap: 0.5rem;
+
+  display: inline-flex;
+  align-items: center;
+  isolation: isolate;
+  vertical-align: middle;
+
+  & > :is(.fern-avatar, .fern-avatar-group-count) {
+    box-shadow: 0 0 0 2px var(--fern-avatar-ring-color);
+  }
+
+  & > :is(.fern-avatar, .fern-avatar-group-count) + :is(.fern-avatar, .fern-avatar-group-count) {
+    margin-inline-start: calc(-1 * var(--fern-avatar-group-overlap));
+  }
+
+  & > :is(.fern-avatar, .fern-avatar-group-count):focus-within {
+    z-index: 1;
+  }
+}
