@@ -2,7 +2,7 @@ import { Avatar, AvatarFallback, AvatarImage, AvatarStatus } from '@taxonlabs/fe
 
 export default function AvatarWithStatusDemo() {
   return (
-    <ul class="grid gap-3">
+    <ul class="m-0 grid gap-3 p-0">
       <li class="flex items-center gap-2">
         <Avatar aria-hidden="true">
           <AvatarImage src="https://github.com/plantaest.png" />
