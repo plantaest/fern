@@ -18,7 +18,7 @@ try {
   const tarball = (await readdir(temp)).find((name) => name.endsWith('.tgz'));
   assert.ok(tarball, 'Expected a packed Fern tarball');
 
-  const solid = '2.0.0';
+  const solid = '2.0.4';
   const files = {
     'package.json': JSON.stringify({
       name: 'fern-clean-consumer',
@@ -35,7 +35,7 @@ try {
         jsdom: '31.0.1',
         typescript: '7.0.2',
         vite: '8.3.8',
-        vitest: '5.1.0',
+        vitest: '5.1.2',
       },
     }),
     'tsconfig.json': JSON.stringify({

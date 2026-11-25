@@ -51,6 +51,18 @@
     height: var(--fern-button-icon-size);
   }
 
+  &:focus-visible {
+    outline: 2px solid var(--fern-border-color-progressive--focus);
+    outline-offset: 2px;
+  }
+
+  &:is(:disabled, [data-disabled]) {
+    color: var(--fern-color-disabled-emphasized);
+    background: var(--fern-background-color-disabled);
+    border-color: transparent;
+    text-decoration: none;
+  }
+
   &:not(:disabled, [data-disabled]):hover {
     color: var(--fern-button-fg-hover);
     background: var(--fern-button-hover);
@@ -62,18 +74,6 @@
     color: var(--fern-button-fg-active);
     background: var(--fern-button-active);
     border-color: var(--fern-button-line-active);
-  }
-
-  &:focus-visible {
-    outline: 2px solid var(--fern-border-color-progressive--focus);
-    outline-offset: 2px;
-  }
-
-  &:is(:disabled, [data-disabled]) {
-    color: var(--fern-color-disabled-emphasized);
-    background: var(--fern-background-color-disabled);
-    border-color: transparent;
-    text-decoration: none;
   }
 }
 
@@ -127,6 +127,11 @@
   --fern-button-active: var(--fern-button-subtle-active);
 }
 
+.fern-button-variant--soft,
+.fern-button-variant--surface {
+  --fern-button-bg: var(--fern-button-subtle-bg);
+}
+
 .fern-button-variant--surface,
 .fern-button-variant--outline {
   --fern-button-line: var(--fern-button-border);
@@ -140,8 +145,6 @@
 
 .fern-button-variant--soft,
 .fern-button-variant--surface {
-  --fern-button-bg: var(--fern-button-subtle-bg);
-
   &:is(:disabled, [data-disabled]) {
     background: var(--fern-background-color-disabled-subtle);
   }

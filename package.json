@@ -4,7 +4,7 @@
   "type": "module",
   "packageManager": "pnpm@8.15.5",
   "engines": {
-    "node": ">=22.12.0 <23"
+    "node": ">=22.18.0 <23"
   },
   "scripts": {
     "dev": "pnpm --filter @taxonlabs/fern build && pnpm --filter fern-docs dev",
@@ -18,20 +18,20 @@
   },
   "devDependencies": {
     "@solidjs/vite-plugin": "3.0.1",
-    "@solidjs/compiler": "2.0.0",
-    "@solidjs/babel-plugin": "2.0.0",
+    "@solidjs/compiler": "2.0.3",
+    "@solidjs/babel-plugin": "2.0.3",
     "typescript": "^7.0.2",
     "vite": "^8.3.8",
-    "@biomejs/biome": "2.6.8",
+    "@biomejs/biome": "2.6.9",
     "prettier": "3.10.1"
   },
   "pnpm": {
     "overrides": {
-      "solid-js": "2.0.0",
-      "@solidjs/web": "2.0.0",
-      "@solidjs/signals": "2.0.0",
-      "@solidjs/compiler": "2.0.0",
-      "@solidjs/babel-plugin": "2.0.0"
+      "solid-js": "2.0.4",
+      "@solidjs/web": "2.0.4",
+      "@solidjs/signals": "2.0.4",
+      "@solidjs/compiler": "2.0.3",
+      "@solidjs/babel-plugin": "2.0.3"
     }
   }
 }

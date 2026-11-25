@@ -19,11 +19,6 @@
   color: var(--fern-color-base);
   background: var(--fern-background-color-neutral);
   text-decoration: none;
-
-  &:focus-visible {
-    outline: 2px solid var(--fern-border-color-progressive--focus);
-    outline-offset: 2px;
-  }
 }
 
 .fern-avatar-image,
@@ -83,6 +78,12 @@
   > .fern-avatar-group-count {
   --fern-avatar-size: 2.5rem;
   --fern-avatar-font-size: var(--fern-font-size-medium);
+}
+
+.fern-avatar:focus-visible,
+.fern-avatar-group-count:focus-visible {
+  outline: 2px solid var(--fern-border-color-progressive--focus);
+  outline-offset: 2px;
 }
 
 .fern-avatar-status {
