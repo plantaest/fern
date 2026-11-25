@@ -1,0 +1,16 @@
+.fern-kbd {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-inline-size: 1.25rem;
+  min-block-size: 1.25rem;
+  padding-inline: var(--fern-spacing);
+
+  font: var(--fern-font-weight-normal) var(--fern-font-size-x-small) / 1.25 var(--fern-font-mono);
+  white-space: nowrap;
+  color: var(--fern-color-base);
+  background-color: var(--fern-background-color-neutral-subtle);
+  border: 1px solid var(--fern-border-color-base);
+  border-block-end-width: 1.5px;
+  border-radius: var(--fern-radius-base);
+}

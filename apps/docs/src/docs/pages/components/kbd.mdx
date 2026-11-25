@@ -1,0 +1,42 @@
+---
+title: Kbd
+description: Display keyboard keys and shortcuts.
+---
+
+import { Example } from '../../ui';
+import { kbdInTextExample, kbdKeyCombinationsExample, kbdWithAButtonExample } from './kbd-examples';
+
+## Examples
+
+### In text
+
+<Example demo={kbdInTextExample} />
+
+### Key combinations
+
+Use a separate `Kbd` for each key and put `+` between keys pressed together. Set `dir="ltr"` on the group to keep the order in right-to-left text.
+
+<Example demo={kbdKeyCombinationsExample} />
+
+### With a button
+
+The link opens when it has focus and you press Enter.
+
+<Example demo={kbdWithAButtonExample} />
+
+## API Reference
+
+<div class="fern-docs-api-table" role="region" aria-labelledby="api-reference" tabindex="0">
+
+| Prop       | Type               | Default | Description                                                    |
+| ---------- | ------------------ | ------- | -------------------------------------------------------------- |
+| `children` | Text or JSX        | —       | The visible key or shortcut.                                   |
+| `...props` | Native `kbd` props | —       | Forwards attributes, events, and the ref to the `kbd` element. |
+
+</div>
+
+## Accessibility
+
+- `Kbd` displays the key. The application implements any shortcut it describes.
+- Use readable key names, such as `Enter`, when a symbol alone could be unclear.
+- Hide a redundant hint with `aria-hidden="true"` when the control already communicates the same interaction, as in the link example.

@@ -47,6 +47,11 @@
       "solid": "./dist/source/components/icon/icon.jsx",
       "default": "./dist/icon.js"
     },
+    "./kbd": {
+      "types": "./dist/source/components/kbd/kbd.d.ts",
+      "solid": "./dist/source/components/kbd/kbd.jsx",
+      "default": "./dist/kbd.js"
+    },
     "./message": {
       "types": "./dist/source/components/message/message.d.ts",
       "solid": "./dist/source/components/message/message.jsx",

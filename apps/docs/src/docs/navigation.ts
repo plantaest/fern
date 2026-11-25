@@ -10,6 +10,7 @@ import ButtonGroupPage, {
 import CollapsiblePage, {
   frontmatter as collapsibleMetadata,
 } from './pages/components/collapsible.mdx';
+import KbdPage, { frontmatter as kbdMetadata } from './pages/components/kbd.mdx';
 import MessagePage, { frontmatter as messageMetadata } from './pages/components/message.mdx';
 import SeparatorPage, { frontmatter as separatorMetadata } from './pages/components/separator.mdx';
 import SkeletonPage, { frontmatter as skeletonMetadata } from './pages/components/skeleton.mdx';
@@ -121,6 +122,14 @@ export const pages = [
     description: collapsibleMetadata.description,
     sections: ['Examples', 'API Reference', 'Accessibility'],
     component: CollapsiblePage,
+  },
+  {
+    path: '/components/kbd',
+    group: 'Components',
+    title: kbdMetadata.title,
+    description: kbdMetadata.description,
+    sections: ['Examples', 'API Reference', 'Accessibility'],
+    component: KbdPage,
   },
   {
     path: '/components/message',

@@ -19,6 +19,7 @@ const styles = (
       'src/components/badge/badge.css',
       'src/components/button/button.css',
       'src/components/button-group/button-group.css',
+      'src/components/kbd/kbd.css',
       'src/components/message/message.css',
       'src/components/separator/separator.css',
       'src/components/skeleton/skeleton.css',
@@ -96,6 +97,7 @@ test('used text, icon, and focus pairs meet their contrast thresholds in both th
   for (const [mode, colors] of Object.entries(json)) {
     const pairs = [
       ['color-base', 'background-color-base', 4.5],
+      ['color-base', 'background-color-neutral-subtle', 4.5],
       ['color-subtle', 'background-color-neutral-subtle', 4.5],
       ['color-progressive', 'background-color-base', 4.5],
       ...['', '--hover', '--active'].map((state) => [

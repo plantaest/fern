@@ -36,6 +36,9 @@ export {
 export type { IconProps } from './components/icon/icon.jsx';
 export { Icon } from './components/icon/icon.jsx';
 
+export type { KbdProps } from './components/kbd/kbd.jsx';
+export { Kbd } from './components/kbd/kbd.jsx';
+
 export type { MessageProps, MessageType, MessageVariant } from './components/message/message.jsx';
 export { Message } from './components/message/message.jsx';
 

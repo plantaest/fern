@@ -14,6 +14,7 @@ export default defineConfig({
         'button-group': 'src/components/button-group/button-group.tsx',
         collapsible: 'src/components/collapsible/collapsible.tsx',
         icon: 'src/components/icon/icon.tsx',
+        kbd: 'src/components/kbd/kbd.tsx',
         message: 'src/components/message/message.tsx',
         separator: 'src/components/separator/separator.tsx',
         skeleton: 'src/components/skeleton/skeleton.tsx',
