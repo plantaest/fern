@@ -41,6 +41,26 @@ export type {
 export { ButtonGroup } from './components/button-group/button-group.jsx';
 
 export type {
+  CardContentProps,
+  CardDescriptionProps,
+  CardFooterProps,
+  CardHeaderProps,
+  CardMediaPosition,
+  CardMediaProps,
+  CardProps,
+  CardTitleProps,
+} from './components/card/card.jsx';
+export {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardMedia,
+  CardTitle,
+} from './components/card/card.jsx';
+
+export type {
   CollapsibleContentProps,
   CollapsibleProps,
   CollapsibleTriggerProps,

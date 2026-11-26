@@ -145,15 +145,15 @@ export function Layout(props: {
       </details>
       <div
         class="
-          grid grid-cols-[216px_minmax(0,792px)_184px] justify-center
-          max-w-[1360px] mx-auto screen-narrow:grid-cols-[200px_minmax(0,792px)]
+          grid grid-cols-[232px_minmax(0,792px)_184px] justify-center
+          max-w-[1360px] mx-auto screen-narrow:grid-cols-[224px_minmax(0,792px)]
           screen-small:block
         "
       >
         <aside
           class="
-            sticky top-18 h-[calc(100vh-4.5rem)] py-10 px-6
-            border-r border-line-subtle flex flex-col screen-small:hidden
+            sticky top-18 h-[calc(100dvh-4.5rem)] overflow-y-auto py-10 px-6
+            border-r border-line-subtle screen-small:hidden
           "
         >
           <nav aria-label="Main navigation">

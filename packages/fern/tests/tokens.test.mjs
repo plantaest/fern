@@ -20,6 +20,7 @@ const styles = (
       'src/components/badge/badge.css',
       'src/components/button/button.css',
       'src/components/button-group/button-group.css',
+      'src/components/card/card.css',
       'src/components/kbd/kbd.css',
       'src/components/message/message.css',
       'src/components/separator/separator.css',

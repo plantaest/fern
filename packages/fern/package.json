@@ -42,6 +42,11 @@
       "solid": "./dist/source/components/button-group/button-group.jsx",
       "default": "./dist/button-group.js"
     },
+    "./card": {
+      "types": "./dist/source/components/card/card.d.ts",
+      "solid": "./dist/source/components/card/card.jsx",
+      "default": "./dist/card.js"
+    },
     "./collapsible": {
       "types": "./dist/source/components/collapsible/collapsible.d.ts",
       "solid": "./dist/source/components/collapsible/collapsible.jsx",

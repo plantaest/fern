@@ -1,0 +1,117 @@
+---
+title: Card
+description: Group content and actions around a single topic.
+---
+
+import { Example } from '../../ui';
+import {
+  cardBasicExample,
+  cardCoverImageExample,
+  cardGroupExample,
+  cardLinkExample,
+  cardMediaAndTitleOnlyExample,
+  cardThumbnailPositionsExample,
+  cardWithActionsExample,
+} from './card-examples';
+
+## Examples
+
+### Basic
+
+<Example demo={cardBasicExample} />
+
+### Link
+
+Use `as="a"` and `href` when the whole card leads to one destination.
+
+<Example demo={cardLinkExample} />
+
+### Media
+
+#### Cover image
+
+Place `AspectRatio` inside `CardMedia` to size a cover image. In the default `block-start` position, the image sits above the content and follows the card's padding.
+
+<Example demo={cardCoverImageExample} />
+
+[Ashtamudi Lake photo](https://commons.wikimedia.org/wiki/File:Mangrove_Reflection_Wide_Ashtamudi_Kollam_Kerala_Mar22_A7C_01464.jpg) by Timothy A. Gonsalves, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/), resized.
+
+#### Thumbnail positions
+
+Set `position` on `CardMedia` to `inline-start` or `inline-end` to place a thumbnail or an icon beside the content.
+
+<Example demo={cardThumbnailPositionsExample} />
+
+#### Media and title only
+
+Use `justify-center` on the card to center the title vertically beside the thumbnail.
+
+<Example demo={cardMediaAndTitleOnlyExample} />
+
+### Group
+
+Use a responsive grid to arrange related cards. Use the same media position on each card, with an icon when a thumbnail is missing.
+
+<Example demo={cardGroupExample} />
+
+[Munroe Island photo](https://commons.wikimedia.org/wiki/File:View_of_Munroe_Island,_Kerala,_India.jpg) by Mohammad Anees Qamar, [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/), resized.
+
+### With actions
+
+Use `CardFooter` for separate actions. The card itself can be a `div` or an `article`.
+
+<Example demo={cardWithActionsExample} />
+
+## API Reference
+
+### Card
+
+<div class="fern-docs-api-table" role="region" aria-labelledby="card" tabindex="0">
+
+| Prop       | Type                           | Default | Description                                          |
+| ---------- | ------------------------------ | ------- | ---------------------------------------------------- |
+| `as`       | Element tag or Solid component | `"div"` | Changes the root element.                            |
+| `children` | `JSX.Element`                  | —       | The content of the card. Compose sections as needed. |
+| `...props` | Props of the rendered element  | —       | Forwards attributes, events, and the ref.            |
+
+</div>
+
+### CardMedia
+
+Place one optional `CardMedia` as the first child of `Card`. It renders a `div` and can contain an image or a decorative icon.
+
+<div class="fern-docs-api-table" role="region" aria-labelledby="cardmedia" tabindex="0">
+
+| Prop       | Type                                                                   | Default         | Description                                                   |
+| ---------- | ---------------------------------------------------------------------- | --------------- | ------------------------------------------------------------- |
+| `position` | <code>"block-start"<br />\| "inline-start"<br />\| "inline-end"</code> | `"block-start"` | Places media above the content or beside it in a 48px square. |
+| `...props` | Native `div` props                                                     | —               | Forwards attributes, events, and the ref.                     |
+
+</div>
+
+### CardHeader
+
+Groups the title and description. Accepts native `div` props.
+
+### CardTitle
+
+Renders a `div` by default. Use `as` to render a heading when the card introduces a section.
+
+### CardDescription
+
+Displays supporting text in a `div`. Accepts native `div` props.
+
+### CardContent
+
+Holds the main content of the card. Accepts native `div` props.
+
+### CardFooter
+
+Renders a flex row with vertically centered items. Use `class` to adjust spacing, wrapping, or alignment. Accepts native `div` props.
+
+## Accessibility
+
+- Use `as="article"` when the card represents an item that makes sense on its own, such as an article preview or a review task.
+- A linked card can use `aria-labelledby` to take its accessible name from the title.
+- Give informative images descriptive `alt` text. Use `alt=""` when the image is decorative or repeats nearby content.
+- A linked card is one Tab stop and opens with Enter. Keep links, buttons, and other controls outside a linked card. For a card with separate actions, Tab moves through the controls in document order.

@@ -13,6 +13,7 @@ export default defineConfig({
         badge: 'src/components/badge/badge.tsx',
         button: 'src/components/button/button.tsx',
         'button-group': 'src/components/button-group/button-group.tsx',
+        card: 'src/components/card/card.tsx',
         collapsible: 'src/components/collapsible/collapsible.tsx',
         icon: 'src/components/icon/icon.tsx',
         kbd: 'src/components/kbd/kbd.tsx',

@@ -1,0 +1,113 @@
+.fern-card {
+  --fern-card-padding: calc(var(--fern-spacing) * 4);
+  --fern-card-gap: calc(var(--fern-spacing) * 3);
+  --fern-card-media-size: 3rem;
+  --fern-card-border-width: 1px;
+  --fern-card-side-padding: calc(
+    var(--fern-card-padding) +
+    var(--fern-card-media-size) +
+    var(--fern-card-gap)
+  );
+
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--fern-card-gap);
+  min-inline-size: 0;
+  padding: var(--fern-card-padding);
+  overflow-wrap: anywhere;
+
+  border: var(--fern-card-border-width) solid var(--fern-border-color-base);
+  border-radius: var(--fern-radius-base);
+  color: var(--fern-color-base);
+  background: var(--fern-background-color-base);
+
+  &:where(
+      :has(
+        > :is(.fern-card-media-position--inline-start, .fern-card-media-position--inline-end):not(
+            [hidden]
+          )
+      )
+    ) {
+    min-block-size: calc(
+      var(--fern-card-media-size) +
+      2 *
+      (var(--fern-card-padding) + var(--fern-card-border-width))
+    );
+  }
+
+  &:has(> :where(.fern-card-media-position--inline-start:not([hidden]))) {
+    padding-inline-start: var(--fern-card-side-padding);
+  }
+
+  &:has(> :where(.fern-card-media-position--inline-end:not([hidden]))) {
+    padding-inline-end: var(--fern-card-side-padding);
+  }
+}
+
+.fern-card-media {
+  min-inline-size: 0;
+  overflow: hidden;
+}
+
+.fern-card
+  > :is(.fern-card-media-position--inline-start, .fern-card-media-position--inline-end):not(
+    [hidden]
+  ) {
+  position: absolute;
+  inset-block-start: var(--fern-card-padding);
+  display: grid;
+  place-items: center;
+  inline-size: var(--fern-card-media-size);
+  block-size: var(--fern-card-media-size);
+}
+
+.fern-card > .fern-card-media-position--inline-start {
+  inset-inline-start: var(--fern-card-padding);
+}
+
+.fern-card > .fern-card-media-position--inline-end {
+  inset-inline-end: var(--fern-card-padding);
+}
+
+.fern-card-header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--fern-spacing);
+}
+
+.fern-card-title {
+  margin: 0;
+  font-size: var(--fern-font-size-medium);
+  font-weight: var(--fern-font-weight-semibold);
+  line-height: var(--fern-line-height-medium);
+}
+
+.fern-card-description {
+  margin: 0;
+  color: var(--fern-color-subtle);
+  font-size: var(--fern-font-size-small);
+  line-height: var(--fern-line-height-small);
+}
+
+.fern-card-footer {
+  display: flex;
+  align-items: center;
+}
+
+.fern-card:any-link {
+  text-decoration: none;
+
+  &:hover {
+    border-color: var(--fern-border-color-interactive--hover);
+  }
+
+  &:active {
+    border-color: var(--fern-border-color-interactive--active);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--fern-border-color-progressive--focus);
+    outline-offset: 2px;
+  }
+}
