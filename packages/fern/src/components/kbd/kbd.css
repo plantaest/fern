@@ -1,16 +1,24 @@
 .fern-kbd {
+  --fern-kbd-size: 1.375rem;
+  --fern-kbd-font-size: var(--fern-font-size-small);
+
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-inline-size: 1.25rem;
-  min-block-size: 1.25rem;
+  min-inline-size: var(--fern-kbd-size);
+  min-block-size: var(--fern-kbd-size);
   padding-inline: var(--fern-spacing);
 
-  font: var(--fern-font-weight-normal) var(--fern-font-size-x-small) / 1.25 var(--fern-font-mono);
+  font: var(--fern-font-weight-normal) var(--fern-kbd-font-size) / 1.25 var(--fern-font-mono);
   white-space: nowrap;
   color: var(--fern-color-base);
   background-color: var(--fern-background-color-neutral-subtle);
   border: 1px solid var(--fern-border-color-base);
   border-block-end-width: 1.5px;
   border-radius: var(--fern-radius-base);
+}
+
+.fern-kbd-size--sm {
+  --fern-kbd-size: 1.25rem;
+  --fern-kbd-font-size: var(--fern-font-size-x-small);
 }

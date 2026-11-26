@@ -20,7 +20,7 @@ Use a separate `Kbd` for each key and put `+` between keys pressed together. Set
 
 ### With a button
 
-The link opens when it has focus and you press Enter.
+Use `size="sm"` for a compact hint inside a control. The link opens when it has focus and you press Enter.
 
 <Example demo={kbdWithAButtonExample} />
 
@@ -28,10 +28,11 @@ The link opens when it has focus and you press Enter.
 
 <div class="fern-docs-api-table" role="region" aria-labelledby="api-reference" tabindex="0">
 
-| Prop       | Type               | Default | Description                                                    |
-| ---------- | ------------------ | ------- | -------------------------------------------------------------- |
-| `children` | Text or JSX        | —       | The visible key or shortcut.                                   |
-| `...props` | Native `kbd` props | —       | Forwards attributes, events, and the ref to the `kbd` element. |
+| Prop       | Type                | Default     | Description                                                                                        |
+| ---------- | ------------------- | ----------- | -------------------------------------------------------------------------------------------------- |
+| `children` | Text or JSX         | —           | The visible key or shortcut.                                                                       |
+| `size`     | `"sm" \| "default"` | `"default"` | `default` uses 14px text and a 22px minimum height. `sm` uses 12px text and a 20px minimum height. |
+| `...props` | Native `kbd` props  | —           | Forwards attributes, events, and the ref to the `kbd` element.                                     |
 
 </div>
 

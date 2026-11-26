@@ -1,9 +1,23 @@
 import type { JSX } from '@solidjs/web';
+import { cva, type VariantProps } from 'class-variance-authority';
 import { omit } from 'solid-js';
 
-export type KbdProps = JSX.HTMLAttributes<HTMLElement>;
+const kbdVariants = cva('fern-kbd', {
+  variants: {
+    size: {
+      sm: 'fern-kbd-size--sm',
+      default: null,
+    },
+  },
+  defaultVariants: { size: 'default' },
+});
+
+export type KbdSize = NonNullable<VariantProps<typeof kbdVariants>['size']>;
+export type KbdProps = JSX.HTMLAttributes<HTMLElement> & { size?: KbdSize };
 
 /** A label for a keyboard key or shortcut. */
 export function Kbd(props: KbdProps) {
-  return <kbd {...omit(props, 'class')} class={['fern-kbd', props.class]} />;
+  const rest = omit(props, 'size', 'class');
+
+  return <kbd {...rest} class={[kbdVariants({ size: props.size }), props.class]} />;
 }

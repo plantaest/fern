@@ -5,7 +5,9 @@ export default function KbdWithAButtonDemo() {
   return (
     <Button as="a" href="/foundations/colors" variant="outline">
       View color tokens
-      <Kbd aria-hidden="true">Enter</Kbd>
+      <Kbd size="sm" aria-hidden="true">
+        Enter
+      </Kbd>
     </Button>
   );
 }
