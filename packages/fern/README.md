@@ -89,10 +89,10 @@ Component styles are in the `components` layer; utilities in the later `utilitie
 
 ## Compatibility and license
 
-The tested runtime is Solid and `@solidjs/web` `2.0.0`, with Kobalte `2.0.0-alpha.4`. Kobalte and some of its dependencies still declare Solid RC peers. Resolve these mismatches before claiming strict-install or stable release support. SSR/hydration is not verified.
+The tested runtime uses `solid-js` and `@solidjs/web` `2.0.4` with Kobalte `2.0.0-alpha.5`. The packed package passes strict peer checks in a clean client-rendered app with these versions. SSR and hydration in other applications still need verification.
 
-Run `pnpm release:check` from the repository root to check the packed package with strict peer resolution. It is currently expected to fail on upstream peer metadata.
+Run `pnpm release:check` from the repository root to verify strict peer resolution for the packed package.
 
-Repository tooling requires Node 22.12 or newer. Codex's own tooling declares a newer Node requirement; Fern reads its prebuilt color and icon data, tested on Node 22.19.0.
+Repository tooling requires Node `>=22.18.0 <23`. Fern uses prebuilt Codex color and icon data, verified on Node 22.19.0.
 
 License: `GPL-2.0-or-later`.

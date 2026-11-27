@@ -30,10 +30,10 @@ Fern is a design system for software built by Taxon Labs for Vietnamese Wikipedi
 | Content and controls | Inter; 16px body, 14px labels                                            |
 | Code                 | JetBrains Mono                                                           |
 | Spacing              | Tailwind scale with a 4px base; 4, 8, 12, 16, 24, 32, 48px               |
-| Radius               | 4px base and a pill token for fully rounded ends                         |
+| Radius               | 4px base, pill for rounded ends, and circle (50%)                        |
 | Icons                | Wikimedia Codex Icons                                                    |
 
-The Docs app bundles fonts locally with Vietnamese glyphs. Fern provides font stacks; consuming applications load fonts. Wrap components in `.fern` and select a theme with `data-theme="light"` or `data-theme="dark"`. Do not add global Preflight or a global reset to component CSS. Do not mix or adjust upstream colors. Non-color choices remain provisional.
+The Docs app bundles fonts locally with Vietnamese glyphs. Fern provides font stacks; consuming applications load fonts. Wrap components in `.fern` and select a theme with `data-theme="light"` or `data-theme="dark"`. Do not add global Preflight or a global reset to component CSS. Preserve upstream color token values. Non-color choices remain provisional.
 
 ## Package conventions
 
@@ -55,6 +55,7 @@ The Docs app bundles fonts locally with Vietnamese glyphs. Fern provides font st
 - Include the styling group in modifier class names: `fern-button-variant--outline`, `fern-button-action--destructive`, and `fern-button-size--icon`. Keep the base class `fern-button`.
 - `pnpm colors` runs `scripts/colors.mjs` to generate `colors.css`, `colors.json`, and the marked Codex palette block in `tailwind.css`. Make changes to generated declarations through the generator.
 - Numbered color token names separate the shade with a hyphen, such as `color-red-300` and `color-modifier-gray-100-translucent`. Preserve Codex values and semantic role names.
+- Component styles may derive colors for specific interaction states, such as a hover overlay based on `currentColor`. Check contrast for the actual color pairs that convey information in Light and Dark.
 - Keep Fern's license in root `LICENSE`. Do not add copied dependency licenses or license-generation scripts unless explicitly requested.
 - Use CVA (`class-variance-authority`) for component variant classes. Combine variant classes and the caller's `class` with a Solid class array. Preserve Solid's native class types and forward class values through custom `as` targets.
 - Keep semantic CSS classes and public styling APIs explicit; do not add Tailwind class merging without a concrete need.
@@ -104,6 +105,8 @@ For changes limited to Markdown documentation, run `pnpm check`. For code, confi
 Test component-specific behavior in the component tests. The clean consumer checks all declared export targets and exercises representative runtime behavior. Add a runtime case only when a new integration or build path needs verification outside the workspace.
 
 For visual or interaction changes, check Light and Dark, narrow screens, and keyboard behavior. Give icon-only controls accessible names. Test reactive props and ensure ordinary buttons do not submit forms.
+
+When adding or changing animations, check that loading and other states remain recognizable with reduced motion enabled.
 
 When changing joined buttons, check both ends of the dividers and verify that buttons stay in place as states change.
 

@@ -54,6 +54,8 @@ During the build, `prerender-crawler` follows the navigation links rendered from
 
 `serve` reads `PORT` and serves `apps/docs/dist/client`. Check direct URLs and reloads at `/components/button` and `/foundations/colors`, and confirm that an unknown URL returns HTTP 404. With JavaScript disabled, content and page links should still work. With JavaScript enabled, check the playgrounds, theme controls, and syntax highlighting.
 
+After changing the shared Docs layout, theme, or prerendering, open a page directly in the production build at a narrow viewport with JavaScript disabled. Check that the content is readable and the **Browse docs** links work. Then enable JavaScript, select Dark, and reload to check that the first paint uses the saved theme.
+
 For [Toolforge Build Service](https://wikitech.wikimedia.org/wiki/Help:Toolforge/Build_service), the root `Procfile` starts Docs after the buildpack installs dependencies and runs the root build script. After committing and pushing the changes, run these commands on Toolforge as the `fern` tool:
 
 ```sh
