@@ -14,6 +14,7 @@ import CollapsiblePage, {
 } from './pages/components/collapsible.mdx';
 import KbdPage, { frontmatter as kbdMetadata } from './pages/components/kbd.mdx';
 import MessagePage, { frontmatter as messageMetadata } from './pages/components/message.mdx';
+import ProgressPage, { frontmatter as progressMetadata } from './pages/components/progress.mdx';
 import SeparatorPage, { frontmatter as separatorMetadata } from './pages/components/separator.mdx';
 import SkeletonPage, { frontmatter as skeletonMetadata } from './pages/components/skeleton.mdx';
 import SpinnerPage, { frontmatter as spinnerMetadata } from './pages/components/spinner.mdx';
@@ -156,6 +157,14 @@ export const pages = [
     description: messageMetadata.description,
     sections: ['Playground', 'Examples', 'API Reference', 'Accessibility'],
     component: MessagePage,
+  },
+  {
+    path: '/components/progress',
+    group: 'Components',
+    title: progressMetadata.title,
+    description: progressMetadata.description,
+    sections: ['Examples', 'API Reference', 'Accessibility'],
+    component: ProgressPage,
   },
   {
     path: '/components/separator',

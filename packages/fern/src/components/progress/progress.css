@@ -1,0 +1,77 @@
+.fern-progress {
+  --fern-progress-height: 0.5rem;
+  --fern-progress-fill: var(--fern-color-icon-progressive);
+
+  inline-size: 100%;
+}
+
+.fern-progress-color--success {
+  --fern-progress-fill: var(--fern-color-success);
+}
+
+.fern-progress-color--warning {
+  --fern-progress-fill: var(--fern-color-warning);
+}
+
+.fern-progress-color--error {
+  --fern-progress-fill: var(--fern-color-error);
+}
+
+.fern-progress-size--sm {
+  --fern-progress-height: 0.25rem;
+}
+
+.fern-progress-size--lg {
+  --fern-progress-height: 0.75rem;
+}
+
+.fern-progress-track {
+  block-size: var(--fern-progress-height);
+  overflow: hidden;
+  color: var(--fern-progress-fill);
+  background-color: var(--fern-background-color-neutral);
+  border-radius: var(--fern-radius-base);
+}
+
+.fern-progress-track[data-disabled] {
+  color: var(--fern-background-color-disabled);
+}
+
+.fern-progress-indicator {
+  --fern-progress-direction: 1;
+
+  block-size: 100%;
+  background-color: currentColor;
+}
+
+.fern-progress-track[data-indeterminate] .fern-progress-indicator {
+  inline-size: calc(100% / 3);
+  margin-inline: auto;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .fern-progress-track:not([data-indeterminate]) .fern-progress-indicator {
+    transition: inline-size 200ms ease;
+  }
+
+  .fern-progress-track[data-indeterminate]:not([data-disabled]) .fern-progress-indicator {
+    margin-inline: 0;
+    animation: fern-progress-slide 1.6s linear infinite;
+  }
+
+  @scope ([dir="rtl"]) to ([dir="ltr"]) {
+    .fern-progress-indicator {
+      --fern-progress-direction: -1;
+    }
+  }
+}
+
+@keyframes fern-progress-slide {
+  from {
+    transform: translateX(calc(-100% * var(--fern-progress-direction)));
+  }
+
+  to {
+    transform: translateX(calc(300% * var(--fern-progress-direction)));
+  }
+}

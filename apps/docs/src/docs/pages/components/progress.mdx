@@ -1,0 +1,92 @@
+---
+title: Progress
+description: Show the progress of an ongoing task.
+---
+
+import { Example } from '../../ui';
+import {
+  progressBasicUsageExample,
+  progressColorsExample,
+  progressCustomRangeExample,
+  progressDisabledExample,
+  progressIndeterminateExample,
+  progressSizesExample,
+  progressWithLabelAndValueExample,
+} from './progress-examples';
+
+## Examples
+
+### Basic usage
+
+Set `value` to show progress. With the default `max` of 100, `value={60}` fills 60% of the bar.
+
+<Example demo={progressBasicUsageExample} />
+
+### With label and value
+
+Add `ProgressLabel` to name the task and `ProgressValue` to display its progress. Use `getValueLabel` to show a count such as `42 / 120`.
+
+<Example demo={progressWithLabelAndValueExample} />
+
+### Indeterminate
+
+Use `indeterminate` when progress can't be measured yet. Omitting `value` also shows this state.
+
+<Example demo={progressIndeterminateExample} />
+
+### Custom range
+
+Set `min` when progress starts from a nonzero value. Here, 350 is halfway between 200 and 500.
+
+<Example demo={progressCustomRangeExample} />
+
+### Sizes
+
+<Example demo={progressSizesExample} />
+
+### Colors
+
+Use `color` to change the fill. If the color signals a task status, provide that status in text as well.
+
+<Example demo={progressColorsExample} />
+
+### Disabled
+
+Use `disabled` to show an inactive bar. Indeterminate progress stays still.
+
+<Example demo={progressDisabledExample} />
+
+## API Reference
+
+### Progress
+
+<div class="fern-docs-api-table" role="region" aria-labelledby="api-reference" tabindex="0">
+
+| Prop            | Type                                                                            | Default         | Description                                                                                                         |
+| --------------- | ------------------------------------------------------------------------------- | --------------- | ------------------------------------------------------------------------------------------------------------------- |
+| `value`         | `number`                                                                        | —               | Current progress, from `min` to `max`. Omit if unknown.                                                             |
+| `min`           | `number`                                                                        | `0`             | Lower bound of the progress range.                                                                                  |
+| `max`           | `number`                                                                        | `100`           | Target value. Use a number greater than `min`.                                                                      |
+| `indeterminate` | `boolean`                                                                       | `false`         | Shows indeterminate progress even when `value` is set.                                                              |
+| `color`         | `"progressive"` <br /> \| `"success"` <br /> \| `"warning"` <br /> \| `"error"` | `"progressive"` | Sets the fill color.                                                                                                |
+| `size`          | `"sm" \| "default" \| "lg"`                                                     | `"default"`     | Sets the bar height to 4, 8, or 12px at a 16px root size.                                                           |
+| `disabled`      | `boolean`                                                                       | `false`         | Uses a muted fill and stops indeterminate animation.                                                                |
+| `getValueLabel` | `({ value, min, max }) => string`                                               | —               | Formats the text shown by `ProgressValue` and provides the default `aria-valuetext`.                                |
+| `children`      | `JSX.Element`                                                                   | —               | Places content such as a label and value above the bar.                                                             |
+| `...props`      | Native `div` props                                                              | —               | Applies `class` and `style` to the container. Forwards the ID, ref, and attributes such as `aria-label` to the bar. |
+
+</div>
+
+### ProgressLabel
+
+Renders a `<span>` that names its parent `Progress`. Accepts native span props and assigns its ID automatically.
+
+### ProgressValue
+
+Renders a `<span>` with the current percentage or the result of `getValueLabel`. The value is empty while progress is indeterminate. Accepts native span props.
+
+## Accessibility
+
+- Name the task with `ProgressLabel`, or use `aria-labelledby` to reference text outside the component. Give an unlabeled bar an `aria-label`.
+- To announce a milestone such as completion, update a separate `role="status"` region.
+- With reduced motion enabled, value changes appear instantly and the indeterminate segment stays centered.

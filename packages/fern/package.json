@@ -67,6 +67,11 @@
       "solid": "./dist/source/components/message/message.jsx",
       "default": "./dist/message.js"
     },
+    "./progress": {
+      "types": "./dist/source/components/progress/progress.d.ts",
+      "solid": "./dist/source/components/progress/progress.jsx",
+      "default": "./dist/progress.js"
+    },
     "./separator": {
       "types": "./dist/source/components/separator/separator.d.ts",
       "solid": "./dist/source/components/separator/separator.jsx",

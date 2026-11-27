@@ -12,6 +12,7 @@
 @import "./components/collapsible/collapsible.css" layer(components);
 @import "./components/kbd/kbd.css" layer(components);
 @import "./components/message/message.css" layer(components);
+@import "./components/progress/progress.css" layer(components);
 @import "./components/separator/separator.css" layer(components);
 @import "./components/skeleton/skeleton.css" layer(components);
 @import "./components/spinner/spinner.css" layer(components);

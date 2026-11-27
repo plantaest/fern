@@ -18,6 +18,7 @@ export default defineConfig({
         icon: 'src/components/icon/icon.tsx',
         kbd: 'src/components/kbd/kbd.tsx',
         message: 'src/components/message/message.tsx',
+        progress: 'src/components/progress/progress.tsx',
         separator: 'src/components/separator/separator.tsx',
         skeleton: 'src/components/skeleton/skeleton.tsx',
         spinner: 'src/components/spinner/spinner.tsx',

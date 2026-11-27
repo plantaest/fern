@@ -80,6 +80,15 @@ export { Kbd } from './components/kbd/kbd.jsx';
 export type { MessageProps, MessageType, MessageVariant } from './components/message/message.jsx';
 export { Message } from './components/message/message.jsx';
 
+export type {
+  ProgressColor,
+  ProgressLabelProps,
+  ProgressProps,
+  ProgressSize,
+  ProgressValueProps,
+} from './components/progress/progress.jsx';
+export { Progress, ProgressLabel, ProgressValue } from './components/progress/progress.jsx';
+
 export type { SeparatorOrientation, SeparatorProps } from './components/separator/separator.jsx';
 export { Separator } from './components/separator/separator.jsx';
 
