@@ -34,7 +34,7 @@ try {
         '@solidjs/vite-plugin': '3.0.1',
         jsdom: '31.0.1',
         typescript: '7.0.2',
-        vite: '8.3.8',
+        vite: '8.4.0',
         vitest: '5.1.2',
       },
     }),
